@@ -8,6 +8,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
+          <h1 CLassName="App-title">AgroXchange</h1>
         </div>
       </Router>
     );
