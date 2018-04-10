@@ -1,3 +1,15 @@
 .product-photo {
   max-width: 10em;
 }
+
+.product-container {
+  flex-grow: 1;
+}
+
+.container {justify-content: center;
+}
+
+.paper {
+  width: 90%;
+  margin: auto;
+}
