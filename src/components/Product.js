@@ -5,7 +5,7 @@ import Grid from 'material-ui/Grid';
 import '../styles/Products.css'
 
 
-const student = {
+const product = {
   name: 'Mandarins',
   code: 40500,
   photo: "https://makemyvape.co.uk/image/cache/catalog/product/o/r/orange_mandarin_-_tfa-800x800.jpg",
@@ -21,9 +21,18 @@ const student = {
 class Product extends PureComponent {
 
   render() {
-    
+
     return(
       <div>
+        <h2>{ product.name }</h2>
+        <p>Code: { product.code }</p>
+        <img src={ product.photo } />
+        <p>Expiration Date: { product.expiration }</p>
+        
+        <p>{ product.description }</p>
+        <p>Volume: { product.volume }<p>
+        <p>Price: { product.price } { product.currency }</p>
+        <p>Shipment Destination: { product.destination }</p>
 
 
       </div>
