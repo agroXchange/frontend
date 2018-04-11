@@ -10,9 +10,12 @@ import Typography from 'material-ui/Typography';
 const styles = {
   card: {
     maxWidth: 345,
+    margin: 20,
+    textAlign: "left",
+    display: "inline-block"
   },
   media: {
-    height: 200,
+    height: 100,
   },
 };
 
@@ -29,6 +32,38 @@ const buyer = [
                 "id": 1,
                 "status": "pending",
                 "volume": "200"
+            },
+            {
+                "ICO": "akjsdf",
+                "comments": "quick delievery, please",
+                "date": "2018-04-08",
+                "id": 2,
+                "status": "pending",
+                "volume": "150"
+            },
+            {
+                "ICO": "akjsdf",
+                "comments": "quick delievery, please",
+                "date": "2018-04-08",
+                "id": 2,
+                "status": "pending",
+                "volume": "150"
+            },
+            {
+                "ICO": "akjsdf",
+                "comments": "quick delievery, please",
+                "date": "2018-04-08",
+                "id": 2,
+                "status": "pending",
+                "volume": "150"
+            },
+            {
+                "ICO": "akjsdf",
+                "comments": "quick delievery, please",
+                "date": "2018-04-08",
+                "id": 2,
+                "status": "pending",
+                "volume": "150"
             },
             {
                 "ICO": "akjsdf",
@@ -71,6 +106,11 @@ class OrderCard extends PureComponent {
       <div>
         {buyer[0].orders.map(order =>
          <Card className={classes.card}>
+           <CardMedia
+            className={classes.media}
+            image="https://imagizer.imageshack.com/v2/280x200q90/922/a6Pawe.jpg"
+            title="product name - redux"
+          />
            <CardContent>
              <Typography gutterBottom variant="headline" component="p">
                Order #{order.id}
