@@ -8,7 +8,7 @@ import Product from './components/Product'
 import ExampleTranslation from './components/ExampleTranslation'
 //import OrderList from './components/OrderList'
 import OrdersPage from './components/admin/OrdersPage'
-import OrderListBuyer from './containers/OrderListBuyer'
+import OrderListBuyer from './containers/orderList/OrderListBuyer'
 import NavBar from './components/NavBar'
 
 import './styles/App.css';
@@ -37,7 +37,7 @@ class App extends Component {
             <Route exact path="/signup" component={SignupPage} />
             <Route exact path="/product" component={ Product } />
             <Route exact path="/translation" component={ ExampleTranslation } />
-            <Route exact path="/orderlistBuyer" component={OrderListBuyer} />
+            <Route exact path="/:id/orderlistBuyer" component={OrderListBuyer} />
           </div>
         </Router>
       </MuiThemeProvider>
