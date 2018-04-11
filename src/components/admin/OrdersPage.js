@@ -1,4 +1,6 @@
 import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import compose from "lodash/fp/compose";
 import { withStyles } from "material-ui/styles";
 import Card from "material-ui/Card";
 import {
@@ -17,6 +19,7 @@ import Table, {
   TableHead,
   TableRow
 } from "material-ui/Table";
+import { fetchAllOrders } from "../../actions/orders";
 
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
@@ -39,20 +42,23 @@ const style = theme => ({
     textAlign: "center",
     fontSize: "20px"
   }
-
 });
 
-const array = [0, 1, 2, 3, 4, 5];
 
-class PendingPage extends PureComponent {
+class OrdersPage extends PureComponent {
+  componentWillMount(props) {
+    this.props.fetchAllOrders();
+  }
+
   render() {
     const { classes } = this.props;
+    const orders = this.props.orders;
 
     return (
       <MuiThemeProvider>
-        {array.map(item => (
+        {orders.map(order => (
           <Card className={classes.card} zDepth={3} circle={true}>
-            <CardHeader avatar="Order #123" />
+            <CardHeader avatar={"#" + order.id} />
             <CardMedia>
               <img
                 className={classes.media}
@@ -60,42 +66,41 @@ class PendingPage extends PureComponent {
                 alt=""
               />
             </CardMedia>
-            <Card >
-            <Table >
+            <Card>
+              <Table>
                 <TableRow className={classes.table}>
                   <TableCell>Buyer: Carlos</TableCell>
                   <TableCell>Seller: Luca</TableCell>
                 </TableRow>
               </Table>
             </Card>
-            <br/>
+            <br />
             <Table className={classes.table}>
               <TableBody>
                 <TableRow>
                   <TableCell>Product</TableCell>
-                  <TableCell>Mandarinas</TableCell>
+                  <TableCell>{order.product.name}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Date Order</TableCell>
-                  <TableCell>10/04/2018</TableCell>
+                  <TableCell>{order.date}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Price</TableCell>
-                  <TableCell>50$</TableCell>
+                  <TableCell>{order.product.price}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Volume</TableCell>
-                  <TableCell>40kg</TableCell>
+                  <TableCell>{order.volume}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Comments</TableCell>
-                  <TableCell>Something...</TableCell>
+                  <TableCell>{order.comments}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Status</TableCell>
-                  <TableCell>Pending</TableCell>
+                  <TableCell>{order.status}</TableCell>
                 </TableRow>
-
               </TableBody>
             </Table>
             <Button size="medium" color="primary">
@@ -108,4 +113,13 @@ class PendingPage extends PureComponent {
   }
 }
 
-export default withStyles(style)(PendingPage);
+const mapStateToProps = function(state) {
+  return {
+    orders: state.orders
+  };
+};
+
+export default compose(
+  withStyles(style),
+  connect(mapStateToProps, { fetchAllOrders })
+)(OrdersPage);

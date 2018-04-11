@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
+import { Link } from "react-router-dom";
 import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
 import Grid from "material-ui/Grid";
@@ -61,9 +62,10 @@ class AdminPage extends PureComponent {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="medium" color="primary">
+                 <Link to={`/admin/pending`}><Button size="medium" color="primary">
                   See more
                 </Button>
+                </Link>
               </CardActions>
             </Paper>
           </Grid>
@@ -113,13 +115,14 @@ class AdminPage extends PureComponent {
                   variant="headline"
                   component="h2"
                 >
-                  View transactions
+                  View Orders
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="medium" color="primary">
+                <Link to={`/admin/orders`}><Button size="medium" color="primary">
                   See more
                 </Button>
+                </Link>
               </CardActions>
             </Paper>
           </Grid>
