@@ -9,27 +9,21 @@ import ExampleTranslation from './components/ExampleTranslation'
 //import OrderList from './components/OrderList'
 import OrdersPage from './components/admin/OrdersPage'
 import OrderListBuyer from './containers/orderList/OrderListBuyer'
+import OrderListSeller from './containers/orderList/OrderListSeller'
 import NavBar from './components/NavBar'
 
 import './styles/App.css';
-import {translate} from "react-i18next"
+
 
 class App extends Component {
   render() {
 
-    const { i18n } = this.props
-
-    const changeLanguage = lng => {
-      i18n.changeLanguage(lng)
-    }
 
     return (
       <MuiThemeProvider>
         <Router>
           <div className="App">
             <NavBar />
-            <button onClick={() => changeLanguage("es")}><img className="LanguageDetector" src="https://lipis.github.io/flag-icon-css/flags/4x3/es.svg" /></button>
-            <button onClick={() => changeLanguage("en")}><img className="LanguageDetector" src="https://lipis.github.io/flag-icon-css/flags/4x3/gb.svg" /></button>
             <h1 className="App-title">AgroXchange</h1>
             <Route exact path="/admin" component={AdminPage} />
             <Route exact path="/admin/pending" component={PendingPage} />
@@ -38,6 +32,7 @@ class App extends Component {
             <Route exact path="/product" component={ Product } />
             <Route exact path="/translation" component={ ExampleTranslation } />
             <Route exact path="/:id/orderlistBuyer" component={OrderListBuyer} />
+            <Route exact path="/:id/orderlistSeller" component={OrderListSeller} />
           </div>
         </Router>
       </MuiThemeProvider>
@@ -45,4 +40,4 @@ class App extends Component {
   }
 }
 
-export default translate("translations")(App)
+export default App
