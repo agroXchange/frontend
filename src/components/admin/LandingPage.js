@@ -50,7 +50,7 @@ class AdminPage extends PureComponent {
             direction={direction}
             justify={justify}
           >
-            <Paper>
+            <Card>
               <CardContent>
                 <Typography
                   className={classes.typo}
@@ -67,7 +67,7 @@ class AdminPage extends PureComponent {
                 </Button>
                 </Link>
               </CardActions>
-            </Paper>
+            </Card>
           </Grid>
         </Grid>
         <Grid item xs={12}>
@@ -79,7 +79,7 @@ class AdminPage extends PureComponent {
             direction={direction}
             justify={justify}
           >
-            <Paper>
+            <Card>
               <CardContent>
                 <Typography
                   className={classes.typo}
@@ -91,11 +91,13 @@ class AdminPage extends PureComponent {
                 </Typography>
               </CardContent>
               <CardActions>
+              <Link to={`/admin/users`}>
                 <Button size="medium" color="primary">
                   See more
                 </Button>
+                </Link>
               </CardActions>
-            </Paper>
+            </Card>
           </Grid>
         </Grid>
         <Grid item xs={12}>
@@ -107,7 +109,7 @@ class AdminPage extends PureComponent {
             direction={direction}
             justify={justify}
           >
-            <Paper>
+            <Card>
               <CardContent>
                 <Typography
                   className={classes.typo}
@@ -124,7 +126,7 @@ class AdminPage extends PureComponent {
                 </Button>
                 </Link>
               </CardActions>
-            </Paper>
+            </Card>
           </Grid>
         </Grid>
       </Grid>
