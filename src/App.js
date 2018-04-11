@@ -9,6 +9,7 @@ import ExampleTranslation from './components/ExampleTranslation'
 import OrdersPage from './components/admin/OrdersPage'
 import OrderListBuyer from './containers/orderList/OrderListBuyer'
 import NavBar from './components/NavBar'
+import LoginPage from './components/login/LoginPage'
 import ProductForm from './components/ProductForm'
 
 import './styles/App.css';
@@ -34,6 +35,7 @@ class App extends Component {
             <Route exact path="/admin" component={AdminPage} />
             <Route exact path="/admin/pending" component={PendingPage} />
             <Route exact path="/admin/orders" component={OrdersPage} />
+            <Route exact path="/login" component={LoginPage} />
             <Route exact path="/signup" component={SignupPage} />
             <Route exact path="/product" component={ Product } />
             <Route exact path="/translation" component={ ExampleTranslation } />
