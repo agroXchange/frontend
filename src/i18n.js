@@ -16,6 +16,9 @@ i18n.use(LanguageDetector).init({
         'City/Port': 'City/Port',
         'Edit Product': 'Edit Product',
         'Make An Order': 'Make An Order'
+      },
+      profile: {
+        'Name': 'Name',
       }
     },
     es: {
@@ -31,6 +34,9 @@ i18n.use(LanguageDetector).init({
         'City/Port': 'Ciudad',
         'Edit Product': 'Editar producto',
         'Make An Order': 'Hacer un pedido'
+      },
+      profile: {
+        'new': 'nuevo'
       }
     }
   },
