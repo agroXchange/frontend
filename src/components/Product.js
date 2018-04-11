@@ -9,6 +9,8 @@ import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import '../styles/Product.css'
 
+import OrderForm from './OrderForm'
+
 
 const profile = {
   country: "Netherlands",
@@ -17,6 +19,16 @@ const profile = {
 
 
 class Product extends PureComponent {
+
+  state = {
+    edit: false
+  }
+
+  toggleEdit = () => {
+    this.setState({
+      edit: !this.state.edit
+    })
+  }
 
   render() {
     const { product } = this.props
@@ -43,7 +55,12 @@ class Product extends PureComponent {
               <p>City/Port: { profile.cityPort }</p>
 
               <Button>Edit Product</Button>
-              <Button>Make An Order</Button>
+              <Button onClick={ this.toggleEdit }>Make An Order</Button>
+
+              {
+                this.state.edit &&
+                <OrderForm onSubmit={this.createBatch} class="batch-form"/>
+              }
 
             </Grid>
 

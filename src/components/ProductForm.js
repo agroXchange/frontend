@@ -89,7 +89,6 @@ class ProductForm extends PureComponent {
           value={ this.state.name }
           onChange={ this.handleChange }
           margin="normal"
-
         />
 
         <div className="upload">
