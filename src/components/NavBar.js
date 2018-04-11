@@ -10,6 +10,8 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import Switch from 'material-ui/Switch';
 import { FormControlLabel, FormGroup } from 'material-ui/Form';
 import Menu, { MenuItem } from 'material-ui/Menu';
+import compose from 'lodash/fp/compose'
+import {translate} from "react-i18next"
 
 const styles = {
   root: {
@@ -52,14 +54,26 @@ class NavBar extends PureComponent {
     const { auth, anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
+    const { i18n } = this.props
+
+    const changeLanguage = lng => {
+      i18n.changeLanguage(lng)
+    }
+
+
     return (
       <div className={classes.root}>
 
         <AppBar position="static">
           <Toolbar>
+
             <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
               <MenuIcon />
             </IconButton>
+            
+            <button onClick={() => changeLanguage("es")}><img className="LanguageDetector" src="https://lipis.github.io/flag-icon-css/flags/4x3/es.svg" /></button>
+            <button onClick={() => changeLanguage("en")}><img className="LanguageDetector" src="https://lipis.github.io/flag-icon-css/flags/4x3/gb.svg" /></button>
+
             <Typography variant="title" color="inherit" className={classes.flex}>
               Title
             </Typography>
@@ -72,7 +86,7 @@ class NavBar extends PureComponent {
                   color="inherit"
                 >
                 <AccountCircle />
-                
+
                 </IconButton>
 
                 <Menu
@@ -104,4 +118,6 @@ class NavBar extends PureComponent {
 
 
 
-export default withStyles(styles)(NavBar);
+export default compose(
+  translate("translations"),
+  withStyles(styles))(NavBar);
