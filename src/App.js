@@ -32,7 +32,7 @@ class App extends Component {
             <h1 className="App-title">AgroXchange</h1>
             <Route exact path="/admin" component={AdminPage} />
             <Route exact path="/admin/pending" component={PendingPage} />
-            <Route exact path="/admin/transactions" component={OrdersPage} />
+            <Route exact path="/admin/orders" component={OrdersPage} />
             <Route exact path="/signup" component={SignupPage} />
             <Route exact path="/product" component={ Product } />
             <Route exact path="/translation" component={ ExampleTranslation } />
