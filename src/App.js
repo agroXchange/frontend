@@ -10,6 +10,7 @@ import ExampleTranslation from './components/ExampleTranslation'
 import OrdersPage from './components/admin/OrdersPage'
 import OrderListBuyer from './containers/OrderListBuyer'
 import NavBar from './components/NavBar'
+import LoginPage from './components/login/LoginPage'
 
 import './styles/App.css';
 import {translate} from "react-i18next"
@@ -34,6 +35,7 @@ class App extends Component {
             <Route exact path="/admin" component={AdminPage} />
             <Route exact path="/admin/pending" component={PendingPage} />
             <Route exact path="/admin/orders" component={OrdersPage} />
+            <Route exact path="/login" component={LoginPage} />
             <Route exact path="/signup" component={SignupPage} />
             <Route exact path="/product" component={ Product } />
             <Route exact path="/translation" component={ ExampleTranslation } />
