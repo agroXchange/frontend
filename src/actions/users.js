@@ -10,7 +10,7 @@ import * as request from 'superagent'
 //
 // export const USER_LOGOUT = 'USER_LOGOUT'
 
-const baseUrl = 'http://localhost:3000'
+const baseUrl = 'http://localhost:4008'
 
 export const USER_SIGNUP_SUCCESS = 'USER_SIGNUP_SUCCESS'
 export const USER_SIGNUP_FAILED = 'USER_SIGNUP_FAILED'
@@ -41,10 +41,10 @@ export const USER_SIGNUP_FAILED = 'USER_SIGNUP_FAILED'
 //     	}
 //     })
 
-export const signup = (email, password) => (dispatch) =>
+export const signup = (newUser) => (dispatch) =>
 	request
 		.post(`${baseUrl}/users`)
-		.send({ email, password })
+		.send(newUser)
 		.then(result => {
 			dispatch({
 				type: USER_SIGNUP_SUCCESS
