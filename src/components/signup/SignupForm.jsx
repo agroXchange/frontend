@@ -164,13 +164,13 @@ class SignupForm extends PureComponent {
         </div>
         <div>
           <TextField
-            id="coc"
-            name="coc"
+            id="chamberOfCommerce"
+            name="chamberOfCommerce"
             label="Registration number"
             className={classes.textField}
             helperText="Chamber of Commerce registration number (optional now)"
             margin="normal"
-            value={this.state.coc}
+            value={this.state.chamberOfCommerce}
             onChange={this.handleChange}
           />
           <Typography color="textSecondary">
