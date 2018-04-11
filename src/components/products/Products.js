@@ -6,8 +6,8 @@ import AppBar from 'material-ui/AppBar';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
-import { fetchAllProducts } from '../actions/products';
-import '../styles/Product.css'
+import { fetchAllProducts } from '../../actions/products';
+import '../../styles/Product.css'
 
 class Product extends PureComponent {
 

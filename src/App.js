@@ -4,7 +4,7 @@ import SignupPage from './components/signup/SignupPage'
 import AdminPage from './components/admin/LandingPage'
 import PendingPage from './components/admin/PendingPage'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Product from './components/Product'
+import Product from './components/products/Products'
 import ExampleTranslation from './components/ExampleTranslation'
 import OrdersPage from './components/admin/OrdersPage'
 import UsersList from './components/admin/UsersList'
@@ -12,7 +12,7 @@ import OrderListBuyer from './containers/orderList/OrderListBuyer'
 import OrderListSeller from './containers/orderList/OrderListSeller'
 import NavBar from './components/NavBar'
 import LoginPage from './components/login/LoginPage'
-import ProductForm from './components/ProductForm'
+import ProductForm from './components/products/ProductForm'
 import LogoutPage from './components/logout/LogoutPage'
 import './styles/App.css';
 
@@ -23,7 +23,6 @@ class App extends Component {
         <Router>
           <div className="App">
             <NavBar />
-            <h1 className="App-title"></h1>
             <Route exact path="/admin" component={AdminPage} />
             <Route exact path="/admin/pending" component={PendingPage} />
             <Route exact path="/admin/orders" component={OrdersPage} />
