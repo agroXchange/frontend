@@ -50,6 +50,8 @@ class ExampleTranslation extends PureComponent {
             <Button>{t('Edit Product')}</Button>{/*Don't forget buttonlabels! */}
             <Button>{t('Make An Order')}</Button>
 
+
+            <p>{t('new')}: { profile.cityPort }</p>
           </Grid>
 
         </Grid>
@@ -69,5 +71,6 @@ const mapStateToProps = (state) => {
 {/* the 'produt is a name for the category in the i18n.js file. Choose wisely!' */}
 export default compose(
   translate('product'),
+  translate('profile'),
   connect(mapStateToProps)
 )(ExampleTranslation);
