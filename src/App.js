@@ -6,11 +6,13 @@ import PendingPage from './components/admin/PendingPage'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Product from './components/Product'
 import ExampleTranslation from './components/ExampleTranslation'
-//import OrderList from './components/OrderList'
 import OrdersPage from './components/admin/OrdersPage'
+import UsersList from './components/admin/UsersList'
 import OrderListBuyer from './containers/orderList/OrderListBuyer'
 import OrderListSeller from './containers/orderList/OrderListSeller'
 import NavBar from './components/NavBar'
+import LoginPage from './components/login/LoginPage'
+import ProductForm from './components/ProductForm'
 
 import './styles/App.css';
 
@@ -24,15 +26,21 @@ class App extends Component {
         <Router>
           <div className="App">
             <NavBar />
-            <h1 className="App-title">AgroXchange</h1>
+            <button onClick={() => changeLanguage("es")}><img className="LanguageDetector" src="https://lipis.github.io/flag-icon-css/flags/4x3/es.svg" /></button>
+            <button onClick={() => changeLanguage("en")}><img className="LanguageDetector" src="https://lipis.github.io/flag-icon-css/flags/4x3/gb.svg" /></button>
+            <h1 className="App-title"></h1>
             <Route exact path="/admin" component={AdminPage} />
             <Route exact path="/admin/pending" component={PendingPage} />
             <Route exact path="/admin/orders" component={OrdersPage} />
+            <Route exact path="/admin/users" component={UsersList} />
+            <Route exact path="/login" component={LoginPage} />
             <Route exact path="/signup" component={SignupPage} />
             <Route exact path="/product" component={ Product } />
             <Route exact path="/translation" component={ ExampleTranslation } />
             <Route exact path="/:id/orderlistBuyer" component={OrderListBuyer} />
             <Route exact path="/:id/orderlistSeller" component={OrderListSeller} />
+            <Route exact path="/product" component={ Product } />
+            <Route exact path="/productform" component={ ProductForm } />
           </div>
         </Router>
       </MuiThemeProvider>
