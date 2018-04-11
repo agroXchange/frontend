@@ -6,10 +6,17 @@
   flex-grow: 1;
 }
 
-.container {justify-content: center;
+.container {
+  justify-content: center;
 }
 
 .paper {
   width: 90%;
+  max-width: 800px;
   margin: auto;
+}
+
+.title {
+  text-align: left;
+  height: 50px;
 }

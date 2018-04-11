@@ -23,12 +23,12 @@ class Product extends PureComponent {
     return(
       <div className="product-container">
         <Paper className="paper">
+        <Paper className="title"><h2>{ product.name }</h2></Paper>
           <Grid container className="container">
 
             <Grid item>
-              <h2>{ product.name }</h2>
-              <p>Code: { product.code }</p>
               <img src={ product.photo } className="product-photo"/>
+              <p>Code: { product.code }</p>
               <p>Harvested Dated: { product.harvested }</p>
               <p>Expiration Date: { product.expiration }</p>
               <Button color="primary">View Seller</Button>
