@@ -4,7 +4,7 @@ import SignupPage from './components/signup/SignupPage'
 import AdminPage from './components/admin/LandingPage'
 import PendingPage from './components/admin/PendingPage'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import TransactionsPage from './components/admin/TransactionsPage'
+import TransactionsPage from './components/admin/OrdersPage'
 import Product from './components/Product'
 import ExampleTranslation from './components/ExampleTranslation'
 //import OrderList from './components/OrderList'
