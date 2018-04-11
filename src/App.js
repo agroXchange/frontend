@@ -8,6 +8,7 @@ import TransactionsPage from './components/admin/TransactionsPage'
 import Product from './components/Product'
 import ExampleTranslation from './components/ExampleTranslation'
 //import OrderList from './components/OrderList'
+import OrdersPage from './components/admin/OrdersPage'
 
 import './styles/App.css';
 import {translate} from "react-i18next"
@@ -30,8 +31,8 @@ class App extends Component {
             <button onClick={() => changeLanguage("en")}><img className="LanguageDetector" src="https://lipis.github.io/flag-icon-css/flags/4x3/gb.svg" /></button>
             <h1 className="App-title">AgroXchange</h1>
             <Route exact path="/admin" component={AdminPage} />
-            <Route exact path="/admin/transactions" component={TransactionsPage} />
             <Route exact path="/admin/pending" component={PendingPage} />
+            <Route exact path="/admin/transactions" component={OrdersPage} />
             <Route exact path="/signup" component={SignupPage} />
             <Route exact path="/product" component={ Product } />
             <Route exact path="/translation" component={ ExampleTranslation } />

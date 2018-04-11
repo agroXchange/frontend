@@ -23,22 +23,22 @@ const style = theme => ({
   }
 });
 
-const array = [0, 1, 2, 3, 4, 5];
 
 class PendingPage extends PureComponent {
   componentWillMount(props) {
     this.props.fetchUsers();
-
-
   }
+
+
   render() {
     const { classes } = this.props;
+    const users = this.props.users
 
     return (
       <MuiThemeProvider>
-        {array.map(item => (
+        {users.map(user => (
           <Card className={classes.card} zDepth={3} circle={true}>
-            <CardHeader title="Seller" />
+            <CardHeader title={user.role} />
             <CardMedia>
               <img
                 className={classes.media}
@@ -47,8 +47,8 @@ class PendingPage extends PureComponent {
               />
             </CardMedia>
             <CardContent>
-              <p>Luca Di Donato</p>
-              <p>501 Ijburglaan</p>
+              <p>{user.profile.name}</p>
+              <p>{user.profile.address}</p>
               <p>Colombia</p>
               <Button size="medium" color="primary">
                 Approve
