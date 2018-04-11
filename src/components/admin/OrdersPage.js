@@ -3,27 +3,15 @@ import { connect } from "react-redux";
 import compose from "lodash/fp/compose";
 import { withStyles } from "material-ui/styles";
 import Card from "material-ui/Card";
-import {
-  CardActions,
-  CardHeader,
-  CardMedia,
-  CardTitle,
-  CardText,
-  CardContent
-} from "material-ui/Card";
+import { CardActions, CardHeader, CardMedia, CardTitle, CardText, CardContent } from "material-ui/Card";
 import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
-import Table, {
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow
-} from "material-ui/Table";
+import Table, { TableBody, TableCell, TableHead, TableRow } from "material-ui/Table";
 import { fetchAllOrders } from "../../actions/orders";
 
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
-const style = theme => ({
+const style = () => ({
   card: {
     height: 550,
     width: 300,
@@ -36,11 +24,12 @@ const style = theme => ({
   },
   table: {
     width: " 10px",
-    fontSize: "10px"
+    fontSize: "10px",
+    textAlign: 'center'
   },
   seller: {
-    textAlign: "center",
-    fontSize: "20px"
+    textAlign: "left",
+    fontSize: "5px"
   }
 });
 
@@ -67,11 +56,15 @@ class OrdersPage extends PureComponent {
               />
             </CardMedia>
             <Card>
-              <Table>
-                <TableRow className={classes.table}>
-                  <TableCell>Buyer: Carlos</TableCell>
-                  <TableCell>Seller: Luca</TableCell>
-                </TableRow>
+              <Table className={classes.seller}>
+                <TableHead  >
+                  <TableCell >Buyer: {order.user.email}</TableCell>
+                </TableHead>
+              </Table>
+              <Table className={classes.seller}>
+                <TableHead  >
+                  <TableCell>Seller: {order.product.user.email}</TableCell>
+                </TableHead>
               </Table>
             </Card>
             <br />
@@ -87,7 +80,7 @@ class OrdersPage extends PureComponent {
                 </TableRow>
                 <TableRow>
                   <TableCell>Price</TableCell>
-                  <TableCell>{order.product.price}</TableCell>
+                  <TableCell>{order.product.price}{order.product.currency}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Volume</TableCell>
