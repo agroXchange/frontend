@@ -9,3 +9,7 @@
   margin-right: 10px;
   text-align: left;
 }
+
+.upload-input {
+  display: block;
+}

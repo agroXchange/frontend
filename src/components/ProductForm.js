@@ -75,26 +75,27 @@ class ProductForm extends PureComponent {
     return(
       <form onSubmit={ this.handleSubmit } className="form-container">
 
-      <h2>Please Add a Product</h2>
+      <h2>Add a Product</h2>
 
       <TextField
         id="name"
         label="Name"
         name="name"
-        className="textField"
+        style={ classes.textField }
         value={ this.state.name }
         onChange={ this.handleChange }
         margin="normal"
-        style={{
-          marginRight: 20,
-        }}
+
       />
 
+      <label htmlFor="photo">Please Upload a Photo </label>
       <input
         accept="image/*"
         id="raised-button-file"
         type="file"
         name="photo"
+        className="upload-input"
+        style={ classes.textField }
         onChange={this.handleFileChange}
       />
 
@@ -102,7 +103,7 @@ class ProductForm extends PureComponent {
         id="description"
         name="description"
         label="Description"
-        className="textField"
+        style={ classes.textField }
         value={ this.state.description }
         onChange={ this.handleChange }
         margin="normal"
@@ -113,13 +114,10 @@ class ProductForm extends PureComponent {
         name="currency"
         select
         label="Please select your currency"
-        className="textField"
+        style={ classes.textField }
         value={ this.state.currency }
         onChange={ this.handleChange }
         margin="normal"
-        style={{
-          width: 200
-        }}
       >
         { currencies.map(option => (
           <MenuItem key={ option.value } value={ option.value } >
@@ -135,7 +133,7 @@ class ProductForm extends PureComponent {
         value={ this.state.price }
         onChange={ this.handleChange }
         type="number"
-        className={ classes.textField }
+        style={ classes.textField }
         InputLabelProps={{
           shrink: true,
         }}
@@ -148,7 +146,7 @@ class ProductForm extends PureComponent {
         name="volume"
         value={ this.state.volume }
         onChange={ this.handleChange }
-        className=""
+        style={ classes.textField }
         InputProps={{
           startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
         }}
@@ -158,7 +156,7 @@ class ProductForm extends PureComponent {
         id="certification"
         name="certification"
         label="Certification"
-        className="textField"
+        style={ classes.textField }
         value={ this.state.certification }
         onChange={ this.handleChange }
         margin="normal"
@@ -171,7 +169,7 @@ class ProductForm extends PureComponent {
         type="date"
         defaultValue="2017-05-24"
         onChange={ this.handleChange }
-        className=" "
+        style={ classes.textField }
         InputLabelProps={{
           shrink: true,
         }}
@@ -184,7 +182,7 @@ class ProductForm extends PureComponent {
         type="date"
         defaultValue="2017-05-24"
         onChange={ this.handleChange }
-        className=" "
+        style={ classes.textField }
         InputLabelProps={{
           shrink: true,
         }}
