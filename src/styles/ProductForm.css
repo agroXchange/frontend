@@ -1,0 +1,33 @@
+.form-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.text-input {
+  width: 250px;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: left;
+}
+
+.upload {
+  margin: auto;
+  width: 200px;
+}
+
+.upload-input {
+  display: block;
+  max-width: 200px;
+  margin: auto;
+  text-align: center;
+}
+
+.paper {
+  width: 90%;
+  max-width: 600px;
+  margin: auto;
+}
+
+.submit-btn {
+  display: block;
+}
