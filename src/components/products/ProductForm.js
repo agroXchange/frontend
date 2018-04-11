@@ -10,6 +10,13 @@ import '../../styles/ProductForm.css'
 
 import Drilldown from './ProductPicker'
 import 'foundation-sites/dist/css/foundation.min.css';
+import zIndex from 'material-ui/styles/zIndex';
+
+import { vegetables, fruits, beans } from '../productCodes'
+
+import jquery from 'jquery';
+window.$ = window.jQuery = jquery;
+require('foundation-sites');
 
 
 const classes = {
@@ -85,25 +92,81 @@ class ProductForm extends PureComponent {
 
         <h2>Add a Product</h2>
 
-        {/* <TextField
-          id="name"
-          label="Name"
-          name="name"
-          style={ classes.textField }
-          value={ this.state.name }
-          onChange={ this.handleChange }
-          margin="normal"
+          <div>
+            <ul className="vertical menu drilldown" 
+            data-drilldown
+              data-auto-height="true"
+            >
+              <li>
+                <a href="#"> Vegetables   </a>
+                <ul className="menu vertical nested">
+                  {vegetables.map(veg =>
+                    <li key={Object.getOwnPropertyNames(veg)}>
+                      <button 
+                        name="name"
+                        className="button"
+                        value={Object.getOwnPropertyNames(veg)}
+                        type="button"
+                        onClick={this.handleChange}
+                      >
+                        {Object.getOwnPropertyNames(veg)}
 
-        /> */}
+                      </button>
+                    </li>
+                  )}
+                </ul>
+              </li>
+              <li>
+                <a href="#"> Fruits & Nuts   </a>
+                <ul className="menu vertical nested">
+                  {fruits.map(fruit =>
+                    <li key={Object.getOwnPropertyNames(fruit)}>
+                      <button 
+                        name="name"
+                        className="button"
+                        value={Object.getOwnPropertyNames(fruit)}
+                        type="button"
+                        onClick={this.handleChange}
+                      >
+                        {Object.getOwnPropertyNames(fruit)}
 
-          <Drilldown 
+                      </button>
+                    </li>
+
+                  )}
+                </ul>
+              </li>
+              <li>
+                <a href="#"> Beans & Crop   </a>
+                <ul className="menu vertical nested">
+                  {beans.map(bean =>
+                    <li key={Object.getOwnPropertyNames(bean)}>
+                      <button 
+                        name="name"
+                        className="button"
+                        value={Object.getOwnPropertyNames(bean)}
+                        type="button"
+                        onClick={this.handleChange}
+                      >
+                        {Object.getOwnPropertyNames(bean)}
+
+                      </button>
+                    </li>
+
+                  )}
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+          {/* <Drilldown 
             id="name"
             label="Name"
             name="name"
             value={this.state.name}
             onChange={this.handleChange}
-          
-          />
+            style={{ zIndex: 100, position: "absolute"}}
+          /> */}
 
         <div className="upload">
           <label htmlFor="photo">Please Upload a Photo </label>
@@ -173,10 +236,10 @@ class ProductForm extends PureComponent {
 
         <TextField
           id="certification"
-          name="certification"
+          name="certificate"
           label="Certification"
           style={ classes.textField }
-          value={ this.state.certification }
+            value={this.state.certificate }
           onChange={ this.handleChange }
           margin="normal"
         />
@@ -196,7 +259,7 @@ class ProductForm extends PureComponent {
 
         <TextField
           id="expired"
-          name="expired"
+            name="expiration"
           label="Expiry Date"
           type="date"
           defaultValue="2017-05-24"
