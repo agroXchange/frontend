@@ -37,6 +37,14 @@ i18n.use(LanguageDetector).init({
       },
       profile: {
         'new': 'nuevo'
+      },
+      orders: {
+        'Order': 'Orden',
+        'Order Volume': 'Volumen de pedido',
+        'Comments': 'Comentarios',
+        'Status': 'Estado',
+        'Ordered date': 'Fecha ordenada',
+        'GO TO SELLER PROFILE': 'IR AL PERFIL DEL VENDEDOR'
       }
     }
   },
