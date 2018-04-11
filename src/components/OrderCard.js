@@ -22,71 +22,78 @@ const styles = {
 const buyer = [
     {
         "approved": true,
-        "email": "yoonjioh90@gmail.com",
+        "email": "email@email.com",
         "id": 1,
         "orders": [
             {
-                "ICO": "alskdjf",
-                "comments": "quick delievery, please",
-                "date": "2018-04-10",
+                "ICO": "term",
+                "comments": "good choice",
+                "date": "2010-10-10",
                 "id": 1,
-                "status": "pending",
-                "volume": "200"
+                "status": "Pending",
+                "volume": "213213"
             },
             {
-                "ICO": "akjsdf",
-                "comments": "quick delievery, please",
-                "date": "2018-04-08",
+                "ICO": "ICOterm",
+                "comments": "bad choice",
+                "date": "2010-10-10",
                 "id": 2,
-                "status": "pending",
-                "volume": "150"
+                "status": "Arrived",
+                "volume": "7654"
+            }],
+        "products": [
+            {
+                "certificate": "BFF",
+                "city": "Amsterdam",
+                "currency": "usd",
+                "description": "new",
+                "expiration_date": "2019-10-10",
+                "harvested": "2010-10-10",
+                "id": 2,
+                "name": "apple",
+                "photo": "https://imagizer.imageshack.com/v2/280x200q90/922/aQ7YfK.jpg",
+                "price": 90,
+                "volume": "500"
             },
             {
-                "ICO": "akjsdf",
-                "comments": "quick delievery, please",
-                "date": "2018-04-08",
-                "id": 2,
-                "status": "pending",
-                "volume": "150"
+                "certificate": "BFF",
+                "city": "Amsterdam",
+                "currency": "usd",
+                "description": "new",
+                "expiration_date": "2019-10-10",
+                "harvested": "2010-10-10",
+                "id": 3,
+                "name": "banana",
+                "photo": "http://",
+                "price": 4,
+                "volume": "2000"
             },
             {
-                "ICO": "akjsdf",
-                "comments": "quick delievery, please",
-                "date": "2018-04-08",
-                "id": 2,
-                "status": "pending",
-                "volume": "150"
-            },
-            {
-                "ICO": "akjsdf",
-                "comments": "quick delievery, please",
-                "date": "2018-04-08",
-                "id": 2,
-                "status": "pending",
-                "volume": "150"
-            },
-            {
-                "ICO": "akjsdf",
-                "comments": "quick delievery, please",
-                "date": "2018-04-08",
-                "id": 2,
-                "status": "pending",
-                "volume": "150"
+                "certificate": "BFF",
+                "city": "Amsterdam",
+                "currency": "usd",
+                "description": "new",
+                "expiration_date": "2019-10-10",
+                "harvested": "2010-10-10",
+                "id": 1,
+                "name": "mandarin",
+                "photo": " https://imagizer.imageshack.com/v2/280x200q90/922/a6Pawe.jpg",
+                "price": 30,
+                "volume": "1000"
             }
         ],
-        "products": [],
         "profile": {
-            "address": "Seoul, Korea",
-            "chamberOfCommerce": "1234",
+            "address": "Buurgerstraat",
+            "chamberOfCommerce": "COC",
             "city": "Amsterdam",
-            "field": "buyer",
+            "field": "field",
             "id": 1,
-            "link": "123adf",
-            "name": "yoonji",
-            "phone": "010-202-0102",
-            "type": "CJKS"
+            "link": "http://",
+            "name": "Codaissuer",
+            "phone": "11223344",
+            "type": "type"
         },
-        "role": "lkdjf"
+        "role": "buyer"
     }
 ]
 
