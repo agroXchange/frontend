@@ -1,11 +1,13 @@
 import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
-import { Link } from 'react-router-dom'	
+import { Link } from 'react-router-dom'
 import {login} from '../../actions/users'
 import LoginForm from './LoginForm'
 import {Redirect} from 'react-router-dom'
 import Typography from "material-ui/Typography";
 import Button from "material-ui/Button";
+import compose from 'lodash/fp/compose'
+import {translate, Trans} from "react-i18next"
 
 class LoginPage extends PureComponent {
 	handleSubmit = (data) => {
@@ -13,6 +15,9 @@ class LoginPage extends PureComponent {
 	}
 
 	render() {
+
+		const { t, i18n } = this.props
+
 		if (this.props.currentUser) return (
 			<Redirect to="/" />
 		)
@@ -20,15 +25,15 @@ class LoginPage extends PureComponent {
 		return (
 			<div>
 				<Typography gutterBottom variant="headline" component="h1">
-          Log in
+          {t('Log in')}
         </Typography>
 
 				<LoginForm onSubmit={this.handleSubmit}/>
 
         { this.props.error && <span style={{color:'red'}}>{this.props.error}</span> }
 
-				<Typography color="textSecondary">Not a member yet? Go to </Typography>
-        <Button color="primary" component={Link} to="/signup">Sign up</Button>
+				<Typography color="textSecondary">{t('notmember')}</Typography>
+        <Button color="primary" component={Link} to="/signup">{t('Sign up')}</Button>
 			</div>
 		)
 	}
@@ -41,4 +46,6 @@ const mapStateToProps = function (state) {
 	}
 }
 
-export default connect(mapStateToProps, {login})(LoginPage)
+export default compose(
+  translate('user'),
+  connect((mapStateToProps), {login}))(LoginPage)

@@ -2,6 +2,8 @@ import React, {PureComponent} from 'react'
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
+import compose from 'lodash/fp/compose'
+import {translate, Trans} from "react-i18next"
 
 const styles = theme => ({
   button: {
@@ -39,6 +41,8 @@ class LoginForm extends PureComponent {
   }
 
 	render() {
+
+    const { t, i18n } = this.props
 		const { classes } = this.props;
 
 		return (

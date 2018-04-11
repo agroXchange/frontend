@@ -19,6 +19,13 @@ i18n.use(LanguageDetector).init({
       },
       profile: {
         'Name': 'Name',
+      },
+      user: {
+        'Email': 'Email',
+        'Log in': 'Log in',
+        'Sign up': 'Sign up',
+        'Password': 'Password',
+        'notmember': 'Not a member yet? Go to '
       }
     },
     es: {
@@ -37,6 +44,13 @@ i18n.use(LanguageDetector).init({
       },
       profile: {
         'new': 'nuevo'
+      },
+      user: {
+        'Email': 'Email',
+        'Log in': 'Iniciar sesión',
+        'Sign up': 'Registrar',
+        'Password': 'Contraseña',
+        'notmember': '¿No tienes una cuenta?'
       }
     }
   },
