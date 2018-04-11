@@ -52,7 +52,7 @@ class LoginForm extends PureComponent {
             required
             id="email"
             name="email"
-            label="Email"
+            label={t('Email')}
             className={classes.textField}
             margin="normal"
             type="email"
@@ -65,7 +65,7 @@ class LoginForm extends PureComponent {
             required
             id="password"
             name="password"
-            label="Password"
+            label={t('Password')}
             className={classes.textField}
             type="password"
             margin="normal"
@@ -74,11 +74,13 @@ class LoginForm extends PureComponent {
           />
 				</div>
         <Button variant="raised" color="primary" className={classes.button} type="submit">
-          Log in
+          {t('Log in')}
         </Button>
 			</form>
 		)
 	}
 }
 
-export default withStyles(styles)(LoginForm);
+export default compose (
+  translate('user'),
+  withStyles(styles))(LoginForm)

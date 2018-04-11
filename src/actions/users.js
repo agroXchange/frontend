@@ -8,6 +8,7 @@ export const FETCH_ALL_USERS = "FETCH_ALL_USERS";
 
 export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS";
 export const USER_LOGIN_FAILED = "USER_LOGIN_FAILED";
+export const USER_LOGOUT = "USER_LOGOUT"
 
 export const fetchUsers = () => dispatch => {
   // const state = getState();
@@ -65,3 +66,7 @@ export const signup = newUser => dispatch =>
         console.error(err);
       }
     });
+
+export const logout = () => ({
+  type: USER_LOGOUT
+})
