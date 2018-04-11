@@ -52,7 +52,7 @@ class PendingPage extends PureComponent {
             <CardContent>
               <p>{user.profile.name}</p>
               <p>{user.profile.address}</p>
-              <p>Colombia</p>
+              <p>{user.profile.country}</p>
               <Button size="medium" color="primary">
                 Approve
               </Button>
