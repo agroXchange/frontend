@@ -9,21 +9,17 @@ import ExampleTranslation from './components/ExampleTranslation'
 import OrdersPage from './components/admin/OrdersPage'
 import UsersList from './components/admin/UsersList'
 import OrderListBuyer from './containers/orderList/OrderListBuyer'
+import OrderListSeller from './containers/orderList/OrderListSeller'
 import NavBar from './components/NavBar'
 import LoginPage from './components/login/LoginPage'
 import ProductForm from './components/ProductForm'
 
 import './styles/App.css';
-import {translate} from "react-i18next"
+
 
 class App extends Component {
   render() {
 
-    const { i18n } = this.props
-
-    const changeLanguage = lng => {
-      i18n.changeLanguage(lng)
-    }
 
     return (
       <MuiThemeProvider>
@@ -42,7 +38,7 @@ class App extends Component {
             <Route exact path="/product" component={ Product } />
             <Route exact path="/translation" component={ ExampleTranslation } />
             <Route exact path="/:id/orderlistBuyer" component={OrderListBuyer} />
-            <Route exact path="/orderlistBuyer" component={OrderListBuyer} />
+            <Route exact path="/:id/orderlistSeller" component={OrderListSeller} />
             <Route exact path="/product" component={ Product } />
             <Route exact path="/productform" component={ ProductForm } />
           </div>
@@ -52,4 +48,4 @@ class App extends Component {
   }
 }
 
-export default translate("translations")(App)
+export default App
