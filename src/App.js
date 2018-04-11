@@ -10,6 +10,7 @@ import ExampleTranslation from './components/ExampleTranslation'
 import OrdersPage from './components/admin/OrdersPage'
 import OrderListBuyer from './containers/OrderListBuyer'
 import NavBar from './components/NavBar'
+import ProductForm from './components/ProductForm'
 
 import './styles/App.css';
 import {translate} from "react-i18next"
@@ -38,6 +39,8 @@ class App extends Component {
             <Route exact path="/product" component={ Product } />
             <Route exact path="/translation" component={ ExampleTranslation } />
             <Route exact path="/orderlistBuyer" component={OrderListBuyer} />
+            <Route exact path="/product" component={ Product } />
+            <Route exact path="/productform" component={ ProductForm } />
           </div>
         </Router>
       </MuiThemeProvider>
