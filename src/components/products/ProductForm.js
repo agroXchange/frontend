@@ -8,6 +8,10 @@ import { withStyles } from 'material-ui/styles';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import '../../styles/ProductForm.css'
 
+import Drilldown from './ProductPicker'
+import 'foundation-sites/dist/css/foundation.min.css';
+
+
 const classes = {
   container: {
     display: 'flex',
@@ -81,7 +85,7 @@ class ProductForm extends PureComponent {
 
         <h2>Add a Product</h2>
 
-        <TextField
+        {/* <TextField
           id="name"
           label="Name"
           name="name"
@@ -90,7 +94,16 @@ class ProductForm extends PureComponent {
           onChange={ this.handleChange }
           margin="normal"
 
-        />
+        /> */}
+
+          <Drilldown 
+            id="name"
+            label="Name"
+            name="name"
+            value={this.state.name}
+            onChange={this.handleChange}
+          
+          />
 
         <div className="upload">
           <label htmlFor="photo">Please Upload a Photo </label>

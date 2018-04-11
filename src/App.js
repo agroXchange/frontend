@@ -18,7 +18,17 @@ import ProductForm from './components/products/ProductForm'
 import LogoutPage from './components/logout/LogoutPage'
 import './styles/App.css';
 
+import $ from 'jquery';
+import 'foundation-sites';
+import './styles/App.css';
+
 class App extends Component {
+
+  componentDidMount() {
+
+    $(document).foundation();
+
+  }
   render() {
     return (
       <MuiThemeProvider>
