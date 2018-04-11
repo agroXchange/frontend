@@ -2,25 +2,21 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-
 import AppBar from 'material-ui/AppBar';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
+import { fetchAllProducts } from '../actions/products';
 import '../styles/Product.css'
-
-
-const profile = {
-  country: "Netherlands",
-  cityPort: "Amsterdam"
-}
-
 
 class Product extends PureComponent {
 
-  render() {
-    const { product } = this.props
-    return(
+  componentWillMount() {
+    this.props.fetchAllProducts()
+  }
+
+  renderProduct(product) {
+    return (
       <div className="product-container">
         <Paper className="paper">
         <Paper className="title"><h2>{ product.name }</h2></Paper>
@@ -39,8 +35,8 @@ class Product extends PureComponent {
               <p>Volume: { product.volume } KG</p>
               <p>Price: { product.price } { product.currency } per KG</p>
               <p>Certification: { product.certification }</p>
-              <p>Country { profile.country }</p>
-              <p>City/Port: { profile.cityPort }</p>
+              <p>Country { product.country }</p>
+              <p>City/Port: { product.cityPort }</p>
 
               <Button>Edit Product</Button>
               <Button>Make An Order</Button>
@@ -53,12 +49,23 @@ class Product extends PureComponent {
     )
   }
 
+  render() {
+  const products = this.props.products;
+
+    return(
+      <div>
+      {products.map(product => (
+        this.renderProduct(product)
+      ))}
+      </div>
+    )
+  }
 }
 
 const mapStateToProps = (state) => {
   return {
-    product: state.product
+    products: state.products
   }
 }
 
-export default connect(mapStateToProps)(Product)
+export default connect(mapStateToProps, {fetchAllProducts})(Product)

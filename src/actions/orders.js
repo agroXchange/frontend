@@ -8,7 +8,7 @@ export const FETCH_ORDER = "FETCH_ORDER"
 export const FETCH_ORDERS_BY_BUYERID = "FETCH_ORDERS_BY_BUYERID";
 
 
-export const fetchAllOrders = () => (dispatch) => {
+export const fetchAllOrders = () => (dispatch, getState) => {
   // const state = getState();
   // const jwt = state.currentUser.jwt;
 
