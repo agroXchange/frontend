@@ -6,6 +6,8 @@ import compose from "lodash/fp/compose";
 import { withStyles } from "material-ui/styles";
 import List, { ListItem, ListItemAvatar, ListItemIcon, ListItemSecondaryAction, ListItemText } from "material-ui/List";
 import DeleteIcon from '@material-ui/icons/Delete';
+import Button from "material-ui/Button";
+import Card, { CardActions, CardContent } from "material-ui/Card";
 import IconButton from 'material-ui/IconButton';
 import Avatar from "material-ui/Avatar";
 
@@ -57,6 +59,13 @@ class UsersList extends PureComponent {
             </ListItem>
           </List>
         ))}
+        <Card>
+          <Link to={`/admin`}>
+            <Button size="medium" color="primary">
+              Admin Page
+            </Button>
+          </Link>
+        </Card>
       </div>
     );
   }
