@@ -70,12 +70,12 @@ class OrdersPage extends PureComponent {
             <Card>
               <Table className={classes.seller}>
                 <TableHead>
-                  <TableCell>Buyer: {order.user.email}</TableCell>
+                  <TableCell>Buyer: {order.buyer.name}</TableCell>
                 </TableHead>
               </Table>
               <Table className={classes.seller}>
                 <TableHead>
-                  <TableCell>Seller: {order.product.user.email}</TableCell>
+                  <TableCell>Seller: {order.product.seller.name}</TableCell>
                 </TableHead>
               </Table>
             </Card>

@@ -49,7 +49,7 @@ class UsersList extends PureComponent {
               </ListItemAvatar>
               <ListItemText
                 primary={user.profile.name}
-                secondary={user.profile.city}
+                secondary={user.profile.country}
               />
               <ListItemSecondaryAction>
                 <IconButton aria-label="Delete">
