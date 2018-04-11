@@ -6,10 +6,10 @@ import PendingPage from './components/admin/PendingPage'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Product from './components/Product'
 import ExampleTranslation from './components/ExampleTranslation'
-//import OrderList from './components/OrderList'
 import OrdersPage from './components/admin/OrdersPage'
 import OrderListBuyer from './containers/orderList/OrderListBuyer'
 import NavBar from './components/NavBar'
+import ProductForm from './components/ProductForm'
 
 import './styles/App.css';
 import {translate} from "react-i18next"
@@ -38,6 +38,9 @@ class App extends Component {
             <Route exact path="/product" component={ Product } />
             <Route exact path="/translation" component={ ExampleTranslation } />
             <Route exact path="/:id/orderlistBuyer" component={OrderListBuyer} />
+            <Route exact path="/orderlistBuyer" component={OrderListBuyer} />
+            <Route exact path="/product" component={ Product } />
+            <Route exact path="/productform" component={ ProductForm } />
           </div>
         </Router>
       </MuiThemeProvider>
