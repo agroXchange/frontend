@@ -54,14 +54,7 @@ class NavBar extends PureComponent {
 
     return (
       <div className={classes.root}>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Switch checked={auth} onChange={this.handleChange} aria-label="LoginSwitch" />
-            }
-            label={auth ? 'Logout' : 'Login'}
-          />
-        </FormGroup>
+
         <AppBar position="static">
           <Toolbar>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
@@ -78,8 +71,10 @@ class NavBar extends PureComponent {
                   onClick={this.handleMenu}
                   color="inherit"
                 >
-                  <AccountCircle />
+                <AccountCircle />
+                
                 </IconButton>
+
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorEl}
@@ -97,6 +92,7 @@ class NavBar extends PureComponent {
                   <MenuItem onClick={this.handleClose}>Profile</MenuItem>
                   <MenuItem onClick={this.handleClose}>My account</MenuItem>
                 </Menu>
+
               </div>
             )}
           </Toolbar>
