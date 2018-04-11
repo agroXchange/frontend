@@ -26,6 +26,14 @@ i18n.use(LanguageDetector).init({
         'Sign up': 'Sign up',
         'Password': 'Password',
         'notmember': 'Not a member yet? Go to '
+      },
+      orders: {
+        'Order': 'Order',
+        'Order Volume': 'Order Volume',
+        'Comments': 'Comentarios',
+        'Status': 'Status',
+        'Ordered date': 'Ordered date',
+        'GO TO SELLER PROFILE': 'GO TO SELLER PROFILE'
       }
     },
     es: {
@@ -51,7 +59,15 @@ i18n.use(LanguageDetector).init({
         'Sign up': 'Registrar',
         'Password': 'Contraseña',
         'notmember': '¿No tienes una cuenta?'
-      }
+      },
+      orders: {
+        'Order': 'Orden',
+        'Order Volume': 'Volumen de pedido',
+        'Comments': 'Comentarios',
+        'Status': 'Estado',
+        'Ordered date': 'Fecha ordenada',
+        'GO TO SELLER PROFILE': 'IR AL PERFIL DEL VENDEDOR'
+      },
     }
   },
   fallbackLng: "en",
