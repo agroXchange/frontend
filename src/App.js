@@ -26,6 +26,7 @@ import $ from 'jquery';
 import 'foundation-sites';
 import './styles/App.css';
 import AddProductContainer from './components/AddProductContainer';
+import SearchProductContainer from './components/SearchProductContainer';
 
 class App extends Component {
 
@@ -53,9 +54,10 @@ class App extends Component {
             <Route exact path="/products" component={ ProductsList } />
             <Route exact path="/product" component={ Product } />
             <Route exact path="/orderlistBuyer" component={OrderListBuyer} />
-            <Route exact path="/addproduct" component={AddProductContainer } />
             <Route exact path="/productform" component={AddProductContainer} />
             <Route exact path="/users/:id" component={ShowUser} />
+            <Route exact path="/addproduct" component={ AddProductContainer } />
+            <Route exact path="/searchproduct" component={ SearchProductContainer } />
           </div>
         </Router>
       </MuiThemeProvider>

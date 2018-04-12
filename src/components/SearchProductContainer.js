@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import ProductForm from './ProductForm'
+import SearchProductForm from './SearchProductForm'
 import { searchProduct } from '../actions/products'
 
 
@@ -17,8 +17,8 @@ class SearchProductContainer extends PureComponent {
     render() {
 
         return (
-            <div className="addProductContainer">
-                <ProductForm onSubmit={this.submit} />
+            <div className="SearchProductContainer">
+                <SearchProductForm onSubmit={this.submit} />
             </div>
         )
     }

@@ -8,7 +8,6 @@ import { withStyles } from 'material-ui/styles';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import '../../styles/ProductForm.css'
 
-import Drilldown from './ProductPicker'
 import 'foundation-sites/dist/css/foundation.min.css';
 import zIndex from 'material-ui/styles/zIndex';
 
@@ -104,7 +103,7 @@ class ProductForm extends PureComponent {
             <ul className="vertical menu drilldown" 
             data-drilldown
               data-auto-height="true"
-              
+              data-scroll-top="true"   
           >
      <div id ="test">       
               <li>

@@ -8,7 +8,6 @@ import { withStyles } from 'material-ui/styles';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import '../styles/ProductForm.css'
 
-import Drilldown from './ProductPicker'
 import 'foundation-sites/dist/css/foundation.min.css';
 import zIndex from 'material-ui/styles/zIndex';
 
@@ -60,7 +59,7 @@ const countries = [
 
 class SearchProductForm extends PureComponent {
     state = {
-       
+       country: 'Colombia'
     }
 
     propTypes = {
@@ -86,7 +85,7 @@ class SearchProductForm extends PureComponent {
             <form onSubmit={this.handleSubmit} className="form-container">
                 <Paper className="paper">
 
-                    <h2>Add a Product</h2>
+                    <h2>Search Products</h2>
 
                     <div>
                         <ul className="vertical menu drilldown"
