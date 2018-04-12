@@ -89,6 +89,7 @@ class ResponsiveDialog extends React.Component {
     }
 
     handleChange = (e) => {
+        e.preventDefault()
         const { name, value } = e.target
 
         this.setState({
@@ -108,9 +109,10 @@ class ResponsiveDialog extends React.Component {
   
         const { fullScreen, codes, vegetables, fruits, beans } = this.props
 
-        if (codes)
+        if (vegetables)
         return (
-            <form onSubmit={this.handleSubmit} className="form-container">
+         <div>   
+            
                 <Paper className="paper">
 
                 <h2>Search Products</h2>
@@ -120,7 +122,7 @@ class ResponsiveDialog extends React.Component {
                     <Dialog
                         fullScreen={fullScreen}
                         open={this.state.open}
-                        onClose={this.handleClose}
+                        // onClose={this.handleClose}
                         aria-labelledby="responsive-dialog-title"
                     >
 
@@ -134,10 +136,11 @@ class ResponsiveDialog extends React.Component {
                                     <DialogContentText>
                                         <ul className="menu vertical nested">
                                             {vegetables.map(veg =>
-                                                <li key={veg.code}>
+                                             { console.log(veg.code)
+                                               return  <li key={veg.code}>
                                                     <Button
                                                         size="small"
-                                                        name="name"
+                                                        name="code"
                                                         color="secondary"
                                                         className="button"
                                                         value={veg.code}
@@ -147,6 +150,7 @@ class ResponsiveDialog extends React.Component {
                                                         {veg.titleeng}
                                                     </Button>
                                                 </li>
+                                            }
                                             )}
                                         </ul>
                                     </DialogContentText>
@@ -217,7 +221,8 @@ class ResponsiveDialog extends React.Component {
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
                 </Dialog>
-
+     
+        <form onSubmit={this.handleSubmit} className="form-container">
                         <TextField
                             id="code"
                             name="code"
@@ -260,9 +265,9 @@ class ResponsiveDialog extends React.Component {
                             Save
                         </Button>
 
-                    </Paper>
                 </form>
-
+                    </Paper>
+</div>
            
         );
     }
