@@ -6,6 +6,8 @@ import Input, { InputLabel } from "material-ui/Input";
 import { FormControl, FormHelperText } from "material-ui/Form";
 import Typography from "material-ui/Typography";
 import Button from "material-ui/Button";
+import compose from 'lodash/fp/compose'
+import {translate, Trans} from "react-i18next"
 
 import TextField from "material-ui/TextField";
 
@@ -58,6 +60,8 @@ class SignupForm extends PureComponent {
   render() {
     const { classes } = this.props;
 
+    const { t, i18n } = this.props
+
     return (
       <form className={classes.container} onSubmit={this.handleSubmit}>
         <div>
@@ -65,35 +69,35 @@ class SignupForm extends PureComponent {
             required
             id="name"
             name="name"
-            label="Name"
+            label={t('name')}
             className={classes.textField}
             margin="normal"
-            helperText="What is the name of your organization?"
+            helperText={t('whatName?')}
             value={this.state.name}
             onChange={this.handleChange}
           />
         </div>
         <div>
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="field">Field</InputLabel>
+            <InputLabel htmlFor="field">{t('field')}</InputLabel>
             <Select
               required
               input={<Input name="field" id="field" />}
               value={this.state.field}
               onChange={this.handleChange}
             >
-              <MenuItem value="producer">Producer</MenuItem>
-              <MenuItem value="trader">Trader</MenuItem>
-              <MenuItem value="logistics">Logistics</MenuItem>
-              <MenuItem value="insurance">Insurance</MenuItem>
-              <MenuItem value="other">Other</MenuItem>
+              <MenuItem value="producer">{t('producer')}</MenuItem>
+              <MenuItem value="trader">{t('trader')}</MenuItem>
+              <MenuItem value="logistics">{t('logistics')}</MenuItem>
+              <MenuItem value="insurance">{t('insurance')}</MenuItem>
+              <MenuItem value="other">{t('other')}</MenuItem>
             </Select>
-            <FormHelperText>What is your field of business?*</FormHelperText>
+            <FormHelperText>{t('whatField?')}</FormHelperText>
           </FormControl>
         </div>
         <div>
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="type">Type</InputLabel>
+            <InputLabel htmlFor="type">{t('type')}</InputLabel>
             <Select
               required
               value={this.state.type}
@@ -103,14 +107,14 @@ class SignupForm extends PureComponent {
                 id: "type"
               }}
             >
-              <MenuItem value="cooperative">Cooperative</MenuItem>
-              <MenuItem value="association">Association</MenuItem>
-              <MenuItem value="private">Private</MenuItem>
-              <MenuItem value="ngo">NGO</MenuItem>
-              <MenuItem value="other">Other</MenuItem>
+              <MenuItem value="cooperative">{t('cooperative')}</MenuItem>
+              <MenuItem value="association">{t('association')}</MenuItem>
+              <MenuItem value="private">{t('private')}</MenuItem>
+              <MenuItem value="ngo">{t('ngo')}</MenuItem>
+              <MenuItem value="other">{t('other')}</MenuItem>
             </Select>
             <FormHelperText>
-              What is the type of your organization?*
+              {t('whatType?')}
             </FormHelperText>
           </FormControl>
         </div>
@@ -119,7 +123,7 @@ class SignupForm extends PureComponent {
             required
             id="address"
             name="address"
-            label="Address"
+            label={t('address')}
             className={classes.textField}
             margin="normal"
             value={this.state.address}
@@ -131,7 +135,7 @@ class SignupForm extends PureComponent {
             required
             id="country"
             name="country"
-            label="Country"
+            label={t('country')}
             className={classes.textField}
             margin="normal"
             value={this.state.country}
@@ -142,9 +146,9 @@ class SignupForm extends PureComponent {
           <TextField
             id="city"
             name="city"
-            label="Nearest city/port"
+            label={t('cityPort')}
             className={classes.textField}
-            helperText="If you plan to sell, what is the nearest city or port?"
+            helperText={t('whatCityPort?')}
             margin="normal"
             value={this.state.city}
             onChange={this.handleChange}
@@ -155,7 +159,7 @@ class SignupForm extends PureComponent {
             required
             id="phone"
             name="phone"
-            label="Phone number"
+            label={t('phone')}
             className={classes.textField}
             margin="normal"
             value={this.state.phone}
@@ -166,25 +170,21 @@ class SignupForm extends PureComponent {
           <TextField
             id="chamberOfCommerce"
             name="chamberOfCommerce"
-            label="Registration number"
+            label={t('registration')}
             className={classes.textField}
-            helperText="Chamber of Commerce registration number (optional now)"
+            helperText={t('cocOptional')}
             margin="normal"
             value={this.state.chamberOfCommerce}
             onChange={this.handleChange}
           />
           <Typography color="textSecondary">
-            To participate on this website, you will need to provide proof of
-            your membership of your local chamber of commerce. If you have your
-            registration number ready, please fill it in above. You can also do
-            this after signing up. If you have any questions, please contact the
-            webmaster.
+            {t('cocExplanation')}
           </Typography>
           <TextField
             required
             id="email"
             name="email"
-            label="Email"
+            label={t('Email')}
             className={classes.textField}
             margin="normal"
             type="email"
@@ -197,8 +197,9 @@ class SignupForm extends PureComponent {
             required
             id="password"
             name="password"
-            label="Password"
+            label={t('Password')}
             className={classes.textField}
+            helperText={t('minPassLength')}
             type="password"
             margin="normal"
             value={this.state.password}
@@ -210,7 +211,7 @@ class SignupForm extends PureComponent {
             required
             id="confirmPassword"
             name="confirmPassword"
-            label="Confirm password"
+            label={t('confirmPassword')}
             className={classes.textField}
             type="password"
             margin="normal"
@@ -221,14 +222,16 @@ class SignupForm extends PureComponent {
         {this.state.password &&
           this.state.confirmPassword &&
           this.state.password !== this.state.confirmPassword && (
-            <p style={{ color: "red" }}>The passwords do not match!</p>
+            <p style={{ color: "red" }}>{t('confirmError')}</p>
           )}
         <Button variant="raised" color="primary" className={classes.button} type="submit">
-          Sign up
+          {t('Sign up')}
         </Button>
       </form>
     );
   }
 }
 
-export default withStyles(styles)(SignupForm);
+export default compose (
+  translate('user'),
+  withStyles(styles))(SignupForm)

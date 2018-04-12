@@ -5,6 +5,7 @@ const baseUrl = "http://localhost:4008";
 export const USER_SIGNUP_SUCCESS = "USER_SIGNUP_SUCCESS";
 export const USER_SIGNUP_FAILED = "USER_SIGNUP_FAILED";
 export const FETCH_ALL_USERS = "FETCH_ALL_USERS";
+export const FETCH_USER = "FETCH_USER";
 
 export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS";
 export const USER_LOGIN_FAILED = "USER_LOGIN_FAILED";
@@ -25,6 +26,22 @@ export const fetchUsers = () => dispatch => {
     )
     .catch(err => alert(err));
 };
+
+export const fetchUser = (userId) => (dispatch, getState) => {
+  // const state = getState()
+  // const jwt = state.currentUser.jwt
+
+  request
+    .get(`${baseUrl}/users/${userId}`)
+    // .set('Authorization', `Bearer ${jwt}`)
+    .then(result => {
+      dispatch({
+        type: FETCH_USER,
+        payload: result.body
+      })
+    })
+    .catch(err => console.error(err))
+}
 
 export const login = (email, password) => dispatch =>
   request
