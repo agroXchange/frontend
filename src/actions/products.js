@@ -39,7 +39,7 @@ export const fetchProduct = (id) => (dispatch, getState) => {
 export const addProduct = (product, picture) => (dispatch) =>{
   console.log(product)
     request
-        .post(`${baseUrl}/1/products`)
+        .post(`${baseUrl}/products`)
         .field(product)
         .attach('productPhoto', picture)
         .then(response => {
