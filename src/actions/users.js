@@ -9,6 +9,7 @@ export const FETCH_PENDING_USERS= "FETCH_PENDING_USERS";
 export const UPDATE_USER = "UPDATE_USER";
 export const APPROVE_USER = "APPROVE_USER";
 export const DELETE_USER = "DELETE_USER"
+export const FETCH_USER = "FETCH_USER";
 
 export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS";
 export const USER_LOGIN_FAILED = "USER_LOGIN_FAILED";
@@ -85,6 +86,21 @@ export const deleteUser = (id) => (dispatch,getState) => {
     })
 }
 
+export const fetchUser = (userId) => (dispatch, getState) => {
+  // const state = getState()
+  // const jwt = state.currentUser.jwt
+
+  request
+    .get(`${baseUrl}/users/${userId}`)
+    // .set('Authorization', `Bearer ${jwt}`)
+    .then(result => {
+      dispatch({
+        type: FETCH_USER,
+        payload: result.body
+      })
+    })
+    .catch(err => console.error(err))
+}
 
 export const login = (email, password) => dispatch =>
   request
