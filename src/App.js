@@ -4,7 +4,8 @@ import SignupPage from './components/signup/SignupPage'
 import AdminPage from './components/admin/LandingPage'
 import PendingPage from './components/admin/PendingPage'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Product from './components/products/Products'
+import ProductsList from './components/products/ProductsList'
+import Product from './components/products/Product'
 import ExampleTranslation from './components/ExampleTranslation'
 import OrdersPage from './components/admin/OrdersPage'
 import UsersList from './components/admin/UsersList'
@@ -33,7 +34,8 @@ class App extends Component {
             <Route exact path="/translation" component={ ExampleTranslation } />
             <Route exact path="/:id/orderlistBuyer" component={OrderListBuyer} />
             <Route exact path="/:id/orderlistSeller" component={OrderListSeller} />
-            <Route exact path="/products" component={ Product } />
+            <Route exact path="/products" component={ ProductsList } />
+            <Route exact path="/product" component={ Product } />
             <Route exact path="/productform" component={ ProductForm } />
           </div>
         </Router>
