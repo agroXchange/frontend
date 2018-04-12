@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
+import { compose } from 'redux'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import Button from 'material-ui/Button';
 import Dialog, {
@@ -9,15 +11,37 @@ import Dialog, {
     withMobileDialog,
 } from 'material-ui/Dialog';
 
+import ExpansionPanel, {
+    ExpansionPanelSummary,
+    ExpansionPanelDetails,
+} from 'material-ui/ExpansionPanel';
+
+import Typography from 'material-ui/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+import { withStyles } from 'material-ui/styles';
 
 import MenuItem from 'material-ui/Menu/MenuItem';
 import TextField from 'material-ui/TextField';
 
 import Paper from 'material-ui/Paper';
-import { withStyles } from 'material-ui/styles';
+
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 
 import { vegetables, fruits, beans } from '../../productCodes'
+
+import { fetchCodes } from '../../actions/codes'
+
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+    },
+    heading: {
+        fontSize: theme.typography.pxToRem(15),
+        fontWeight: theme.typography.fontWeightRegular,
+    },
+});
+
 
 const classes = {
     container: {
@@ -93,65 +117,193 @@ class ResponsiveDialog extends React.Component {
         console.log(e.target.value)
     }
 
+    componentWillMount = () => {
+        this.props.fetchCodes()
+    }
+
 
 
     render() {
-        const { fullScreen } = this.props;
+       // const { fullScreen } = this.props;
+        const { fullScreen, codes, vegetables, fruits, beans } = this.props
 
+        if (codes)
         return (
-            <div>
-                <Button onClick={this.handleClickOpen}>Open responsive dialog</Button>
-                <Dialog
-                    fullScreen={fullScreen}
-                    open={this.state.open}
-                    onClose={this.handleClose}
-                    aria-labelledby="responsive-dialog-title"
-                >
-                    <DialogTitle id="responsive-dialog-title">{"Use Google's location service?"}</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
-                            {/* <form onSubmit={this.handleSubmit} className="form-container"> */}
-                            <ul className="menu vertical nested">
-                                {fruits.map(fruit =>
-                                    <li key={Object.getOwnPropertyNames(fruit)}>
-                                        <button
-                                            name="name"
-                                            className="button"
-                                            value={Object.getOwnPropertyNames(fruit)}
-                                            type="button"
-                                            onClick={this.handleChange}
+            <form onSubmit={this.handleSubmit} className="form-container">
+                <Paper className="paper">
 
-                                        >
-                                            {Object.getOwnPropertyNames(fruit)}
+                <h2>Search Products</h2>
 
-                                        </button>
-                                    </li>
+                <Button onClick={this.handleClickOpen}>Products</Button>
 
-                                )}
-                            </ul>
-                            {/* </form> */}
-            </DialogContentText>
-                    </DialogContent>
-                    {/* <DialogActions>
-                        <Button onClick={this.handleClose} color="primary" autoFocus>
-                            Agree
-            </Button>
-                    </DialogActions> */}
+
+                    <Dialog
+                        fullScreen={fullScreen}
+                        open={this.state.open}
+                        onClose={this.handleClose}
+                        aria-labelledby="responsive-dialog-title"
+                    >
+
+                   
+                    <ExpansionPanel>
+                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                            <Typography className={classes.heading}>Vegetables</Typography>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelDetails>
+                            {/* <Typography>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+                                sit amet blandit leo lobortis eget.
+                            </Typography> */}
+
+
+                                {/* <DialogTitle id="responsive-dialog-title">{"Pick product:"}</DialogTitle> */}
+                                <DialogContent>
+                                    <DialogContentText>
+                                        <ul className="menu vertical nested">
+                                            {vegetables.map(veg =>
+                                                <li key={veg.code}>
+                                                    <Button
+                                                        size="small"
+                                                        name="name"
+                                                        color="secondary"
+                                                        className="button"
+                                                        value={veg.code}
+                                                        type="button"
+                                                        onClick={this.handleChange}
+                                                    >
+                                                        {veg.titleeng}
+                                                    </Button>
+                                                </li>
+                                            )}
+                                        </ul>
+                                    </DialogContentText>
+                                </DialogContent>
+
+                        </ExpansionPanelDetails>
+                    </ExpansionPanel>
+
+                    <ExpansionPanel>
+                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                                <Typography className={classes.heading}>Fruits & Nuts </Typography>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+
+                                {/* <Dialog
+                                    fullScreen={fullScreen}
+                                    open={this.state.open}
+                                    onClose={this.handleClose}
+                                    aria-labelledby="responsive-dialog-title"
+                                > */}
+                                    {/* <DialogTitle id="responsive-dialog-title">{"Pick product:"}</DialogTitle> */}
+                                    <DialogContent>
+                                        <DialogContentText>
+                                            <ul className="menu vertical nested">
+                                                {fruits.map(fruit =>
+                                                    <li key={fruit.code}>
+                                                        <Button
+                                                            size="small"
+                                                            name="name"
+                                                            color="secondary"
+                                                            className="button"
+                                                            value={fruit.code}
+                                                            type="button"
+                                                            onClick={this.handleChange}
+                                                        >
+                                                            {fruit.titleeng}
+                                                        </Button>
+                                                    </li>
+                                                )}
+                                            </ul>
+                                        </DialogContentText>
+                                    </DialogContent>
+                                
+                        </ExpansionPanelDetails>
+                    </ExpansionPanel>
+
+                        <ExpansionPanel>
+                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                                <Typography className={classes.heading}>Beans & Crop </Typography>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails>
+
+                                {/* <Dialog
+                                    fullScreen={fullScreen}
+                                    open={this.state.open}
+                                    onClose={this.handleClose}
+                                    aria-labelledby="responsive-dialog-title"
+                                > */}
+                                {/* <DialogTitle id="responsive-dialog-title">{"Pick product:"}</DialogTitle> */}
+                                <DialogContent>
+                                    <DialogContentText>
+                                        <ul className="menu vertical nested">
+                                            {beans.map(bean =>
+                                                <li key={bean.code}>
+                                                    <Button
+                                                        size="small"
+                                                        name="name"
+                                                        color="secondary"
+                                                        className="button"
+                                                        value={bean.code}
+                                                        type="button"
+                                                        onClick={this.handleChange}
+                                                    >
+                                                        {bean.titleeng}
+                                                    </Button>
+                                                </li>
+                                            )}
+                                        </ul>
+                                    </DialogContentText>
+                                </DialogContent>
+
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+
+
+
                 </Dialog>
 
 
-                <form onSubmit={this.handleSubmit} className="form-container">
-                    <Paper className="paper">
 
-                        <h2>Search Products</h2>
 
-                        <div>
+                    {/* <Dialog
+                        fullScreen={fullScreen}
+                        open={this.state.open}
+                        onClose={this.handleClose}
+                        aria-labelledby="responsive-dialog-title"
+                    >
+                        <DialogTitle id="responsive-dialog-title">{"Pick product:"}</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                <ul className="menu vertical nested">
+                                    {fruits.map(fruit =>
+                                        <li key={fruit.code}>
+                                            <Button
+                                                size="small"
+                                                name="name"
+                                                color="secondary"
+                                                className="button"
+                                                value={fruit.code}
+                                                type="button"
+                                                onClick={this.handleChange}
+                                            >
+                                                {fruit.titleeng}
+                                            </Button>
+                                        </li>
+                                    )}
+                                </ul>
+                            </DialogContentText>
+                        </DialogContent>
+                    </Dialog> */}
+
+
+ {/* ----------------------------------------------------------                    */}
+                        {/* <div>
                             <ul className="vertical menu drilldown"
                                 data-drilldown
                                 data-auto-height="true"
 
-                            >
-                                <div id="test">
+                            > */}
+                              
                                     {/* <li>
                                         <a href="#"> Vegetables   </a>
                                         <ul className="menu vertical nested">
@@ -217,9 +369,9 @@ class ResponsiveDialog extends React.Component {
                                             )}
                                         </ul>
                                     </li> */}
-                                </div>
+                                {/* </div>
                             </ul>
-                        </div>
+                        </div> */}
 
                         <TextField
                             id="code"
@@ -261,12 +413,12 @@ class ResponsiveDialog extends React.Component {
                             }}
                         >
                             Save
-        </Button>
+                        </Button>
 
                     </Paper>
                 </form>
 
-            </div>
+           
         );
     }
 }
@@ -275,4 +427,17 @@ ResponsiveDialog.propTypes = {
     fullScreen: PropTypes.bool.isRequired,
 };
 
-export default withMobileDialog()(ResponsiveDialog);
+const mapStateToProps = (state, props) => ({
+    codes: state.codes,
+    vegetables: state.codes.filter(x => x.code.match(/^07/)),
+    fruits: state.codes.filter(x => x.code.match(/^08/)),
+    beans: state.codes.filter(x => x.code.match(/^09/))
+})
+
+export default compose(
+    withMobileDialog(), 
+    connect(mapStateToProps, { fetchCodes })
+)(ResponsiveDialog);
+
+
+
