@@ -36,7 +36,8 @@ export const fetchProduct = (id) => (dispatch, getState) => {
     .catch(err => alert(err))
 }
 
-export const addProduct = (product, picture) => (dispatch) =>
+export const addProduct = (product, picture) => (dispatch) =>{
+  console.log(product)
     request
         .post(`${baseUrl}/1/products`)
         .field(product)
@@ -50,7 +51,7 @@ export const addProduct = (product, picture) => (dispatch) =>
         .catch(err => {
             console.error(err)
         })
-
+}
 
 
 export const searchProduct = (name,number,country) => (dispatch) => {
