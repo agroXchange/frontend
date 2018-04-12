@@ -49,7 +49,7 @@ class App extends Component {
             <Route exact path="/profiles/:id" component={ProfilePage} />
             <Route exact path="/productform" component={AddProductContainer} />
             <Route exact path="/addproduct" component={ AddProductContainer } />
-            <Route exact path="/searchproduct" component={ SearchProductContainer } />
+            <Route exact path="/searchproduct" component={ SearchTestContainer } />
           </div>
         </Router>
       </MuiThemeProvider>
