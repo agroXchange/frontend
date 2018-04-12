@@ -6,12 +6,11 @@ import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
 import { withStyles } from 'material-ui/styles';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
-import '../styles/ProductForm.css'
 
 import 'foundation-sites/dist/css/foundation.min.css';
 import zIndex from 'material-ui/styles/zIndex';
 
-import { vegetables, fruits, beans } from '../productCodes'
+import { vegetables, fruits, beans } from '../../productCodes'
 
 import jquery from 'jquery';
 window.$ = window.jQuery = jquery;

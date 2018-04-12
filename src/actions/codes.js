@@ -2,7 +2,7 @@ import * as request from 'superagent'
 
 const baseUrl = 'http://localhost:4008'
 
-export const FETCH_ALL_CODES = 'FETCH_ALL_CODES78'
+export const FETCH_ALL_CODES = 'FETCH_ALL_CODES'
 
 export const fetchCodes = () => (dispatch) => {
     // const state = getState();USER_SIGNUP_SUCCESS

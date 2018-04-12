@@ -14,7 +14,7 @@ import 'foundation-sites/dist/css/foundation.min.css';
 import zIndex from 'material-ui/styles/zIndex';
 
 // import { vegetables, fruits, beans } from '../productCodes'
-import { fetchCodes } from '../actions/codes'
+import { fetchCodes } from '../../actions/codes'
 
 
 import jquery from 'jquery';

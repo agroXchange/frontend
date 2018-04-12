@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import ProductForm from './ProductForm'
-import {addProduct} from '../actions/products'
+import { addProduct } from '../../actions/products'
 
 
 
