@@ -4,6 +4,8 @@ const baseUrl = "http://localhost:4008";
 
 export const FETCH_ALL_PRODUCTS = "FETCH_ALL_PRODUCTS";
 export const FETCH_PRODUCT = "FETCH_PRODUCT"
+export const ADD_PRODUCT = "ADD_PRODUCT"
+export const SEARCH_PRODUCT = 'SEARCH_PRODUCT'
 //will need FETCH_USERS_PRODUCT what returns all Products of one user
 
 export const fetchAllProducts = () => (dispatch, getState) => {
@@ -33,3 +35,36 @@ export const fetchProduct = (id) => (dispatch, getState) => {
     }))
     .catch(err => alert(err))
 }
+
+export const addProduct = (product, picture) => (dispatch) =>{
+  console.log(product)
+    request
+        .post(`${baseUrl}/products`)
+        .field(product)
+        .attach('productPhoto', picture)
+        .then(response => {
+            dispatch({
+                type: ADD_PRODUCT,
+              payload: response.body
+            })
+        })
+        .catch(err => {
+            console.error(err)
+        })
+}
+
+
+export const searchProduct = (name,number,country) => (dispatch) => {
+    console.log(name, number, country)
+
+    request
+        .get(`${baseUrl}/products`)
+        .then(result => {
+            dispatch({
+                type: SEARCH_PRODUCT
+            })
+        })
+        .catch(err => {
+            console.error(err)
+        })
+      }
