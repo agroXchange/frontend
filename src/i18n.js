@@ -34,7 +34,7 @@ i18n.use(LanguageDetector).init({
         'alreadyRegistered?': 'Already registered? Go to ',
         'name': 'Name',
         'whatName?': 'What is the name of your organization?',
-        'field': 'Field*',
+        'field': 'Field',
         'producer': 'Producer',
         'trader': 'Trader',
         'logistics': 'Logistics',
@@ -45,7 +45,7 @@ i18n.use(LanguageDetector).init({
         'association': 'Association',
         'private': 'Private',
         'ngo': 'NGO',
-        'type': 'Type*',
+        'type': 'Type',
         'whatType?': 'What is the type of your organization?',
         'address': 'Address',
         'country': 'Country',
@@ -53,6 +53,7 @@ i18n.use(LanguageDetector).init({
         'whatCityPort?': 'If you plan to sell, what is the nearest city or port?',
         'phone': 'Phone number',
         'registration': 'Registration number',
+        'coc': 'Chamber of Commerce',
         'cocOptional': 'Chamber of Commerce registration number (optional now)',
         'cocExplanation': 'To participate on this website, you will need to provide proof of your membership of your local chamber of commerce. If you have your registration number ready, please fill it in above. You can also do this after signing up. If you have any questions, please contact the webmaster.',
 
@@ -61,10 +62,27 @@ i18n.use(LanguageDetector).init({
       orders: {
         'Order': 'Order',
         'Order Volume': 'Order Volume',
-        'Comments': 'Comentarios',
+        'Comments': 'Comments',
         'Status': 'Status',
         'Ordered date': 'Ordered date',
-        'GO TO SELLER PROFILE': 'GO TO SELLER PROFILE'
+        'GO TO SELLER PROFILE': 'GO TO SELLER PROFILE',
+        'SEE DETAILS': 'SEE DETAILS'
+      },
+      detail: {
+        'Order': 'Order',
+        'Organization name': 'Organization name',
+        'Field': 'Field',
+        'Type': 'Type',
+        'COC': 'COC',
+        'Address': 'Address',
+        'Country': 'Country',
+        'Phone': 'Phone',
+        'Email': 'Email',
+        'ICO': 'ICO',
+        'Volume': 'Volume',
+        'Comments': 'Comments',
+        'ACCEPT': 'ACCEPT',
+        'DECLINE': 'DECLINE'
       }
     },
     es: {
@@ -98,7 +116,7 @@ i18n.use(LanguageDetector).init({
         'alreadyRegistered?': '¿Ya tienes una cuenta?',
         'name': 'Nombre',
         'whatName?': '¿Cuál es el nombre de su organización?',
-        'field': 'Espacio*',
+        'field': 'Espacio',
         'producer': 'Productor',
         'trader': 'Vendedor',
         'logistics': 'Logistica',
@@ -109,7 +127,7 @@ i18n.use(LanguageDetector).init({
         'association': 'Association',
         'private': 'Privada',
         'ngo': 'Organización No Gubernamental ONG',
-        'type': 'Tipo*',
+        'type': 'Tipo',
         'whatType?': '¿Cuál es su tipo de su organización?',
         'address': 'Dirección',
         'country': 'País',
@@ -117,6 +135,7 @@ i18n.use(LanguageDetector).init({
         'whatCityPort?': '¿Si su plan es vender, cual es la ciudad o puerto mas cercano?',
         'phone': 'Número de telefono',
         'registration': 'Número de registro',
+        'coc': 'Camara de Comercio',
         'cocOptional': 'Registro de Camara de Comercio (Opcional ahora)',
         'cocExplanation': 'Para participar en este website, ud. necesita proveer el registro de membresía (pertenencia) de su camara de comercio local. Si ud. tiene su número de registro listo, por favor rellenelo (escríbalo) arriba. También puede hacerlo después de registrarse. Si usted tiene algunas preguntas, por favor contacte al administrador de la web.',
       },
@@ -126,8 +145,25 @@ i18n.use(LanguageDetector).init({
         'Comments': 'Comentarios',
         'Status': 'Estado',
         'Ordered date': 'Fecha ordenada',
-        'GO TO SELLER PROFILE': 'IR AL PERFIL DEL VENDEDOR'
+        'GO TO SELLER PROFILE': 'IR AL PERFIL DEL VENDEDOR',
+        'SEE DETAILS': 'Ver detalles'
       },
+      detail: {
+        'Order': 'Orden',
+        'Organization name': 'Nombre de la Organización',
+        'Field': 'Campo',
+        'Type': 'Tipo',
+        'COC': 'COC',
+        'Address': 'Dirección',
+        'Country': 'País',
+        'Phone': 'Teléfono',
+        'Email': 'Email',
+        'ICO': 'ICO',
+        'Volume': 'Volumen',
+        'Comments': 'Comentarios',
+        'ACCEPT': 'ACEPTAR',
+        'DECLINE': 'DISMINUCION'
+      }
     }
   },
   fallbackLng: "en",

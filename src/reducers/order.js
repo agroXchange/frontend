@@ -1,10 +1,14 @@
-import { FETCH_ORDER } from "../actions/orders";
+import { FETCH_ORDER, CHANGE_STATUS } from "../actions/orders";
 
 export default function(state = [], { type, payload } = {}) {
   switch (type) {
     case FETCH_ORDER:
       return payload;
-    default:
-      return state;
+
+    case CHANGE_STATUS:
+      return [...state, payload]
+
+      default:
+        return state;
     }
   }

@@ -1,5 +1,6 @@
 import signup from './signup'
 import users from './users'
+import user from './user'
 import order from './order'
 import orders from './orders'
 import products from './products'
@@ -14,6 +15,7 @@ export default {
   products,
   product,
   users,
+  user,
   order,
   orders,
   login,

@@ -7,6 +7,8 @@ export const FETCH_ALL_ORDERS = "FETCH_ALL_ORDERS";
 export const FETCH_ORDER = "FETCH_ORDER"
 export const FETCH_ORDERS_BY_BUYERID = "FETCH_ORDERS_BY_BUYERID";
 
+export const CHANGE_STATUS = "CHANGE_STATUS";
+
 
 export const fetchAllOrders = () => (dispatch, getState) => {
   const state = getState()
@@ -50,3 +52,13 @@ export const fetchOrdersByBuyerId = (id) => (dispatch, getState) => {
     }))
     .catch(err => alert(err))
 }
+
+export const changeStatus = (data, id) => (dispatch) => (
+  request
+    .patch(`${baseUrl}/orders/${id}`)
+    .send(data)
+    .then(response => dispatch({
+      type: CHANGE_STATUS,
+      payload: response.body
+    }))
+  )

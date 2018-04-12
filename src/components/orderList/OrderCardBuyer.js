@@ -31,7 +31,7 @@ const styles = {
 
 
 
-class OrderCard extends PureComponent {
+class OrderCardBuyer extends PureComponent {
   static propTypes = {
   classes: PropTypes.object.isRequired
   };
@@ -97,4 +97,4 @@ class OrderCard extends PureComponent {
 
 export default compose(
   translate('orders'),
-  withStyles(styles))(OrderCard);
+  withStyles(styles))(OrderCardBuyer);

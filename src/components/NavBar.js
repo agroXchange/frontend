@@ -7,6 +7,7 @@ import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Translate from '@material-ui/icons/Translate';
 import Switch from 'material-ui/Switch';
 import { FormControlLabel, FormGroup } from 'material-ui/Form';
 import Menu, { MenuItem } from 'material-ui/Menu';
@@ -46,14 +47,22 @@ class NavBar extends PureComponent {
     this.setState({ anchorEl: event.currentTarget });
   };
 
+  handleNewMenu = event => {
+    this.setState({ El: event.currentTarget });
+  };
+
   handleClose = () => {
     this.setState({ anchorEl: null });
   };
 
+  handleNewClose = () => {
+    this.setState({ El: null });
+  };
   render() {
     const { classes } = this.props;
-    const { auth, anchorEl } = this.state;
+    const { auth, anchorEl, El } = this.state;
     const open = Boolean(anchorEl);
+    const openNew = Boolean(El);
 
     const { i18n } = this.props
 
@@ -71,11 +80,9 @@ class NavBar extends PureComponent {
               <MenuIcon />
             </IconButton>
 
-            <button onClick={() => changeLanguage("es")}><img className="LanguageDetector" src="https://lipis.github.io/flag-icon-css/flags/4x3/es.svg" /></button>
-            <button onClick={() => changeLanguage("en")}><img className="LanguageDetector" src="https://lipis.github.io/flag-icon-css/flags/4x3/gb.svg" /></button>
 
             <Typography variant="title" color="inherit" className={classes.flex}>
-              Title
+              AgroXchange
             </Typography>
             {auth && (
               <div>
@@ -88,6 +95,34 @@ class NavBar extends PureComponent {
                 <AccountCircle />
 
                 </IconButton>
+
+                <IconButton
+                  aria-owns={openNew ? 'menu-lang' : null}
+                  aria-haspopup="true"
+                  onClick={this.handleNewMenu}
+                  color="inherit"
+                >
+                <Translate />
+                </IconButton>
+
+                <Menu
+                  id="menu"
+                  anchorEl={El}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={openNew}
+                  onClose={this.handleNewClose}
+                >
+                <MenuItem> <button onClick={() => changeLanguage("en")}><img className="LanguageDetector" src="https://lipis.github.io/flag-icon-css/flags/4x3/gb.svg" /></button></MenuItem>
+                  <MenuItem> <button onClick={() => changeLanguage("es")}><img className="LanguageDetector" src="https://lipis.github.io/flag-icon-css/flags/4x3/es.svg" /></button></MenuItem>
+
+                </Menu>
 
                 <Menu
                   id="menu-appbar"
@@ -103,8 +138,8 @@ class NavBar extends PureComponent {
                   open={open}
                   onClose={this.handleClose}
                 >
-                  <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                  <MenuItem> <Link to='/orders'>Profile</Link></MenuItem>
+                  <MenuItem> onClick={this.handleClose}>My account</MenuItem>
                   <MenuItem><Link to='/logout'>Log out</Link></MenuItem>
                 </Menu>
               </div>
