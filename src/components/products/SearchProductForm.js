@@ -16,16 +16,6 @@ import Search from '@material-ui/icons/Search';
 
 import { fetchCodes } from '../../actions/codes'
 
-// const styles = theme => ({
-//     root: {
-//         flexGrow: 1,
-//     },
-//     heading: {
-//         fontSize: theme.typography.pxToRem(15),
-//         fontWeight: theme.typography.fontWeightRegular,
-//     },
-// });
-
 
 const classes = {
     container: {

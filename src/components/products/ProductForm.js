@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
-
+import { compose } from 'redux'
 import PropTypes from 'prop-types';
 import MenuItem from 'material-ui/Menu/MenuItem';
 import TextField from 'material-ui/TextField';
@@ -8,18 +8,15 @@ import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
 import { withStyles } from 'material-ui/styles';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import Dialog, { DialogContent, DialogContentText, withMobileDialog, } from 'material-ui/Dialog';
+import ExpansionPanel, { ExpansionPanelSummary, ExpansionPanelDetails, } from 'material-ui/ExpansionPanel';
+import Typography from 'material-ui/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import '../../styles/ProductForm.css'
 
-import 'foundation-sites/dist/css/foundation.min.css';
-import zIndex from 'material-ui/styles/zIndex';
-
-// import { vegetables, fruits, beans } from '../productCodes'
 import { fetchCodes } from '../../actions/codes'
 
-
-import jquery from 'jquery';
-window.$ = window.jQuery = jquery;
-require('foundation-sites');
+import Search from '@material-ui/icons/Search';
 
 
 const classes = {
@@ -64,10 +61,20 @@ const currencies = [
 class ProductForm extends PureComponent {
   state = {
     currency: 'EUR',
+    open: false,
   }
 
   propTypes = {
     classes: PropTypes.object.isRequired,
+  };
+
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   handleSubmit = (e) => {
@@ -78,11 +85,15 @@ class ProductForm extends PureComponent {
   handleChange = (e) => {
     const { name, value } = e.target
 
-//    if (name === "name") document.querySelector('#test:a').classList.toggle("hide")
-   // if (name === "name") $('#element').foundation('_hideAll');
-
     this.setState({
-      [name]: value      
+      [name]: value
+    })
+  }
+
+  handleClick = code => {
+    this.setState({
+      code: code,
+      open: false
     })
   }
 
@@ -98,85 +109,114 @@ class ProductForm extends PureComponent {
 
 
   render() {
-    const { codes, vegetables, fruits, beans } = this.props
-    console.log( JSON.stringify(vegetables ) )
+    const { fullScreen, codes, vegetables, fruits, beans } = this.props
 
-    if(fruits)
+    if(codes)
     return(
       <form onSubmit={ this.handleSubmit } className="form-container">
         <Paper className="paper">
-
-        <h2>Add a Product</h2>
-
-          <div>
-            {/* <ul className="vertical menu drilldown" 
-            data-drilldown
-               data-auto-height="true"
-              // data-scroll-top="true"   
-          > */}
-     
-              {/* <li> */}
-                {/* <a href="#"> Vegetables   </a> */}
-                {/* <ul className="menu vertical nested"> */}
-                  {vegetables.map(veg =>
-
-                  <button key={veg.code}
-                      name="code"
-                     className="button"
-                      value={veg.code}
-                      onClick={this.handleChange}
-                       type="button"
-                        // data-close-on-click="true"
-                    >{veg.titleeng}
+          <div id="addProduct">  
 
 
+              <h2>Product Search</h2>
 
-                      {/* <a href="#"
+              <Button
+                onClick={this.handleClickOpen}
+                variant="raised"
+              >
+                <Search /> Products
+                        </Button>
 
-                      
-                      > xx{veg.code}</a>
-                      <ul className="menu vertical nested">
-                        <li><a href="#" >Two AAAA</a></li>
-                      </ul> */}
-                    </button> 
-                  )}
-                {/* </ul>
-              </li> */}
+              <Dialog
+                fullScreen={fullScreen}
+                open={this.state.open}
+                aria-labelledby="responsive-dialog-title"
+              >
 
+                <ExpansionPanel>
+                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                    <Typography className={classes.heading}>Vegetables ({vegetables.length})</Typography>
+                  </ExpansionPanelSummary>
+                  <ExpansionPanelDetails>
 
-              {/* <li>
-                <a href="#"> Fruits & Nuts   </a>
-                <ul className="menu vertical nested">
-                  {fruits.map(fruit =>
+                    <DialogContent>
+                      <DialogContentText>
+                        {vegetables.map(veg => {
+                          return <div key={veg.code}>
+                            <Button
+                              color="primary"
+                              className="button"
+                              size="small"
+                              type="button"
+                              onClick={_ => this.handleClick(veg.code)}
+                            >
+                              {veg.titleeng}
+                            </Button>
+                          </div>
+                        }
+                        )}
+                      </DialogContentText>
+                    </DialogContent>
 
-                    <li key={fruit.code}>
-                      <button 
-                        name="name"
-                        className="button"
-                          value={Object.values(fruit)[0]}
-                        type="button"
-                        onClick={this.handleChange}      
-                      >
+                  </ExpansionPanelDetails>
+                </ExpansionPanel>
 
-                      ssss
-                       
-                      </button>
-                    </li>
+                <ExpansionPanel>
+                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                    <Typography className={classes.heading}>Fruits & Nuts ({fruits.length})</Typography>
+                  </ExpansionPanelSummary>
+                  <ExpansionPanelDetails>
 
-                  )}
-                </ul>
-              </li> */}
-              {/* <li>
-                <a href="#"> Beans & Crop   </a>
-                <ul className="menu vertical nested">
-                  {beans.map(bean =>
-                      <div>  0 </div>
-                  )}
-                </ul>
-              </li> */}
-          
-            {/* </ul> */}
-          </div>
+                    <DialogContent>
+                      <DialogContentText>
+                        {fruits.map(fruit =>
+                          <div key={fruit.code}>
+                            <Button
+                              size="small"
+                              color="primary"
+                              className="button"
+                              type="button"
+                              onClick={_ => this.handleClick(fruit.code)}
+                            >
+                              {fruit.titleeng}
+                            </Button>
+                          </div>
+                        )}
+                      </DialogContentText>
+                    </DialogContent>
+
+                  </ExpansionPanelDetails>
+                </ExpansionPanel>
+
+                <ExpansionPanel>
+                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                    <Typography className={classes.heading}>Beans & Crop ({beans.length})</Typography>
+                  </ExpansionPanelSummary>
+                  <ExpansionPanelDetails>
+
+                    <DialogContent>
+                      <DialogContentText>
+                        {beans.map(bean =>
+                          <div key={bean.code}>
+                            <Button
+                              size="small"
+                              color="primary"
+                              className="button"
+                              type="button"
+                              onClick={_ => this.handleClick(bean.code)}
+                            >
+                              {bean.titleeng}
+                            </Button>
+                          </div>
+                        )}
+                      </DialogContentText>
+                    </DialogContent>
+
+                  </ExpansionPanelDetails>
+                </ExpansionPanel>
+              </Dialog>
+            </div>  
+
 
         <div className="upload">
           <label htmlFor="photo">Please Upload a Photo </label>
@@ -308,6 +348,7 @@ const mapStateToProps = (state, props) => ({
   beans: state.codes.filter(x => x.code.match(/^09/))
 })
 
-
-
-export default connect(mapStateToProps, { fetchCodes })(ProductForm)
+export default compose(
+  withMobileDialog(),
+  connect(mapStateToProps, { fetchCodes })
+)(ProductForm);
