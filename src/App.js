@@ -13,12 +13,20 @@ import OrderListBuyer from './containers/orderList/OrderListBuyer'
 import OrderDetail from './containers/orderList/OrderDetail'
 import NavBar from './components/NavBar'
 import LoginPage from './components/login/LoginPage'
-import ProductForm from './components/products/ProductForm'
+import ShowUser from './components/profile/ShowUser'
 import LogoutPage from './components/logout/LogoutPage'
-
+import AddProductContainer from './components/products/AddProductContainer';
+import SearchProductContainer from './components/products/SearchProductContainer';
+import $ from 'jquery';
+import 'foundation-sites';
 import './styles/App.css';
 
 class App extends Component {
+
+  componentDidMount() {
+    $(document).foundation();
+  }
+
   render() {
     return (
       <MuiThemeProvider>
@@ -37,7 +45,10 @@ class App extends Component {
             <Route exact path="/orders/:id" component={OrderDetail} />
             <Route exact path="/products" component={ ProductsList } />
             <Route exact path="/product" component={ Product } />
-            <Route exact path="/productform" component={ ProductForm } />
+            <Route exact path="/productform" component={AddProductContainer} />
+            <Route exact path="/users/:id" component={ShowUser} />
+            <Route exact path="/addproduct" component={ AddProductContainer } />
+            <Route exact path="/searchproduct" component={ SearchProductContainer } />
           </div>
         </Router>
       </MuiThemeProvider>

@@ -8,8 +8,7 @@ import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import '../../styles/Product.css'
-
-import OrderForm from '../OrderForm'
+import OrderForm from './../OrderForm'
 import ProductForm from './ProductForm'
 
 

@@ -15,7 +15,7 @@ export const fetchAllOrders = () => (dispatch, getState) => {
   const jwt = state.currentUser.jwt
 
   request
-    .get(`${baseUrl}/orders`)
+    .get(`${baseUrl}/orders/all`)
     .set("Authorization", `Bearer ${jwt}`)
     .then(response => dispatch({
       type: FETCH_ALL_ORDERS,

@@ -1,14 +1,23 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchUsers } from "../../actions/users";
+import { fetchUsers, deleteUser, updateUser } from "../../actions/users";
 import compose from "lodash/fp/compose";
 import { withStyles } from "material-ui/styles";
-import List, { ListItem, ListItemAvatar, ListItemIcon, ListItemSecondaryAction, ListItemText } from "material-ui/List";
-import DeleteIcon from '@material-ui/icons/Delete';
+import EditUserForm from './EditUserForm'
+import SignupForm from '../signup/SignupForm'
+import List, {
+  ListItem,
+  ListItemAvatar,
+  ListItemIcon,
+  ListItemSecondaryAction,
+  ListItemText
+} from "material-ui/List";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
 import Button from "material-ui/Button";
 import Card, { CardActions, CardContent } from "material-ui/Card";
-import IconButton from 'material-ui/IconButton';
+import IconButton from "material-ui/IconButton";
 import Avatar from "material-ui/Avatar";
 
 const style = theme => ({
@@ -22,9 +31,29 @@ const style = theme => ({
 });
 
 class UsersList extends PureComponent {
+  state = {
+   edit: false
+ };
+
+ toggleEdit = () => {
+   this.setState({
+    edit: !this.state.edit
+  });
+ };
+
+
   componentWillMount(props) {
     this.props.fetchUsers();
   }
+
+  updateUser = (id, user) => {
+    this.props.updateUser(id,user);
+    this.toggleEdit();
+  };
+
+  deleteUser = id => {
+    this.props.deleteUser(id);
+  };
 
   render() {
     const users = this.props.users;
@@ -38,6 +67,7 @@ class UsersList extends PureComponent {
         {users.map(user => (
           <List>
             <ListItem>
+             {!this.state.edit && (
               <ListItemAvatar>
                 <Avatar>
                   <img
@@ -47,12 +77,29 @@ class UsersList extends PureComponent {
                   />
                 </Avatar>
               </ListItemAvatar>
+            )}
               <ListItemText
                 primary={user.profile.name}
                 secondary={user.profile.country}
               />
+
               <ListItemSecondaryAction>
-                <IconButton aria-label="Delete">
+                <IconButton
+                  onClick={this.toggleEdit}
+                  aria-label="Edit"
+                >
+                  <EditIcon />
+                </IconButton>
+                {this.state.edit && (
+                  <EditUserForm
+                    initialValues={user.profile}
+                    onSubmit={() => this.updateUser(user.id,user)}
+                  />
+                )}
+                <IconButton
+                  onClick={() => this.deleteUser(user.profile.id)}
+                  aria-label="Delete"
+                >
                   <DeleteIcon />
                 </IconButton>
               </ListItemSecondaryAction>
@@ -79,5 +126,5 @@ const mapStateToProps = function(state) {
 
 export default compose(
   withStyles(style),
-  connect(mapStateToProps, { fetchUsers })
+  connect(mapStateToProps, { fetchUsers, deleteUser, updateUser })
 )(UsersList);
