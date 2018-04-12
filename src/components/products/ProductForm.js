@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux'
+
 import PropTypes from 'prop-types';
 import MenuItem from 'material-ui/Menu/MenuItem';
 import TextField from 'material-ui/TextField';
@@ -12,6 +14,8 @@ import 'foundation-sites/dist/css/foundation.min.css';
 import zIndex from 'material-ui/styles/zIndex';
 
 import { vegetables, fruits, beans } from '../productCodes'
+import { fetchCodes } from '../actions/codes'
+
 
 import jquery from 'jquery';
 window.$ = window.jQuery = jquery;
@@ -92,6 +96,11 @@ class ProductForm extends PureComponent {
     })
   }
 
+  componentWillMount = () => {
+    this.props.fetchCodes()
+  }
+
+
   render() {
     return(
       <form onSubmit={ this.handleSubmit } className="form-container">
@@ -112,7 +121,7 @@ class ProductForm extends PureComponent {
                   {vegetables.map(veg =>
                     <li key={Object.getOwnPropertyNames(veg)}
                       name="name"
-                      value={Object.getOwnPropertyNames(veg)}
+                      value={Object.values(veg)[0]}
                       onClick={this.handleChange}
                       type="button"
                         data-close-on-click="true"
@@ -148,7 +157,7 @@ class ProductForm extends PureComponent {
                       <button 
                         name="name"
                         className="button"
-                        value={Object.getOwnPropertyNames(fruit)}
+                          value={Object.values(fruit)[0]}
                         type="button"
                         onClick={this.handleChange}
                         
@@ -169,7 +178,7 @@ class ProductForm extends PureComponent {
                       <button 
                         name="name"
                         className="button"
-                        value={Object.getOwnPropertyNames(bean)}
+                          value={Object.values(bean)[0]}
                         type="button"
                         onClick={this.handleChange}
                       >
@@ -318,4 +327,5 @@ class ProductForm extends PureComponent {
 }
 
 
-export default ProductForm
+
+export default connect(null, { fetchCodes })(ProductForm)
