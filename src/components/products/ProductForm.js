@@ -74,9 +74,17 @@ class ProductForm extends PureComponent {
 
   handleChange = (e) => {
     const { name, value } = e.target
+
+    if (name === "name") document.querySelector('#test:a').classList.toggle("hide")
+   // if (name === "name") $('#element').foundation('_hideAll');
+
+
     this.setState({
       [name]: value
+
+      
     })
+
   }
 
   handleFileChange = (e) => {
@@ -96,22 +104,39 @@ class ProductForm extends PureComponent {
             <ul className="vertical menu drilldown" 
             data-drilldown
               data-auto-height="true"
-            >
+              
+          >
+     <div id ="test">       
               <li>
                 <a href="#"> Vegetables   </a>
                 <ul className="menu vertical nested">
                   {vegetables.map(veg =>
-                    <li key={Object.getOwnPropertyNames(veg)}>
-                      <button 
+                    <li key={Object.getOwnPropertyNames(veg)}
+                      name="name"
+                      value={Object.getOwnPropertyNames(veg)}
+                      onClick={this.handleChange}
+                      type="button"
+                        data-close-on-click="true"
+                    >
+
+                      <a href="#"
+
+                      
+                      >{Object.getOwnPropertyNames(veg)}</a>
+                      <ul className="menu vertical nested">
+                        <li><a href="#" >Two AAAA</a></li>
+                      </ul>
+
+                      {/* <div 
                         name="name"
-                        className="button"
+                        
                         value={Object.getOwnPropertyNames(veg)}
-                        type="button"
+                        
                         onClick={this.handleChange}
                       >
                         {Object.getOwnPropertyNames(veg)}
+                      </div> */}
 
-                      </button>
                     </li>
                   )}
                 </ul>
@@ -127,6 +152,7 @@ class ProductForm extends PureComponent {
                         value={Object.getOwnPropertyNames(fruit)}
                         type="button"
                         onClick={this.handleChange}
+                        
                       >
                         {Object.getOwnPropertyNames(fruit)}
 
@@ -156,6 +182,7 @@ class ProductForm extends PureComponent {
                   )}
                 </ul>
               </li>
+   </div>           
             </ul>
           </div>
 
