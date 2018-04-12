@@ -5,6 +5,7 @@ import { withStyles } from 'material-ui/styles';
 import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
+import { Link } from 'react-router-dom'
 import compose from 'lodash/fp/compose'
 import {translate, Trans} from "react-i18next"
 
@@ -15,6 +16,7 @@ import { fetchAllProducts } from '../../actions/products'
 const styles = {
   card: {
     maxWidth: 345,
+    minWidth: 240,
     margin: 20,
     textAlign: "left",
     display: "inline-block"
@@ -65,13 +67,19 @@ class ProductList extends PureComponent {
              </p>
 
                <table>
+
+                 <tr className={classes.table}>
+                    <th>{t('Product ID')}</th>
+                    <td>{product.id}</td>
+                 </tr>
+
                  <tr className={classes.table}>
                     <th>{t('Order Volume')}</th>
                     <td>{product.volume}</td>
                  </tr>
 
                  <tr className={classes.table}>
-                    <th>{t('Comments')}</th>
+                    <th>{t('Price')}</th>
                     <td>{product.price}</td>
                  </tr>
 
@@ -80,17 +88,17 @@ class ProductList extends PureComponent {
                     <td>{product.description}</td>
                  </tr>
 
-                 <tr className={classes.table}>
-                    <th>{t('Ordered date')}</th>
-                    <td>{product.currency}</td>
-                 </tr>
+
                </table>
 
            </CardContent>
            <CardActions>
+
+            <Link to={ `/products/${product.id}` }>
              <Button size="small" color="primary">
-               {t('Go to seller profile')}
+               {t('View Product')}
              </Button>
+             </Link>
            </CardActions>
          </Card>
          )}
