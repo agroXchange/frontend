@@ -25,11 +25,5 @@ class AddProductContainer extends PureComponent {
     }
 
 
-const mapStateToProps = (state) => {
-    return {
-        student: state.students,
-        // batches: state.batches
-    }
-}
 
-export default connect(mapStateToProps, { addProduct })(AddProductContainer)
+export default connect(null, { addProduct })(AddProductContainer)
