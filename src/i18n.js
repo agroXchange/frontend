@@ -61,10 +61,27 @@ i18n.use(LanguageDetector).init({
       orders: {
         'Order': 'Order',
         'Order Volume': 'Order Volume',
-        'Comments': 'Comentarios',
+        'Comments': 'Comments',
         'Status': 'Status',
         'Ordered date': 'Ordered date',
-        'GO TO SELLER PROFILE': 'GO TO SELLER PROFILE'
+        'GO TO SELLER PROFILE': 'GO TO SELLER PROFILE',
+        'SEE DETAILS': 'SEE DETAILS'
+      },
+      detail: {
+        'Order': 'Order',
+        'Organization name': 'Organization name',
+        'Field': 'Field',
+        'Type': 'Type',
+        'COC': 'COC',
+        'Address': 'Address',
+        'Country': 'Country',
+        'Phone': 'Phone',
+        'Email': 'Email',
+        'ICO': 'ICO',
+        'Volume': 'Volume',
+        'Comments': 'Comments',
+        'ACCEPT': 'ACCEPT',
+        'DECLINE': 'DECLINE'
       }
     },
     es: {
@@ -126,8 +143,25 @@ i18n.use(LanguageDetector).init({
         'Comments': 'Comentarios',
         'Status': 'Estado',
         'Ordered date': 'Fecha ordenada',
-        'GO TO SELLER PROFILE': 'IR AL PERFIL DEL VENDEDOR'
+        'GO TO SELLER PROFILE': 'IR AL PERFIL DEL VENDEDOR',
+        'SEE DETAILS': 'Ver detalles'
       },
+      detail: {
+        'Order': 'Orden',
+        'Organization name': 'Nombre de la Organización',
+        'Field': 'Campo',
+        'Type': 'Tipo',
+        'COC': 'COC',
+        'Address': 'Dirección',
+        'Country': 'País',
+        'Phone': 'Teléfono',
+        'Email': 'Email',
+        'ICO': 'ICO',
+        'Volume': 'Volumen',
+        'Comments': 'Comentarios',
+        'ACCEPT': 'ACEPTAR',
+        'DECLINE': 'DISMINUCION'
+      }
     }
   },
   fallbackLng: "en",
