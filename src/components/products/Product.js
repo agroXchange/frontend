@@ -7,8 +7,16 @@ import AppBar from 'material-ui/AppBar';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
+
 import '../../styles/Product.css'
 import { fetchProduct } from '../../actions/products'
+import { createOrder } from '../../actions/orders'
 import OrderForm from '../OrderForm'
 import ProductForm from './ProductForm'
 
@@ -18,14 +26,18 @@ class Product extends PureComponent {
 
   state = {
     newOrder: false,
-    edit: false
+    edit: false,
+    open: false
   }
 
-  toggleOrder = () => {
-    this.setState({
-      newOrder: !this.state.newOrder
-    })
-  }
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
 
   toggleEdit = () => {
     this.setState({
@@ -37,13 +49,16 @@ class Product extends PureComponent {
     this.props.fetchProduct(this.props.match.params.id)
   }
 
-  createOrder = (order) => {
-    this.props.createBatch(order)
-    console.log('Created Batch')
+  createOrder = (order, productId, buyer) => {
+    this.props.createOrder(order, this.props.match.params.id, this.props.currentUser)
+    this.handleClose()
+    console.log(this.props.currentUser)
+    console.log(order)
+    console.log(this.props.match.params.id)
   }
 
   render() {
-    const { product } = this.props
+    const { product, currentUser } = this.props
     if (!product) return null
 
     return(
@@ -63,6 +78,8 @@ class Product extends PureComponent {
                   View Seller
                 </Button>
               </Link>
+
+              {console.log(currentUser.id)}
             </Grid>
 
             <Grid item>
@@ -74,19 +91,28 @@ class Product extends PureComponent {
               <p>City/Port: { product.seller.city }</p>
 
               <Button onClick={ this.toggleEdit }>Edit Product</Button>
-              <Button onClick={ this.toggleOrder }>Make An Order</Button>
-
+              <Button onClick={this.handleClickOpen}>Make New Order</Button>
             </Grid>
 
-            {
-              this.state.newOrder &&
-              <OrderForm onSubmit={ this.createOrder } class="batch-form"/>
-            }
 
             {
               this.state.edit &&
               <ProductForm />
             }
+
+
+            <Dialog
+              open={this.state.open}
+              onClose={this.handleClose}
+              aria-labelledby="form-dialog-title"
+            >
+            <DialogTitle id="form-dialog-title">Please enter your order</DialogTitle>
+
+
+              <OrderForm onSubmit={ this.createOrder } class="batch-form"/>
+
+
+            </Dialog>
 
           </Grid>
         </Paper>
@@ -103,4 +129,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchProduct })(Product)
+export default connect(mapStateToProps, { fetchProduct, createOrder })(Product)

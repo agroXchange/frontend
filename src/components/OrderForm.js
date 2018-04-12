@@ -22,6 +22,11 @@ const classes = {
   menu: {
     width: 200,
   },
+  paper: {
+    marginBottom: 20,
+    marginLeft: 20,
+    marginRight: 20,
+  }
 }
 
 class OrderForm extends PureComponent {
@@ -42,7 +47,7 @@ class OrderForm extends PureComponent {
   render() {
     return(
       <form onSubmit={ this.handleSubmit } className="form-container">
-        <Paper className="paper">
+        <Paper style={ classes.paper }>
           <TextField
             label="Volume"
             id="volume"
@@ -58,9 +63,9 @@ class OrderForm extends PureComponent {
           <TextField
             id="ico"
             label="ICO"
-            name="ico"
+            name="ICO"
             style={ classes.textField }
-            value={ this.state.ico }
+            value={ this.state.ICO }
             onChange={ this.handleChange }
             margin="normal"
           />
