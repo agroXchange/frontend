@@ -6,7 +6,6 @@ export default function (state = {}, {type, payload}) {
 			return {
 				error: payload
 			}
-
 		default:
       return state
 	}

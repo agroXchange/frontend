@@ -6,7 +6,7 @@ import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
 import { withStyles } from 'material-ui/styles';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
-import '../styles/ProductForm.css'
+import '../../styles/ProductForm.css'
 
 const classes = {
   container: {
