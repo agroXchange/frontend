@@ -63,7 +63,7 @@ class ProductList extends PureComponent {
           />
            <CardContent>
              <p className={classes.number}>
-               {t('Order')} #{ product.name }
+               <h2> { product.name }</h2>
              </p>
 
                <table>
@@ -74,18 +74,18 @@ class ProductList extends PureComponent {
                  </tr>
 
                  <tr className={classes.table}>
-                    <th>{t('Order Volume')}</th>
-                    <td>{product.volume}</td>
+                    <th>{t('Volume')}</th>
+                    <td>{product.volume} KG</td>
                  </tr>
 
                  <tr className={classes.table}>
                     <th>{t('Price')}</th>
-                    <td>{product.price}</td>
+                    <td>{product.price} {product.currency} per KG</td>
                  </tr>
 
                  <tr className={classes.table}>
-                    <th>{t('Status')}</th>
-                    <td>{product.description}</td>
+                    <th>{t('Expiry Date')}</th>
+                    <td> {product.expiration}</td>
                  </tr>
 
 

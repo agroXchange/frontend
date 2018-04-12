@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-
+import { Link } from 'react-router-dom'
 import AppBar from 'material-ui/AppBar';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
@@ -12,11 +12,6 @@ import { fetchProduct } from '../../actions/products'
 import OrderForm from '../OrderForm'
 import ProductForm from './ProductForm'
 
-
-const profile = {
-  country: "Netherlands",
-  cityPort: "Amsterdam"
-}
 
 
 class Product extends PureComponent {
@@ -50,7 +45,7 @@ class Product extends PureComponent {
   render() {
     const { product } = this.props
     if (!product) return null
-    
+
     return(
       <div className="product-container">
         <Paper className="paper">
@@ -62,16 +57,21 @@ class Product extends PureComponent {
               <p>Code: { product.code }</p>
               <p>Harvested Dated: { product.harvested }</p>
               <p>Expiration Date: { product.expiration }</p>
-              <Button color="primary">View Seller</Button>
+
+              <Link to={ `/profiles/${product.seller.id}` }>
+                <Button color="primary">
+                  View Seller
+                </Button>
+              </Link>
             </Grid>
 
             <Grid item>
               <p>{ product.description }</p>
               <p>Volume: { product.volume } KG</p>
               <p>Price: { product.price } { product.currency } per KG</p>
-              <p>Certification: { product.certification }</p>
-              <p>Country { profile.country }</p>
-              <p>City/Port: { profile.cityPort }</p>
+              <p>Certification: { product.certificate }</p>
+              <p>Country { product.seller.country }</p>
+              <p>City/Port: { product.seller.city }</p>
 
               <Button onClick={ this.toggleEdit }>Edit Product</Button>
               <Button onClick={ this.toggleOrder }>Make An Order</Button>
@@ -98,7 +98,8 @@ class Product extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    product: state.product
+    product: state.product,
+    currentUser: state.currentUser
   }
 }
 
