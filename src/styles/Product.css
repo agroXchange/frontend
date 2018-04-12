@@ -1,9 +1,13 @@
 .product-photo {
   max-width: 10em;
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
 
 .product-container {
   flex-grow: 1;
+  vertical-align: middle;
+  align-content: space-between;
 }
 
 .container {
@@ -17,6 +21,6 @@
 }
 
 .title {
-  text-align: left;
+  text-align: center;
   height: 50px;
 }
