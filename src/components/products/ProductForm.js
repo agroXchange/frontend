@@ -81,13 +81,9 @@ class ProductForm extends PureComponent {
 //    if (name === "name") document.querySelector('#test:a').classList.toggle("hide")
    // if (name === "name") $('#element').foundation('_hideAll');
 
-
     this.setState({
-      [name]: value
-
-      
+      [name]: value      
     })
-
   }
 
   handleFileChange = (e) => {
@@ -102,6 +98,10 @@ class ProductForm extends PureComponent {
 
 
   render() {
+    const { codes, vegetables, fruits, beans } = this.props
+    console.log(vegetables )
+
+    if(codes)
     return(
       <form onSubmit={ this.handleSubmit } className="form-container">
         <Paper className="paper">
@@ -326,6 +326,13 @@ class ProductForm extends PureComponent {
 
 }
 
+const mapStateToProps = (state, props) => ({
+  codes: state.codes,
+  vegetables: state.codes.filter(x => x.code.match(/^07/) ),
+  fruits: state.codes.filter(x => x.code.match(/^08/)),
+  beans: state.codes.filter(x => x.code.match(/^09/))
+})
 
 
-export default connect(null, { fetchCodes })(ProductForm)
+
+export default connect(mapStateToProps, { fetchCodes })(ProductForm)
