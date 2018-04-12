@@ -11,18 +11,20 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MenuItem from 'material-ui/Menu/MenuItem';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
+import Icon from 'material-ui/Icon';
+import Search from '@material-ui/icons/Search';
 
 import { fetchCodes } from '../../actions/codes'
 
-const styles = theme => ({
-    root: {
-        flexGrow: 1,
-    },
-    heading: {
-        fontSize: theme.typography.pxToRem(15),
-        fontWeight: theme.typography.fontWeightRegular,
-    },
-});
+// const styles = theme => ({
+//     root: {
+//         flexGrow: 1,
+//     },
+//     heading: {
+//         fontSize: theme.typography.pxToRem(15),
+//         fontWeight: theme.typography.fontWeightRegular,
+//     },
+// });
 
 
 const classes = {
@@ -72,32 +74,31 @@ class ResponsiveDialog extends React.Component {
     };
 
     handleClickOpen = () => {
-        
         this.setState({ open: true });
     };
 
     handleClose = () => {
-        
         this.setState({ open: false });
     };
-
 
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.onSubmit(this.state)
-        
     }
 
-    handleChange = (e) => {
-        e.preventDefault()
+    handleChange  = (e) => {     
         const { name, value } = e.target
 
         this.setState({
             [name]: value
         })
+    }
 
-        this.setState({ open: false });
-        console.log(e.target.value)
+    handleClick = code => {
+        this.setState({
+            code: code,
+            open: false
+        })
     }
 
     componentWillMount = () => {
@@ -106,23 +107,27 @@ class ResponsiveDialog extends React.Component {
 
 
     render() {
-  
         const { fullScreen, codes, vegetables, fruits, beans } = this.props
 
-        if (vegetables)
+        if (codes)
         return (
-         <div>   
+            <form onSubmit={this.handleSubmit} className="form-container">
             
                 <Paper className="paper">
+             <div id="search">    
 
-                <h2>Search Products</h2>
+                <h2>Product Search</h2>
 
-                <Button onClick={this.handleClickOpen}>Products</Button>
+                        <Button 
+                            onClick={this.handleClickOpen}
+                            variant="raised" 
+                           >
+                            <Search/> Products 
+                        </Button>
 
                     <Dialog
                         fullScreen={fullScreen}
                         open={this.state.open}
-                        // onClose={this.handleClose}
                         aria-labelledby="responsive-dialog-title"
                     >
 
@@ -134,25 +139,21 @@ class ResponsiveDialog extends React.Component {
  
                                 <DialogContent>
                                     <DialogContentText>
-                                        <ul className="menu vertical nested">
                                             {vegetables.map(veg =>
-                                             { console.log(veg.code)
-                                               return  <li key={veg.code}>
+                                             { 
+                                               return  <div key={veg.code}>
                                                     <Button
-                                                        size="small"
-                                                        name="code"
-                                                        color="secondary"
+                                                       color="primary"
                                                         className="button"
-                                                        value={veg.code}
+                                                        size="small"
                                                         type="button"
-                                                        onClick={this.handleChange}
+                                                        onClick={_ => this.handleClick(veg.code)}
                                                     >
                                                         {veg.titleeng}
                                                     </Button>
-                                                </li>
+                                                </div>
                                             }
                                             )}
-                                        </ul>
                                     </DialogContentText>
                                 </DialogContent>
 
@@ -160,79 +161,73 @@ class ResponsiveDialog extends React.Component {
                     </ExpansionPanel>
 
                     <ExpansionPanel>
-                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography className={classes.heading}>Fruits & Nuts ({fruits.length})</Typography>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails>
+                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                            <Typography className={classes.heading}>Fruits & Nuts ({fruits.length})</Typography>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelDetails>
 
                                     <DialogContent>
                                         <DialogContentText>
-                                            <ul className="menu vertical nested">
                                                 {fruits.map(fruit =>
-                                                    <li key={fruit.code}>
+                                                    <div key={fruit.code}>
                                                         <Button
                                                             size="small"
-                                                            name="name"
-                                                            color="secondary"
-                                                            className="button"
-                                                            value={fruit.code}
+                                                            color="primary"
+                                                            className="button" 
                                                             type="button"
-                                                            onClick={this.handleChange}
+                                                            onClick={_ => this.handleClick(fruit.code)}
                                                         >
                                                             {fruit.titleeng}
                                                         </Button>
-                                                    </li>
+                                                    </div>
                                                 )}
-                                            </ul>
                                         </DialogContentText>
                                     </DialogContent>
                                 
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
 
-                        <ExpansionPanel>
-                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography className={classes.heading}>Beans & Crop ({beans.length})</Typography>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails>
+                    <ExpansionPanel>
+                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                            <Typography className={classes.heading}>Beans & Crop ({beans.length})</Typography>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelDetails>
 
                                 <DialogContent>
                                     <DialogContentText>
-                                        <ul className="menu vertical nested">
                                             {beans.map(bean =>
-                                                <li key={bean.code}>
+                                                <div key={bean.code}>
                                                     <Button
                                                         size="small"
-                                                        name="name"
-                                                        color="secondary"
+                                                        color="primary"
                                                         className="button"
-                                                        value={bean.code}
                                                         type="button"
-                                                        onClick={this.handleChange}
+                                                        onClick={_ => this.handleClick(bean.code)}
                                                     >
                                                         {bean.titleeng}
                                                     </Button>
-                                                </li>
+                                                </div>
                                             )}
-                                        </ul>
                                     </DialogContentText>
                                 </DialogContent>
 
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
                 </Dialog>
-     
-        <form onSubmit={this.handleSubmit} className="form-container">
+            </div>   
+            <div> 
                         <TextField
                             id="code"
                             name="code"
-                            label="HS Code"
+                            // label="HS Code"
                             style={classes.textField}
                             value={this.state.code}
                             onChange={this.handleChange}
+                            placeholder="HS Number"
                             margin="normal"
                         />
-
+            </div>
+            <div >
                         <TextField
                             id="country"
                             name="country"
@@ -265,9 +260,9 @@ class ResponsiveDialog extends React.Component {
                             Save
                         </Button>
 
-                </form>
+                    </div>
                     </Paper>
-</div>
+                </form>
            
         );
     }
