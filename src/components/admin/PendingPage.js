@@ -1,8 +1,11 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { withStyles } from "material-ui/styles";
+import { Link } from "react-router-dom";
 import Card from "material-ui/Card";
 import { CardActions, CardHeader, CardMedia, CardTitle, CardText, CardContent } from "material-ui/Card";
+import IconButton from 'material-ui/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
 import { fetchUsers } from "../../actions/users";
@@ -49,16 +52,23 @@ class PendingPage extends PureComponent {
             <CardContent>
               <p>{user.profile.name}</p>
               <p>{user.profile.address}</p>
-              <p>Colombia</p>
+              <p>{user.profile.country}</p>
               <Button size="medium" color="primary">
                 Approve
               </Button>
-              <Button size="medium" color="primary">
-                Delete
-              </Button>
+              <IconButton aria-label="Delete">
+                <DeleteIcon />
+              </IconButton>
             </CardContent>
           </Card>
         ))}
+        <Card>
+          <Link to={`/admin`}>
+            <Button size="medium" color="primary">
+              Admin Page
+            </Button>
+          </Link>
+        </Card>
       </MuiThemeProvider>
     );
   }

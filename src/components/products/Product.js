@@ -9,6 +9,9 @@ import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import '../styles/Product.css'
 
+import OrderForm from './OrderForm'
+import ProductForm from './ProductForm'
+
 
 const profile = {
   country: "Netherlands",
@@ -17,6 +20,28 @@ const profile = {
 
 
 class Product extends PureComponent {
+
+  state = {
+    newOrder: false,
+    edit: false
+  }
+
+  toggleOrder = () => {
+    this.setState({
+      newOrder: !this.state.newOrder
+    })
+  }
+
+  toggleEdit = () => {
+    this.setState({
+      edit: !this.state.edit
+    })
+  }
+
+  createOrder = (order) => {
+    this.props.createBatch(order)
+    console.log('Created Batch')
+  }
 
   render() {
     const { product } = this.props
@@ -42,10 +67,20 @@ class Product extends PureComponent {
               <p>Country { profile.country }</p>
               <p>City/Port: { profile.cityPort }</p>
 
-              <Button>Edit Product</Button>
-              <Button>Make An Order</Button>
+              <Button onClick={ this.toggleEdit }>Edit Product</Button>
+              <Button onClick={ this.toggleOrder }>Make An Order</Button>
 
             </Grid>
+
+            {
+              this.state.newOrder &&
+              <OrderForm onSubmit={ this.createOrder } class="batch-form"/>
+            }
+
+            {
+              this.state.edit &&
+              <ProductForm />
+            }
 
           </Grid>
         </Paper>

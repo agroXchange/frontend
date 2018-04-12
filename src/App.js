@@ -4,45 +4,40 @@ import SignupPage from './components/signup/SignupPage'
 import AdminPage from './components/admin/LandingPage'
 import PendingPage from './components/admin/PendingPage'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Product from './components/Product'
+import ProductsList from './components/products/ProductsList'
+import Product from './components/products/Product'
 import ExampleTranslation from './components/ExampleTranslation'
 import OrdersPage from './components/admin/OrdersPage'
+import UsersList from './components/admin/UsersList'
 import OrderListBuyer from './containers/orderList/OrderListBuyer'
+import OrderListSeller from './containers/orderList/OrderListSeller'
 import NavBar from './components/NavBar'
 import LoginPage from './components/login/LoginPage'
-import ProductForm from './components/ProductForm'
 import ShowUser from './components/profile/ShowUser'
-
+import ProductForm from './components/products/ProductForm'
+import LogoutPage from './components/logout/LogoutPage'
 import './styles/App.css';
-import {translate} from "react-i18next"
 
 class App extends Component {
   render() {
-
-    const { i18n } = this.props
-
-    const changeLanguage = lng => {
-      i18n.changeLanguage(lng)
-    }
-
     return (
       <MuiThemeProvider>
         <Router>
           <div className="App">
             <NavBar />
-            <button onClick={() => changeLanguage("es")}><img className="LanguageDetector" src="https://lipis.github.io/flag-icon-css/flags/4x3/es.svg" /></button>
-            <button onClick={() => changeLanguage("en")}><img className="LanguageDetector" src="https://lipis.github.io/flag-icon-css/flags/4x3/gb.svg" /></button>
-            <h1 className="App-title">AgroXchange</h1>
             <Route exact path="/admin" component={AdminPage} />
             <Route exact path="/admin/pending" component={PendingPage} />
             <Route exact path="/admin/orders" component={OrdersPage} />
+            <Route exact path="/admin/users" component={UsersList} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/signup" component={SignupPage} />
-            <Route exact path="/product" component={ Product } />
+            <Route exact path="/logout" component={LogoutPage} />
             <Route exact path="/translation" component={ ExampleTranslation } />
             <Route exact path="/:id/orderlistBuyer" component={OrderListBuyer} />
-            <Route exact path="/orderlistBuyer" component={OrderListBuyer} />
+            <Route exact path="/:id/orderlistSeller" component={OrderListSeller} />
+            <Route exact path="/products" component={ ProductsList } />
             <Route exact path="/product" component={ Product } />
+            <Route exact path="/orderlistBuyer" component={OrderListBuyer} />
             <Route exact path="/productform" component={ ProductForm } />
             <Route exact path="/users/:id" component={ShowUser} />
           </div>
@@ -52,4 +47,4 @@ class App extends Component {
   }
 }
 
-export default translate("translations")(App)
+export default App

@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import compose from "lodash/fp/compose";
 import { withStyles } from "material-ui/styles";
+import { Link } from "react-router-dom";
 import Card from "material-ui/Card";
 import {
   CardActions,
@@ -23,7 +24,7 @@ import { fetchAllOrders } from "../../actions/orders";
 
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
-const style = theme => ({
+const style = () => ({
   card: {
     height: 550,
     width: 300,
@@ -36,14 +37,14 @@ const style = theme => ({
   },
   table: {
     width: " 10px",
-    fontSize: "10px"
+    fontSize: "10px",
+    textAlign: "center"
   },
   seller: {
-    textAlign: "center",
-    fontSize: "20px"
+    textAlign: "left",
+    fontSize: "5px"
   }
 });
-
 
 class OrdersPage extends PureComponent {
   componentWillMount(props) {
@@ -55,7 +56,7 @@ class OrdersPage extends PureComponent {
     const orders = this.props.orders;
 
     return (
-      <MuiThemeProvider>
+      <div>
         {orders.map(order => (
           <Card className={classes.card} zDepth={3} circle={true}>
             <CardHeader avatar={"#" + order.id} />
@@ -67,11 +68,15 @@ class OrdersPage extends PureComponent {
               />
             </CardMedia>
             <Card>
-              <Table>
-                <TableRow className={classes.table}>
-                  <TableCell>Buyer: Carlos</TableCell>
-                  <TableCell>Seller: Luca</TableCell>
-                </TableRow>
+              <Table className={classes.seller}>
+                <TableHead>
+                  <TableCell>Buyer: {order.buyer.name}</TableCell>
+                </TableHead>
+              </Table>
+              <Table className={classes.seller}>
+                <TableHead>
+                  <TableCell>Seller: {order.product.seller.name}</TableCell>
+                </TableHead>
               </Table>
             </Card>
             <br />
@@ -87,7 +92,10 @@ class OrdersPage extends PureComponent {
                 </TableRow>
                 <TableRow>
                   <TableCell>Price</TableCell>
-                  <TableCell>{order.product.price}</TableCell>
+                  <TableCell>
+                    {order.product.price}
+                    {order.product.currency}
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Volume</TableCell>
@@ -108,7 +116,14 @@ class OrdersPage extends PureComponent {
             </Button>
           </Card>
         ))}
-      </MuiThemeProvider>
+        <Card>
+          <Link to={`/admin`}>
+            <Button size="medium" color="primary">
+              Admin Page
+            </Button>
+          </Link>
+        </Card>
+      </div>
     );
   }
 }
