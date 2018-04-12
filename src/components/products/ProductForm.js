@@ -101,7 +101,7 @@ class ProductForm extends PureComponent {
     const { codes, vegetables, fruits, beans } = this.props
     console.log( JSON.stringify(vegetables ) )
 
-    if(codes)
+    if(fruits)
     return(
       <form onSubmit={ this.handleSubmit } className="form-container">
         <Paper className="paper">
@@ -109,47 +109,42 @@ class ProductForm extends PureComponent {
         <h2>Add a Product</h2>
 
           <div>
-            <ul className="vertical menu drilldown" 
+            {/* <ul className="vertical menu drilldown" 
             data-drilldown
                data-auto-height="true"
               // data-scroll-top="true"   
-          >
+          > */}
      
-              <li>
-                <a href="#"> Vegetables   </a>
-                <ul className="menu vertical nested">
+              {/* <li> */}
+                {/* <a href="#"> Vegetables   </a> */}
+                {/* <ul className="menu vertical nested"> */}
                   {vegetables.map(veg =>
-                    <li key={veg.code}
-                      name="name"
-                      value={Object.values(veg)[0]}
-                      onClick={this.handleChange}
-                      type="button"
-                        data-close-on-click="true"
-                    >
 
-                      <a href="#"
+                  <button key={veg.code}
+                      name="code"
+                     className="button"
+                      value={veg.code}
+                      onClick={this.handleChange}
+                       type="button"
+                        // data-close-on-click="true"
+                    >{veg.titleeng}
+
+
+
+                      {/* <a href="#"
 
                       
                       > xx{veg.code}</a>
                       <ul className="menu vertical nested">
                         <li><a href="#" >Two AAAA</a></li>
-                      </ul>
-
-                      {/* <div 
-                        name="name"
-                        
-                        value={Object.getOwnPropertyNames(veg)}
-                        
-                        onClick={this.handleChange}
-                      >
-                        {Object.getOwnPropertyNames(veg)}
-                      </div> */}
-
-                    </li>
+                      </ul> */}
+                    </button> 
                   )}
-                </ul>
-              </li>
-              <li>
+                {/* </ul>
+              </li> */}
+
+
+              {/* <li>
                 <a href="#"> Fruits & Nuts   </a>
                 <ul className="menu vertical nested">
                   {fruits.map(fruit =>
@@ -170,41 +165,18 @@ class ProductForm extends PureComponent {
 
                   )}
                 </ul>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <a href="#"> Beans & Crop   </a>
                 <ul className="menu vertical nested">
                   {beans.map(bean =>
                       <div>  0 </div>
-
-                    // <li key={bean.code}>
-                    //   <button 
-                    //     name="name"
-                    //     className="button"
-                    //       value={Object.values(bean)[0]}
-                    //     type="button"
-                    //     onClick={this.handleChange}
-                    //   >
-                    //     {Object.getOwnPropertyNames(bean)}
-
-                    //   </button>
-                    // </li>
-
                   )}
                 </ul>
-              </li>
+              </li> */}
           
-            </ul>
+            {/* </ul> */}
           </div>
-
-          {/* <Drilldown 
-            id="name"
-            label="Name"
-            name="name"
-            value={this.state.name}
-            onChange={this.handleChange}
-            style={{ zIndex: 100, position: "absolute"}}
-          /> */}
 
         <div className="upload">
           <label htmlFor="photo">Please Upload a Photo </label>
