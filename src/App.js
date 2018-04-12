@@ -13,7 +13,8 @@ import OrderListBuyer from './containers/orderList/OrderListBuyer'
 import OrderDetail from './containers/orderList/OrderDetail'
 import NavBar from './components/NavBar'
 import LoginPage from './components/login/LoginPage'
-import ShowUser from './components/profile/ShowUser'
+import ProfilePage from './components/profile/ProfilePage'
+import ProductForm from './components/products/ProductForm'
 import LogoutPage from './components/logout/LogoutPage'
 import AddProductContainer from './components/products/AddProductContainer';
 import SearchProductContainer from './components/products/SearchProductContainer';
@@ -45,8 +46,8 @@ class App extends Component {
             <Route exact path="/orders/:id" component={OrderDetail} />
             <Route exact path="/products" component={ ProductsList } />
             <Route exact path="/product" component={ Product } />
+            <Route exact path="/profiles/:id" component={ProfilePage} />
             <Route exact path="/productform" component={AddProductContainer} />
-            <Route exact path="/users/:id" component={ShowUser} />
             <Route exact path="/addproduct" component={ AddProductContainer } />
             <Route exact path="/searchproduct" component={ SearchProductContainer } />
           </div>
