@@ -26,24 +26,25 @@ class Product extends PureComponent {
 
   state = {
     newOrder: false,
-    edit: false,
-    open: false
+    editProduct: false
   }
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
+  handleClickOrderOpen = () => {
+    this.setState({ newOrder: true });
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
+  handleOrderClose = () => {
+    this.setState({ newOrder: false });
   };
 
+  handleEditOpen = () => {
+    this.setState({ editProduct: true });
+  };
 
-  toggleEdit = () => {
-    this.setState({
-      edit: !this.state.edit
-    })
-  }
+  handleEditClose = () => {
+    this.setState({ editProduct: false });
+  };
+
 
   componentWillMount(props) {
     this.props.fetchProduct(this.props.match.params.id)
@@ -51,10 +52,7 @@ class Product extends PureComponent {
 
   createOrder = (order, productId, buyer) => {
     this.props.createOrder(order, this.props.match.params.id, this.props.currentUser)
-    this.handleClose()
-    console.log(this.props.currentUser)
-    console.log(order)
-    console.log(this.props.match.params.id)
+    this.handleOrderClose()
   }
 
   render() {
@@ -78,8 +76,6 @@ class Product extends PureComponent {
                   View Seller
                 </Button>
               </Link>
-
-              {console.log(currentUser.id)}
             </Grid>
 
             <Grid item>
@@ -90,28 +86,29 @@ class Product extends PureComponent {
               <p>Country { product.seller.country }</p>
               <p>City/Port: { product.seller.city }</p>
 
-              <Button onClick={ this.toggleEdit }>Edit Product</Button>
-              <Button onClick={this.handleClickOpen}>Make New Order</Button>
+              <Button onClick={ this.handleEditOpen }>Edit Product</Button>
+              <Button onClick={this.handleClickOrderOpen}>Make New Order</Button>
             </Grid>
 
 
-            {
-              this.state.edit &&
-              <ProductForm />
-            }
+            <Dialog
+              open={this.state.editProduct}
+              onClose={this.handleEditClose}
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle id="form-dialog-title">Edit Your Product</DialogTitle>
+                <ProductForm inititalValues={ product } onSubmit={ this.updateProduct }/>
+            </Dialog>
+
 
 
             <Dialog
-              open={this.state.open}
-              onClose={this.handleClose}
+              open={this.state.newOrder}
+              onClose={this.handleOrderClose}
               aria-labelledby="form-dialog-title"
             >
-            <DialogTitle id="form-dialog-title">Please enter your order</DialogTitle>
-
-
-              <OrderForm onSubmit={ this.createOrder } class="batch-form"/>
-
-
+              <DialogTitle id="form-dialog-title">Please enter your order</DialogTitle>
+                <OrderForm onSubmit={ this.createOrder } class="batch-form"/>
             </Dialog>
 
           </Grid>

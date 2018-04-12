@@ -75,6 +75,8 @@ class ProductForm extends PureComponent {
   }
 
   render() {
+
+    const initialValues = this.props.initialValues || {}
     return(
       <form onSubmit={ this.handleSubmit } className="form-container">
         <Paper className="paper">
@@ -86,7 +88,7 @@ class ProductForm extends PureComponent {
           label="Name"
           name="name"
           style={ classes.textField }
-          value={ this.state.name }
+          value={ this.state.name || initialValues.name || ''}
           onChange={ this.handleChange }
           margin="normal"
 
@@ -110,7 +112,7 @@ class ProductForm extends PureComponent {
           name="description"
           label="Description"
           style={ classes.textField }
-          value={ this.state.description }
+          value={ this.state.description || initialValues.description || ''  }
           onChange={ this.handleChange }
           margin="normal"
         />
@@ -121,7 +123,7 @@ class ProductForm extends PureComponent {
           select
           label="Please select your currency"
           style={ classes.textField }
-          value={ this.state.currency }
+          value={ this.state.currency || initialValues.currency || ''}
           onChange={ this.handleChange }
           margin="normal"
         >
@@ -136,7 +138,7 @@ class ProductForm extends PureComponent {
           id="price"
           name="price"
           label="Price per Kg"
-          value={ this.state.price }
+          value={ this.state.price || initialValues.price || ''}
           onChange={ this.handleChange }
           type="number"
           style={ classes.textField }
@@ -150,7 +152,7 @@ class ProductForm extends PureComponent {
           label="Volume"
           id="volume"
           name="volume"
-          value={ this.state.volume }
+          value={ this.state.volume || initialValues.volume || ''}
           onChange={ this.handleChange }
           style={ classes.textField }
           InputProps={{
@@ -163,7 +165,7 @@ class ProductForm extends PureComponent {
           name="certification"
           label="Certification"
           style={ classes.textField }
-          value={ this.state.certification }
+          value={ this.state.certification || initialValues.certification || ''}
           onChange={ this.handleChange }
           margin="normal"
         />
