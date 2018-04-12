@@ -2,33 +2,15 @@ import React, { PureComponent } from 'react';
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
+
 import Button from 'material-ui/Button';
-import Dialog, {
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-    withMobileDialog,
-} from 'material-ui/Dialog';
-
-import ExpansionPanel, {
-    ExpansionPanelSummary,
-    ExpansionPanelDetails,
-} from 'material-ui/ExpansionPanel';
-
+import Dialog, { DialogContent, DialogContentText, withMobileDialog,} from 'material-ui/Dialog';
+import ExpansionPanel, { ExpansionPanelSummary, ExpansionPanelDetails,} from 'material-ui/ExpansionPanel';
 import Typography from 'material-ui/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
-import { withStyles } from 'material-ui/styles';
-
 import MenuItem from 'material-ui/Menu/MenuItem';
 import TextField from 'material-ui/TextField';
-
 import Paper from 'material-ui/Paper';
-
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
-
-import { vegetables, fruits, beans } from '../../productCodes'
 
 import { fetchCodes } from '../../actions/codes'
 
@@ -49,7 +31,7 @@ const classes = {
         flexWrap: 'wrap',
     },
     textField: {
-        marginLeft: 10,
+        marginLeft: 5,
         marginRight: 10,
         marginBottom: 20,
         width: 200,
@@ -122,9 +104,8 @@ class ResponsiveDialog extends React.Component {
     }
 
 
-
     render() {
-       // const { fullScreen } = this.props;
+  
         const { fullScreen, codes, vegetables, fruits, beans } = this.props
 
         if (codes)
@@ -136,7 +117,6 @@ class ResponsiveDialog extends React.Component {
 
                 <Button onClick={this.handleClickOpen}>Products</Button>
 
-
                     <Dialog
                         fullScreen={fullScreen}
                         open={this.state.open}
@@ -144,19 +124,12 @@ class ResponsiveDialog extends React.Component {
                         aria-labelledby="responsive-dialog-title"
                     >
 
-                   
                     <ExpansionPanel>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography className={classes.heading}>Vegetables</Typography>
+                            <Typography className={classes.heading}>Vegetables ({vegetables.length})</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
-                            {/* <Typography>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                sit amet blandit leo lobortis eget.
-                            </Typography> */}
-
-
-                                {/* <DialogTitle id="responsive-dialog-title">{"Pick product:"}</DialogTitle> */}
+ 
                                 <DialogContent>
                                     <DialogContentText>
                                         <ul className="menu vertical nested">
@@ -184,17 +157,10 @@ class ResponsiveDialog extends React.Component {
 
                     <ExpansionPanel>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography className={classes.heading}>Fruits & Nuts </Typography>
+                                <Typography className={classes.heading}>Fruits & Nuts ({fruits.length})</Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
 
-                                {/* <Dialog
-                                    fullScreen={fullScreen}
-                                    open={this.state.open}
-                                    onClose={this.handleClose}
-                                    aria-labelledby="responsive-dialog-title"
-                                > */}
-                                    {/* <DialogTitle id="responsive-dialog-title">{"Pick product:"}</DialogTitle> */}
                                     <DialogContent>
                                         <DialogContentText>
                                             <ul className="menu vertical nested">
@@ -222,17 +188,10 @@ class ResponsiveDialog extends React.Component {
 
                         <ExpansionPanel>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography className={classes.heading}>Beans & Crop </Typography>
+                                <Typography className={classes.heading}>Beans & Crop ({beans.length})</Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
 
-                                {/* <Dialog
-                                    fullScreen={fullScreen}
-                                    open={this.state.open}
-                                    onClose={this.handleClose}
-                                    aria-labelledby="responsive-dialog-title"
-                                > */}
-                                {/* <DialogTitle id="responsive-dialog-title">{"Pick product:"}</DialogTitle> */}
                                 <DialogContent>
                                     <DialogContentText>
                                         <ul className="menu vertical nested">
@@ -257,121 +216,7 @@ class ResponsiveDialog extends React.Component {
 
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
-
-
-
                 </Dialog>
-
-
-
-
-                    {/* <Dialog
-                        fullScreen={fullScreen}
-                        open={this.state.open}
-                        onClose={this.handleClose}
-                        aria-labelledby="responsive-dialog-title"
-                    >
-                        <DialogTitle id="responsive-dialog-title">{"Pick product:"}</DialogTitle>
-                        <DialogContent>
-                            <DialogContentText>
-                                <ul className="menu vertical nested">
-                                    {fruits.map(fruit =>
-                                        <li key={fruit.code}>
-                                            <Button
-                                                size="small"
-                                                name="name"
-                                                color="secondary"
-                                                className="button"
-                                                value={fruit.code}
-                                                type="button"
-                                                onClick={this.handleChange}
-                                            >
-                                                {fruit.titleeng}
-                                            </Button>
-                                        </li>
-                                    )}
-                                </ul>
-                            </DialogContentText>
-                        </DialogContent>
-                    </Dialog> */}
-
-
- {/* ----------------------------------------------------------                    */}
-                        {/* <div>
-                            <ul className="vertical menu drilldown"
-                                data-drilldown
-                                data-auto-height="true"
-
-                            > */}
-                              
-                                    {/* <li>
-                                        <a href="#"> Vegetables   </a>
-                                        <ul className="menu vertical nested">
-                                            {vegetables.map(veg =>
-                                                <li key={Object.getOwnPropertyNames(veg)}
-                                                    name="name"
-                                                    value={Object.getOwnPropertyNames(veg)}
-                                                    onClick={this.handleChange}
-                                                    type="button"
-                                                    data-close-on-click="true"
-                                                >
-
-                                                    <a href="#"
-
-                                                    >{Object.getOwnPropertyNames(veg)}</a>
-                                                    <ul className="menu vertical nested">
-                                                        <li><a href="#" >Two AAAA</a></li>
-                                                    </ul>
-                                                </li>
-                                            )}
-                                        </ul>
-                                    </li> */}
-
-                                    {/* <li>
-                                        <a href="#"> Fruits & Nuts   </a>
-                                        <ul className="menu vertical nested">
-                                            {fruits.map(fruit =>
-                                                <li key={Object.getOwnPropertyNames(fruit)}>
-                                                    <button
-                                                        name="name"
-                                                        className="button"
-                                                        value={Object.getOwnPropertyNames(fruit)}
-                                                        type="button"
-                                                        onClick={this.handleChange}
-
-                                                    >
-                                                        {Object.getOwnPropertyNames(fruit)}
-
-                                                    </button>
-                                                </li>
-
-                                            )}
-                                        </ul>
-                                    </li> */}
-
-                                    {/* <li>
-                                        <a href="#"> Beans & Crop   </a>
-                                        <ul className="menu vertical nested">
-                                            {beans.map(bean =>
-                                                <li key={Object.getOwnPropertyNames(bean)}>
-                                                    <button
-                                                        name="name"
-                                                        className="button"
-                                                        value={Object.getOwnPropertyNames(bean)}
-                                                        type="button"
-                                                        onClick={this.handleChange}
-                                                    >
-                                                        {Object.getOwnPropertyNames(bean)}
-
-                                                    </button>
-                                                </li>
-
-                                            )}
-                                        </ul>
-                                    </li> */}
-                                {/* </div>
-                            </ul>
-                        </div> */}
 
                         <TextField
                             id="code"
