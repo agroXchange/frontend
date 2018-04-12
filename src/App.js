@@ -35,7 +35,7 @@ class App extends Component {
             <Route exact path="/:id/orderlistBuyer" component={OrderListBuyer} />
             <Route exact path="/:id/orderlistSeller" component={OrderListSeller} />
             <Route exact path="/products" component={ ProductsList } />
-            <Route exact path="/product" component={ Product } />
+            <Route exact path="/products/:id" component={ Product } />
             <Route exact path="/orderlistBuyer" component={OrderListBuyer} />
             <Route exact path="/productform" component={ ProductForm } />
           </div>

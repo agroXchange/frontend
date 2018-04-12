@@ -8,7 +8,7 @@ import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import '../../styles/Product.css'
-
+import { fetchProduct } from '../../actions/products'
 import OrderForm from '../OrderForm'
 import ProductForm from './ProductForm'
 
@@ -38,6 +38,10 @@ class Product extends PureComponent {
     })
   }
 
+  componentWillMount(props) {
+    this.props.fetchProduct(this.props.match.params.id)
+  }
+
   createOrder = (order) => {
     this.props.createBatch(order)
     console.log('Created Batch')
@@ -45,6 +49,8 @@ class Product extends PureComponent {
 
   render() {
     const { product } = this.props
+    if (!product) return null
+    
     return(
       <div className="product-container">
         <Paper className="paper">
@@ -96,4 +102,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Product)
+export default connect(mapStateToProps, { fetchProduct })(Product)

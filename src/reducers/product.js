@@ -1,3 +1,5 @@
+import { FETCH_PRODUCT } from '../actions/products'
+
 
 const initialState = {
   name: 'Mandarins',
@@ -13,6 +15,11 @@ const initialState = {
   certification: "BPA"
 }
 
-export default function (state = initialState, action) {
-  return state
+export default function (state = null, action) {
+  switch(action.type) {
+    case FETCH_PRODUCT:
+      return action.payload
+    default:
+      return state
+    }
 }
