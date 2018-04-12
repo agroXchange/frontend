@@ -11,13 +11,13 @@ export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS";
 export const USER_LOGIN_FAILED = "USER_LOGIN_FAILED";
 export const USER_LOGOUT = "USER_LOGOUT"
 
-export const fetchUsers = () => dispatch => {
-  // const state = getState();
-  // const jwt = state.currentUser.jwt;
+export const fetchUsers = () => (dispatch, getState) => {
+  const state = getState();
+  const jwt = state.currentUser.jwt;
 
   request
     .get(`${baseUrl}/users`)
-    // .set("Authorization", `Bearer ${jwt}`)
+    .set("Authorization", `Bearer ${jwt}`)
     .then(response =>
       dispatch({
         type: FETCH_ALL_USERS,
@@ -28,12 +28,12 @@ export const fetchUsers = () => dispatch => {
 };
 
 export const fetchUser = (userId) => (dispatch, getState) => {
-  // const state = getState()
-  // const jwt = state.currentUser.jwt
+  const state = getState()
+  const jwt = state.currentUser.jwt
 
   request
     .get(`${baseUrl}/users/${userId}`)
-    // .set('Authorization', `Bearer ${jwt}`)
+    .set('Authorization', `Bearer ${jwt}`)
     .then(result => {
       dispatch({
         type: FETCH_USER,

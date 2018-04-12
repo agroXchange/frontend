@@ -13,7 +13,7 @@ import OrderListBuyer from './containers/orderList/OrderListBuyer'
 import OrderListSeller from './containers/orderList/OrderListSeller'
 import NavBar from './components/NavBar'
 import LoginPage from './components/login/LoginPage'
-import ShowUser from './components/profile/ShowUser'
+import ProfilePage from './components/profile/ProfilePage'
 import ProductForm from './components/products/ProductForm'
 import LogoutPage from './components/logout/LogoutPage'
 import './styles/App.css';
@@ -39,7 +39,7 @@ class App extends Component {
             <Route exact path="/product" component={ Product } />
             <Route exact path="/orderlistBuyer" component={OrderListBuyer} />
             <Route exact path="/productform" component={ ProductForm } />
-            <Route exact path="/users/:id" component={ShowUser} />
+            <Route exact path="/profiles/:id" component={ProfilePage} />
           </div>
         </Router>
       </MuiThemeProvider>

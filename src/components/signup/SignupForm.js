@@ -79,7 +79,7 @@ class SignupForm extends PureComponent {
         </div>
         <div>
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="field">{t('field')}</InputLabel>
+            <InputLabel htmlFor="field">{t('field')}*</InputLabel>
             <Select
               required
               input={<Input name="field" id="field" />}
@@ -97,7 +97,7 @@ class SignupForm extends PureComponent {
         </div>
         <div>
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="type">{t('type')}</InputLabel>
+            <InputLabel htmlFor="type">{t('type')}*</InputLabel>
             <Select
               required
               value={this.state.type}
