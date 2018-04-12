@@ -75,7 +75,7 @@ class ProductForm extends PureComponent {
   handleChange = (e) => {
     const { name, value } = e.target
 
-    if (name === "name") document.querySelector('#test:a').classList.toggle("hide")
+//    if (name === "name") document.querySelector('#test:a').classList.toggle("hide")
    // if (name === "name") $('#element').foundation('_hideAll');
 
 

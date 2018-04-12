@@ -12,15 +12,20 @@ import UsersList from './components/admin/UsersList'
 import OrderListBuyer from './containers/orderList/OrderListBuyer'
 import OrderListSeller from './containers/orderList/OrderListSeller'
 import NavBar from './components/NavBar'
+<<<<<<< HEAD
 import LoginPage from './components/login/LoginPage'
 import ShowUser from './components/profile/ShowUser'
 import ProductForm from './components/products/ProductForm'
 import LogoutPage from './components/logout/LogoutPage'
+=======
+
+>>>>>>> AddProductContainer & fix route
 import './styles/App.css';
 
 import $ from 'jquery';
 import 'foundation-sites';
 import './styles/App.css';
+import AddProductContainer from './components/AddProductContainer';
 
 class App extends Component {
 
@@ -48,7 +53,8 @@ class App extends Component {
             <Route exact path="/products" component={ ProductsList } />
             <Route exact path="/product" component={ Product } />
             <Route exact path="/orderlistBuyer" component={OrderListBuyer} />
-            <Route exact path="/productform" component={ ProductForm } />
+            <Route exact path="/addproduct" component={AddProductContainer } />
+            <Route exact path="/productform" component={AddProductContainer} />
             <Route exact path="/users/:id" component={ShowUser} />
           </div>
         </Router>
