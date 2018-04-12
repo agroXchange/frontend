@@ -1,10 +1,12 @@
-import { FETCH_ALL_USERS, FETCH_PENDING_USERS } from "../actions/users";
+import { UPDATE_USER, APPROVE_USER, DELETE_USER} from "../actions/users";
 
 export default function(state = [], { type, payload } = {}) {
   switch (type) {
-    case FETCH_ALL_USERS:
+    case UPDATE_USER:
       return payload;
-    case FETCH_PENDING_USERS:
+    case APPROVE_USER:
+      return payload;
+    case DELETE_USER:
       return payload;
     default:
       return state;
