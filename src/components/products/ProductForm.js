@@ -13,7 +13,7 @@ import '../../styles/ProductForm.css'
 import 'foundation-sites/dist/css/foundation.min.css';
 import zIndex from 'material-ui/styles/zIndex';
 
-import { vegetables, fruits, beans } from '../productCodes'
+// import { vegetables, fruits, beans } from '../productCodes'
 import { fetchCodes } from '../actions/codes'
 
 
@@ -99,7 +99,7 @@ class ProductForm extends PureComponent {
 
   render() {
     const { codes, vegetables, fruits, beans } = this.props
-    console.log(vegetables )
+    console.log( JSON.stringify(vegetables ) )
 
     if(codes)
     return(
@@ -111,15 +111,15 @@ class ProductForm extends PureComponent {
           <div>
             <ul className="vertical menu drilldown" 
             data-drilldown
-              data-auto-height="true"
-              data-scroll-top="true"   
+               data-auto-height="true"
+              // data-scroll-top="true"   
           >
-     <div id ="test">       
+     
               <li>
                 <a href="#"> Vegetables   </a>
                 <ul className="menu vertical nested">
                   {vegetables.map(veg =>
-                    <li key={Object.getOwnPropertyNames(veg)}
+                    <li key={veg.code}
                       name="name"
                       value={Object.values(veg)[0]}
                       onClick={this.handleChange}
@@ -130,7 +130,7 @@ class ProductForm extends PureComponent {
                       <a href="#"
 
                       
-                      >{Object.getOwnPropertyNames(veg)}</a>
+                      > xx{veg.code}</a>
                       <ul className="menu vertical nested">
                         <li><a href="#" >Two AAAA</a></li>
                       </ul>
@@ -153,17 +153,18 @@ class ProductForm extends PureComponent {
                 <a href="#"> Fruits & Nuts   </a>
                 <ul className="menu vertical nested">
                   {fruits.map(fruit =>
-                    <li key={Object.getOwnPropertyNames(fruit)}>
+
+                    <li key={fruit.code}>
                       <button 
                         name="name"
                         className="button"
                           value={Object.values(fruit)[0]}
                         type="button"
-                        onClick={this.handleChange}
-                        
+                        onClick={this.handleChange}      
                       >
-                        {Object.getOwnPropertyNames(fruit)}
 
+                      ssss
+                       
                       </button>
                     </li>
 
@@ -174,23 +175,25 @@ class ProductForm extends PureComponent {
                 <a href="#"> Beans & Crop   </a>
                 <ul className="menu vertical nested">
                   {beans.map(bean =>
-                    <li key={Object.getOwnPropertyNames(bean)}>
-                      <button 
-                        name="name"
-                        className="button"
-                          value={Object.values(bean)[0]}
-                        type="button"
-                        onClick={this.handleChange}
-                      >
-                        {Object.getOwnPropertyNames(bean)}
+                      <div>  0 </div>
 
-                      </button>
-                    </li>
+                    // <li key={bean.code}>
+                    //   <button 
+                    //     name="name"
+                    //     className="button"
+                    //       value={Object.values(bean)[0]}
+                    //     type="button"
+                    //     onClick={this.handleChange}
+                    //   >
+                    //     {Object.getOwnPropertyNames(bean)}
+
+                    //   </button>
+                    // </li>
 
                   )}
                 </ul>
               </li>
-   </div>           
+          
             </ul>
           </div>
 
