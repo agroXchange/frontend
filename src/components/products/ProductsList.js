@@ -12,6 +12,7 @@ import {translate, Trans} from "react-i18next"
 
 import { fetchAllProducts } from '../../actions/products'
 
+const stockImage = "https://theculinarycook.com/wp-content/uploads/2012/04/vegetable-stock-679x509.jpg"
 
 const styles = {
   card: {
@@ -58,7 +59,8 @@ class ProductList extends PureComponent {
          <Card className={classes.card}>
            <CardMedia
             className={classes.media}
-            image={ product.photo }
+            image={ product.photo !== null ?
+              product.photo : stockImage }
             title="product name - redux"
           />
            <CardContent>
