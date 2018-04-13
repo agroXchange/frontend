@@ -43,7 +43,6 @@ class App extends Component {
             <Route exact path="/orders/:id" component={OrderDetail} />
             <Route exact path="/products" component={ ProductsList } />
             <Route exact path="/products/:id" component={ Product } />
-            <Route exact path="/orderlistBuyer" component={OrderListBuyer} />
             <Route exact path="/productform" component={ ProductForm } />
             <Route exact path="/product" component={ Product } />
             <Route exact path="/profiles/:id" component={ProfilePage} />
