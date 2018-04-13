@@ -10,7 +10,6 @@ import Input, { InputLabel, InputAdornment } from 'material-ui/Input'
 import '../../styles/ProductForm.css'
 import 'foundation-sites/dist/css/foundation.min.css'
 import zIndex from 'material-ui/styles/zIndex'
-// import { vegetables, fruits, beans } from '../productCodes'
 import { fetchCodes } from '../../actions/codes'
 
 
@@ -110,42 +109,6 @@ class ProductForm extends PureComponent {
             onChange={ this.handleChange }
             margin="normal"
           />
-
-
-
-                {/* <li>
-                  <a href="#"> Fruits & Nuts   </a>
-                  <ul className="menu vertical nested">
-                    {fruits.map(fruit =>
-
-                      <li key={fruit.code}>
-                        <button
-                          name="name"
-                          className="button"
-                            value={Object.values(fruit)[0]}
-                          type="button"
-                          onClick={this.handleChange}
-                        >
-
-                        ssss
-
-                        </button>
-                      </li>
-
-                    )}
-                  </ul>
-                </li> */}
-                {/* <li>
-                  <a href="#"> Beans & Crop   </a>
-                  <ul className="menu vertical nested">
-                    {beans.map(bean =>
-                        <div>  0 </div>
-                    )}
-                  </ul>
-                </li> */}
-
-              {/* </ul> */}
-
 
           <div className="upload">
             <label htmlFor="photo">Please Upload a Photo </label>
