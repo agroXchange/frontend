@@ -1,20 +1,22 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import compose from 'lodash/fp/compose'
-import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
-import AppBar from 'material-ui/AppBar'
-import Paper from 'material-ui/Paper'
-import Grid from 'material-ui/Grid'
-import Button from 'material-ui/Button'
-import Typography from 'material-ui/Typography'
+import PropTypes from 'prop-types';
+
+import { withStyles } from 'material-ui/styles';
+import AppBar from 'material-ui/AppBar';
+import Paper from 'material-ui/Paper';
+import Grid from 'material-ui/Grid';
+import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography';
 import Dialog, {
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-} from 'material-ui/Dialog'
+} from 'material-ui/Dialog';
+
 import '../../styles/Product.css'
 import { fetchProduct } from '../../actions/products'
 import { createOrder } from '../../actions/orders'
@@ -28,7 +30,7 @@ const styles = {
     marginRight: 20,
   }
 }
-
+const stockImage = "https://theculinarycook.com/wp-content/uploads/2012/04/vegetable-stock-679x509.jpg"
 
 class Product extends PureComponent {
 
@@ -83,7 +85,10 @@ class Product extends PureComponent {
           <Grid container className="container" spacing={24}>
 
             <Grid item xs={12}>
-              <img src={ product.photo } className="product-photo"/>
+              <img src={ product.photo !== null ?
+                product.photo : stockImage }
+                alt="product"
+                className="product-photo"/>
             </Grid>
 
             <Grid item xs={12} sm={6}>
