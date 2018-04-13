@@ -109,6 +109,12 @@ class ProductForm extends PureComponent {
   render() {
     const { fullScreen, codes, vegetables, fruits, beans } = this.props
 
+    let product = codes.filter(i => i.code.match(this.state.code) )
+
+    let title =''
+    if (product[0]){  title = ( product[0].titleeng   )}
+   
+    
     if(codes)
       return(
         <form onSubmit={ this.handleSubmit } className="form-container">
