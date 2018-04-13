@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchUsers, deleteUser } from "../../actions/users";
+import { assignImage } from './lib/lib'
 import compose from "lodash/fp/compose";
 import { withStyles } from "material-ui/styles";
 import List, {
@@ -47,28 +48,25 @@ class UsersList extends PureComponent {
       <div>
         <h1> Users List</h1>
         {users.map(user => (
+
           <List>
             <ListItem>
               <ListItemAvatar>
+              <Link to={`/admin/profiles/${user.id}`}>
                 <Avatar>
                   <img
                     className={classes.media}
-                    src={`${user.profile.logo}`}
+                    src={assignImage(user.profile.logo)}
                     alt=""
                   />
                 </Avatar>
+                </Link>
               </ListItemAvatar>
               <ListItemText
                 primary={user.profile.name}
                 secondary={user.profile.country}
               />
               <ListItemSecondaryAction>
-                <IconButton
-
-                  aria-label="Delete"
-                >
-                  <EditIcon />
-                </IconButton>
                 <IconButton
                   onClick={() => this.deleteUser(user.id)}
                   onClick={() => {

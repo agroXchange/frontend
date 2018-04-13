@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import SignupPage from './components/signup/SignupPage'
 import AdminPage from './components/admin/LandingPage'
 import PendingPage from './components/admin/PendingPage'
+import AdminProfilePage from './components/admin/AdminProfilePage'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import ProductsList from './components/products/ProductsList'
 import Product from './components/products/Product'
@@ -33,6 +34,7 @@ class App extends Component {
             <Route exact path="/admin/pending" component={PendingPage} />
             <Route exact path="/admin/orders" component={OrdersPage} />
             <Route exact path="/admin/users" component={UsersList} />
+            <Route exact path="/admin/profiles/:id" component={AdminProfilePage} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/signup" component={SignupPage} />
             <Route exact path="/logout" component={LogoutPage} />
