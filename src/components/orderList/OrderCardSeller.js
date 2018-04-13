@@ -6,7 +6,7 @@ import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 
 import compose from 'lodash/fp/compose'
-import {translate, Trans} from "react-i18next"
+import { translate } from "react-i18next"
 
 
 
@@ -42,7 +42,7 @@ class OrderCardSeller extends PureComponent {
   render() {
     const { classes, orders } = this.props;
 
-    const { t, i18n } = this.props
+    const { t } = this.props
     {/* specific for translation */}
 
     const { product } = this.props

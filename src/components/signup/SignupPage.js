@@ -3,10 +3,11 @@ import { connect } from "react-redux";
 import { signup } from "../../actions/users";
 import SignupForm from "./SignupForm";
 import { Redirect } from "react-router-dom";
+import compose from "lodash/fp/compose";
+import { translate } from "react-i18next";
 import Typography from "material-ui/Typography";
 import Button from "material-ui/Button";
-import compose from 'lodash/fp/compose'
-import {translate, Trans} from "react-i18next"
+import Paper from "material-ui/Paper";
 
 class SignupPage extends PureComponent {
   handleSubmit = newUser => {
@@ -14,24 +15,27 @@ class SignupPage extends PureComponent {
   };
 
   render() {
-
-    const { t, i18n } = this.props
-
+    const { t } = this.props;
     if (this.props.signup.success) return <Redirect to="/" />;
 
     return (
-      <div>
+      <Paper
+        style={{
+          textAlign: "center",
+          display: "inline-block",
+          marginTop: "40px"
+        }}
+        className="outer-paper"
+      >
         <Typography gutterBottom variant="headline" component="h1">
-          {t('Sign up form')}
+          {t("Sign up form")}
         </Typography>
-        <Typography color="textSecondary">
-          {t('fieldsNecessary')}
-        </Typography>
+        <Typography color="textSecondary">{t("fieldsNecessary")}</Typography>
         <SignupForm onSubmit={this.handleSubmit} />
         <p style={{ color: "red" }}>{this.props.signup.error}</p>
-        <Typography color="textSecondary">{t('alreadyRegistered?')}</Typography>
-        <Button color="primary">{t('Log in')}</Button>
-      </div>
+        <Typography color="textSecondary">{t("alreadyRegistered?")}</Typography>
+        <Button color="primary">{t("Log in")}</Button>
+      </Paper>
     );
   }
 }
@@ -43,5 +47,6 @@ const mapStateToProps = function(state) {
 };
 
 export default compose(
-  translate('user'),
-connect((mapStateToProps), { postSignup: signup }))(SignupPage)
+  translate("user"),
+  connect(mapStateToProps, { postSignup: signup })
+)(SignupPage);

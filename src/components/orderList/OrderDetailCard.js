@@ -9,7 +9,7 @@ import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 
 import compose from 'lodash/fp/compose'
-import {translate, Trans} from "react-i18next"
+import { translate } from "react-i18next"
 
 
 
@@ -65,7 +65,7 @@ class OrderDetailCard extends PureComponent {
   render() {
     const { classes, order } = this.props;
 
-    const { t, i18n } = this.props
+    const { t } = this.props
 
     const { product } = this.props
 
