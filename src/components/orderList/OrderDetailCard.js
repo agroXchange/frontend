@@ -34,14 +34,14 @@ class OrderDetailCard extends PureComponent {
       status: 'Approved'
     }
     this.props.chageOrderStatus(data)
-    window.location.reload()
+    // window.location.reload()
   }
   handleDecline = () => {
     const data = {
       status: 'Declined'
     }
     this.props.chageOrderStatus(data)
-    window.location.reload()
+    //window.location.reload()
   }
   render() {
     const { classes, order } = this.props;

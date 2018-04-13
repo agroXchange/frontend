@@ -6,7 +6,7 @@ export default function(state = [], { type, payload } = {}) {
       return payload;
 
     case CHANGE_STATUS:
-      return [...state, payload]
+      return payload
 
       default:
         return state;
