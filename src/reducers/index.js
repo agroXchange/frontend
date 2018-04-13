@@ -3,6 +3,7 @@ import users from './users'
 import user from './user'
 import order from './order'
 import orders from './orders'
+import password from './password'
 import products from './products'
 import product from './product'
 import login from './login'
@@ -19,5 +20,6 @@ export default {
   orders,
   login,
   currentUser,
-  codes
+  codes,
+  password
 }
