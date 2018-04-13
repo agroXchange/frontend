@@ -24,6 +24,8 @@ class OrderDetail extends PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired
   }
+})
+
 
  componentWillMount() {
    this.props.fetchOrder(this.props.match.params.id)
@@ -44,7 +46,6 @@ class OrderDetail extends PureComponent {
    )
  }
 }
-
 
 const mapStateToProps = (state) => ({
  order: state.order

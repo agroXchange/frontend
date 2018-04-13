@@ -1,23 +1,20 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import PropTypes from 'prop-types';
-import MenuItem from 'material-ui/Menu/MenuItem';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
-import Paper from 'material-ui/Paper';
-import { withStyles } from 'material-ui/styles';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
-import Dialog, { DialogContent, DialogContentText, withMobileDialog, } from 'material-ui/Dialog';
-import ExpansionPanel, { ExpansionPanelSummary, ExpansionPanelDetails, } from 'material-ui/ExpansionPanel';
-import Typography from 'material-ui/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import PropTypes from 'prop-types'
+import MenuItem from 'material-ui/Menu/MenuItem'
+import TextField from 'material-ui/TextField'
+import Button from 'material-ui/Button'
+import Paper from 'material-ui/Paper'
+import { withStyles } from 'material-ui/styles'
+import Input, { InputLabel, InputAdornment } from 'material-ui/Input'
+import Dialog, { DialogContent, DialogContentText, withMobileDialog, } from 'material-ui/Dialog'
+import ExpansionPanel, { ExpansionPanelSummary, ExpansionPanelDetails, } from 'material-ui/ExpansionPanel'
+import Typography from 'material-ui/Typography'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import '../../styles/ProductForm.css'
-
 import { fetchCodes } from '../../actions/codes'
-
-import Search from '@material-ui/icons/Search';
-
+import Search from '@material-ui/icons/Search'
 
 const classes = {
   container: {
@@ -56,7 +53,7 @@ const currencies = [
     value: 'JPY',
     label: '¥',
   },
-];
+]
 
 class ProductForm extends PureComponent {
   state = {
@@ -66,16 +63,16 @@ class ProductForm extends PureComponent {
 
   propTypes = {
     classes: PropTypes.object.isRequired,
-  };
+  }
 
 
   handleClickOpen = () => {
-    this.setState({ open: true });
-  };
+    this.setState({ open: true })
+  }
 
   handleClose = () => {
-    this.setState({ open: false });
-  };
+    this.setState({ open: false })
+  }
 
   handleSubmit = (e) => {
     e.preventDefault()
@@ -356,4 +353,4 @@ const mapStateToProps = (state, props) => ({
 export default compose(
   withMobileDialog(),
   connect(mapStateToProps, { fetchCodes })
-)(ProductForm);
+)(ProductForm)

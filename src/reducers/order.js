@@ -6,7 +6,7 @@ export default function(state = null, { type, payload } = {}) {
       return payload;
     case CHANGE_STATUS:
       return payload
-      default:
-        return state;
+    default:
+      return state;
     }
   }

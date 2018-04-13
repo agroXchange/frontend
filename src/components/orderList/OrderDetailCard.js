@@ -25,6 +25,7 @@ const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
   },
+
 })
 
 class OrderDetailCard extends PureComponent {

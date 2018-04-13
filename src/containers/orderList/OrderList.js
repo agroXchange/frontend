@@ -7,8 +7,6 @@ import { fetchOrdersByBuyerId } from  '../../actions/orders'
 import OrderCardBuyer from '../../components/orderList/OrderCardBuyer'
 import './OrderList.css'
 
-
-
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -19,8 +17,6 @@ const styles = theme => ({
     color: theme.palette.text.secondary,
   },
 })
-
-
 
 class OrderListBuyer extends PureComponent {
   static propTypes = {
