@@ -8,6 +8,7 @@ import IconButton from 'material-ui/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
+import Dialog, { DialogActions, DialogContent, DialogContentText,  DialogTitle} from "material-ui/Dialog";
 import { fetchPendingUsers, approveUser, deleteUser } from "../../actions/users";
 import compose from 'lodash/fp/compose'
 
@@ -40,6 +41,22 @@ class PendingPage extends PureComponent {
     this.props.approveUser(id);
   };
 
+  renderMessage = users => {
+  return (
+    <Dialog open={users.length === 0} aria-labelledby="form-dialog-title">
+      <DialogTitle id="form-dialog-title">
+        There are not pending request
+      </DialogTitle>
+      <Link to={`/admin`}>
+        <Button size="medium" color="primary">
+          Admin Page
+        </Button>
+      </Link>
+    </Dialog>
+  );
+};
+
+
 
   render() {
     const { classes } = this.props;
@@ -47,6 +64,7 @@ class PendingPage extends PureComponent {
 
     return (
       <MuiThemeProvider>
+      {this.renderMessage(users)}
         {users.map(user => (
           <Card className={classes.card} zDepth={3} circle={true}>
             <CardHeader title={user.role} />

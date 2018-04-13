@@ -74,7 +74,7 @@ class AdminProfilePage extends PureComponent {
               <EditIcon />
             </IconButton>
             {this.state.edit && (
-         <EditUserForm
+         <EditUserForm 
            initialValues={user.profile}
            onSubmit={this.updateUser}
          />

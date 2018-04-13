@@ -21,7 +21,7 @@ import Table, {
   TableRow
 } from "material-ui/Table";
 import { fetchAllOrders } from "../../actions/orders";
-
+import Dialog, { DialogActions, DialogContent, DialogContentText,  DialogTitle} from "material-ui/Dialog";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 const style = () => ({
@@ -51,12 +51,30 @@ class OrdersPage extends PureComponent {
     this.props.fetchAllOrders();
   }
 
+  renderMessage = orders => {
+  return (
+      <Dialog open={orders.length === 0} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">
+          There are no orders
+        </DialogTitle>
+        <Link to={`/admin`}>
+          <Button size="medium" color="primary">
+            Admin Page
+          </Button>
+        </Link>
+      </Dialog>
+    );
+  };
+
+
+
   render() {
     const { classes } = this.props;
     const orders = this.props.orders;
 
     return (
       <div>
+        {this.renderMessage(orders)}
         {orders.map(order => (
           <Card className={classes.card} zDepth={3} circle={true}>
             <CardHeader avatar={"#" + order.id} />

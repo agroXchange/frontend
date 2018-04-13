@@ -33,6 +33,7 @@ class LoginPage extends PureComponent {
     const { t } = this.props
     if (this.props.currentUser) return <Redirect to="/" />;
 
+
     return (
       <Paper
         style={{
@@ -42,6 +43,7 @@ class LoginPage extends PureComponent {
         }}
         className="outer-paper"
       >
+        {console.log(this.props.currentUser)}
         <Typography gutterBottom variant="headline" component="h1">
           {t("Log in")}
         </Typography>
