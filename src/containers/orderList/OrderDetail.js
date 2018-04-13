@@ -20,8 +20,6 @@ const styles = theme => ({
  },
 })
 
-
-
 class OrderDetail extends PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired
