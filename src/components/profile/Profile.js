@@ -13,6 +13,7 @@ class Profile extends PureComponent {
 
   render() {
     const { user, t, i18n } = this.props
+    {console.log(user)}
     if (!user || !user.profile) return null
 
     return (
