@@ -69,8 +69,8 @@ class ProductList extends PureComponent {
                <table>
 
                  <tr className={classes.table}>
-                    <th>{t('Product ID')}</th>
-                    <td>{product.id}</td>
+                    <th>{t('Product')}</th>
+                    <td>{product.code.titleeng}</td>
                  </tr>
 
                  <tr className={classes.table}>

@@ -9,12 +9,16 @@ import Paper from 'material-ui/Paper'
 import Grid from 'material-ui/Grid'
 import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
-import '../../styles/Product.css'
-import OrderForm from './../OrderForm'
-import Dialog, { DialogActions, DialogContent, DialogContentText,  DialogTitle } from 'material-ui/Dialog'
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog'
 import '../../styles/Product.css'
 import { fetchProduct } from '../../actions/products'
 import { createOrder } from '../../actions/orders'
+import OrderForm from '../OrderForm'
 import ProductForm from './ProductForm'
 
 const styles = {
@@ -75,14 +79,19 @@ class Product extends PureComponent {
     return(
       <div className="product-container">
         <Paper className="paper">
-        <Paper className="title"><h2>{ product.name }</h2></Paper>
-          <Grid container className="container">
+        <Paper><h2 className="title">{ product.code.titleeng }</h2></Paper>
+          <Grid container className="container" spacing={24}>
 
-            <Grid item>
+            <Grid item xs={12}>
               <img src={ product.photo } className="product-photo"/>
-              <p>Code: { product.code }</p>
-              <p>Harvested Dated: { product.harvested }</p>
-              <p>Expiration Date: { product.expiration }</p>
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <p><b>Code:</b> { product.code.code }</p>
+              <p><b>Harvested Dated:</b> { product.harvested }</p>
+              <p><b>Expiration Date:</b> { product.expiration }</p>
+              <p><b>Volume:</b> { product.volume } KG</p>
+              <p><b>Price:</b> { product.price } { product.currency } per KG</p>
 
               <Link to={ `/profiles/${product.seller.id}` }>
                 <Button color="primary">
@@ -91,13 +100,11 @@ class Product extends PureComponent {
               </Link>
             </Grid>
 
-            <Grid item>
-              <p>{ product.description }</p>
-              <p>Volume: { product.volume } KG</p>
-              <p>Price: { product.price } { product.currency } per KG</p>
-              <p>Certification: { product.certificate }</p>
-              <p>Country { product.seller.country }</p>
-              <p>City/Port: { product.seller.city }</p>
+            <Grid item xs={12} sm={6}>
+              <p><b>Description:</b> { product.description }</p>
+              <p><b>Certification:</b> { product.certificate }</p>
+              <p><b>Country</b> { product.seller.country }</p>
+              <p><b>City/Port:</b> { product.seller.city }</p>
 
               <Button onClick={ this.handleEditOpen }>Edit Product</Button>
 
@@ -132,7 +139,12 @@ class Product extends PureComponent {
             </Dialog>
 
           </Grid>
+
+          <Button color="inherit" onClick={() => this.props.history.goBack()}>
+          	Go Back
+          </Button>
         </Paper>
+
       </div>
     )
   }
@@ -146,4 +158,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchProduct, createOrder })(Product)
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, { fetchProduct, createOrder }))(Product)
