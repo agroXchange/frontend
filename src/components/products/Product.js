@@ -73,7 +73,7 @@ class Product extends PureComponent {
   }
 
   render() {
-    const { classes, product, currentUser } = this.props
+    const { classes, product, currentUser, currentUserId } = this.props
     if (!product) return null
 
     return(
@@ -93,11 +93,12 @@ class Product extends PureComponent {
               <p><b>Volume:</b> { product.volume } KG</p>
               <p><b>Price:</b> { product.price } { product.currency } per KG</p>
 
-              <Link to={ `/profiles/${product.seller.id}` }>
-                <Button color="primary">
-                  View Seller
-                </Button>
-              </Link>
+              { currentUserId !== product.seller.id &&
+
+                <Link to={ `/profiles/${product.seller.id}` }>
+                  <Button color="primary">View Seller</Button>
+                </Link>
+              }
             </Grid>
 
             <Grid item xs={12} sm={6}>
@@ -106,9 +107,15 @@ class Product extends PureComponent {
               <p><b>Country</b> { product.seller.country }</p>
               <p><b>City/Port:</b> { product.seller.city }</p>
 
-              <Button onClick={ this.handleEditOpen }>Edit Product</Button>
+              { currentUserId === product.seller.id &&
+                <Button onClick={ this.handleEditOpen }>Edit Product</Button>
+              }
 
-              <Button onClick={this.handleClickOrderOpen}>Make New Order</Button>
+              { currentUserId !== product.seller.id &&
+                <Button onClick={this.handleClickOrderOpen}>Make New Order</Button>
+              }
+
+
             </Grid>
 
 
@@ -154,7 +161,8 @@ class Product extends PureComponent {
 const mapStateToProps = (state) => {
   return {
     product: state.product,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    currentUserId: Number(state.currentUser.id)
   }
 }
 
