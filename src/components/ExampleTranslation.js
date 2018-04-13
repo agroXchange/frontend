@@ -4,7 +4,7 @@ import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 // specific for translation
 import compose from 'lodash/fp/compose'
-import {translate, Trans} from "react-i18next"
+import {translate} from "react-i18next"
 {/* specific for translation */}
 
 const profile = {
@@ -18,7 +18,7 @@ class ExampleTranslation extends PureComponent {
   render() {
 
     {/* specific for translation */}
-    const { t, i18n } = this.props
+    const { t } = this.props
     {/* specific for translation */}
 
     const { product } = this.props
@@ -28,7 +28,6 @@ class ExampleTranslation extends PureComponent {
 
         {/* {t('')} this is the frame*/}
         {/* {t('City/Port')} 'City/Port' is the key. Add it to your category in i18n.js File */}
-
 
           <Grid item >
             <h2>{ product.name }</h2>

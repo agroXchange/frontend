@@ -1,14 +1,25 @@
-import * as request from "superagent";
+import * as request from "superagent"
 
-const baseUrl = "http://localhost:4008";
+const baseUrl = "http://localhost:4008"
 
-
-export const FETCH_ALL_ORDERS = "FETCH_ALL_ORDERS";
+export const FETCH_ALL_ORDERS = "FETCH_ALL_ORDERS"
 export const FETCH_ORDER = "FETCH_ORDER"
-export const FETCH_ORDERS_BY_BUYERID = "FETCH_ORDERS_BY_BUYERID";
+export const FETCH_ORDERS_BY_BUYERID = "FETCH_ORDERS_BY_BUYERID"
+export const CREATE_ORDER = "CREATE_ORDER"
+export const CHANGE_STATUS = "CHANGE_STATUS"
 
-export const CHANGE_STATUS = "CHANGE_STATUS";
-
+export const createOrder = (order, productId) => (dispatch, getState) => {
+  const state = getState()
+  const jwt = state.currentUser.jwt
+  request
+    .post(`${baseUrl}/products/${productId}/orders`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .send(order)
+    .then(response => dispatch({
+      type: CREATE_ORDER,
+      payload: response.body
+    }))
+}
 
 export const fetchAllOrders = () => (dispatch, getState) => {
   const state = getState()
@@ -23,7 +34,6 @@ export const fetchAllOrders = () => (dispatch, getState) => {
     }))
     .catch(err => alert(err))
 }
-
 
 export const fetchOrder = (id) => (dispatch, getState) => {
   const state = getState()

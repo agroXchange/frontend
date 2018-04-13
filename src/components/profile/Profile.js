@@ -1,19 +1,14 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { fetchUser } from "../../actions/users";
-// import { userId } from "../../jwt";
-import Paper from "material-ui/Paper";
-import Card, { CardActions, CardContent, CardMedia } from "material-ui/Card";
-import Typography from "material-ui/Typography";
-import compose from 'lodash/fp/compose'
-import {translate, Trans} from "react-i18next"
+import React, { PureComponent } from "react"
+import { connect } from "react-redux"
+import { fetchUser } from "../../actions/users"
+import Paper from "material-ui/Paper"
+import Typography from "material-ui/Typography"
+import compose from "lodash/fp/compose"
+import { translate } from "react-i18next"
 
 class Profile extends PureComponent {
-
   render() {
-    const { user, t, i18n } = this.props
-    {console.log(user)}
+    const { user, t } = this.props;
     if (!user || !user.profile) return null
 
     return (
@@ -27,45 +22,45 @@ class Profile extends PureComponent {
               {user.profile.name}
             </Typography>
             <Typography color="textSecondary">
-              {t('field')}: {user.profile.field}
+              {t("field")}: {user.profile.field}
             </Typography>
             <Typography color="textSecondary">
-              {t('type')}: {user.profile.type}
+              {t("type")}: {user.profile.type}
             </Typography>
             <Typography color="textSecondary">
-              {t('coc')}: {user.profile.chamberOfCommerce}
+              {t("coc")}: {user.profile.chamberOfCommerce}
             </Typography>
             <Typography color="textSecondary">
-              {t('address')}: {user.profile.address}
+              {t("address")}: {user.profile.address}
             </Typography>
             <Typography color="textSecondary">
-              {t('cityPort')}: {user.profile.city}
+              {t("cityPort")}: {user.profile.city}
             </Typography>
             <Typography color="textSecondary">
-              {t('country')}: {user.profile.country}
+              {t("country")}: {user.profile.country}
             </Typography>
             <Typography color="textSecondary">
-              {t('phone')}: {user.profile.phone}
+              {t("phone")}: {user.profile.phone}
             </Typography>
             <Typography color="textSecondary">
-              {t('Email')}: {user.email}
+              {t("Email")}: {user.email}
             </Typography>
           </div>
         </div>
       </Paper>
-
-    );
+    )
   }
 }
 
 const mapStateToProps = ({ user }, props) => ({
   user
-});
+})
 
 const mapDispatchToProps = {
-  fetchUser,
-};
+  fetchUser
+}
 
-export default compose (
-  translate('user'),
-  connect((mapStateToProps), (mapDispatchToProps)))(Profile);
+export default compose(
+  translate("user"),
+  connect(mapStateToProps, mapDispatchToProps)
+)(Profile)

@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Paper from 'material-ui/Paper';
-import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
-import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import Paper from 'material-ui/Paper'
+import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card'
+import Button from 'material-ui/Button'
+import Typography from 'material-ui/Typography'
 import compose from 'lodash/fp/compose'
-import {translate, Trans} from "react-i18next"
+import { translate } from "react-i18next"
+
 const styles = theme => ({
   card: {
     maxWidth: 400,
@@ -24,29 +25,31 @@ const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
   },
-});
+
+})
+
 class OrderDetailCard extends PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired
-  };
+  }
+
   handleApprove = () => {
     const data = {
       status: 'Approved'
     }
-    this.props.chageOrderStatus(data)
-    // window.location.reload()
+    this.props.hello(data)
   }
   handleDecline = () => {
     const data = {
       status: 'Declined'
     }
-    this.props.chageOrderStatus(data)
-    //window.location.reload()
+    this.props.hello(data)
   }
+
   render() {
-    const { classes, order } = this.props;
-    const { t, i18n } = this.props
-    const { product } = this.props
+    const { classes, order, product } = this.props
+    const { t } = this.props
+
     return (
       <div>
       {order.map( order =>
