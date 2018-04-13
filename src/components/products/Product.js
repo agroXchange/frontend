@@ -26,7 +26,12 @@ class Product extends PureComponent {
 
   state = {
     newOrder: false,
+    confirmOrder: false,
     editProduct: false
+  }
+
+  componentWillMount(props) {
+    this.props.fetchProduct(this.props.match.params.id)
   }
 
   handleClickOrderOpen = () => {
@@ -37,6 +42,14 @@ class Product extends PureComponent {
     this.setState({ newOrder: false });
   };
 
+  handleConfirmOpen = () => {
+    this.setState({ confirmOrder: true })
+  }
+
+  handleConfirmClose = () => {
+    this.setState({ confirmOrder: false })
+  }
+
   handleEditOpen = () => {
     this.setState({ editProduct: true });
   };
@@ -45,14 +58,10 @@ class Product extends PureComponent {
     this.setState({ editProduct: false });
   };
 
-
-  componentWillMount(props) {
-    this.props.fetchProduct(this.props.match.params.id)
-  }
-
   createOrder = (order, productId, buyer) => {
     this.props.createOrder(order, this.props.match.params.id, this.props.currentUser)
     this.handleOrderClose()
+    this.handleConfirmOpen()
   }
 
   render() {
@@ -87,6 +96,7 @@ class Product extends PureComponent {
               <p>City/Port: { product.seller.city }</p>
 
               <Button onClick={ this.handleEditOpen }>Edit Product</Button>
+
               <Button onClick={this.handleClickOrderOpen}>Make New Order</Button>
             </Grid>
 
@@ -109,6 +119,14 @@ class Product extends PureComponent {
             >
               <DialogTitle id="form-dialog-title">Please enter your order</DialogTitle>
                 <OrderForm onSubmit={ this.createOrder } class="batch-form"/>
+            </Dialog>
+
+            <Dialog
+              open={ this.state.confirmOrder }
+              onClose={ this.handleConfirmClose }
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle id="form-dialog-title">Thankyou. Your order has been recieved.</DialogTitle>
             </Dialog>
 
           </Grid>
