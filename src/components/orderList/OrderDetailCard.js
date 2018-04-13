@@ -53,7 +53,6 @@ class OrderDetailCard extends PureComponent {
 
     return (
       <div>
-      {order.map( order =>
          <Card className={classes.card}>
            <CardContent>
              <Typography gutterBottom
@@ -131,7 +130,6 @@ class OrderDetailCard extends PureComponent {
            {t('DECLINE')}
           </Button>
          </Card>
-         )}
        </div>
     )
   }
