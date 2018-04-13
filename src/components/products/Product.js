@@ -75,14 +75,19 @@ class Product extends PureComponent {
     return(
       <div className="product-container">
         <Paper className="paper">
-        <Paper className="title"><h2>{ product.name }</h2></Paper>
-          <Grid container className="container">
+        <Paper><h2 className="title">{ product.name }Product Name</h2></Paper>
+          <Grid container className="container" spacing={24}>
 
-            <Grid item>
+            <Grid item xs={12}>
               <img src={ product.photo } className="product-photo"/>
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
               <p>Code: { product.code }</p>
               <p>Harvested Dated: { product.harvested }</p>
               <p>Expiration Date: { product.expiration }</p>
+              <p>Volume: { product.volume } KG</p>
+              <p>Price: { product.price } { product.currency } per KG</p>
 
               <Link to={ `/profiles/${product.seller.id}` }>
                 <Button color="primary">
@@ -91,10 +96,8 @@ class Product extends PureComponent {
               </Link>
             </Grid>
 
-            <Grid item>
+            <Grid item xs={12} sm={6}>
               <p>{ product.description }</p>
-              <p>Volume: { product.volume } KG</p>
-              <p>Price: { product.price } { product.currency } per KG</p>
               <p>Certification: { product.certificate }</p>
               <p>Country { product.seller.country }</p>
               <p>City/Port: { product.seller.city }</p>
@@ -132,7 +135,12 @@ class Product extends PureComponent {
             </Dialog>
 
           </Grid>
+
+          <Button color="inherit" onClick={() => this.props.history.goBack()}>
+          	Go Back
+          </Button>
         </Paper>
+        
       </div>
     )
   }
@@ -146,4 +154,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchProduct, createOrder })(Product)
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, { fetchProduct, createOrder }))(Product)
