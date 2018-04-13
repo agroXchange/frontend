@@ -57,8 +57,8 @@ export const addProduct = (product, picture) => (dispatch, getState) =>{
 }
 
 
-export const searchProduct = (name,number,country) => (dispatch) => {
-    console.log(name, number, country)
+export const searchProduct = (search) => (dispatch) => {
+    console.log(search)
 
     request
         .get(`${baseUrl}/products`)

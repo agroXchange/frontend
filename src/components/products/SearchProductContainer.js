@@ -9,8 +9,8 @@ import { searchProduct } from '../../actions/products'
 class SearchProductContainer extends PureComponent {
 
 
-    submit = (product) => {
-        this.props.searchProduct(product)
+    submit = (search) => {
+        this.props.searchProduct(search)
     }
 
 
