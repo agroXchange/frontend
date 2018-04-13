@@ -1,17 +1,5 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-<<<<<<< HEAD
-import PropTypes from 'prop-types'
-import MenuItem from 'material-ui/Menu/MenuItem'
-import TextField from 'material-ui/TextField'
-import Button from 'material-ui/Button'
-import Paper from 'material-ui/Paper'
-import { withStyles } from 'material-ui/styles'
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input'
-import '../../styles/ProductForm.css'
-import 'foundation-sites/dist/css/foundation.min.css'
-import zIndex from 'material-ui/styles/zIndex'
-=======
 import { compose } from 'redux'
 import PropTypes from 'prop-types';
 import MenuItem from 'material-ui/Menu/MenuItem';
@@ -25,8 +13,6 @@ import ExpansionPanel, { ExpansionPanelSummary, ExpansionPanelDetails, } from 'm
 import Typography from 'material-ui/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import '../../styles/ProductForm.css'
-
->>>>>>> 698767e4b817aae441a6e91bbf34807855275b6d
 import { fetchCodes } from '../../actions/codes'
 
 import Search from '@material-ui/icons/Search';
@@ -105,12 +91,8 @@ class ProductForm extends PureComponent {
 
   handleClick = code => {
     this.setState({
-<<<<<<< HEAD
-      [name]: value
-=======
       code: code,
       open: false
->>>>>>> 698767e4b817aae441a6e91bbf34807855275b6d
     })
   }
 
@@ -126,14 +108,11 @@ class ProductForm extends PureComponent {
 
 
   render() {
-<<<<<<< HEAD
 
     const initialValues = this.props.initialValues || {}
-=======
     const { fullScreen, codes, vegetables, fruits, beans } = this.props
 
     if(codes)
->>>>>>> 698767e4b817aae441a6e91bbf34807855275b6d
     return(
       <form onSubmit={ this.handleSubmit } className="form-container">
         <Paper className="paper">
@@ -148,7 +127,6 @@ class ProductForm extends PureComponent {
             margin="normal"
           />
 
-<<<<<<< HEAD
           <div className="upload">
             <label htmlFor="photo">Please Upload a Photo </label>
             <input
@@ -166,8 +144,8 @@ class ProductForm extends PureComponent {
             id="description"
             name="description"
             label="Description"
-=======
-          <div id="addProduct">  
+          />
+          <div id="addProduct">
               <h2>Add Product</h2>
 
               <Button
@@ -265,7 +243,7 @@ class ProductForm extends PureComponent {
                   </ExpansionPanelDetails>
                 </ExpansionPanel>
               </Dialog>
-            </div>  
+            </div>
 
           <br />
         <div className="upload">
@@ -276,14 +254,11 @@ class ProductForm extends PureComponent {
             type="file"
             name="photo"
             className="upload-input"
->>>>>>> 698767e4b817aae441a6e91bbf34807855275b6d
             style={ classes.textField }
             value={ this.state.description || initialValues.description || ''  }
             onChange={ this.handleChange }
             margin="normal"
           />
-<<<<<<< HEAD
-=======
         </div>
 
         <TextField
@@ -338,8 +313,6 @@ class ProductForm extends PureComponent {
         </TextField>
 
 
->>>>>>> 698767e4b817aae441a6e91bbf34807855275b6d
-
           <TextField
             id="currency"
             name="currency"
@@ -371,7 +344,6 @@ class ProductForm extends PureComponent {
             margin="normal"
           />
 
-<<<<<<< HEAD
           <TextField
             label="Volume"
             id="volume"
@@ -406,8 +378,6 @@ class ProductForm extends PureComponent {
               shrink: true,
             }}
           />
-=======
-
 
         <TextField
           id="harvested"
@@ -436,7 +406,6 @@ class ProductForm extends PureComponent {
             shrink: true,
           }}
         />
->>>>>>> 698767e4b817aae441a6e91bbf34807855275b6d
 
           <TextField
             id="expired"

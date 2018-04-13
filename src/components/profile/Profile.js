@@ -48,6 +48,7 @@ class Profile extends PureComponent {
           </div>
         </div>
       </Paper>
+    )
   }
 }
 
