@@ -115,10 +115,9 @@ class ProductForm extends PureComponent {
     return(
       <form onSubmit={ this.handleSubmit } className="form-container">
         <Paper className="paper">
+
           <div id="addProduct">  
-
-
-              <h2>Product Search</h2>
+              <h2>Add Product</h2>
 
               <Button
                 onClick={this.handleClickOpen}
@@ -217,7 +216,7 @@ class ProductForm extends PureComponent {
               </Dialog>
             </div>  
 
-
+          <br />
         <div className="upload">
           <label htmlFor="photo">Please Upload a Photo </label>
           <input

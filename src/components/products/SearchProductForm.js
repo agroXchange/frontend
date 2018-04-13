@@ -57,7 +57,7 @@ const countries = [
 ];
 
 
-class ResponsiveDialog extends React.Component {
+class SearchProductForm extends React.Component {
     state = {
         open: false,
         country: 'Colombia'
@@ -205,6 +205,7 @@ class ResponsiveDialog extends React.Component {
                         </ExpansionPanel>
                 </Dialog>
             </div>   
+            <br/>
             <div> 
                         <TextField
                             id="code"
@@ -258,7 +259,7 @@ class ResponsiveDialog extends React.Component {
     }
 }
 
-ResponsiveDialog.propTypes = {
+SearchProductForm.propTypes = {
     fullScreen: PropTypes.bool.isRequired,
 };
 
@@ -272,7 +273,7 @@ const mapStateToProps = (state, props) => ({
 export default compose(
     withMobileDialog(), 
     connect(mapStateToProps, { fetchCodes })
-)(ResponsiveDialog);
+)(SearchProductForm);
 
 
 
