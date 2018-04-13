@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import PropTypes from 'prop-types';
@@ -13,7 +13,6 @@ import ExpansionPanel, { ExpansionPanelSummary, ExpansionPanelDetails, } from 'm
 import Typography from 'material-ui/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import '../../styles/ProductForm.css'
-
 import { fetchCodes } from '../../actions/codes'
 
 import Search from '@material-ui/icons/Search';
@@ -109,14 +108,44 @@ class ProductForm extends PureComponent {
 
 
   render() {
+
+    const initialValues = this.props.initialValues || {}
     const { fullScreen, codes, vegetables, fruits, beans } = this.props
 
     if(codes)
     return(
       <form onSubmit={ this.handleSubmit } className="form-container">
         <Paper className="paper">
+          <h2>Add a Product</h2>
+          <TextField
+            id="name"
+            label="Name"
+            name="name"
+            style={ classes.textField }
+            value={ this.state.name || initialValues.name || ''}
+            onChange={ this.handleChange }
+            margin="normal"
+          />
 
-          <div id="addProduct">  
+          <div className="upload">
+            <label htmlFor="photo">Please Upload a Photo </label>
+            <input
+              accept="image/*"
+              id="raised-button-file"
+              type="file"
+              name="photo"
+              className="upload-input"
+              style={ classes.textField }
+              onChange={this.handleFileChange}
+            />
+          </div>
+
+          <TextField
+            id="description"
+            name="description"
+            label="Description"
+          />
+          <div id="addProduct">
               <h2>Add Product</h2>
 
               <Button
@@ -214,7 +243,7 @@ class ProductForm extends PureComponent {
                   </ExpansionPanelDetails>
                 </ExpansionPanel>
               </Dialog>
-            </div>  
+            </div>
 
           <br />
         <div className="upload">
@@ -226,7 +255,9 @@ class ProductForm extends PureComponent {
             name="photo"
             className="upload-input"
             style={ classes.textField }
-            onChange={this.handleFileChange}
+            value={ this.state.description || initialValues.description || ''  }
+            onChange={ this.handleChange }
+            margin="normal"
           />
         </div>
 
@@ -282,20 +313,71 @@ class ProductForm extends PureComponent {
         </TextField>
 
 
+          <TextField
+            id="currency"
+            name="currency"
+            select
+            label="Please select your currency"
+            style={ classes.textField }
+            value={ this.state.currency || initialValues.currency || ''}
+            onChange={ this.handleChange }
+            margin="normal"
+          >
+            { currencies.map(option => (
+              <MenuItem key={ option.value } value={ option.value } >
+                { option.label }
+              </MenuItem>
+            ))}
+          </TextField>
 
-        <TextField
-          label="Volume"
-          id="volume"
-          name="volume"
-          value={ this.state.volume }
-          onChange={ this.handleChange }
-          style={ classes.textField }
-          InputProps={{
-            startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
-          }}
-        />
+          <TextField
+            id="price"
+            name="price"
+            label="Price per Kg"
+            value={ this.state.price || initialValues.price || ''}
+            onChange={ this.handleChange }
+            type="number"
+            style={ classes.textField }
+            InputLabelProps={{
+              shrink: true,
+            }}
+            margin="normal"
+          />
 
+          <TextField
+            label="Volume"
+            id="volume"
+            name="volume"
+            value={ this.state.volume || initialValues.volume || ''}
+            onChange={ this.handleChange }
+            style={ classes.textField }
+            InputProps={{
+              startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
+            }}
+          />
 
+          <TextField
+            id="certification"
+            name="certificate"
+            label="Certification"
+            style={ classes.textField }
+            value={ this.state.certification || initialValues.certification || ''}
+            onChange={ this.handleChange }
+            margin="normal"
+          />
+
+          <TextField
+            id="harvested"
+            name="harvested"
+            label="Harvested Date"
+            type="date"
+            defaultValue="2017-05-24"
+            onChange={ this.handleChange }
+            style={ classes.textField }
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
 
         <TextField
           id="harvested"
@@ -325,22 +407,34 @@ class ProductForm extends PureComponent {
           }}
         />
 
-        <Button
-          color="primary"
-          className="submit-btn"
-          type="submit"
-          style={{
-            display: 'block',
-            margin: 'auto',
-            marginTop: 20,
-            marginBottom: 20
-          }}
-        >
-          Save
-        </Button>
+          <TextField
+            id="expired"
+              name="expiration"
+            label="Expiry Date"
+            type="date"
+            defaultValue="2017-05-24"
+            onChange={ this.handleChange }
+            style={ classes.textField }
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
 
-        </Paper>
-      </form>
+          <Button
+            color="primary"
+            className="submit-btn"
+            type="submit"
+            style={{
+              display: 'block',
+              margin: 'auto',
+              marginTop: 20,
+              marginBottom: 20
+            }}
+          >
+            Save
+          </Button>
+          </Paper>
+        </form>
     )
   }
 
