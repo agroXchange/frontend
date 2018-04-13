@@ -302,7 +302,7 @@ class ProductForm extends PureComponent {
           name="harvested"
           label="Harvested Date"
           type="date"
-          defaultValue="2017-05-24"
+          defaultValue={new Date}
             value={this.state.harvested}
           onChange={ this.handleChange }
           style={ classes.textField }
@@ -316,7 +316,7 @@ class ProductForm extends PureComponent {
             name="expiration"
           label="Expiry Date"
           type="date"
-          defaultValue="2017-05-24"
+            defaultValue={new Date}
             value={this.state.expiration}
           onChange={ this.handleChange }
           style={ classes.textField }
