@@ -8,7 +8,7 @@ import IconButton from 'material-ui/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
-import { fetchUsers } from "../../actions/users";
+import { fetchPendingUsers, approveUser, deleteUser } from "../../actions/users";
 import compose from 'lodash/fp/compose'
 
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
@@ -29,8 +29,16 @@ const style = theme => ({
 
 class PendingPage extends PureComponent {
   componentWillMount(props) {
-    this.props.fetchUsers();
+    this.props.fetchPendingUsers();
   }
+
+  deleteUser = id => {
+    this.props.deleteUser(id);
+  };
+
+  approveUser = id => {
+    this.props.approveUser(id);
+  };
 
 
   render() {
@@ -53,10 +61,10 @@ class PendingPage extends PureComponent {
               <p>{user.profile.name}</p>
               <p>{user.profile.address}</p>
               <p>{user.profile.country}</p>
-              <Button size="medium" color="primary">
+              <Button onClick={() => this.approveUser(user.id)} size="medium" color="primary">
                 Approve
               </Button>
-              <IconButton aria-label="Delete">
+              <IconButton onClick={() => this.deleteUser(user.id)}aria-label="Delete">
                 <DeleteIcon />
               </IconButton>
             </CardContent>
@@ -82,5 +90,5 @@ const mapStateToProps = function(state) {
 
 export default compose(
   withStyles(style),
-  connect(mapStateToProps,{fetchUsers})
+  connect(mapStateToProps,{fetchPendingUsers, approveUser, deleteUser})
 )(PendingPage)

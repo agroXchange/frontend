@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import Select from "material-ui/Select";
+import compose from "lodash/fp/compose";
 import { MenuItem } from "material-ui/Menu";
 import { withStyles } from "material-ui/styles";
 import Input, { InputLabel } from "material-ui/Input";
@@ -36,27 +37,27 @@ const styles = theme => ({
   }
 });
 
-class SignupForm extends PureComponent {
-  state = {
-    field: "",
-    type: ""
-  };
+class EditUserForm extends PureComponent {
+  state = {}
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.onSubmit(this.state);
-  };
+	handleSubmit = (e) => {
+		e.preventDefault()
+		this.props.onSubmit(this.state)
+	}
 
-  handleChange = event => {
-    const { name, value } = event.target;
+
+	handleChange = (event) => {
+    const {name, value} = event.target
 
     this.setState({
       [name]: value
-    });
-  };
+    })
+  }
+
 
   render() {
     const { classes } = this.props;
+    const initialValues = this.props.initialValues || {}
 
     return (
       <form className={classes.container} onSubmit={this.handleSubmit}>
@@ -68,8 +69,7 @@ class SignupForm extends PureComponent {
             label="Name"
             className={classes.textField}
             margin="normal"
-            helperText="What is the name of your organization?"
-            value={this.state.name}
+            value={this.state.name || initialValues.name || ''}
             onChange={this.handleChange}
           />
         </div>
@@ -79,7 +79,7 @@ class SignupForm extends PureComponent {
             <Select
               required
               input={<Input name="field" id="field" />}
-              value={this.state.field}
+              value={this.state.field || initialValues.field || ''}
               onChange={this.handleChange}
             >
               <MenuItem value="producer">Producer</MenuItem>
@@ -88,7 +88,6 @@ class SignupForm extends PureComponent {
               <MenuItem value="insurance">Insurance</MenuItem>
               <MenuItem value="other">Other</MenuItem>
             </Select>
-            <FormHelperText>What is your field of business?*</FormHelperText>
           </FormControl>
         </div>
         <div>
@@ -96,7 +95,7 @@ class SignupForm extends PureComponent {
             <InputLabel htmlFor="type">Type</InputLabel>
             <Select
               required
-              value={this.state.type}
+              value={this.state.type || initialValues.type || ''}
               onChange={this.handleChange}
               inputProps={{
                 name: "type",
@@ -109,9 +108,6 @@ class SignupForm extends PureComponent {
               <MenuItem value="ngo">NGO</MenuItem>
               <MenuItem value="other">Other</MenuItem>
             </Select>
-            <FormHelperText>
-              What is the type of your organization?*
-            </FormHelperText>
           </FormControl>
         </div>
         <div>
@@ -122,7 +118,7 @@ class SignupForm extends PureComponent {
             label="Address"
             className={classes.textField}
             margin="normal"
-            value={this.state.address}
+            value={this.state.address || initialValues.address || ''}
             onChange={this.handleChange}
           />
         </div>
@@ -134,7 +130,7 @@ class SignupForm extends PureComponent {
             label="Country"
             className={classes.textField}
             margin="normal"
-            value={this.state.country}
+            value={this.state.country || initialValues.country || ''}
             onChange={this.handleChange}
           />
         </div>
@@ -144,9 +140,8 @@ class SignupForm extends PureComponent {
             name="city"
             label="Nearest city/port"
             className={classes.textField}
-            helperText="If you plan to sell, what is the nearest city or port?"
             margin="normal"
-            value={this.state.city}
+            value={this.state.city || initialValues.city || ''}
             onChange={this.handleChange}
           />
         </div>
@@ -158,7 +153,7 @@ class SignupForm extends PureComponent {
             label="Phone number"
             className={classes.textField}
             margin="normal"
-            value={this.state.phone}
+            value={this.state.phone || initialValues.phone || ''}
             onChange={this.handleChange}
           />
         </div>
@@ -168,18 +163,10 @@ class SignupForm extends PureComponent {
             name="chamberOfCommerce"
             label="Registration number"
             className={classes.textField}
-            helperText="Chamber of Commerce registration number (optional now)"
             margin="normal"
-            value={this.state.chamberOfCommerce}
+            value={this.state.chamberOfCommerce || initialValues.chamberOfCommerce || ''}
             onChange={this.handleChange}
           />
-          <Typography color="textSecondary">
-            To participate on this website, you will need to provide proof of
-            your membership of your local chamber of commerce. If you have your
-            registration number ready, please fill it in above. You can also do
-            this after signing up. If you have any questions, please contact the
-            webmaster.
-          </Typography>
           <TextField
             required
             id="email"
@@ -188,47 +175,18 @@ class SignupForm extends PureComponent {
             className={classes.textField}
             margin="normal"
             type="email"
-            value={this.state.email}
+            value={this.state.email || initialValues.email || ''}
             onChange={this.handleChange}
           />
         </div>
-        <div>
-          <TextField
-            required
-            id="password"
-            name="password"
-            label="Password"
-            className={classes.textField}
-            type="password"
-            margin="normal"
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
-        </div>
-        <div>
-          <TextField
-            required
-            id="confirmPassword"
-            name="confirmPassword"
-            label="Confirm password"
-            className={classes.textField}
-            type="password"
-            margin="normal"
-            value={this.state.confirmPassword}
-            onChange={this.handleChange}
-          />
-        </div>
-        {this.state.password &&
-          this.state.confirmPassword &&
-          this.state.password !== this.state.confirmPassword && (
-            <p style={{ color: "red" }}>The passwords do not match!</p>
-          )}
         <Button variant="raised" color="primary" className={classes.button} type="submit">
-          Sign up
+          Edit User
         </Button>
       </form>
     );
   }
 }
 
-export default withStyles(styles)(SignupForm);
+export default
+  withStyles(styles)
+(EditUserForm);

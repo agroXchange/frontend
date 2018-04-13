@@ -63,7 +63,7 @@ class OrdersPage extends PureComponent {
             <CardMedia>
               <img
                 className={classes.media}
-                src="https://makemyvape.co.uk/image/cache/catalog/product/o/r/orange_mandarin_-_tfa-800x800.jpg"
+                src={order.product.photo}
                 alt=""
               />
             </CardMedia>

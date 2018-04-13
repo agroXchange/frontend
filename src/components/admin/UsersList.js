@@ -1,14 +1,21 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchUsers } from "../../actions/users";
+import { fetchUsers, deleteUser } from "../../actions/users";
 import compose from "lodash/fp/compose";
 import { withStyles } from "material-ui/styles";
-import List, { ListItem, ListItemAvatar, ListItemIcon, ListItemSecondaryAction, ListItemText } from "material-ui/List";
-import DeleteIcon from '@material-ui/icons/Delete';
+import List, {
+  ListItem,
+  ListItemAvatar,
+  ListItemIcon,
+  ListItemSecondaryAction,
+  ListItemText
+} from "material-ui/List";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
 import Button from "material-ui/Button";
 import Card, { CardActions, CardContent } from "material-ui/Card";
-import IconButton from 'material-ui/IconButton';
+import IconButton from "material-ui/IconButton";
 import Avatar from "material-ui/Avatar";
 
 const style = theme => ({
@@ -26,6 +33,10 @@ class UsersList extends PureComponent {
     this.props.fetchUsers();
   }
 
+  deleteUser = id => {
+    this.props.deleteUser(id);
+  };
+
   render() {
     const users = this.props.users;
     const classes = this.props;
@@ -42,7 +53,7 @@ class UsersList extends PureComponent {
                 <Avatar>
                   <img
                     className={classes.media}
-                    src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+                    src={`${user.profile.logo}`}
                     alt=""
                   />
                 </Avatar>
@@ -52,7 +63,19 @@ class UsersList extends PureComponent {
                 secondary={user.profile.country}
               />
               <ListItemSecondaryAction>
-                <IconButton aria-label="Delete">
+                <IconButton
+
+                  aria-label="Delete"
+                >
+                  <EditIcon />
+                </IconButton>
+                <IconButton
+                  onClick={() => this.deleteUser(user.id)}
+                  onClick={() => {
+                  if (window.confirm('Are you sure you wish to delete this student?'))
+                  this.deleteUser(user.id)}}
+                  aria-label="Delete"
+                >
                   <DeleteIcon />
                 </IconButton>
               </ListItemSecondaryAction>
@@ -79,5 +102,5 @@ const mapStateToProps = function(state) {
 
 export default compose(
   withStyles(style),
-  connect(mapStateToProps, { fetchUsers })
+  connect(mapStateToProps, { fetchUsers, deleteUser })
 )(UsersList);

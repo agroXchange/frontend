@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux'
+
 import PropTypes from 'prop-types';
 import MenuItem from 'material-ui/Menu/MenuItem';
 import TextField from 'material-ui/TextField';
@@ -7,6 +9,18 @@ import Paper from 'material-ui/Paper';
 import { withStyles } from 'material-ui/styles';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import '../../styles/ProductForm.css'
+
+import 'foundation-sites/dist/css/foundation.min.css';
+import zIndex from 'material-ui/styles/zIndex';
+
+// import { vegetables, fruits, beans } from '../productCodes'
+import { fetchCodes } from '../../actions/codes'
+
+
+import jquery from 'jquery';
+window.$ = window.jQuery = jquery;
+require('foundation-sites');
+
 
 const classes = {
   container: {
@@ -63,6 +77,10 @@ class ProductForm extends PureComponent {
 
   handleChange = (e) => {
     const { name, value } = e.target
+
+//    if (name === "name") document.querySelector('#test:a').classList.toggle("hide")
+   // if (name === "name") $('#element').foundation('_hideAll');
+
     this.setState({
       [name]: value
     })
@@ -73,6 +91,11 @@ class ProductForm extends PureComponent {
       picture: e.target.files[0]
     })
   }
+
+  componentWillMount = () => {
+    this.props.fetchCodes()
+  }
+
 
   render() {
 
@@ -92,7 +115,63 @@ class ProductForm extends PureComponent {
           onChange={ this.handleChange }
           margin="normal"
 
-        />
+                  <button key={veg.code}
+                      name="code"
+                     className="button"
+                      value={veg.code}
+                      onClick={this.handleChange}
+                       type="button"
+                        // data-close-on-click="true"
+                    >{veg.titleeng}
+
+
+
+                      {/* <a href="#"
+
+
+                      > xx{veg.code}</a>
+                      <ul className="menu vertical nested">
+                        <li><a href="#" >Two AAAA</a></li>
+                      </ul> */}
+                    </button>
+                  )}
+                {/* </ul>
+              </li> */}
+
+
+              {/* <li>
+                <a href="#"> Fruits & Nuts   </a>
+                <ul className="menu vertical nested">
+                  {fruits.map(fruit =>
+
+                    <li key={fruit.code}>
+                      <button
+                        name="name"
+                        className="button"
+                          value={Object.values(fruit)[0]}
+                        type="button"
+                        onClick={this.handleChange}
+                      >
+
+                      ssss
+
+                      </button>
+                    </li>
+
+                  )}
+                </ul>
+              </li> */}
+              {/* <li>
+                <a href="#"> Beans & Crop   </a>
+                <ul className="menu vertical nested">
+                  {beans.map(bean =>
+                      <div>  0 </div>
+                  )}
+                </ul>
+              </li> */}
+
+            {/* </ul> */}
+          </div>
 
         <div className="upload">
           <label htmlFor="photo">Please Upload a Photo </label>
@@ -162,7 +241,7 @@ class ProductForm extends PureComponent {
 
         <TextField
           id="certification"
-          name="certification"
+          name="certificate"
           label="Certification"
           style={ classes.textField }
           value={ this.state.certification || initialValues.certification || ''}
@@ -185,7 +264,7 @@ class ProductForm extends PureComponent {
 
         <TextField
           id="expired"
-          name="expired"
+            name="expiration"
           label="Expiry Date"
           type="date"
           defaultValue="2017-05-24"
@@ -217,5 +296,13 @@ class ProductForm extends PureComponent {
 
 }
 
+const mapStateToProps = (state, props) => ({
+  codes: state.codes,
+  vegetables: state.codes.filter(x => x.code.match(/^07/) ),
+  fruits: state.codes.filter(x => x.code.match(/^08/)),
+  beans: state.codes.filter(x => x.code.match(/^09/))
+})
 
-export default ProductForm
+
+
+export default connect(mapStateToProps, { fetchCodes })(ProductForm)

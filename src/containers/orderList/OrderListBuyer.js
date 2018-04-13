@@ -7,7 +7,7 @@ import { fetchOrdersByBuyerId } from  '../../actions/orders'
 
 import Paper from 'material-ui/Paper'
 import Grid from 'material-ui/Grid';
-import OrderCard from '../../components/orderList/OrderCard'
+import OrderCardBuyer from '../../components/orderList/OrderCardBuyer'
 import './OrderList.css'
 
 
@@ -40,7 +40,7 @@ class OrderListBuyer extends PureComponent {
 
     return (
       <div className={classes.root}>
-        <OrderCard orders={orders}/>
+        <OrderCardBuyer orders={orders}/>
       </div>
     )
   }
