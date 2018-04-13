@@ -28,7 +28,7 @@ const styles = {
     marginRight: 20,
   }
 }
-
+const stockImage = "https://theculinarycook.com/wp-content/uploads/2012/04/vegetable-stock-679x509.jpg"
 
 class Product extends PureComponent {
 
@@ -44,11 +44,11 @@ class Product extends PureComponent {
 
   handleClickOrderOpen = () => {
     this.setState({ newOrder: true });
-  };
+  }
 
   handleOrderClose = () => {
     this.setState({ newOrder: false });
-  };
+  }
 
   handleConfirmOpen = () => {
     this.setState({ confirmOrder: true })
@@ -60,11 +60,11 @@ class Product extends PureComponent {
 
   handleEditOpen = () => {
     this.setState({ editProduct: true });
-  };
+  }
 
   handleEditClose = () => {
     this.setState({ editProduct: false });
-  };
+  }
 
   createOrder = (order, productId, buyer) => {
     this.props.createOrder(order, this.props.match.params.id, this.props.currentUser)
@@ -83,7 +83,10 @@ class Product extends PureComponent {
           <Grid container className="container" spacing={24}>
 
             <Grid item xs={12}>
-              <img src={ product.photo } className="product-photo"/>
+              <img src={ product.photo !== null ?
+                product.photo : stockImage }
+                alt="product"
+                className="product-photo"/>
             </Grid>
 
             <Grid item xs={12} sm={6}>
@@ -168,4 +171,5 @@ const mapStateToProps = (state) => {
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { fetchProduct, createOrder }))(Product)
+  connect(mapStateToProps, { fetchProduct, createOrder })
+)(Product)
