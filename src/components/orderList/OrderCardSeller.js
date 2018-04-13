@@ -32,20 +32,11 @@ class OrderCardSeller extends PureComponent {
   };
 
   render() {
-    const { classes, orders } = this.props;
-
-<<<<<<< HEAD
-    const { t, i18n } = this.props
-=======
+    const { classes, order, product } = this.props;
     const { t } = this.props
-    {/* specific for translation */}
->>>>>>> 698767e4b817aae441a6e91bbf34807855275b6d
-
-    const { product } = this.props
 
     return (
       <div>
-        {orders.map(order =>
          <Card className={classes.card}>
            <CardMedia
             className={classes.media}
@@ -81,7 +72,6 @@ class OrderCardSeller extends PureComponent {
              </Button>
            </CardActions>
          </Card>
-         )}
        </div>
     )
   }

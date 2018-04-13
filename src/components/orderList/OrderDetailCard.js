@@ -37,13 +37,15 @@ class OrderDetailCard extends PureComponent {
     const data = {
       status: 'Approved'
     }
-    this.props.hello(data)
+    this.props.chageOrderStatus(data)
+    // window.location.reload()
   }
   handleDecline = () => {
     const data = {
       status: 'Declined'
     }
-    this.props.hello(data)
+    this.props.chageOrderStatus(data)
+    //window.location.reload()
   }
 
   render() {
@@ -52,7 +54,6 @@ class OrderDetailCard extends PureComponent {
 
     return (
       <div>
-      {order.map( order =>
          <Card className={classes.card}>
            <CardContent>
              <Typography gutterBottom
@@ -130,7 +131,6 @@ class OrderDetailCard extends PureComponent {
            {t('DECLINE')}
           </Button>
          </Card>
-         )}
        </div>
     )
   }

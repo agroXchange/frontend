@@ -5,8 +5,8 @@ import Paper from 'material-ui/Paper'
 import Grid from 'material-ui/Grid';
 import OrderDetailCard from '../../components/orderList/OrderDetailCard'
 import { fetchOrder, changeStatus } from '../../actions/orders'
-import { connect } from 'react-redux';
-import compose from "lodash/fp/compose";
+import { connect } from 'react-redux'
+import compose from 'lodash/fp/compose'
 import './OrderList.css'
 
 const styles = theme => ({
@@ -18,14 +18,14 @@ const styles = theme => ({
    textAlign: 'center',
    color: theme.palette.text.secondary,
  },
-});
-
-
+})
 
 class OrderDetail extends PureComponent {
- static propTypes = {
- classes: PropTypes.object.isRequired
- };
+  static propTypes = {
+    classes: PropTypes.object.isRequired
+  }
+})
+
 
  componentWillMount() {
    this.props.fetchOrder(this.props.match.params.id)
@@ -37,6 +37,7 @@ class OrderDetail extends PureComponent {
 
  render() {
    const { classes, order } = this.props;
+   if (!order) return null
 
    return (
      <div className={classes.root}>
@@ -45,7 +46,6 @@ class OrderDetail extends PureComponent {
    )
  }
 }
-
 
 const mapStateToProps = (state) => ({
  order: state.order
