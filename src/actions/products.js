@@ -36,10 +36,13 @@ export const fetchProduct = (id) => (dispatch, getState) => {
     .catch(err => alert(err))
 }
 
-export const addProduct = (product, picture) => (dispatch) =>{
-  console.log(product)
+export const addProduct = (product, picture) => (dispatch, getState) =>{
+    const state = getState()
+    const jwt = state.currentUser.jwt
+
     request
         .post(`${baseUrl}/products`)
+        .set("Authorization", `Bearer ${jwt}`)
         .field(product)
         .attach('productPhoto', picture)
         .then(response => {
