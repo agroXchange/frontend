@@ -14,48 +14,48 @@ import './OrderList.css'
 
 
 const styles = theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing.unit * 2,
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
+ root: {
+   flexGrow: 1,
+ },
+ paper: {
+   padding: theme.spacing.unit * 2,
+   textAlign: 'center',
+   color: theme.palette.text.secondary,
+ },
 });
 
 
 
 class OrderDetail extends PureComponent {
-  static propTypes = {
-  classes: PropTypes.object.isRequired
-  };
+ static propTypes = {
+ classes: PropTypes.object.isRequired
+ };
 
-  componentWillMount() {
-    this.props.fetchOrder(this.props.match.params.id)
-  }
+ componentWillMount() {
+   this.props.fetchOrder(this.props.match.params.id)
+ }
 
-  handleChangeStatus = (data ) => {
-    this.props.changeStatus(data, this.props.match.params.id)
-  }
+ handleChangeStatus = (data ) => {
+   this.props.changeStatus(data, this.props.match.params.id)
+ }
 
-  render() {
-    const { classes, order } = this.props;
+ render() {
+   const { classes, order } = this.props;
 
-    return (
-      <div className={classes.root}>
-        <OrderDetailCard hello={this.handleChangeStatus} order={order}/>
-      </div>
-    )
-  }
+   return (
+     <div className={classes.root}>
+       <OrderDetailCard chageOrderStatus={this.handleChangeStatus} order={order}/>
+     </div>
+   )
+ }
 }
 
 
 const mapStateToProps = (state) => ({
-  order: state.order
+ order: state.order
 })
 
 export default compose(
-  withStyles(styles),
-  connect(mapStateToProps, { fetchOrder, changeStatus })
+ withStyles(styles),
+ connect(mapStateToProps, { fetchOrder, changeStatus })
 )(OrderDetail);

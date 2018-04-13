@@ -4,7 +4,6 @@ import { withStyles } from "material-ui/styles";
 import { connect } from 'react-redux';
 import compose from "lodash/fp/compose";
 import { fetchOrdersByBuyerId } from  '../../actions/orders'
-
 import Paper from 'material-ui/Paper'
 import Grid from 'material-ui/Grid';
 import OrderCardBuyer from '../../components/orderList/OrderCardBuyer'
