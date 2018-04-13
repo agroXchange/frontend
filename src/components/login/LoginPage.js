@@ -1,36 +1,36 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { login } from "../../actions/users";
-import LoginForm from "./LoginForm";
-import ForgotPasswordForm from "../password/ForgotPasswordForm";
-import { Redirect } from "react-router-dom";
-import { translate } from "react-i18next";
-import compose from "lodash/fp/compose";
-import Typography from "material-ui/Typography";
-import Button from "material-ui/Button";
-import Paper from "material-ui/Paper";
-import Dialog, { DialogActions,  DialogContent, DialogContentText, DialogTitle } from "material-ui/Dialog";
-import { sendForgotPassword } from "../../actions/password";
+import React, { PureComponent } from "react"
+import { connect } from "react-redux"
+import { Link } from "react-router-dom"
+import { login } from "../../actions/users"
+import LoginForm from "./LoginForm"
+import ForgotPasswordForm from "../password/ForgotPasswordForm"
+import { Redirect } from "react-router-dom"
+import { translate } from "react-i18next"
+import compose from "lodash/fp/compose"
+import Typography from "material-ui/Typography"
+import Button from "material-ui/Button"
+import Paper from "material-ui/Paper"
+import Dialog, { DialogActions,  DialogContent, DialogContentText, DialogTitle } from "material-ui/Dialog"
+import { sendForgotPassword } from "../../actions/password"
 
 class LoginPage extends PureComponent {
-  state = {};
+  state = {}
 
   handleSubmit = data => {
-    this.props.login(data.email, data.password);
-  };
+    this.props.login(data.email, data.password)
+  }
 
   handleForgetSubmit = data => {
-    this.props.sendForgotPassword(data.email);
-    this.setState({ forgotPassword: false });
-  };
+    this.props.sendForgotPassword(data.email)
+    this.setState({ forgotPassword: false })
+  }
 
   handleForgotPasswordOpen = () => {
-    this.setState({ forgotPassword: true });
-  };
+    this.setState({ forgotPassword: true })
+  }
 
   render() {
-    const { t } = this.props;
+    const { t } = this.props
     if (this.props.currentUser) return <Redirect to="/" />;
 
     return (
@@ -69,7 +69,7 @@ class LoginPage extends PureComponent {
           {t("Sign up")}
         </Button>
       </Paper>
-    );
+    )
   }
 }
 
@@ -78,10 +78,10 @@ const mapStateToProps = function(state) {
     currentUser: state.currentUser,
     error: state.login.error,
     success: state.password.message
-  };
-};
+  }
+}
 
 export default compose(
   translate("user"),
   connect(mapStateToProps, { login, sendForgotPassword })
-)(LoginPage);
+)(LoginPage)
