@@ -19,15 +19,9 @@ import LogoutPage from './components/logout/LogoutPage'
 import AddProductContainer from './components/products/AddProductContainer';
 import SearchProductContainer from './components/products/SearchProductContainer';
 
-// import $ from 'jquery';
-// import 'foundation-sites';
 import './styles/App.css';
 
 class App extends Component {
-
-  // componentDidMount() {
-  //   $(document).foundation();
-  // }
 
   render() {
     return (
