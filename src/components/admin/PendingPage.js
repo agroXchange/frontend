@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { withStyles } from "material-ui/styles";
 import { Link } from "react-router-dom";
+import { assignImage } from './lib/lib'
 import Card from "material-ui/Card";
 import { CardActions, CardHeader, CardMedia, CardTitle, CardText, CardContent } from "material-ui/Card";
 import IconButton from 'material-ui/IconButton';
@@ -71,7 +72,7 @@ class PendingPage extends PureComponent {
             <CardMedia>
               <img
                 className={classes.media}
-                src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+                src={assignImage(user.profile.logo)}
                 alt=""
               />
             </CardMedia>

@@ -5,19 +5,14 @@ import { fetchUsers, deleteUser } from "../../actions/users";
 import { assignImage } from './lib/lib'
 import compose from "lodash/fp/compose";
 import { withStyles } from "material-ui/styles";
-import List, {
-  ListItem,
-  ListItemAvatar,
-  ListItemIcon,
-  ListItemSecondaryAction,
-  ListItemText
-} from "material-ui/List";
+import List, { ListItem, ListItemAvatar, ListItemIcon, ListItemSecondaryAction, ListItemText } from "material-ui/List";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import Button from "material-ui/Button";
 import Card, { CardActions, CardContent } from "material-ui/Card";
 import IconButton from "material-ui/IconButton";
 import Avatar from "material-ui/Avatar";
+import Dialog, { DialogActions, DialogContent, DialogContentText,  DialogTitle} from "material-ui/Dialog";
 
 const style = theme => ({
   card: {
@@ -38,6 +33,21 @@ class UsersList extends PureComponent {
     this.props.deleteUser(id);
   };
 
+  renderMessage = users => {
+  return (
+    <Dialog open={users.length === 0} aria-labelledby="form-dialog-title">
+      <DialogTitle id="form-dialog-title">
+        There are no users
+      </DialogTitle>
+      <Link to={`/admin`}>
+        <Button size="medium" color="primary">
+          Admin Page
+        </Button>
+      </Link>
+    </Dialog>
+  );
+};
+
   render() {
     const users = this.props.users;
     const classes = this.props;
@@ -47,6 +57,7 @@ class UsersList extends PureComponent {
     return (
       <div>
         <h1> Users List</h1>
+        {this.renderMessage(users)}
         {users.map(user => (
 
           <List>
