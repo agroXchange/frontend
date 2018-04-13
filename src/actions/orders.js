@@ -70,5 +70,6 @@ export const changeStatus = (data, id) => (dispatch) => (
     .then(response => dispatch({
       type: CHANGE_STATUS,
       payload: response.body
+
     }))
   )

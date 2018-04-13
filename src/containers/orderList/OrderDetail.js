@@ -5,13 +5,9 @@ import Paper from 'material-ui/Paper'
 import Grid from 'material-ui/Grid';
 import OrderDetailCard from '../../components/orderList/OrderDetailCard'
 import { fetchOrder, changeStatus } from '../../actions/orders'
-
 import { connect } from 'react-redux';
 import compose from "lodash/fp/compose";
-
 import './OrderList.css'
-
-
 
 const styles = theme => ({
  root: {

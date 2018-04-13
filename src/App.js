@@ -9,7 +9,7 @@ import Product from './components/products/Product'
 import ExampleTranslation from './components/ExampleTranslation'
 import OrdersPage from './components/admin/OrdersPage'
 import UsersList from './components/admin/UsersList'
-import OrderListBuyer from './containers/orderList/OrderListBuyer'
+import OrderList from './containers/orderList/OrderList'
 import OrderDetail from './containers/orderList/OrderDetail'
 import NavBar from './components/NavBar'
 import LoginPage from './components/login/LoginPage'
@@ -37,7 +37,7 @@ class App extends Component {
             <Route exact path="/signup" component={SignupPage} />
             <Route exact path="/logout" component={LogoutPage} />
             <Route exact path="/translation" component={ ExampleTranslation } />
-            <Route exact path="/orders" component={OrderListBuyer} />
+            <Route exact path="/orders" component={OrderList} />
             <Route exact path="/orders/:id" component={OrderDetail} />
             <Route exact path="/products" component={ ProductsList } />
             <Route exact path="/products/:id" component={ Product } />
