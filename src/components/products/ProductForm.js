@@ -1,22 +1,20 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import PropTypes from 'prop-types';
-import MenuItem from 'material-ui/Menu/MenuItem';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
-import Paper from 'material-ui/Paper';
-import { withStyles } from 'material-ui/styles';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
-import Dialog, { DialogContent, DialogContentText, withMobileDialog, } from 'material-ui/Dialog';
-import ExpansionPanel, { ExpansionPanelSummary, ExpansionPanelDetails, } from 'material-ui/ExpansionPanel';
-import Typography from 'material-ui/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import PropTypes from 'prop-types'
+import MenuItem from 'material-ui/Menu/MenuItem'
+import TextField from 'material-ui/TextField'
+import Button from 'material-ui/Button'
+import Paper from 'material-ui/Paper'
+import { withStyles } from 'material-ui/styles'
+import Input, { InputLabel, InputAdornment } from 'material-ui/Input'
+import Dialog, { DialogContent, DialogContentText, withMobileDialog, } from 'material-ui/Dialog'
+import ExpansionPanel, { ExpansionPanelSummary, ExpansionPanelDetails, } from 'material-ui/ExpansionPanel'
+import Typography from 'material-ui/Typography'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import '../../styles/ProductForm.css'
 import { fetchCodes } from '../../actions/codes'
-
-import Search from '@material-ui/icons/Search';
-
+import Search from '@material-ui/icons/Search'
 
 const classes = {
   container: {
@@ -55,7 +53,7 @@ const currencies = [
     value: 'JPY',
     label: '¥',
   },
-];
+]
 
 class ProductForm extends PureComponent {
   state = {
@@ -65,16 +63,16 @@ class ProductForm extends PureComponent {
 
   propTypes = {
     classes: PropTypes.object.isRequired,
-  };
+  }
 
 
   handleClickOpen = () => {
-    this.setState({ open: true });
-  };
+    this.setState({ open: true })
+  }
 
   handleClose = () => {
-    this.setState({ open: false });
-  };
+    this.setState({ open: false })
+  }
 
   handleSubmit = (e) => {
     e.preventDefault()
@@ -108,43 +106,13 @@ class ProductForm extends PureComponent {
 
 
   render() {
-
-    const initialValues = this.props.initialValues || {}
     const { fullScreen, codes, vegetables, fruits, beans } = this.props
 
     if(codes)
     return(
       <form onSubmit={ this.handleSubmit } className="form-container">
         <Paper className="paper">
-          <h2>Add a Product</h2>
-          <TextField
-            id="name"
-            label="Name"
-            name="name"
-            style={ classes.textField }
-            value={ this.state.name || initialValues.name || ''}
-            onChange={ this.handleChange }
-            margin="normal"
-          />
 
-          <div className="upload">
-            <label htmlFor="photo">Please Upload a Photo </label>
-            <input
-              accept="image/*"
-              id="raised-button-file"
-              type="file"
-              name="photo"
-              className="upload-input"
-              style={ classes.textField }
-              onChange={this.handleFileChange}
-            />
-          </div>
-
-          <TextField
-            id="description"
-            name="description"
-            label="Description"
-          />
           <div id="addProduct">
               <h2>Add Product</h2>
 
@@ -255,9 +223,7 @@ class ProductForm extends PureComponent {
             name="photo"
             className="upload-input"
             style={ classes.textField }
-            value={ this.state.description || initialValues.description || ''  }
-            onChange={ this.handleChange }
-            margin="normal"
+            onChange={this.handleFileChange}
           />
         </div>
 
@@ -313,78 +279,27 @@ class ProductForm extends PureComponent {
         </TextField>
 
 
-          <TextField
-            id="currency"
-            name="currency"
-            select
-            label="Please select your currency"
-            style={ classes.textField }
-            value={ this.state.currency || initialValues.currency || ''}
-            onChange={ this.handleChange }
-            margin="normal"
-          >
-            { currencies.map(option => (
-              <MenuItem key={ option.value } value={ option.value } >
-                { option.label }
-              </MenuItem>
-            ))}
-          </TextField>
 
-          <TextField
-            id="price"
-            name="price"
-            label="Price per Kg"
-            value={ this.state.price || initialValues.price || ''}
-            onChange={ this.handleChange }
-            type="number"
-            style={ classes.textField }
-            InputLabelProps={{
-              shrink: true,
-            }}
-            margin="normal"
-          />
+        <TextField
+          label="Volume"
+          id="volume"
+          name="volume"
+          value={ this.state.volume }
+          onChange={ this.handleChange }
+          style={ classes.textField }
+          InputProps={{
+            startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
+          }}
+        />
 
-          <TextField
-            label="Volume"
-            id="volume"
-            name="volume"
-            value={ this.state.volume || initialValues.volume || ''}
-            onChange={ this.handleChange }
-            style={ classes.textField }
-            InputProps={{
-              startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
-            }}
-          />
 
-          <TextField
-            id="certification"
-            name="certificate"
-            label="Certification"
-            style={ classes.textField }
-            value={ this.state.certification || initialValues.certification || ''}
-            onChange={ this.handleChange }
-            margin="normal"
-          />
-
-          <TextField
-            id="harvested"
-            name="harvested"
-            label="Harvested Date"
-            type="date"
-            defaultValue="2017-05-24"
-            onChange={ this.handleChange }
-            style={ classes.textField }
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
 
         <TextField
           id="harvested"
           name="harvested"
           label="Harvested Date"
           type="date"
-          defaultValue="2017-05-24"
+          defaultValue={new Date}
             value={this.state.harvested}
           onChange={ this.handleChange }
           style={ classes.textField }
@@ -398,7 +313,7 @@ class ProductForm extends PureComponent {
             name="expiration"
           label="Expiry Date"
           type="date"
-          defaultValue="2017-05-24"
+            defaultValue={new Date}
             value={this.state.expiration}
           onChange={ this.handleChange }
           style={ classes.textField }
@@ -407,34 +322,22 @@ class ProductForm extends PureComponent {
           }}
         />
 
-          <TextField
-            id="expired"
-              name="expiration"
-            label="Expiry Date"
-            type="date"
-            defaultValue="2017-05-24"
-            onChange={ this.handleChange }
-            style={ classes.textField }
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
+        <Button
+          color="primary"
+          className="submit-btn"
+          type="submit"
+          style={{
+            display: 'block',
+            margin: 'auto',
+            marginTop: 20,
+            marginBottom: 20
+          }}
+        >
+          Save
+        </Button>
 
-          <Button
-            color="primary"
-            className="submit-btn"
-            type="submit"
-            style={{
-              display: 'block',
-              margin: 'auto',
-              marginTop: 20,
-              marginBottom: 20
-            }}
-          >
-            Save
-          </Button>
-          </Paper>
-        </form>
+        </Paper>
+      </form>
     )
   }
 
@@ -450,4 +353,4 @@ const mapStateToProps = (state, props) => ({
 export default compose(
   withMobileDialog(),
   connect(mapStateToProps, { fetchCodes })
-)(ProductForm);
+)(ProductForm)
