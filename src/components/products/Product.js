@@ -1,12 +1,15 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
 import { Link } from 'react-router-dom'
+import compose from 'lodash/fp/compose'
+import PropTypes from 'prop-types';
+
+import { withStyles } from 'material-ui/styles';
 import AppBar from 'material-ui/AppBar';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography';
 import Dialog, {
   DialogActions,
   DialogContent,
@@ -20,6 +23,13 @@ import { createOrder } from '../../actions/orders'
 import OrderForm from '../OrderForm'
 import ProductForm from './ProductForm'
 
+const styles = {
+  dialog: {
+    marginBottom: 20,
+    marginLeft: 20,
+    marginRight: 20,
+  }
+}
 
 
 class Product extends PureComponent {
@@ -65,7 +75,7 @@ class Product extends PureComponent {
   }
 
   render() {
-    const { product, currentUser } = this.props
+    const { classes, product, currentUser } = this.props
     if (!product) return null
 
     return(
@@ -109,8 +119,6 @@ class Product extends PureComponent {
               <DialogTitle id="form-dialog-title">Edit Your Product</DialogTitle>
                 <ProductForm inititalValues={ product } onSubmit={ this.updateProduct }/>
             </Dialog>
-
-
 
             <Dialog
               open={this.state.newOrder}
