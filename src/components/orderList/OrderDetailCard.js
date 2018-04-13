@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-<<<<<<< 68535833ba676399be74479ca9b1f59a62022be1
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
@@ -9,16 +8,6 @@ import Typography from 'material-ui/Typography'
 import compose from 'lodash/fp/compose'
 import { translate } from "react-i18next"
 
-=======
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Paper from 'material-ui/Paper';
-import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
-import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
-import compose from 'lodash/fp/compose'
-import {translate, Trans} from "react-i18next"
->>>>>>> Fixed bugs in accept and decline by orders/id
 const styles = theme => ({
   card: {
     maxWidth: 400,
