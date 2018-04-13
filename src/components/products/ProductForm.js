@@ -1,19 +1,15 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-
-import PropTypes from 'prop-types';
-import MenuItem from 'material-ui/Menu/MenuItem';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
-import Paper from 'material-ui/Paper';
-import { withStyles } from 'material-ui/styles';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import PropTypes from 'prop-types'
+import MenuItem from 'material-ui/Menu/MenuItem'
+import TextField from 'material-ui/TextField'
+import Button from 'material-ui/Button'
+import Paper from 'material-ui/Paper'
+import { withStyles } from 'material-ui/styles'
+import Input, { InputLabel, InputAdornment } from 'material-ui/Input'
 import '../../styles/ProductForm.css'
-
-import 'foundation-sites/dist/css/foundation.min.css';
-import zIndex from 'material-ui/styles/zIndex';
-
-// import { vegetables, fruits, beans } from '../productCodes'
+import 'foundation-sites/dist/css/foundation.min.css'
+import zIndex from 'material-ui/styles/zIndex'
 import { fetchCodes } from '../../actions/codes'
 
 
@@ -82,7 +78,7 @@ class ProductForm extends PureComponent {
    // if (name === "name") $('#element').foundation('_hideAll');
 
     this.setState({
-      [name]: value      
+      [name]: value
     })
   }
 
@@ -98,204 +94,139 @@ class ProductForm extends PureComponent {
 
 
   render() {
-    const { codes, vegetables, fruits, beans } = this.props
-    console.log( JSON.stringify(vegetables ) )
 
-    if(fruits)
+    const initialValues = this.props.initialValues || {}
     return(
       <form onSubmit={ this.handleSubmit } className="form-container">
         <Paper className="paper">
+          <h2>Add a Product</h2>
+          <TextField
+            id="name"
+            label="Name"
+            name="name"
+            style={ classes.textField }
+            value={ this.state.name || initialValues.name || ''}
+            onChange={ this.handleChange }
+            margin="normal"
+          />
 
-        <h2>Add a Product</h2>
-
-          <div>
-            {/* <ul className="vertical menu drilldown" 
-            data-drilldown
-               data-auto-height="true"
-              // data-scroll-top="true"   
-          > */}
-     
-              {/* <li> */}
-                {/* <a href="#"> Vegetables   </a> */}
-                {/* <ul className="menu vertical nested"> */}
-                  {vegetables.map(veg =>
-
-                  <button key={veg.code}
-                      name="code"
-                     className="button"
-                      value={veg.code}
-                      onClick={this.handleChange}
-                       type="button"
-                        // data-close-on-click="true"
-                    >{veg.titleeng}
-
-
-
-                      {/* <a href="#"
-
-                      
-                      > xx{veg.code}</a>
-                      <ul className="menu vertical nested">
-                        <li><a href="#" >Two AAAA</a></li>
-                      </ul> */}
-                    </button> 
-                  )}
-                {/* </ul>
-              </li> */}
-
-
-              {/* <li>
-                <a href="#"> Fruits & Nuts   </a>
-                <ul className="menu vertical nested">
-                  {fruits.map(fruit =>
-
-                    <li key={fruit.code}>
-                      <button 
-                        name="name"
-                        className="button"
-                          value={Object.values(fruit)[0]}
-                        type="button"
-                        onClick={this.handleChange}      
-                      >
-
-                      ssss
-                       
-                      </button>
-                    </li>
-
-                  )}
-                </ul>
-              </li> */}
-              {/* <li>
-                <a href="#"> Beans & Crop   </a>
-                <ul className="menu vertical nested">
-                  {beans.map(bean =>
-                      <div>  0 </div>
-                  )}
-                </ul>
-              </li> */}
-          
-            {/* </ul> */}
+          <div className="upload">
+            <label htmlFor="photo">Please Upload a Photo </label>
+            <input
+              accept="image/*"
+              id="raised-button-file"
+              type="file"
+              name="photo"
+              className="upload-input"
+              style={ classes.textField }
+              onChange={this.handleFileChange}
+            />
           </div>
 
-        <div className="upload">
-          <label htmlFor="photo">Please Upload a Photo </label>
-          <input
-            accept="image/*"
-            id="raised-button-file"
-            type="file"
-            name="photo"
-            className="upload-input"
+          <TextField
+            id="description"
+            name="description"
+            label="Description"
             style={ classes.textField }
-            onChange={this.handleFileChange}
+            value={ this.state.description || initialValues.description || ''  }
+            onChange={ this.handleChange }
+            margin="normal"
           />
-        </div>
 
-        <TextField
-          id="description"
-          name="description"
-          label="Description"
-          style={ classes.textField }
-          value={ this.state.description }
-          onChange={ this.handleChange }
-          margin="normal"
-        />
+          <TextField
+            id="currency"
+            name="currency"
+            select
+            label="Please select your currency"
+            style={ classes.textField }
+            value={ this.state.currency || initialValues.currency || ''}
+            onChange={ this.handleChange }
+            margin="normal"
+          >
+            { currencies.map(option => (
+              <MenuItem key={ option.value } value={ option.value } >
+                { option.label }
+              </MenuItem>
+            ))}
+          </TextField>
 
-        <TextField
-          id="currency"
-          name="currency"
-          select
-          label="Please select your currency"
-          style={ classes.textField }
-          value={ this.state.currency }
-          onChange={ this.handleChange }
-          margin="normal"
-        >
-          { currencies.map(option => (
-            <MenuItem key={ option.value } value={ option.value } >
-              { option.label }
-            </MenuItem>
-          ))}
-        </TextField>
+          <TextField
+            id="price"
+            name="price"
+            label="Price per Kg"
+            value={ this.state.price || initialValues.price || ''}
+            onChange={ this.handleChange }
+            type="number"
+            style={ classes.textField }
+            InputLabelProps={{
+              shrink: true,
+            }}
+            margin="normal"
+          />
 
-        <TextField
-          id="price"
-          name="price"
-          label="Price per Kg"
-          value={ this.state.price }
-          onChange={ this.handleChange }
-          type="number"
-          style={ classes.textField }
-          InputLabelProps={{
-            shrink: true,
-          }}
-          margin="normal"
-        />
+          <TextField
+            label="Volume"
+            id="volume"
+            name="volume"
+            value={ this.state.volume || initialValues.volume || ''}
+            onChange={ this.handleChange }
+            style={ classes.textField }
+            InputProps={{
+              startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
+            }}
+          />
 
-        <TextField
-          label="Volume"
-          id="volume"
-          name="volume"
-          value={ this.state.volume }
-          onChange={ this.handleChange }
-          style={ classes.textField }
-          InputProps={{
-            startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
-          }}
-        />
+          <TextField
+            id="certification"
+            name="certificate"
+            label="Certification"
+            style={ classes.textField }
+            value={ this.state.certification || initialValues.certification || ''}
+            onChange={ this.handleChange }
+            margin="normal"
+          />
 
-        <TextField
-          id="certification"
-          name="certificate"
-          label="Certification"
-          style={ classes.textField }
-            value={this.state.certificate }
-          onChange={ this.handleChange }
-          margin="normal"
-        />
+          <TextField
+            id="harvested"
+            name="harvested"
+            label="Harvested Date"
+            type="date"
+            defaultValue="2017-05-24"
+            onChange={ this.handleChange }
+            style={ classes.textField }
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
 
-        <TextField
-          id="harvested"
-          name="harvested"
-          label="Harvested Date"
-          type="date"
-          defaultValue="2017-05-24"
-          onChange={ this.handleChange }
-          style={ classes.textField }
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
+          <TextField
+            id="expired"
+              name="expiration"
+            label="Expiry Date"
+            type="date"
+            defaultValue="2017-05-24"
+            onChange={ this.handleChange }
+            style={ classes.textField }
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
 
-        <TextField
-          id="expired"
-            name="expiration"
-          label="Expiry Date"
-          type="date"
-          defaultValue="2017-05-24"
-          onChange={ this.handleChange }
-          style={ classes.textField }
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-
-        <Button
-          color="primary"
-          className="submit-btn"
-          type="submit"
-          style={{
-            display: 'block',
-            margin: 'auto',
-            marginTop: 20,
-            marginBottom: 20
-          }}
-        >
-          Save
-        </Button>
-
-        </Paper>
-      </form>
+          <Button
+            color="primary"
+            className="submit-btn"
+            type="submit"
+            style={{
+              display: 'block',
+              margin: 'auto',
+              marginTop: 20,
+              marginBottom: 20
+            }}
+          >
+            Save
+          </Button>
+          </Paper>
+        </form>
     )
   }
 

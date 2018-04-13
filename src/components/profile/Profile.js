@@ -1,11 +1,10 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { fetchUser } from "../../actions/users";
-// import { userId } from "../../jwt";
+import React, { PureComponent } from "react"
+import { connect } from "react-redux"
+import { Redirect } from "react-router-dom"
+import { fetchUser } from "../../actions/users"
 import Paper from "material-ui/Paper";
-import Card, { CardActions, CardContent, CardMedia } from "material-ui/Card";
-import Typography from "material-ui/Typography";
+import Card, { CardActions, CardContent, CardMedia } from "material-ui/Card"
+import Typography from "material-ui/Typography"
 import compose from 'lodash/fp/compose'
 import {translate, Trans} from "react-i18next"
 
@@ -13,7 +12,6 @@ class Profile extends PureComponent {
 
   render() {
     const { user, t, i18n } = this.props
-    {console.log(user)}
     if (!user || !user.profile) return null
 
     return (
@@ -53,19 +51,18 @@ class Profile extends PureComponent {
           </div>
         </div>
       </Paper>
-
-    );
+    )
   }
 }
 
 const mapStateToProps = ({ user }, props) => ({
   user
-});
+})
 
 const mapDispatchToProps = {
   fetchUser,
-};
+}
 
 export default compose (
   translate('user'),
-  connect((mapStateToProps), (mapDispatchToProps)))(Profile);
+  connect((mapStateToProps), (mapDispatchToProps)))(Profile)
