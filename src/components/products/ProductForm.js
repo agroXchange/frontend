@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
+<<<<<<< HEAD
 import PropTypes from 'prop-types'
 import MenuItem from 'material-ui/Menu/MenuItem'
 import TextField from 'material-ui/TextField'
@@ -10,12 +11,25 @@ import Input, { InputLabel, InputAdornment } from 'material-ui/Input'
 import '../../styles/ProductForm.css'
 import 'foundation-sites/dist/css/foundation.min.css'
 import zIndex from 'material-ui/styles/zIndex'
+=======
+import { compose } from 'redux'
+import PropTypes from 'prop-types';
+import MenuItem from 'material-ui/Menu/MenuItem';
+import TextField from 'material-ui/TextField';
+import Button from 'material-ui/Button';
+import Paper from 'material-ui/Paper';
+import { withStyles } from 'material-ui/styles';
+import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import Dialog, { DialogContent, DialogContentText, withMobileDialog, } from 'material-ui/Dialog';
+import ExpansionPanel, { ExpansionPanelSummary, ExpansionPanelDetails, } from 'material-ui/ExpansionPanel';
+import Typography from 'material-ui/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import '../../styles/ProductForm.css'
+
+>>>>>>> 698767e4b817aae441a6e91bbf34807855275b6d
 import { fetchCodes } from '../../actions/codes'
 
-
-import jquery from 'jquery';
-window.$ = window.jQuery = jquery;
-require('foundation-sites');
+import Search from '@material-ui/icons/Search';
 
 
 const classes = {
@@ -60,10 +74,20 @@ const currencies = [
 class ProductForm extends PureComponent {
   state = {
     currency: 'EUR',
+    open: false,
   }
 
   propTypes = {
     classes: PropTypes.object.isRequired,
+  };
+
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   handleSubmit = (e) => {
@@ -74,11 +98,19 @@ class ProductForm extends PureComponent {
   handleChange = (e) => {
     const { name, value } = e.target
 
-//    if (name === "name") document.querySelector('#test:a').classList.toggle("hide")
-   // if (name === "name") $('#element').foundation('_hideAll');
-
     this.setState({
       [name]: value
+    })
+  }
+
+  handleClick = code => {
+    this.setState({
+<<<<<<< HEAD
+      [name]: value
+=======
+      code: code,
+      open: false
+>>>>>>> 698767e4b817aae441a6e91bbf34807855275b6d
     })
   }
 
@@ -94,8 +126,14 @@ class ProductForm extends PureComponent {
 
 
   render() {
+<<<<<<< HEAD
 
     const initialValues = this.props.initialValues || {}
+=======
+    const { fullScreen, codes, vegetables, fruits, beans } = this.props
+
+    if(codes)
+>>>>>>> 698767e4b817aae441a6e91bbf34807855275b6d
     return(
       <form onSubmit={ this.handleSubmit } className="form-container">
         <Paper className="paper">
@@ -110,6 +148,7 @@ class ProductForm extends PureComponent {
             margin="normal"
           />
 
+<<<<<<< HEAD
           <div className="upload">
             <label htmlFor="photo">Please Upload a Photo </label>
             <input
@@ -127,11 +166,179 @@ class ProductForm extends PureComponent {
             id="description"
             name="description"
             label="Description"
+=======
+          <div id="addProduct">  
+              <h2>Add Product</h2>
+
+              <Button
+                onClick={this.handleClickOpen}
+                variant="raised"
+              >
+                <Search /> Products
+                        </Button>
+
+              <Dialog
+                fullScreen={fullScreen}
+                open={this.state.open}
+                aria-labelledby="responsive-dialog-title"
+              >
+
+                <ExpansionPanel>
+                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                    <Typography className={classes.heading}>Vegetables ({vegetables.length})</Typography>
+                  </ExpansionPanelSummary>
+                  <ExpansionPanelDetails>
+
+                    <DialogContent>
+                      <DialogContentText>
+                        {vegetables.map(veg => {
+                          return <div key={veg.code}>
+                            <Button
+                              color="primary"
+                              className="button"
+                              size="small"
+                              type="button"
+                              onClick={_ => this.handleClick(veg.code)}
+                            >
+                              {veg.titleeng}
+                            </Button>
+                          </div>
+                        }
+                        )}
+                      </DialogContentText>
+                    </DialogContent>
+
+                  </ExpansionPanelDetails>
+                </ExpansionPanel>
+
+                <ExpansionPanel>
+                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                    <Typography className={classes.heading}>Fruits & Nuts ({fruits.length})</Typography>
+                  </ExpansionPanelSummary>
+                  <ExpansionPanelDetails>
+
+                    <DialogContent>
+                      <DialogContentText>
+                        {fruits.map(fruit =>
+                          <div key={fruit.code}>
+                            <Button
+                              size="small"
+                              color="primary"
+                              className="button"
+                              type="button"
+                              onClick={_ => this.handleClick(fruit.code)}
+                            >
+                              {fruit.titleeng}
+                            </Button>
+                          </div>
+                        )}
+                      </DialogContentText>
+                    </DialogContent>
+
+                  </ExpansionPanelDetails>
+                </ExpansionPanel>
+
+                <ExpansionPanel>
+                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                    <Typography className={classes.heading}>Beans & Crop ({beans.length})</Typography>
+                  </ExpansionPanelSummary>
+                  <ExpansionPanelDetails>
+
+                    <DialogContent>
+                      <DialogContentText>
+                        {beans.map(bean =>
+                          <div key={bean.code}>
+                            <Button
+                              size="small"
+                              color="primary"
+                              className="button"
+                              type="button"
+                              onClick={_ => this.handleClick(bean.code)}
+                            >
+                              {bean.titleeng}
+                            </Button>
+                          </div>
+                        )}
+                      </DialogContentText>
+                    </DialogContent>
+
+                  </ExpansionPanelDetails>
+                </ExpansionPanel>
+              </Dialog>
+            </div>  
+
+          <br />
+        <div className="upload">
+          <label htmlFor="photo">Please Upload a Photo </label>
+          <input
+            accept="image/*"
+            id="raised-button-file"
+            type="file"
+            name="photo"
+            className="upload-input"
+>>>>>>> 698767e4b817aae441a6e91bbf34807855275b6d
             style={ classes.textField }
             value={ this.state.description || initialValues.description || ''  }
             onChange={ this.handleChange }
             margin="normal"
           />
+<<<<<<< HEAD
+=======
+        </div>
+
+        <TextField
+          id="description"
+          name="description"
+          label="Description"
+          style={ classes.textField }
+          value={ this.state.description }
+          onChange={ this.handleChange }
+          margin="normal"
+        />
+
+          <TextField
+            id="certification"
+            name="certificate"
+            label="Certification"
+            style={classes.textField}
+            value={this.state.certificate}
+            onChange={this.handleChange}
+            margin="normal"
+          />
+
+          <TextField
+            id="price"
+            name="price"
+            label="Price per Kg"
+            value={this.state.price}
+            onChange={this.handleChange}
+            type="number"
+            style={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            margin="normal"
+          />
+
+        <TextField
+          id="currency"
+          name="currency"
+          select
+          label="Please select your currency"
+          style={ classes.textField }
+          value={ this.state.currency }
+          onChange={ this.handleChange }
+          margin="normal"
+        >
+          { currencies.map(option => (
+            <MenuItem key={ option.value } value={ option.value } >
+              { option.label }
+            </MenuItem>
+          ))}
+        </TextField>
+
+
+>>>>>>> 698767e4b817aae441a6e91bbf34807855275b6d
 
           <TextField
             id="currency"
@@ -164,6 +371,7 @@ class ProductForm extends PureComponent {
             margin="normal"
           />
 
+<<<<<<< HEAD
           <TextField
             label="Volume"
             id="volume"
@@ -198,6 +406,37 @@ class ProductForm extends PureComponent {
               shrink: true,
             }}
           />
+=======
+
+
+        <TextField
+          id="harvested"
+          name="harvested"
+          label="Harvested Date"
+          type="date"
+          defaultValue="2017-05-24"
+            value={this.state.harvested}
+          onChange={ this.handleChange }
+          style={ classes.textField }
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+
+        <TextField
+          id="expired"
+            name="expiration"
+          label="Expiry Date"
+          type="date"
+          defaultValue="2017-05-24"
+            value={this.state.expiration}
+          onChange={ this.handleChange }
+          style={ classes.textField }
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+>>>>>>> 698767e4b817aae441a6e91bbf34807855275b6d
 
           <TextField
             id="expired"
@@ -239,6 +478,7 @@ const mapStateToProps = (state, props) => ({
   beans: state.codes.filter(x => x.code.match(/^09/))
 })
 
-
-
-export default connect(mapStateToProps, { fetchCodes })(ProductForm)
+export default compose(
+  withMobileDialog(),
+  connect(mapStateToProps, { fetchCodes })
+)(ProductForm);

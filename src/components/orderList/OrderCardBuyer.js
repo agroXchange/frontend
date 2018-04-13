@@ -5,7 +5,7 @@ import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card'
 import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
 import compose from 'lodash/fp/compose'
-import {translate, Trans} from "react-i18next"
+import { translate } from "react-i18next"
 
 const styles = {
   card: {
@@ -34,11 +34,8 @@ class OrderCardBuyer extends PureComponent {
 
 
   render() {
-    const { classes, orders } = this.props;
-
-    const { t, i18n } = this.props
-
-    const { product } = this.props
+    const { classes, orders, product } = this.props;
+    const { t } = this.props
 
     return (
       <div>

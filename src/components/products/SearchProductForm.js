@@ -1,20 +1,20 @@
 import React, { PureComponent } from 'react';
+import { compose } from 'redux'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
+
+import Button from 'material-ui/Button';
+import Dialog, { DialogContent, DialogContentText, withMobileDialog,} from 'material-ui/Dialog';
+import ExpansionPanel, { ExpansionPanelSummary, ExpansionPanelDetails,} from 'material-ui/ExpansionPanel';
+import Typography from 'material-ui/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MenuItem from 'material-ui/Menu/MenuItem';
 import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
-import { withStyles } from 'material-ui/styles';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import Icon from 'material-ui/Icon';
+import Search from '@material-ui/icons/Search';
 
-import 'foundation-sites/dist/css/foundation.min.css';
-import zIndex from 'material-ui/styles/zIndex';
-
-import { vegetables, fruits, beans } from '../../productCodes'
-
-import jquery from 'jquery';
-window.$ = window.jQuery = jquery;
-require('foundation-sites');
+import { fetchCodes } from '../../actions/codes'
 
 
 const classes = {
@@ -23,7 +23,7 @@ const classes = {
         flexWrap: 'wrap',
     },
     textField: {
-        marginLeft: 10,
+        marginLeft: 5,
         marginRight: 10,
         marginBottom: 20,
         width: 200,
@@ -56,13 +56,19 @@ const countries = [
     },
 ];
 
-class SearchProductForm extends PureComponent {
-    state = {
-       country: 'Colombia'
-    }
 
-    propTypes = {
-        classes: PropTypes.object.isRequired,
+class SearchProductForm extends React.Component {
+    state = {
+        open: false,
+        country: 'Colombia'
+    };
+
+    handleClickOpen = () => {
+        this.setState({ open: true });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
     };
 
     handleSubmit = (e) => {
@@ -70,149 +76,204 @@ class SearchProductForm extends PureComponent {
         this.props.onSubmit(this.state)
     }
 
-    handleChange = (e) => {
+    handleChange  = (e) => {     
         const { name, value } = e.target
 
         this.setState({
             [name]: value
         })
-
     }
+
+    handleClick = code => {
+        this.setState({
+            code: code,
+            open: false
+        })
+    }
+
+    componentWillMount = () => {
+        this.props.fetchCodes()
+    }
+
 
     render() {
+        const { fullScreen, codes, vegetables, fruits, beans } = this.props
+
+        if (codes)
         return (
             <form onSubmit={this.handleSubmit} className="form-container">
+            
                 <Paper className="paper">
+             <div id="search">    
 
-                    <h2>Search Products</h2>
+                <h2>Product Search</h2>
 
-                    <div>
-                        <ul className="vertical menu drilldown"
-                            data-drilldown
-                            data-auto-height="true"
+                        <Button 
+                            onClick={this.handleClickOpen}
+                            variant="raised" 
+                           >
+                            <Search/> Products 
+                        </Button>
 
+                    <Dialog
+                        fullScreen={fullScreen}
+                        open={this.state.open}
+                        aria-labelledby="responsive-dialog-title"
+                    >
+
+                    <ExpansionPanel>
+                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                            <Typography className={classes.heading}>Vegetables ({vegetables.length})</Typography>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelDetails>
+ 
+                                <DialogContent>
+                                    <DialogContentText>
+                                            {vegetables.map(veg =>
+                                             { 
+                                               return  <div key={veg.code}>
+                                                    <Button
+                                                       color="primary"
+                                                        className="button"
+                                                        size="small"
+                                                        type="button"
+                                                        onClick={_ => this.handleClick(veg.code)}
+                                                    >
+                                                        {veg.titleeng}
+                                                    </Button>
+                                                </div>
+                                            }
+                                            )}
+                                    </DialogContentText>
+                                </DialogContent>
+
+                        </ExpansionPanelDetails>
+                    </ExpansionPanel>
+
+                    <ExpansionPanel>
+                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                            <Typography className={classes.heading}>Fruits & Nuts ({fruits.length})</Typography>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelDetails>
+
+                                    <DialogContent>
+                                        <DialogContentText>
+                                                {fruits.map(fruit =>
+                                                    <div key={fruit.code}>
+                                                        <Button
+                                                            size="small"
+                                                            color="primary"
+                                                            className="button" 
+                                                            type="button"
+                                                            onClick={_ => this.handleClick(fruit.code)}
+                                                        >
+                                                            {fruit.titleeng}
+                                                        </Button>
+                                                    </div>
+                                                )}
+                                        </DialogContentText>
+                                    </DialogContent>
+                                
+                        </ExpansionPanelDetails>
+                    </ExpansionPanel>
+
+                    <ExpansionPanel>
+                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                            <Typography className={classes.heading}>Beans & Crop ({beans.length})</Typography>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelDetails>
+
+                                <DialogContent>
+                                    <DialogContentText>
+                                            {beans.map(bean =>
+                                                <div key={bean.code}>
+                                                    <Button
+                                                        size="small"
+                                                        color="primary"
+                                                        className="button"
+                                                        type="button"
+                                                        onClick={_ => this.handleClick(bean.code)}
+                                                    >
+                                                        {bean.titleeng}
+                                                    </Button>
+                                                </div>
+                                            )}
+                                    </DialogContentText>
+                                </DialogContent>
+
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                </Dialog>
+            </div>   
+            <br/>
+            <div> 
+                        <TextField
+                            id="code"
+                            name="code"
+                            // label="HS Code"
+                            style={classes.textField}
+                            value={this.state.code}
+                            onChange={this.handleChange}
+                            placeholder="HS Number"
+                            margin="normal"
+                        />
+            </div>
+            <div >
+                        <TextField
+                            id="country"
+                            name="country"
+                            select
+                            label="Please select your country"
+                            style={classes.textField}
+                            value={this.state.country}
+                            onChange={this.handleChange}
+                            margin="normal"
                         >
-                            <div id="test">
-                                <li>
-                                    <a href="#"> Vegetables   </a>
-                                    <ul className="menu vertical nested">
-                                        {vegetables.map(veg =>
-                                            <li key={Object.getOwnPropertyNames(veg)}
-                                                name="name"
-                                                value={Object.getOwnPropertyNames(veg)}
-                                                onClick={this.handleChange}
-                                                type="button"
-                                                data-close-on-click="true"
-                                            >
-
-                                                <a href="#"
+                            {countries.map(option => (
+                                <MenuItem key={option.value} value={option.value} >
+                                    {option.label}
+                                </MenuItem>
+                            ))}
+                        </TextField>
 
 
-                                                >{Object.getOwnPropertyNames(veg)}</a>
-                                                <ul className="menu vertical nested">
-                                                    <li><a href="#" >Two AAAA</a></li>
-                                                </ul>
+                        <Button
+                            color="primary"
+                            className="submit-btn"
+                            type="submit"
+                            style={{
+                                display: 'block',
+                                margin: 'auto',
+                                marginTop: 20,
+                                marginBottom: 20
+                            }}
+                        >
+                            Save
+                        </Button>
 
-                                               
-
-
-                                            </li>
-                                        )}
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#"> Fruits & Nuts   </a>
-                                    <ul className="menu vertical nested">
-                                        {fruits.map(fruit =>
-                                            <li key={Object.getOwnPropertyNames(fruit)}>
-                                                <button
-                                                    name="name"
-                                                    className="button"
-                                                    value={Object.getOwnPropertyNames(fruit)}
-                                                    type="button"
-                                                    onClick={this.handleChange}
-
-                                                >
-                                                    {Object.getOwnPropertyNames(fruit)}
-
-                                                </button>
-                                            </li>
-
-                                        )}
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#"> Beans & Crop   </a>
-                                    <ul className="menu vertical nested">
-                                        {beans.map(bean =>
-                                            <li key={Object.getOwnPropertyNames(bean)}>
-                                                <button
-                                                    name="name"
-                                                    className="button"
-                                                    value={Object.getOwnPropertyNames(bean)}
-                                                    type="button"
-                                                    onClick={this.handleChange}
-                                                >
-                                                    {Object.getOwnPropertyNames(bean)}
-
-                                                </button>
-                                            </li>
-
-                                        )}
-                                    </ul>
-                                </li>
-                            </div>
-                        </ul>
                     </div>
-
-                    <TextField
-                        id="code"
-                        name="code"
-                        label="HS Code"
-                        style={classes.textField}
-                        value={this.state.code}
-                        onChange={this.handleChange}
-                        margin="normal"
-                    />
-
-                    <TextField
-                        id="country"
-                        name="country"
-                        select
-                        label="Please select your country"
-                        style={classes.textField}
-                        value={this.state.country}
-                        onChange={this.handleChange}
-                        margin="normal"
-                    >
-                        {countries.map(option => (
-                            <MenuItem key={option.value} value={option.value} >
-                                {option.label}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-
-
-                    <Button
-                        color="primary"
-                        className="submit-btn"
-                        type="submit"
-                        style={{
-                            display: 'block',
-                            margin: 'auto',
-                            marginTop: 20,
-                            marginBottom: 20
-                        }}
-                    >
-                        Save
-        </Button>
-
-                </Paper>
-            </form>
-        )
+                    </Paper>
+                </form>
+           
+        );
     }
-
 }
 
+SearchProductForm.propTypes = {
+    fullScreen: PropTypes.bool.isRequired,
+};
 
-export default SearchProductForm
+const mapStateToProps = (state, props) => ({
+    codes: state.codes,
+    vegetables: state.codes.filter(x => x.code.match(/^07/)),
+    fruits: state.codes.filter(x => x.code.match(/^08/)),
+    beans: state.codes.filter(x => x.code.match(/^09/))
+})
+
+export default compose(
+    withMobileDialog(), 
+    connect(mapStateToProps, { fetchCodes })
+)(SearchProductForm);
+
+
+
