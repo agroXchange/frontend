@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+<<<<<<< 68535833ba676399be74479ca9b1f59a62022be1
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
@@ -8,6 +9,16 @@ import Typography from 'material-ui/Typography'
 import compose from 'lodash/fp/compose'
 import { translate } from "react-i18next"
 
+=======
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import Paper from 'material-ui/Paper';
+import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
+import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography';
+import compose from 'lodash/fp/compose'
+import {translate, Trans} from "react-i18next"
+>>>>>>> Fixed bugs in accept and decline by orders/id
 const styles = theme => ({
   card: {
     maxWidth: 400,
@@ -36,14 +47,15 @@ class OrderDetailCard extends PureComponent {
     const data = {
       status: 'Approved'
     }
-    this.props.hello(data)
+    this.props.chageOrderStatus(data)
+    window.location.reload()
   }
-
   handleDecline = () => {
     const data = {
       status: 'Declined'
     }
-    this.props.hello(data)
+    this.props.chageOrderStatus(data)
+    window.location.reload()
   }
 
   render() {
@@ -73,7 +85,7 @@ class OrderDetailCard extends PureComponent {
                  </tr>
                  <tr>
                     <th>{t('Type')}</th>
-                    <td>{order.buyer.Type}</td>
+                    <td>{order.buyer.type}</td>
                  </tr>
                  <tr>
                     <th>{t('COC')}</th>
@@ -107,8 +119,11 @@ class OrderDetailCard extends PureComponent {
                     <th>{t('Comments')}</th>
                     <td>{order.comments}</td>
                  </tr>
+                 <tr>
+                    <th>{t('Status')}</th>
+                    <td>{order.status}</td>
+                 </tr>
                </table>
-
            </CardContent>
            <Button
               variant="raised"
@@ -132,9 +147,6 @@ class OrderDetailCard extends PureComponent {
     )
   }
 }
-
-
-
 export default compose(
   translate('detail'),
   withStyles(styles))(OrderDetailCard);
