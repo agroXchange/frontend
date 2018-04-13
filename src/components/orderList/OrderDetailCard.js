@@ -25,6 +25,7 @@ const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
   },
+
 })
 
 class OrderDetailCard extends PureComponent {
@@ -38,7 +39,6 @@ class OrderDetailCard extends PureComponent {
     }
     this.props.hello(data)
   }
-
   handleDecline = () => {
     const data = {
       status: 'Declined'
@@ -73,7 +73,7 @@ class OrderDetailCard extends PureComponent {
                  </tr>
                  <tr>
                     <th>{t('Type')}</th>
-                    <td>{order.buyer.Type}</td>
+                    <td>{order.buyer.type}</td>
                  </tr>
                  <tr>
                     <th>{t('COC')}</th>
@@ -107,8 +107,11 @@ class OrderDetailCard extends PureComponent {
                     <th>{t('Comments')}</th>
                     <td>{order.comments}</td>
                  </tr>
+                 <tr>
+                    <th>{t('Status')}</th>
+                    <td>{order.status}</td>
+                 </tr>
                </table>
-
            </CardContent>
            <Button
               variant="raised"
@@ -132,9 +135,6 @@ class OrderDetailCard extends PureComponent {
     )
   }
 }
-
-
-
 export default compose(
   translate('detail'),
   withStyles(styles))(OrderDetailCard);
