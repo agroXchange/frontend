@@ -56,8 +56,9 @@ i18n.use(LanguageDetector).init({
         'coc': 'Chamber of Commerce',
         'cocOptional': 'Chamber of Commerce registration number (optional now)',
         'cocExplanation': 'To participate on this website, you will need to provide proof of your membership of your local chamber of commerce. If you have your registration number ready, please fill it in above. You can also do this after signing up. If you have any questions, please contact the webmaster.',
-
-
+        'resetPassword': 'Reset password',
+        'forgotPassword': 'Forgot password',
+        'forgotPassword?': 'Forgot password?',
       },
       orders: {
         'Order': 'Order',
@@ -138,6 +139,9 @@ i18n.use(LanguageDetector).init({
         'coc': 'Camara de Comercio',
         'cocOptional': 'Registro de Camara de Comercio (Opcional ahora)',
         'cocExplanation': 'Para participar en este website, ud. necesita proveer el registro de membresía (pertenencia) de su camara de comercio local. Si ud. tiene su número de registro listo, por favor rellenelo (escríbalo) arriba. También puede hacerlo después de registrarse. Si usted tiene algunas preguntas, por favor contacte al administrador de la web.',
+        'resetPassword': 'Restablecer la contraseña',
+        'forgotPassword': 'Olvidé la contraseña',
+        'forgotPassword?':'¿Olvidaste tu contraseña?'
       },
       orders: {
         'Order': 'Orden',
