@@ -240,6 +240,30 @@ class ProductForm extends PureComponent {
           margin="normal"
         />
 
+          <TextField
+            id="certification"
+            name="certificate"
+            label="Certification"
+            style={classes.textField}
+            value={this.state.certificate}
+            onChange={this.handleChange}
+            margin="normal"
+          />
+
+          <TextField
+            id="price"
+            name="price"
+            label="Price per Kg"
+            value={this.state.price}
+            onChange={this.handleChange}
+            type="number"
+            style={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            margin="normal"
+          />
+
         <TextField
           id="currency"
           name="currency"
@@ -257,19 +281,7 @@ class ProductForm extends PureComponent {
           ))}
         </TextField>
 
-        <TextField
-          id="price"
-          name="price"
-          label="Price per Kg"
-          value={ this.state.price }
-          onChange={ this.handleChange }
-          type="number"
-          style={ classes.textField }
-          InputLabelProps={{
-            shrink: true,
-          }}
-          margin="normal"
-        />
+
 
         <TextField
           label="Volume"
@@ -283,15 +295,7 @@ class ProductForm extends PureComponent {
           }}
         />
 
-        <TextField
-          id="certification"
-          name="certificate"
-          label="Certification"
-          style={ classes.textField }
-            value={this.state.certificate }
-          onChange={ this.handleChange }
-          margin="normal"
-        />
+
 
         <TextField
           id="harvested"
@@ -299,6 +303,7 @@ class ProductForm extends PureComponent {
           label="Harvested Date"
           type="date"
           defaultValue="2017-05-24"
+            value={this.state.harvested}
           onChange={ this.handleChange }
           style={ classes.textField }
           InputLabelProps={{
@@ -312,6 +317,7 @@ class ProductForm extends PureComponent {
           label="Expiry Date"
           type="date"
           defaultValue="2017-05-24"
+            value={this.state.expiration}
           onChange={ this.handleChange }
           style={ classes.textField }
           InputLabelProps={{
