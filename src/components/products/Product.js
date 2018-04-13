@@ -15,7 +15,6 @@ import Dialog, { DialogActions, DialogContent, DialogContentText,  DialogTitle }
 import '../../styles/Product.css'
 import { fetchProduct } from '../../actions/products'
 import { createOrder } from '../../actions/orders'
-import OrderForm from '../OrderForm'
 import ProductForm from './ProductForm'
 
 const styles = {
