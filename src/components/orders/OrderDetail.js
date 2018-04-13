@@ -1,59 +1,76 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper'
+import Grid from 'material-ui/Grid';
 import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card'
 import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
+import { fetchOrder, changeStatus } from '../../actions/orders'
+import { connect } from 'react-redux'
 import compose from 'lodash/fp/compose'
+import '../../styles/OrderList.css'
 import { translate } from "react-i18next"
 
 const styles = theme => ({
-  card: {
-    maxWidth: 400,
-    margin: 50,
-    textAlign: "left",
-    display: "inline-block"
-  },
-  table: {
-    width: "15px",
-    fontSize: "12px"
-  },
-  number: {
-    fontSize: "15px"
-  },
-  button: {
-    margin: theme.spacing.unit,
-  },
-
+ root: {
+   flexGrow: 1,
+ },
+ paper: {
+   padding: theme.spacing.unit * 2,
+   textAlign: 'center',
+   color: theme.palette.text.secondary,
+ },
+ card: {
+   maxWidth: 400,
+   margin: 50,
+   textAlign: "left",
+   display: "inline-block"
+ },
+ table: {
+   width: "15px",
+   fontSize: "12px"
+ },
+ number: {
+   fontSize: "15px"
+ },
+ button: {
+   margin: theme.spacing.unit,
+ },
 })
 
-class OrderDetailCard extends PureComponent {
+class OrderDetail extends PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired
   }
 
-  handleApprove = () => {
+  componentWillMount() {
+    this.props.fetchOrder(this.props.match.params.id)
+  }
+
+  handleApprove = (value) => {
     const data = {
       status: 'Approved'
     }
-    this.props.chageOrderStatus(data)
-    // window.location.reload()
+    this.props.changeStatus(data, this.props.match.params.id)
+    window.location.reload()
   }
+
   handleDecline = () => {
     const data = {
       status: 'Declined'
     }
-    this.props.chageOrderStatus(data)
-    //window.location.reload()
+    this.props.changeStatus(data, this.props.match.params.id)
+    window.location.reload()
   }
 
   render() {
-    const { classes, order, product } = this.props
-    const { t } = this.props
+     const { classes, order } = this.props;
+     const { t } = this.props;
+     if (!order) return null
 
     return (
-      <div>
+      <div className={classes.root}>
          <Card className={classes.card}>
            <CardContent>
              <Typography gutterBottom
@@ -131,10 +148,17 @@ class OrderDetailCard extends PureComponent {
            {t('DECLINE')}
           </Button>
          </Card>
-       </div>
-    )
-  }
+      </div>
+      )
+   }
 }
+
+const mapStateToProps = (state) => ({
+ order: state.order
+})
+
 export default compose(
   translate('detail'),
-  withStyles(styles))(OrderDetailCard);
+  withStyles(styles),
+  connect(mapStateToProps, { fetchOrder, changeStatus })
+)(OrderDetail);

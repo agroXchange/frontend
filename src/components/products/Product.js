@@ -18,7 +18,7 @@ import Dialog, {
 import '../../styles/Product.css'
 import { fetchProduct } from '../../actions/products'
 import { createOrder } from '../../actions/orders'
-import OrderForm from '../OrderForm'
+import OrderForm from '../orders/OrderForm'
 import ProductForm from './ProductForm'
 
 const styles = {

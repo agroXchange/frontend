@@ -4,8 +4,8 @@ import { withStyles } from "material-ui/styles"
 import { connect } from 'react-redux'
 import compose from "lodash/fp/compose"
 import { fetchOrdersByBuyerId } from  '../../actions/orders'
-import OrderCardBuyer from '../../components/orderList/OrderCardBuyer'
-import './OrderList.css'
+import OrderListItem from './OrderListItem'
+import '../../styles/OrderList.css'
 
 const styles = theme => ({
   root: {
@@ -27,6 +27,7 @@ class OrderListBuyer extends PureComponent {
     this.props.fetchOrdersByBuyerId(this.props.match.params.id)
   }
 
+  render
 
   render() {
     const { classes, orders } = this.props
@@ -34,7 +35,7 @@ class OrderListBuyer extends PureComponent {
     return (
       <div className={classes.root}>
         {orders.map( order =>
-          <OrderCardBuyer order={order}/>
+          <OrderListItem order={order}/>
         )}
       </div>
     )

@@ -5,7 +5,8 @@ import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card'
 import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
 import compose from 'lodash/fp/compose'
-import { translate } from "react-i18next"
+import { translate } from 'react-i18next'
+import { Link } from 'react-router-dom'
 
 const styles = {
   card: {
@@ -30,8 +31,6 @@ class OrderCardBuyer extends PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired
   }
-
-
 
   render() {
     const { classes, order, product } = this.props;
@@ -69,9 +68,11 @@ class OrderCardBuyer extends PureComponent {
                </table>
            </CardContent>
            <CardActions>
-             <Button size="small" color="primary">
-               {t('Go to seller profile')}
-             </Button>
+             <Link to={`/orders/${order.id}`}>
+               <Button size="small"   color="primary">
+                 {t('SEE DETAILS')}
+               </Button>
+             </Link>
            </CardActions>
          </Card>
        </div>
