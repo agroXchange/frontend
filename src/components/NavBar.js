@@ -159,24 +159,23 @@ class NavBar extends PureComponent {
             <IconButton color="inherit" onClick={this.toggleDrawer('left', true)}>
               <MenuIcon />
             </IconButton>
+            {this.props.location.pathname.indexOf("admin") > 0 && (
+            <Button color="inherit" onClick={() => this.props.history.push("/admin")}>
+              Admin
+            </Button>
+          )}
 
             <SwipeableDrawer open={this.state.left} onClose={this.toggleDrawer('left', false)} onOpen={this.toggleDrawer('left', true)}>
               <div tabIndex={0} role="button" onClick={this.toggleDrawer('left', false)} onKeyDown={this.toggleDrawer('left', false)}>
                 {sideList}
               </div>
             </SwipeableDrawer>
-            {this.props.location.pathname.indexOf("admin") > 0 && (
-            <Button color="inherit" onClick={() => this.props.history.push("/admin")}>
-              Admin Page
-            </Button>
-          )}
-
-
           </div>
 
           <Typography variant="title" color="inherit" className={classes.flex}>
             AgroXchange
           </Typography>
+
 
           {
             auth && (<div>

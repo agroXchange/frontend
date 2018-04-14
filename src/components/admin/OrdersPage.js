@@ -129,7 +129,7 @@ class OrdersPage extends PureComponent {
                 </TableRow>
               </TableBody>
             </Table>
-            <Button size="medium" color="primary">
+            <Button onClick={() => this.props.history.push(`/orders/${order.id}`)} size="medium" color="primary">
               View Order
             </Button>
           </Card>
