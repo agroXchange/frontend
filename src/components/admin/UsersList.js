@@ -5,12 +5,7 @@ import { fetchUsers, deleteUser } from "../../actions/users";
 import { assignImage } from "./lib/lib";
 import compose from "lodash/fp/compose";
 import { withStyles } from "material-ui/styles";
-import List, {
-  ListItem,
-  ListItemAvatar,
-  ListItemSecondaryAction,
-  ListItemText
-} from "material-ui/List";
+import List, { ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText } from "material-ui/List";
 import DeleteIcon from "@material-ui/icons/Delete";
 import InfoIcon from "@material-ui/icons/Info";
 import Button from "material-ui/Button";

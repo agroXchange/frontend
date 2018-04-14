@@ -4,12 +4,11 @@ import { withStyles } from "material-ui/styles";
 import { Link } from "react-router-dom";
 import { assignImage } from './lib/lib'
 import Card from "material-ui/Card";
-import { CardActions, CardHeader, CardMedia, CardTitle, CardText, CardContent } from "material-ui/Card";
+import {CardHeader, CardMedia, CardContent } from "material-ui/Card";
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from "material-ui/Button";
-import Paper from "material-ui/Paper";
-import Dialog, { DialogActions, DialogContent, DialogContentText,  DialogTitle} from "material-ui/Dialog";
+import Dialog, { DialogTitle } from "material-ui/Dialog";
 import { fetchPendingUsers, approveUser, deleteUser } from "../../actions/users";
 import compose from 'lodash/fp/compose'
 

@@ -5,7 +5,10 @@ export default function(state = null, { type, payload } = {}) {
     case FETCH_USER:
       return payload
     case UPDATE_USER:
-      return payload
+      return {
+        ...state,
+        [payload.id]: payload
+      }
     case APPROVE_USER:
       return payload
     case DELETE_USER:

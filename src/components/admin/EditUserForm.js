@@ -1,11 +1,9 @@
 import React, { PureComponent } from "react";
 import Select from "material-ui/Select";
-import compose from "lodash/fp/compose";
 import { MenuItem } from "material-ui/Menu";
 import { withStyles } from "material-ui/styles";
 import Input, { InputLabel } from "material-ui/Input";
-import { FormControl, FormHelperText } from "material-ui/Form";
-import Typography from "material-ui/Typography";
+import { FormControl} from "material-ui/Form";
 import Button from "material-ui/Button";
 
 import TextField from "material-ui/TextField";
@@ -187,6 +185,4 @@ class EditUserForm extends PureComponent {
   }
 }
 
-export default
-  withStyles(styles)
-(EditUserForm);
+export default withStyles(styles)(EditUserForm);

@@ -4,25 +4,11 @@ import compose from "lodash/fp/compose";
 import { withStyles } from "material-ui/styles";
 import { Link } from "react-router-dom";
 import Card from "material-ui/Card";
-import {
-  CardActions,
-  CardHeader,
-  CardMedia,
-  CardTitle,
-  CardText,
-  CardContent
-} from "material-ui/Card";
+import { CardHeader,CardMedia } from "material-ui/Card";
 import Button from "material-ui/Button";
-import Paper from "material-ui/Paper";
-import Table, {
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow
-} from "material-ui/Table";
+import Table, { TableBody, TableCell, TableHead, TableRow } from "material-ui/Table";
 import { fetchAllOrders } from "../../actions/orders";
-import Dialog, { DialogActions, DialogContent, DialogContentText,  DialogTitle} from "material-ui/Dialog";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import Dialog, { DialogTitle } from "material-ui/Dialog";
 
 const style = () => ({
   card: {
