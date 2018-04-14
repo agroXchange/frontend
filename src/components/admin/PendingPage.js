@@ -89,13 +89,6 @@ class PendingPage extends PureComponent {
             </CardContent>
           </Card>
         ))}
-        <Card>
-          <Link to={`/admin`}>
-            <Button size="medium" color="primary">
-              Admin Page
-            </Button>
-          </Link>
-        </Card>
       </MuiThemeProvider>
     );
   }

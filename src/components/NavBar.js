@@ -14,6 +14,7 @@ import Menu, {MenuItem} from 'material-ui/Menu';
 import compose from 'lodash/fp/compose'
 import {translate} from "react-i18next"
 import {Link} from 'react-router-dom'
+import { withRouter } from "react-router";
 
 import SwipeableDrawer from 'material-ui/SwipeableDrawer';
 import Button from 'material-ui/Button';
@@ -154,7 +155,6 @@ class NavBar extends PureComponent {
 
       <AppBar position="static">
         <Toolbar>
-
           <div>
             <IconButton color="inherit" onClick={this.toggleDrawer('left', true)}>
               <MenuIcon />
@@ -165,12 +165,19 @@ class NavBar extends PureComponent {
                 {sideList}
               </div>
             </SwipeableDrawer>
+            {this.props.location.pathname.indexOf("admin") > 0 && (
+            <Button color="inherit" onClick={() => this.props.history.push("/admin")}>
+              Admin Page
+            </Button>
+          )}
+
 
           </div>
 
           <Typography variant="title" color="inherit" className={classes.flex}>
             AgroXchange
           </Typography>
+
           {
             auth && (<div>
               <IconButton aria-owns={open
@@ -233,4 +240,7 @@ NavBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default compose(translate("translations"), withStyles(styles))(NavBar);
+export default compose(
+  withRouter,
+  translate("translations"),
+  withStyles(styles))(NavBar);

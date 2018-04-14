@@ -5,7 +5,7 @@ import { fetchUsers, deleteUser } from "../../actions/users";
 import { assignImage } from './lib/lib'
 import compose from "lodash/fp/compose";
 import { withStyles } from "material-ui/styles";
-import List, { ListItem, ListItemAvatar, ListItemIcon, ListItemSecondaryAction, ListItemText } from "material-ui/List";
+import List, { ListItem, ListItemAvatar, ListItemIcon, ListItemSecondaryAction, ListItemText} from "material-ui/List";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import Button from "material-ui/Button";
@@ -37,7 +37,7 @@ class UsersList extends PureComponent {
   return (
     <Dialog open={users.length === 0} aria-labelledby="form-dialog-title">
       <DialogTitle id="form-dialog-title">
-        There are no users
+        There are not users
       </DialogTitle>
       <Link to={`/admin`}>
         <Button size="medium" color="primary">
@@ -91,13 +91,6 @@ class UsersList extends PureComponent {
             </ListItem>
           </List>
         ))}
-        <Card>
-          <Link to={`/admin`}>
-            <Button size="medium" color="primary">
-              Admin Page
-            </Button>
-          </Link>
-        </Card>
       </div>
     );
   }

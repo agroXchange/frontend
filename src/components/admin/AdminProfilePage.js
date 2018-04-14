@@ -30,6 +30,7 @@ class AdminProfilePage extends PureComponent {
     this.toggleEdit();
   };
 
+
   render() {
     const { user, t } = this.props;
     if (!user || !user.profile) return null;
@@ -74,7 +75,7 @@ class AdminProfilePage extends PureComponent {
               <EditIcon />
             </IconButton>
             {this.state.edit && (
-         <EditUserForm 
+         <EditUserForm
            initialValues={user.profile}
            onSubmit={this.updateUser}
          />
