@@ -9,6 +9,7 @@ import IconButton from "material-ui/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import compose from "lodash/fp/compose";
 import { translate } from "react-i18next";
+import Dialog, { DialogTitle } from "material-ui/Dialog";
 
 class AdminProfilePage extends PureComponent {
   state = {
@@ -19,6 +20,14 @@ class AdminProfilePage extends PureComponent {
     this.setState({
       edit: !this.state.edit
     });
+  };
+
+  handleEditClose = () => {
+    this.setState({ edit: false });
+  };
+
+  handleEditOpen = () => {
+    this.setState({ edit: true });
   };
 
   componentWillMount(props) {
@@ -36,6 +45,14 @@ class AdminProfilePage extends PureComponent {
 
     return (
       <div key={user.profile.id} className="user-card">
+      <Button
+        onClick={() => this.props.history.goBack()}
+        size="medium"
+        color="primary"
+        style={{display:'flex', flex:1}}
+      >
+        Go Back
+      </Button>
         <div className="photo">
           <img
             style={{ marginTop: "50px" }}
@@ -44,7 +61,7 @@ class AdminProfilePage extends PureComponent {
             width="100"
           />
         </div>
-        <IconButton onClick={this.toggleEdit} aria-label="Edit">
+        <IconButton onClick={this.handleEditOpen} aria-label="Edit">
           <EditIcon />
         </IconButton>
         <div className="info">
@@ -78,30 +95,36 @@ class AdminProfilePage extends PureComponent {
             {t("Email")}: {user.email}
           </Typography>
 
-          {!this.state.edit && (
-            <div>
-              <Button
-                onClick={() => this.props.history.push(`/orders/${user.id}`)}
-                size="medium"
-                color="primary"
-              >
-                Orders
-              </Button>
-              <Button
-                onClick={() => this.props.history.push(`/products/${user.id}`)}
-                size="medium"
-                color="primary"
-              >
-                Products
-              </Button>
-            </div>
-          )}
-          {this.state.edit && (
-            <EditUserForm
-              initialValues={user.profile}
-              onSubmit={this.updateUser}
-            />
-          )}
+          <Dialog
+            open={this.state.edit}
+            onClose={this.handleEditClose}
+            aria-labelledby="form-dialog-title"
+          >
+            <DialogTitle id="form-dialog-title">Update User</DialogTitle>
+            {this.state.edit && (
+              <EditUserForm
+                initialValues={user.profile}
+                onSubmit={this.updateUser}
+              />
+            )}
+          </Dialog>
+
+          <div>
+            <Button
+              onClick={() => this.props.history.push(`/orders/${user.id}`)}
+              size="medium"
+              color="primary"
+            >
+              Orders
+            </Button>
+            <Button
+              onClick={() => this.props.history.push(`/products/${user.id}`)}
+              size="medium"
+              color="primary"
+            >
+              Products
+            </Button>
+          </div>
         </div>
       </div>
     );
