@@ -12,7 +12,7 @@ import Button from "material-ui/Button";
 import IconButton from "material-ui/IconButton";
 import Avatar from "material-ui/Avatar";
 import Divider from "material-ui/Divider";
-import Dialog, { DialogTitle } from "material-ui/Dialog";
+import Dialog, { DialogTitle, DialogActions } from "material-ui/Dialog";
 
 const style = theme => ({
   card: {
@@ -25,12 +25,25 @@ const style = theme => ({
 });
 
 class UsersList extends PureComponent {
+  state = {
+   open: false,
+ };
+
+ handleOpen = () => {
+   this.setState({open: true});
+ };
+
+ handleClose = () => {
+   this.setState({open: false});
+ };
+
   componentWillMount(props) {
     this.props.fetchUsers();
   }
 
   deleteUser = id => {
     this.props.deleteUser(id);
+    this.handleClose()
   };
 
   renderMessage = users => {
@@ -82,18 +95,26 @@ class UsersList extends PureComponent {
               </Link>
               <ListItemSecondaryAction>
                 <IconButton
-                  onClick={() => {
-                    if (
-                      window.confirm(
-                        "Are you sure you wish to delete this student?"
-                      )
-                    )
-                      this.deleteUser(user.id);
-                  }}
-                  aria-label="Delete"
+                  onClick={this.handleOpen}
                 >
                   <DeleteIcon />
                 </IconButton>
+                <Dialog
+                  open={this.state.open}
+                  onRequestClose={this.handleClose}
+                >
+                  <DialogTitle>
+                    {`Are you sure do you want to delete ${user.profile.name}?`}
+                  </DialogTitle>
+                    <DialogActions>
+                      <Button onClick={this.handleClose} primary>
+                        {"Cancel"}
+                      </Button>
+                      <Button onClick={() => this.deleteUser(user.id)} primary>
+                        {"Yes"}
+                      </Button>
+                    </DialogActions>
+                </Dialog>
               </ListItemSecondaryAction>
               <Divider inset={true} />
             </ListItem>
