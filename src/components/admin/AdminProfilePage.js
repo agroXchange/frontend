@@ -1,14 +1,15 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { fetchUser, updateUser } from "../../actions/users";
-import { assignImage } from './lib/lib'
-import Paper from "material-ui/Paper";
+import { assignImage } from "./lib/lib";
+import Button from "material-ui/Button";
 import Typography from "material-ui/Typography";
-import EditUserForm from './EditUserForm'
+import EditUserForm from "./EditUserForm";
 import IconButton from "material-ui/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import compose from "lodash/fp/compose";
 import { translate } from "react-i18next";
+import Dialog, { DialogTitle } from "material-ui/Dialog";
 
 class AdminProfilePage extends PureComponent {
   state = {
@@ -19,6 +20,14 @@ class AdminProfilePage extends PureComponent {
     this.setState({
       edit: !this.state.edit
     });
+  };
+
+  handleEditClose = () => {
+    this.setState({ edit: false });
+  };
+
+  handleEditOpen = () => {
+    this.setState({ edit: true });
   };
 
   componentWillMount(props) {
@@ -35,53 +44,89 @@ class AdminProfilePage extends PureComponent {
     if (!user || !user.profile) return null;
 
     return (
-      <Paper className="outer-paper">
-        <div key={user.profile.id} className="user-card">
-          <div className="photo">
-            <img src={assignImage(user.profile.logo)} alt="img" width="100" />
-          </div>
-          <div className="info">
-            {!this.state.edit && (
-              <Typography variant="headline" component="h2">
-                {user.profile.name}
-              </Typography>
-            )}
-            <Typography color="textSecondary">
-              {t("field")}: {user.profile.field}
-            </Typography>
-            <Typography color="textSecondary">
-              {t("type")}: {user.profile.type}
-            </Typography>
-            <Typography color="textSecondary">
-              {t("coc")}: {user.profile.chamberOfCommerce}
-            </Typography>
-            <Typography color="textSecondary">
-              {t("address")}: {user.profile.address}
-            </Typography>
-            <Typography color="textSecondary">
-              {t("cityPort")}: {user.profile.city}
-            </Typography>
-            <Typography color="textSecondary">
-              {t("country")}: {user.profile.country}
-            </Typography>
-            <Typography color="textSecondary">
-              {t("phone")}: {user.profile.phone}
-            </Typography>
-            <Typography color="textSecondary">
-              {t("Email")}: {user.email}
-            </Typography>
-            <IconButton onClick={this.toggleEdit} aria-label="Edit">
-              <EditIcon />
-            </IconButton>
+      <div key={user.profile.id} className="user-card">
+      <Button
+        onClick={() => this.props.history.goBack()}
+        size="medium"
+        color="primary"
+        style={{display:'flex', flex:1}}
+      >
+        Go Back
+      </Button>
+        <div className="photo">
+          <img
+            style={{ marginTop: "50px" }}
+            src={assignImage(user.profile.logo)}
+            alt="img"
+            width="100"
+          />
+        </div>
+        <IconButton onClick={this.handleEditOpen} aria-label="Edit">
+          <EditIcon />
+        </IconButton>
+        <div className="info">
+          <Typography variant="headline" component="h2">
+            {user.profile.name}
+          </Typography>
+
+          <Typography color="textSecondary">
+            {t("field")}: {user.profile.field}
+          </Typography>
+          <Typography color="textSecondary">
+            {t("type")}: {user.profile.type}
+          </Typography>
+          <Typography color="textSecondary">
+            {t("coc")}: {user.profile.chamberOfCommerce}
+          </Typography>
+          <Typography color="textSecondary">
+            {t("address")}: {user.profile.address}
+          </Typography>
+          <Typography color="textSecondary">
+            {t("cityPort")}: {user.profile.city}
+          </Typography>
+          <Typography color="textSecondary">
+            {t("country")}: {user.profile.country}
+          </Typography>
+          <Typography color="textSecondary">
+            {t("phone")}: {user.profile.phone}
+          </Typography>
+
+          <Typography color="textSecondary">
+            {t("Email")}: {user.email}
+          </Typography>
+
+          <Dialog
+            open={this.state.edit}
+            onClose={this.handleEditClose}
+            aria-labelledby="form-dialog-title"
+          >
+            <DialogTitle id="form-dialog-title">Update User</DialogTitle>
             {this.state.edit && (
-         <EditUserForm
-           initialValues={user.profile}
-           onSubmit={this.updateUser}
-         />
-       )}
+              <EditUserForm
+                initialValues={user.profile}
+                onSubmit={this.updateUser}
+              />
+            )}
+          </Dialog>
+
+          <div>
+            <Button
+              onClick={() => this.props.history.push(`/orders/${user.id}`)}
+              size="medium"
+              color="primary"
+            >
+              Orders
+            </Button>
+            <Button
+              onClick={() => this.props.history.push(`/products/${user.id}`)}
+              size="medium"
+              color="primary"
+            >
+              Products
+            </Button>
           </div>
         </div>
-      </Paper>
+      </div>
     );
   }
 }
@@ -92,8 +137,7 @@ const mapStateToProps = function(state) {
   };
 };
 
-
 export default compose(
   translate("user"),
-  connect(mapStateToProps, {fetchUser, updateUser})
+  connect(mapStateToProps, { fetchUser, updateUser })
 )(AdminProfilePage);
