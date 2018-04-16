@@ -15,12 +15,11 @@ import compose from 'lodash/fp/compose'
 import {translate} from "react-i18next"
 import {Link} from 'react-router-dom'
 import {connect} from "react-redux";
-
+import { withRouter } from "react-router";
 import SwipeableDrawer from 'material-ui/SwipeableDrawer';
 import Button from 'material-ui/Button';
 import List from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-
 import {ListItem, ListItemIcon, ListItemText} from 'material-ui/List';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
@@ -147,7 +146,6 @@ class NavBar extends PureComponent {
 
       <AppBar position="static" style={{backgroundColor:'#5088b7'}}>
         <Toolbar>
-
       <div>
           {currentUser &&      <IconButton color="inherit" onClick={this.toggleDrawer('left', true)}>
               <MenuIcon/>
@@ -158,12 +156,13 @@ class NavBar extends PureComponent {
                 {sideList}
               </div>
             </SwipeableDrawer>
-
           </div>
 
            <Typography variant="title" color="inherit" className={classes.flex}>
             AgroXchange
           </Typography>
+
+
           {
             auth && (<div>
         {currentUser &&       <IconButton aria-owns={open

@@ -2,12 +2,13 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { withStyles } from "material-ui/styles";
 import { Link } from "react-router-dom";
+import { assignImage } from './lib/lib'
 import Card from "material-ui/Card";
-import { CardActions, CardHeader, CardMedia, CardTitle, CardText, CardContent } from "material-ui/Card";
+import {CardHeader, CardMedia, CardContent } from "material-ui/Card";
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from "material-ui/Button";
-import Paper from "material-ui/Paper";
+import Dialog, { DialogTitle, DialogActions } from "material-ui/Dialog";
 import { fetchPendingUsers, approveUser, deleteUser } from "../../actions/users";
 import compose from 'lodash/fp/compose'
 
@@ -28,6 +29,18 @@ const style = theme => ({
 
 
 class PendingPage extends PureComponent {
+  state = {
+   open: false,
+ };
+
+ handleOpen = () => {
+   this.setState({open: true});
+ };
+
+ handleClose = () => {
+   this.setState({open: false});
+ };
+
   componentWillMount(props) {
     this.props.fetchPendingUsers();
   }
@@ -40,6 +53,22 @@ class PendingPage extends PureComponent {
     this.props.approveUser(id);
   };
 
+  renderMessage = users => {
+  return (
+    <Dialog open={users.length === 0} aria-labelledby="form-dialog-title">
+      <DialogTitle id="form-dialog-title">
+        There are not pending request
+      </DialogTitle>
+      <Link to={`/admin`}>
+        <Button size="medium" color="primary">
+          Admin Page
+        </Button>
+      </Link>
+    </Dialog>
+  );
+};
+
+
 
   render() {
     const { classes } = this.props;
@@ -47,15 +76,18 @@ class PendingPage extends PureComponent {
 
     return (
       <MuiThemeProvider>
+      {this.renderMessage(users)}
         {users.map(user => (
           <Card className={classes.card} zDepth={3} circle={true}>
             <CardHeader title={user.role} />
             <CardMedia>
+              <Link to={`/admin/profiles/${user.id}`}>
               <img
                 className={classes.media}
-                src="http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png"
+                src={assignImage(user.profile.logo)}
                 alt=""
               />
+              </Link>
             </CardMedia>
             <CardContent>
               <p>{user.profile.name}</p>
@@ -64,19 +96,28 @@ class PendingPage extends PureComponent {
               <Button onClick={() => this.approveUser(user.id)} size="medium" color="primary">
                 Approve
               </Button>
-              <IconButton onClick={() => this.deleteUser(user.id)}aria-label="Delete">
+              <IconButton onClick={this.handleOpen} aria-label="Delete">
                 <DeleteIcon />
               </IconButton>
+              <Dialog
+                open={this.state.open}
+                onRequestClose={this.handleClose}
+              >
+                <DialogTitle>
+                  {`Are you sure do you want to delete ${user.profile.name}?`}
+                </DialogTitle>
+                  <DialogActions>
+                    <Button onClick={this.handleClose} primary>
+                      {"Cancel"}
+                    </Button>
+                    <Button onClick={() => this.deleteUser(user.id)} primary>
+                      {"Yes"}
+                    </Button>
+                  </DialogActions>
+                </Dialog>
             </CardContent>
           </Card>
         ))}
-        <Card>
-          <Link to={`/admin`}>
-            <Button size="medium" color="primary">
-              Admin Page
-            </Button>
-          </Link>
-        </Card>
       </MuiThemeProvider>
     );
   }

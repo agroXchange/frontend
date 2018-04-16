@@ -1,17 +1,16 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
-import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card'
+import Button from 'material-ui/Button'
+import Typography from 'material-ui/Typography'
 import { Link } from 'react-router-dom'
 import compose from 'lodash/fp/compose'
-import {translate, Trans} from "react-i18next"
-
-
+import {translate, Trans} from 'react-i18next'
 import { fetchAllProducts } from '../../actions/products'
 
+const stockImage = "https://theculinarycook.com/wp-content/uploads/2012/04/vegetable-stock-679x509.jpg"
 
 const styles = {
   card: {
@@ -31,10 +30,7 @@ const styles = {
   media: {
     height: 100,
   },
-};
-
-
-
+}
 
 class ProductList extends PureComponent {
   static propTypes = {
@@ -58,7 +54,8 @@ class ProductList extends PureComponent {
          <Card className={classes.card}>
            <CardMedia
             className={classes.media}
-            image={ product.photo }
+            image={ product.photo !== null ?
+              product.photo : stockImage }
             title="product name - redux"
           />
            <CardContent>
@@ -69,8 +66,8 @@ class ProductList extends PureComponent {
                <table>
 
                  <tr className={classes.table}>
-                    <th>{t('Product ID')}</th>
-                    <td>{product.id}</td>
+                    <th>{t('Product')}</th>
+                    <td>{product.code.titleeng}</td>
                  </tr>
 
                  <tr className={classes.table}>
@@ -116,4 +113,5 @@ const mapStateToProps = (state) => {
 export default compose(
   translate('orders'),
   withStyles(styles),
-  connect(mapStateToProps, { fetchAllProducts }))(ProductList);
+  connect(mapStateToProps, { fetchAllProducts })
+)(ProductList);

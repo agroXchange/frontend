@@ -1,9 +1,7 @@
 import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
 import { withStyles } from "material-ui/styles";
 import { Link } from "react-router-dom";
 import Button from "material-ui/Button";
-import Paper from "material-ui/Paper";
 import Grid from "material-ui/Grid";
 import Typography from "material-ui/Typography";
 import Card, { CardActions, CardContent } from "material-ui/Card";

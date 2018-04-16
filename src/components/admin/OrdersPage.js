@@ -4,25 +4,11 @@ import compose from "lodash/fp/compose";
 import { withStyles } from "material-ui/styles";
 import { Link } from "react-router-dom";
 import Card from "material-ui/Card";
-import {
-  CardActions,
-  CardHeader,
-  CardMedia,
-  CardTitle,
-  CardText,
-  CardContent
-} from "material-ui/Card";
+import { CardHeader,CardMedia } from "material-ui/Card";
 import Button from "material-ui/Button";
-import Paper from "material-ui/Paper";
-import Table, {
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow
-} from "material-ui/Table";
+import Table, { TableBody, TableCell, TableHead, TableRow } from "material-ui/Table";
 import { fetchAllOrders } from "../../actions/orders";
-
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import Dialog, { DialogTitle } from "material-ui/Dialog";
 
 const style = () => ({
   card: {
@@ -51,12 +37,30 @@ class OrdersPage extends PureComponent {
     this.props.fetchAllOrders();
   }
 
+  renderMessage = orders => {
+  return (
+      <Dialog open={orders.length === 0} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">
+          There are no orders
+        </DialogTitle>
+        <Link to={`/admin`}>
+          <Button size="medium" color="primary">
+            Admin Page
+          </Button>
+        </Link>
+      </Dialog>
+    );
+  };
+
+
+
   render() {
     const { classes } = this.props;
     const orders = this.props.orders;
 
     return (
       <div>
+        {this.renderMessage(orders)}
         {orders.map(order => (
           <Card className={classes.card} zDepth={3} circle={true}>
             <CardHeader avatar={"#" + order.id} />
@@ -111,18 +115,11 @@ class OrdersPage extends PureComponent {
                 </TableRow>
               </TableBody>
             </Table>
-            <Button size="medium" color="primary">
+            <Button onClick={() => this.props.history.push(`/orders/${order.id}`)} size="medium" color="primary">
               View Order
             </Button>
           </Card>
         ))}
-        <Card>
-          <Link to={`/admin`}>
-            <Button size="medium" color="primary">
-              Admin Page
-            </Button>
-          </Link>
-        </Card>
       </div>
     );
   }

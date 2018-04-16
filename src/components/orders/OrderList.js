@@ -1,13 +1,11 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types';
-import { withStyles } from "material-ui/styles";
-import { connect } from 'react-redux';
-import compose from "lodash/fp/compose";
+import PropTypes from 'prop-types'
+import { withStyles } from "material-ui/styles"
+import { connect } from 'react-redux'
+import compose from "lodash/fp/compose"
 import { fetchOrdersByBuyerId } from  '../../actions/orders'
-import OrderCardBuyer from '../../components/orderList/OrderCardBuyer'
-import './OrderList.css'
-
-
+import OrderListItem from './OrderListItem'
+import '../../styles/OrderList.css'
 
 const styles = theme => ({
   root: {
@@ -18,26 +16,27 @@ const styles = theme => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
-});
-
-
+})
 
 class OrderListBuyer extends PureComponent {
   static propTypes = {
   classes: PropTypes.object.isRequired
-  };
+  }
 
   componentWillMount() {
     this.props.fetchOrdersByBuyerId(this.props.match.params.id)
   }
 
+  render
 
   render() {
-    const { classes, orders } = this.props;
+    const { classes, orders } = this.props
 
     return (
       <div className={classes.root}>
-        <OrderCardBuyer orders={orders}/>
+        {orders.map( order =>
+          <OrderListItem order={order}/>
+        )}
       </div>
     )
   }
@@ -50,4 +49,4 @@ const mapStateToProps = (state) => ({
 export default compose(
   withStyles(styles),
   connect(mapStateToProps, { fetchOrdersByBuyerId })
-)(OrderListBuyer);
+)(OrderListBuyer)

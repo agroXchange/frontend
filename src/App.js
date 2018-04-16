@@ -10,17 +10,17 @@ import Product from './components/products/Product'
 import ExampleTranslation from './components/ExampleTranslation'
 import OrdersPage from './components/admin/OrdersPage'
 import UsersList from './components/admin/UsersList'
-import OrderList from './containers/orderList/OrderList'
-import OrderDetail from './containers/orderList/OrderDetail'
+import OrderList from './components/orders/OrderList'
+import OrderDetail from './components/orders/OrderDetail'
 import NavBar from './components/NavBar'
 import LoginPage from './components/login/LoginPage'
 import ProfilePage from './components/profile/ProfilePage'
 import ProductForm from './components/products/ProductForm'
 import LogoutPage from './components/logout/LogoutPage'
-import AddProductContainer from './components/products/AddProductContainer';
-import SearchProductContainer from './components/products/SearchProductContainer';
-import Home from './components/default/default';
-
+import ResetPasswordPage from './components/password/ResetPasswordPage'
+import AddProductContainer from './components/products/AddProductContainer'
+import SearchProductContainer from './components/products/SearchProductContainer'
+import Dashboard from './components/dashboard/Dashboard'
 import './styles/App.css';
 
 class App extends Component {
@@ -50,6 +50,8 @@ class App extends Component {
             <Route exact path="/profiles/:id" component={ProfilePage} />
             <Route exact path="/addproduct" component={ AddProductContainer } />
             <Route exact path="/searchproduct" component={ SearchProductContainer } />
+            <Route exact path="/reset-password" component={ ResetPasswordPage } />
+            <Route exact path="/dashboard" component={ Dashboard } />
           </div>
         </Router>
       </MuiThemeProvider>

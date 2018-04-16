@@ -9,12 +9,16 @@ import Paper from 'material-ui/Paper'
 import Grid from 'material-ui/Grid'
 import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
-import '../../styles/Product.css'
-import OrderForm from './../OrderForm'
-import Dialog, { DialogActions, DialogContent, DialogContentText,  DialogTitle } from 'material-ui/Dialog'
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog'
 import '../../styles/Product.css'
 import { fetchProduct } from '../../actions/products'
 import { createOrder } from '../../actions/orders'
+import OrderForm from '../orders/OrderForm'
 import ProductForm from './ProductForm'
 
 const styles = {
@@ -24,7 +28,7 @@ const styles = {
     marginRight: 20,
   }
 }
-
+const stockImage = "https://theculinarycook.com/wp-content/uploads/2012/04/vegetable-stock-679x509.jpg"
 
 class Product extends PureComponent {
 
@@ -40,11 +44,11 @@ class Product extends PureComponent {
 
   handleClickOrderOpen = () => {
     this.setState({ newOrder: true });
-  };
+  }
 
   handleOrderClose = () => {
     this.setState({ newOrder: false });
-  };
+  }
 
   handleConfirmOpen = () => {
     this.setState({ confirmOrder: true })
@@ -56,11 +60,11 @@ class Product extends PureComponent {
 
   handleEditOpen = () => {
     this.setState({ editProduct: true });
-  };
+  }
 
   handleEditClose = () => {
     this.setState({ editProduct: false });
-  };
+  }
 
   createOrder = (order, productId, buyer) => {
     this.props.createOrder(order, this.props.match.params.id, this.props.currentUser)
@@ -69,39 +73,52 @@ class Product extends PureComponent {
   }
 
   render() {
-    const { classes, product, currentUser } = this.props
+    const { classes, product, currentUser, currentUserId } = this.props
     if (!product) return null
 
     return(
       <div className="product-container">
         <Paper className="paper">
-        <Paper className="title"><h2>{ product.name }</h2></Paper>
-          <Grid container className="container">
+        <Paper><h2 className="title">{ product.code.titleeng }</h2></Paper>
+          <Grid container className="container" spacing={24}>
 
-            <Grid item>
-              <img src={ product.photo } className="product-photo"/>
-              <p>Code: { product.code }</p>
-              <p>Harvested Dated: { product.harvested }</p>
-              <p>Expiration Date: { product.expiration }</p>
-
-              <Link to={ `/profiles/${product.seller.id}` }>
-                <Button color="primary">
-                  View Seller
-                </Button>
-              </Link>
+            <Grid item xs={12}>
+              <img src={ product.photo !== null ?
+                product.photo : stockImage }
+                alt="product"
+                className="product-photo"/>
             </Grid>
 
-            <Grid item>
-              <p>{ product.description }</p>
-              <p>Volume: { product.volume } KG</p>
-              <p>Price: { product.price } { product.currency } per KG</p>
-              <p>Certification: { product.certificate }</p>
-              <p>Country { product.seller.country }</p>
-              <p>City/Port: { product.seller.city }</p>
+            <Grid item xs={12} sm={6}>
+              <p><b>Code:</b> { product.code.code }</p>
+              <p><b>Harvested Dated:</b> { product.harvested }</p>
+              <p><b>Expiration Date:</b> { product.expiration }</p>
+              <p><b>Volume:</b> { product.volume } KG</p>
+              <p><b>Price:</b> { product.price } { product.currency } per KG</p>
 
-              <Button onClick={ this.handleEditOpen }>Edit Product</Button>
+              { currentUserId !== product.seller.id &&
 
-              <Button onClick={this.handleClickOrderOpen}>Make New Order</Button>
+                <Link to={ `/profiles/${product.seller.id}` }>
+                  <Button color="primary">View Seller</Button>
+                </Link>
+              }
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <p><b>Description:</b> { product.description }</p>
+              <p><b>Certification:</b> { product.certificate }</p>
+              <p><b>Country</b> { product.seller.country }</p>
+              <p><b>City/Port:</b> { product.seller.city }</p>
+
+              { currentUserId === product.seller.id &&
+                <Button onClick={ this.handleEditOpen }>Edit Product</Button>
+              }
+
+              { currentUserId !== product.seller.id &&
+                <Button onClick={this.handleClickOrderOpen}>Make New Order</Button>
+              }
+
+
             </Grid>
 
 
@@ -132,7 +149,12 @@ class Product extends PureComponent {
             </Dialog>
 
           </Grid>
+
+          <Button color="inherit" onClick={() => this.props.history.goBack()}>
+          	Go Back
+          </Button>
         </Paper>
+
       </div>
     )
   }
@@ -142,8 +164,12 @@ class Product extends PureComponent {
 const mapStateToProps = (state) => {
   return {
     product: state.product,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    currentUserId: Number(state.currentUser.id)
   }
 }
 
-export default connect(mapStateToProps, { fetchProduct, createOrder })(Product)
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps, { fetchProduct, createOrder })
+)(Product)
