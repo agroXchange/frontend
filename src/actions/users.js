@@ -82,7 +82,7 @@ export const deleteUser = (id) => (dispatch,getState) => {
     .delete(`${baseUrl}/admin/users/${id}`)
     .set("Authorization", `Bearer ${jwt}`)
     .then(response => {
-      dispatch({ type: DELETE_USER, payload: id })
+      dispatch({ type: DELETE_USER, payload: response.body })
     })
 }
 
