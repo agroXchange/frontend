@@ -14,15 +14,13 @@ import Menu, {MenuItem} from 'material-ui/Menu';
 import compose from 'lodash/fp/compose'
 import {translate} from "react-i18next"
 import {Link} from 'react-router-dom'
+import {connect} from "react-redux";
 import { withRouter } from "react-router";
-
 import SwipeableDrawer from 'material-ui/SwipeableDrawer';
 import Button from 'material-ui/Button';
 import List from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-
-
-import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import {ListItem, ListItemIcon, ListItemText} from 'material-ui/List';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import StarIcon from '@material-ui/icons/Star';
@@ -40,10 +38,11 @@ const styles = {
   },
   fullList: {
     width: 'auto'
-  }
+  },
 };
 
 class NavBar extends PureComponent {
+
   static propTypes = {
     classes: PropTypes.object.isRequired
   };
@@ -55,9 +54,7 @@ class NavBar extends PureComponent {
   };
 
   toggleDrawer = (side, open) => () => {
-    this.setState({
-      [side]: open,
-    });
+    this.setState({[side]: open});
   };
 
   handleChange = (event, checked) => {
@@ -80,7 +77,7 @@ class NavBar extends PureComponent {
     this.setState({El: null});
   };
   render() {
-    const {classes} = this.props;
+    const {classes, currentUser} = this.props;
     const {auth, anchorEl, El} = this.state;
     const open = Boolean(anchorEl);
     const openNew = Boolean(El);
@@ -91,79 +88,68 @@ class NavBar extends PureComponent {
       i18n.changeLanguage(lng)
     }
 
-    const sideList = (<div className={classes.list}>
+    const sideList = ( <div className={classes.list}>
 
       <div>
-      <ListItem button>
-        <ListItemIcon>
-          <StarIcon />
-        </ListItemIcon>
-          <Link to='/HOME'>Home</Link>
-      </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <SendIcon />
-        </ListItemIcon>
-          <Link to='/profile'>Profile</Link>
-      </ListItem>
+        <ListItem button="button">
+          <ListItemIcon>
+            <StarIcon/>
+          </ListItemIcon>
+          <Link to='/'>Home</Link>
+        </ListItem>
+        <ListItem button="button">
+          <ListItemIcon>
+            <SendIcon/>
+          </ListItemIcon>
+          <Link to='/profile'>My profile</Link>
+        </ListItem>
 
-      <ListItem button>
-        <ListItemIcon>
-          <SendIcon />
-        </ListItemIcon>
+        <ListItem button="button">
+          <ListItemIcon>
+            <SendIcon/>
+          </ListItemIcon>
           <Link to='/products'>My products</Link>
-      </ListItem>
+        </ListItem>
 
-      <ListItem button>
-        <ListItemIcon>
-          <SendIcon />
-        </ListItemIcon>
+        <ListItem button="button">
+          <ListItemIcon>
+            <SendIcon/>
+          </ListItemIcon>
           <Link to='/orders'>My orders</Link>
-      </ListItem>
+        </ListItem>
 
-      <ListItem button>
-        <ListItemIcon>
-          <SendIcon />
-        </ListItemIcon>
+        <ListItem button="button">
+          <ListItemIcon>
+            <SendIcon/>
+          </ListItemIcon>
           <Link to='/search'>AgroXpress</Link>
-      </ListItem>
+        </ListItem>
 
-      <ListItem button>
-        <ListItemIcon>
-          <SendIcon />
-        </ListItemIcon>
+        <ListItem button="button">
+          <ListItemIcon>
+            <SendIcon/>
+          </ListItemIcon>
           <Link to='/about'>About</Link>
-      </ListItem>
+        </ListItem>
 
-      <ListItem button>
-        <ListItemIcon>
-          <SendIcon />
-        </ListItemIcon>
-        <Link to='/logout'>Logout</Link>
-      </ListItem>
-  </div>
+        <ListItem button="button">
+          <ListItemIcon>
+            <SendIcon/>
+          </ListItemIcon>
+          <Link to='/logout'>Logout</Link>
+        </ListItem>
+      </div>
     </div>);
 
-    const fullList = (<div className={classes.fullList}>
-      <List>rte</List>
-      <Divider/>
-      <List>abc</List>
-    </div>);
 
-    return (
-      <div>
+    return (<div>
 
-      <AppBar position="static">
+      <AppBar position="static" style={{backgroundColor:'#5088b7'}}>
         <Toolbar>
-          <div>
-            <IconButton color="inherit" onClick={this.toggleDrawer('left', true)}>
-              <MenuIcon />
-            </IconButton>
-            {this.props.location.pathname.indexOf("admin") > 0 && (
-            <Button color="inherit" onClick={() => this.props.history.push("/admin")}>
-              Admin
-            </Button>
-          )}
+      <div>
+          {currentUser &&      <IconButton color="inherit" onClick={this.toggleDrawer('left', true)}>
+              <MenuIcon/>
+            </IconButton>}
 
             <SwipeableDrawer open={this.state.left} onClose={this.toggleDrawer('left', false)} onOpen={this.toggleDrawer('left', true)}>
               <div tabIndex={0} role="button" onClick={this.toggleDrawer('left', false)} onKeyDown={this.toggleDrawer('left', false)}>
@@ -172,19 +158,19 @@ class NavBar extends PureComponent {
             </SwipeableDrawer>
           </div>
 
-          <Typography variant="title" color="inherit" className={classes.flex}>
+           <Typography variant="title" color="inherit" className={classes.flex}>
             AgroXchange
           </Typography>
 
 
           {
             auth && (<div>
-              <IconButton aria-owns={open
+        {currentUser &&       <IconButton aria-owns={open
                   ? 'menu-appbar'
                   : null} aria-haspopup="true" onClick={this.handleMenu} color="inherit">
                 <AccountCircle/>
 
-              </IconButton>
+              </IconButton> }
 
               <IconButton aria-owns={openNew
                   ? 'menu-lang'
@@ -219,7 +205,7 @@ class NavBar extends PureComponent {
                   <Link to='/orders'>Profile</Link>
                 </MenuItem>
                 <MenuItem>
-                <Link to='/profile'>My account</Link>
+                  <Link to='/profile'>My account</Link>
                 </MenuItem>
                 <MenuItem>
                   <Link to='/logout'>Log out</Link>
@@ -227,8 +213,8 @@ class NavBar extends PureComponent {
 
               </Menu>
 
-            </div>
-            )}
+            </div>)
+          }
         </Toolbar>
       </AppBar>
     </div>);
@@ -239,7 +225,8 @@ NavBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default compose(
-  withRouter,
-  translate("translations"),
-  withStyles(styles))(NavBar);
+const mapStateToProps = function(state) {
+  return {currentUser: state.currentUser};
+};
+
+export default compose(translate("translations"), connect(mapStateToProps), withStyles(styles))(NavBar);

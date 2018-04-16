@@ -22,6 +22,7 @@ import AddProductContainer from './components/products/AddProductContainer'
 import SearchProductContainer from './components/products/SearchProductContainer'
 import MyProducts from './components/products/MyProducts'
 import ProductsPage from './components/products/ProductsPage'
+import Dashboard from './components/dashboard/Dashboard'
 
 import './styles/App.css';
 
@@ -33,6 +34,7 @@ class App extends Component {
         <Router>
           <div className="App">
             <NavBar />
+            <Route exact path="/" component={ Home } />
             <Route exact path="/admin" component={AdminPage} />
             <Route exact path="/admin/pending" component={PendingPage} />
             <Route exact path="/admin/orders" component={OrdersPage} />
@@ -52,6 +54,7 @@ class App extends Component {
             <Route exact path="/addproduct" component={ AddProductContainer } />
             <Route exact path="/searchproduct" component={ SearchProductContainer } />
             <Route exact path="/reset-password" component={ ResetPasswordPage } />
+            <Route exact path="/dashboard" component={ Dashboard } />
           </div>
         </Router>
       </MuiThemeProvider>
