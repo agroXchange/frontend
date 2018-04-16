@@ -21,8 +21,6 @@ import ResetPasswordPage from './components/password/ResetPasswordPage'
 import AddProductContainer from './components/products/AddProductContainer'
 import SearchProductContainer from './components/products/SearchProductContainer'
 import Dashboard from './components/dashboard/Dashboard'
-
-
 import './styles/App.css';
 
 class App extends Component {
@@ -33,6 +31,7 @@ class App extends Component {
         <Router>
           <div className="App">
             <NavBar />
+            <Route exact path="/" component={ Home } />
             <Route exact path="/admin" component={AdminPage} />
             <Route exact path="/admin/pending" component={PendingPage} />
             <Route exact path="/admin/orders" component={OrdersPage} />
