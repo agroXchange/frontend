@@ -15,6 +15,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import '../../styles/ProductForm.css'
 import { fetchCodes } from '../../actions/codes'
 import Search from '@material-ui/icons/Search'
+import Grid from 'material-ui/Grid';
 
 const classes = {
   container: {
@@ -59,6 +60,12 @@ class ProductForm extends PureComponent {
   state = {
     currency: 'EUR',
     open: false,
+  }
+
+  style = {
+  direction: 'row',
+  justify: 'center',
+  alignItems: 'center',
   }
 
   propTypes = {
@@ -108,6 +115,7 @@ class ProductForm extends PureComponent {
 
   render() {
     const { fullScreen, codes, vegetables, fruits, beans } = this.props
+    const { alignItems, direction, justify } = this.style;
 
     let product = codes.filter(i => i.code.match(this.state.code) )
 
@@ -222,7 +230,7 @@ class ProductForm extends PureComponent {
 
           <br />
 
-          <div><p>{   title  }</p></div>
+          <div><h3>{   title  }</h3></div>
 
         <TextField
           id="description"
@@ -244,37 +252,37 @@ class ProductForm extends PureComponent {
             margin="normal"
           />
 
-          <TextField
-            id="price"
-            name="price"
-            label="Price per Kg"
-            value={this.state.price}
-            onChange={this.handleChange}
-            type="number"
-            style={classes.textField}
-            InputLabelProps={{
-              shrink: true,
-            }}
-            margin="normal"
-          />
-
-        <TextField
-          id="currency"
-          name="currency"
-          select
-          label="Please select your currency"
-          style={ classes.textField }
-          value={ this.state.currency }
-          onChange={ this.handleChange }
-          margin="normal"
-        >
-          { currencies.map(option => (
-            <MenuItem key={ option.value } value={ option.value } >
-              { option.label }
-            </MenuItem>
-          ))}
-        </TextField>
-
+ 
+              <TextField
+                id="price"
+                name="price"
+                label="Price per Kg"
+                value={this.state.price}
+                onChange={this.handleChange}
+                type="number"
+                style={classes.textField}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                margin="normal"
+              />
+   
+            <TextField
+              id="currency"
+              name="currency"
+              select
+              label="Please select your currency"
+              style={ classes.textField }
+              value={ this.state.currency }
+              onChange={ this.handleChange }
+              margin="normal"
+            >
+              { currencies.map(option => (
+                <MenuItem key={ option.value } value={ option.value } >
+                  { option.label }
+                </MenuItem>
+              ))}
+            </TextField>
 
 
         <TextField
