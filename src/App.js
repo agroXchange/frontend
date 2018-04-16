@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import SignupPage from './components/signup/SignupPage'
 import AdminPage from './components/admin/LandingPage'
-import PendingPage from './components/admin/PendingPage'
+import PendingUserList from './components/admin/PendingUserList'
 import AdminProfilePage from './components/admin/AdminProfilePage'
+import PendingUserPage from './components/admin/PendingUserPage'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Product from './components/products/Product'
 import ExampleTranslation from './components/ExampleTranslation'
@@ -34,7 +35,8 @@ class App extends Component {
             <NavBar />
             <Route exact path="/" component={ Home } />
             <Route exact path="/admin" component={AdminPage} />
-            <Route exact path="/admin/pending" component={PendingPage} />
+            <Route exact path="/admin/pending" component={PendingUserList} />
+            <Route exact path="/admin/pending/profiles/:id" component={PendingUserPage} />
             <Route exact path="/admin/orders" component={OrdersPage} />
             <Route exact path="/admin/users" component={UsersList} />
             <Route exact path="/admin/profiles/:id" component={AdminProfilePage} />
