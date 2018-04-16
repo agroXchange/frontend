@@ -60,6 +60,7 @@ class ProductForm extends PureComponent {
   state = {
     currency: 'EUR',
     open: false,
+    code:''
   }
 
   style = {
@@ -115,12 +116,11 @@ class ProductForm extends PureComponent {
 
   render() {
     const { fullScreen, codes, vegetables, fruits, beans } = this.props
-    const { alignItems, direction, justify } = this.style;
+
 
     let product = codes.filter(i => i.code.match(this.state.code) )
-
     let title =''
-    if (product[0]){  title = ( product[0].titleeng   )}
+    if (product.length > 0){  title = ( product[0].titleeng   )}
    
     
     if(codes)

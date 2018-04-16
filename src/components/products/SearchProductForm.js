@@ -99,6 +99,11 @@ class SearchProductForm extends React.Component {
     render() {
         const { fullScreen, codes, vegetables, fruits, beans } = this.props
 
+        let product = codes.filter(i => i.code.match(this.state.code))
+
+        let title = ''
+        if (product[0]) { title = (product[0].titleeng) }
+
         if (codes)
         return (
             <form onSubmit={this.handleSubmit} className="form-container">
@@ -206,6 +211,9 @@ class SearchProductForm extends React.Component {
                 </Dialog>
             </div>   
             <br/>
+
+                <div><h3>{title}</h3></div>
+
             <div> 
                         <TextField
                             id="code"
@@ -218,6 +226,7 @@ class SearchProductForm extends React.Component {
                             margin="normal"
                         />
             </div>
+
             <div >
                         <TextField
                             id="country"
