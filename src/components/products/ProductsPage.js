@@ -10,9 +10,8 @@ class ProductsPage extends PureComponent {
     this.props.fetchAllProducts()
   }
 
-
   render() {
-    const { products } = this.props
+    const { products, currentUserRole } = this.props
     if (!products) return null
 
     return(
@@ -24,6 +23,7 @@ class ProductsPage extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
+
   return {
     products: state.products
   }

@@ -7,6 +7,7 @@ export const FETCH_PRODUCT = "FETCH_PRODUCT"
 export const ADD_PRODUCT = "ADD_PRODUCT"
 export const SEARCH_PRODUCT = 'SEARCH_PRODUCT'
 export const FETCH_MY_PRODUCTS = "FETCH_MY_PRODUCTS"
+export const UPDATED_PRODUCT = 'UPDATE_PRODUCT'
 
 export const fetchMyProducts = (profileId) => (dispatch, getState) => {
   const state = getState()
@@ -68,6 +69,23 @@ export const addProduct = (product, picture) => (dispatch, getState) =>{
     })
     .catch(err => {
       console.error(err)
+    })
+}
+
+export const updateProduct = (productId, updates) => (dispatch, getState) => {
+  const state = getState()
+  const jwt = state.currentUser.jwt
+
+  request
+    .put(`${baseUrl}/products/${productId}`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .send(updates)
+    .then(response => dispatch ({
+      type: UPDATED_PRODUCT,
+      payload: response.body
+    }))
+    .catch(err => {
+        console.error(err)
     })
 }
 

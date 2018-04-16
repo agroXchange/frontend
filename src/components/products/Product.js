@@ -16,7 +16,7 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog'
 import '../../styles/Product.css'
-import { fetchProduct } from '../../actions/products'
+import { fetchProduct, updateProduct } from '../../actions/products'
 import { createOrder } from '../../actions/orders'
 import OrderForm from '../orders/OrderForm'
 import ProductForm from './ProductForm'
@@ -70,6 +70,10 @@ class Product extends PureComponent {
     this.props.createOrder(order, this.props.match.params.id, this.props.currentUser)
     this.handleOrderClose()
     this.handleConfirmOpen()
+  }
+
+  updateProduct = (productId, updates) => {
+    this.props.updateProduct(this.props.match.params.id, updates)
   }
 
   render() {
@@ -128,7 +132,7 @@ class Product extends PureComponent {
               aria-labelledby="form-dialog-title"
             >
               <DialogTitle id="form-dialog-title">Edit Your Product</DialogTitle>
-                <ProductForm inititalValues={ product } onSubmit={ this.updateProduct }/>
+                <ProductForm edit={true} inititalValues={ this.props.product } onSubmit={ this.updateProduct }/>
             </Dialog>
 
             <Dialog
@@ -171,5 +175,5 @@ const mapStateToProps = (state) => {
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { fetchProduct, createOrder })
+  connect(mapStateToProps, { fetchProduct, createOrder, updateProduct })
 )(Product)

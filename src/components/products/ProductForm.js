@@ -60,7 +60,8 @@ class ProductForm extends PureComponent {
   state = {
     currency: 'EUR',
     open: false,
-    code:''
+    code:'',
+    edit: false
   }
 
   style = {
@@ -116,20 +117,26 @@ class ProductForm extends PureComponent {
 
   render() {
     const { fullScreen, codes, vegetables, fruits, beans } = this.props
-
+    const initialValues = this.props.initialValues || {}
 
     let product = codes.filter(i => i.code.match(this.state.code) )
     let title =''
     if (product.length > 0){  title = ( product[0].titleeng   )}
-   
-    
+
+    if (this.props.edit === true ) {
+      this.setState({edit: true})
+    }
+
     if(codes)
       return(
         <form onSubmit={ this.handleSubmit } className="form-container">
+
+
+
           <Paper className="paper">
 
+          { this.state.edit === false &&
           <div id="addProduct">
-              <h4>Add Product</h4>
 
               <Button
                 onClick={this.handleClickOpen}
@@ -228,16 +235,19 @@ class ProductForm extends PureComponent {
               </Dialog>
             </div>
 
+          }
           <br />
 
           <div><h3>{   title  }</h3></div>
+
+
 
         <TextField
           id="description"
           name="description"
           label="Description"
           style={ classes.textField }
-          value={ this.state.description }
+          value={ this.state.description || initialValues.description || '' }
           onChange={ this.handleChange }
           margin="normal"
         />
@@ -247,17 +257,17 @@ class ProductForm extends PureComponent {
             name="certificate"
             label="Certification"
             style={classes.textField}
-            value={this.state.certificate}
+            value={this.state.certificate || initialValues.certificate || '' }
             onChange={this.handleChange}
             margin="normal"
           />
 
- 
+
               <TextField
                 id="price"
                 name="price"
                 label="Price per Kg"
-                value={this.state.price}
+                value={this.state.price || initialValues.price || '' }
                 onChange={this.handleChange}
                 type="number"
                 style={classes.textField}
@@ -266,14 +276,14 @@ class ProductForm extends PureComponent {
                 }}
                 margin="normal"
               />
-   
+
             <TextField
               id="currency"
               name="currency"
               select
               label="Please select your currency"
               style={ classes.textField }
-              value={ this.state.currency }
+              value={ this.state.currency || initialValues.currency || ''  }
               onChange={ this.handleChange }
               margin="normal"
             >
@@ -289,7 +299,7 @@ class ProductForm extends PureComponent {
           label="Volume"
           id="volume"
           name="volume"
-          value={ this.state.volume }
+          value={ this.state.volume || initialValues.volume || '' }
           onChange={ this.handleChange }
           style={ classes.textField }
           InputProps={{
@@ -305,7 +315,7 @@ class ProductForm extends PureComponent {
           label="Harvested Date"
           type="date"
           defaultValue={new Date}
-            value={this.state.harvested}
+            value={this.state.harvested || initialValues.harvested || '' }
           onChange={ this.handleChange }
           style={ classes.textField }
           InputLabelProps={{
@@ -319,7 +329,7 @@ class ProductForm extends PureComponent {
           label="Expiry Date"
           type="date"
             defaultValue={new Date}
-            value={this.state.expiration}
+            value={this.state.expiration || initialValues.expiration || '' }
           onChange={ this.handleChange }
           style={ classes.textField }
           InputLabelProps={{
