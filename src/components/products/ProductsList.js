@@ -37,9 +37,9 @@ class ProductList extends PureComponent {
   classes: PropTypes.object.isRequired
   };
 
-  componentDidMount(props) {
-    this.props.fetchAllProducts()
-  }
+  // componentDidMount(props) {
+  //   this.props.fetchAllProducts()
+  // }
 
   render() {
     const { classes, products } = this.props;
@@ -106,12 +106,12 @@ class ProductList extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    products: state.products
+  //  products: state.products
   }
 }
 
 export default compose(
   translate('orders'),
   withStyles(styles),
-  connect(mapStateToProps, { fetchAllProducts })
+  //connect(mapStateToProps, { fetchAllProducts })
 )(ProductList);

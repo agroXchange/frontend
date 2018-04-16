@@ -23,8 +23,6 @@ export const fetchMyProducts = (profileId) => (dispatch, getState) => {
 }
 
 
-
-
 export const fetchAllProducts = () => (dispatch, getState) => {
   const state = getState()
   const jwt = state.currentUser.jwt
