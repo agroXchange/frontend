@@ -19,6 +19,7 @@ import ProductForm from './components/products/ProductForm'
 import LogoutPage from './components/logout/LogoutPage'
 import AddProductContainer from './components/products/AddProductContainer';
 import SearchProductContainer from './components/products/SearchProductContainer';
+import Home from './components/default/default';
 
 import './styles/App.css';
 
@@ -30,6 +31,7 @@ class App extends Component {
         <Router>
           <div className="App">
             <NavBar />
+            <Route exact path="/" component={ Home } />
             <Route exact path="/admin" component={AdminPage} />
             <Route exact path="/admin/pending" component={PendingPage} />
             <Route exact path="/admin/orders" component={OrdersPage} />
@@ -43,7 +45,6 @@ class App extends Component {
             <Route exact path="/orders/:id" component={OrderDetail} />
             <Route exact path="/products" component={ ProductsList } />
             <Route exact path="/products/:id" component={ Product } />
-            <Route exact path="/orderlistBuyer" component={OrderListBuyer} />
             <Route exact path="/productform" component={ ProductForm } />
             <Route exact path="/product" component={ Product } />
             <Route exact path="/profiles/:id" component={ProfilePage} />

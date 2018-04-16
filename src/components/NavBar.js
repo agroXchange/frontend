@@ -39,7 +39,7 @@ const styles = {
   },
   fullList: {
     width: 'auto'
-  }
+  },
 };
 
 class NavBar extends PureComponent {
@@ -102,7 +102,7 @@ class NavBar extends PureComponent {
           <ListItemIcon>
             <SendIcon/>
           </ListItemIcon>
-          <Link to='/profile'>Profile</Link>
+          <Link to='/profile'>My profile</Link>
         </ListItem>
 
         <ListItem button="button">
@@ -145,7 +145,7 @@ class NavBar extends PureComponent {
 
     return (<div>
 
-      <AppBar position="static">
+      <AppBar position="static" style={{backgroundColor:'#5088b7'}}>
         <Toolbar>
 
       <div>
