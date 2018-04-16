@@ -20,6 +20,7 @@ import LogoutPage from './components/logout/LogoutPage'
 import ResetPasswordPage from './components/password/ResetPasswordPage'
 import AddProductContainer from './components/products/AddProductContainer'
 import SearchProductContainer from './components/products/SearchProductContainer'
+import MyProducts from './components/products/MyProducts'
 
 import './styles/App.css';
 
@@ -47,6 +48,7 @@ class App extends Component {
             <Route exact path="/productform" component={ ProductForm } />
             <Route exact path="/product" component={ Product } />
             <Route exact path="/profiles/:id" component={ProfilePage} />
+            <Route exact patch="/profiles/:id/products" component={ MyProducts } />
             <Route exact path="/addproduct" component={ AddProductContainer } />
             <Route exact path="/searchproduct" component={ SearchProductContainer } />
             <Route exact path="/reset-password" component={ ResetPasswordPage } />
