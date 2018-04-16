@@ -28,4 +28,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(MyProducts)
+export default connect(mapStateToProps, { fetchMyProducts })(MyProducts)
