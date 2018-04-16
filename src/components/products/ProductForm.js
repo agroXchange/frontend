@@ -120,8 +120,13 @@ class ProductForm extends PureComponent {
         <form onSubmit={ this.handleSubmit } className="form-container">
           <Paper className="paper">
 
+<<<<<<< HEAD
             <div id="addProduct">
               <h2>Add Product</h2>
+=======
+          <div id="addProduct">
+              <h4>Add Product</h4>
+>>>>>>> Add rerouting on add product click
 
               <Button
                 onClick={this.handleClickOpen}
@@ -220,132 +225,135 @@ class ProductForm extends PureComponent {
               </Dialog>
             </div>
 
-            <br />
-            <div className="upload">
-              <label htmlFor="photo">Please Upload a Photo </label>
-              <input
-                accept="image/*"
-                id="raised-button-file"
-                type="file"
-                name="photo"
-                className="upload-input"
-                style={ classes.textField }
-                onChange={this.handleFileChange}
-              />
-            </div>
+          <br />
 
-            <TextField
-              id="description"
-              name="description"
-              label="Description"
-              style={ classes.textField }
-              value={ this.state.description }
-              onChange={ this.handleChange }
-              margin="normal"
-            />
+          <div><p>{   title  }</p></div>
 
-            <TextField
-              id="certification"
-              name="certificate"
-              label="Certification"
+        <TextField
+          id="description"
+          name="description"
+          label="Description"
+          style={ classes.textField }
+          value={ this.state.description }
+          onChange={ this.handleChange }
+          margin="normal"
+        />
+
+          <TextField
+            id="certification"
+            name="certificate"
+            label="Certification"
+            style={classes.textField}
+            value={this.state.certificate}
+            onChange={this.handleChange}
+            margin="normal"
+          />
+
+          <TextField
+            id="price"
+            name="price"
+            label="Price per Kg"
+            value={this.state.price}
+            onChange={this.handleChange}
+            type="number"
+            style={classes.textField}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            margin="normal"
+          />
+
+        <TextField
+          id="currency"
+          name="currency"
+          select
+          label="Please select your currency"
+          style={ classes.textField }
+          value={ this.state.currency }
+          onChange={ this.handleChange }
+          margin="normal"
+        >
+          { currencies.map(option => (
+            <MenuItem key={ option.value } value={ option.value } >
+              { option.label }
+            </MenuItem>
+          ))}
+        </TextField>
+
+
+
+        <TextField
+          label="Volume"
+          id="volume"
+          name="volume"
+          value={ this.state.volume }
+          onChange={ this.handleChange }
+          style={ classes.textField }
+          InputProps={{
+            startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
+          }}
+        />
+
+
+
+        <TextField
+          id="harvested"
+          name="harvested"
+          label="Harvested Date"
+          type="date"
+          defaultValue={new Date}
+            value={this.state.harvested}
+          onChange={ this.handleChange }
+          style={ classes.textField }
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+
+        <TextField
+          id="expired"
+            name="expiration"
+          label="Expiry Date"
+          type="date"
+            defaultValue={new Date}
+            value={this.state.expiration}
+          onChange={ this.handleChange }
+          style={ classes.textField }
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+
+          <div className="upload">
+            <label htmlFor="photo">Please Upload a Photo </label>
+            <input
+              accept="image/*"
+              id="raised-button-file"
+              type="file"
+              name="photo"
+              className="upload-input"
               style={classes.textField}
-              value={this.state.certificate}
-              onChange={this.handleChange}
-              margin="normal"
+              onChange={this.handleFileChange}
             />
+          </div>
 
-            <TextField
-              id="price"
-              name="price"
-              label="Price per Kg"
-              value={this.state.price}
-              onChange={this.handleChange}
-              type="number"
-              style={classes.textField}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              margin="normal"
-            />
+        <Button
+          color="primary"
+          className="submit-btn"
+          type="submit"
+          style={{
+            display: 'block',
+            margin: 'auto',
+            marginTop: 20,
+            marginBottom: 20
+          }}
+        >
+          Save
+        </Button>
 
-            <TextField
-              id="currency"
-              name="currency"
-              select
-              label="Please select your currency"
-              style={ classes.textField }
-              value={ this.state.currency }
-              onChange={ this.handleChange }
-              margin="normal"
-            >
-              { currencies.map(option => (
-                <MenuItem key={ option.value } value={ option.value } >
-                  { option.label }
-                </MenuItem>
-              ))}
-            </TextField>
-
-
-
-            <TextField
-              label="Volume"
-              id="volume"
-              name="volume"
-              value={ this.state.volume }
-              onChange={ this.handleChange }
-              style={ classes.textField }
-              InputProps={{
-                startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
-              }}
-            />
-
-
-
-            <TextField
-              id="harvested"
-              name="harvested"
-              label="Harvested Date"
-              type="date"
-              defaultValue={new Date}
-              value={this.state.harvested}
-              onChange={ this.handleChange }
-              style={ classes.textField }
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-
-            <TextField
-              id="expired"
-              name="expiration"
-              label="Expiry Date"
-              type="date"
-              defaultValue={new Date}
-              value={this.state.expiration}
-              onChange={ this.handleChange }
-              style={ classes.textField }
-              InputLabelProps={{
-                shrink: true,
-              }}
-            />
-
-            <Button
-              color="primary"
-              className="submit-btn"
-              type="submit"
-              style={{
-                display: 'block',
-                margin: 'auto',
-                marginTop: 20,
-                marginBottom: 20
-              }}
-            >
-              Save
-            </Button>
-
-          </Paper>
-        </form>
-      )
+        </Paper>
+      </form>
+    )
   }
 
 }

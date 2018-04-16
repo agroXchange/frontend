@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import ProductForm from './ProductForm'
 import { addProduct } from '../../actions/products'
 
@@ -8,13 +8,26 @@ import { addProduct } from '../../actions/products'
 
 class AddProductContainer extends PureComponent {
 
-
-    submit = (product, image) => {
-        this.props.addProduct(product, image)
+    state = {
+        redirectToNext: false
     }
 
 
+    submit = (product, image) => {
+        this.props.addProduct(product, image)
+        this.setState({ redirectToNext: true })
+    }
+
+
+
+
     render() {
+
+        if (this.state.redirectToNext) {
+            return (
+                <Redirect to={`profile/`} />
+            )
+        }
 
             return (
                 <div className="addProductContainer">
