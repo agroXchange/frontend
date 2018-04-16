@@ -90,7 +90,7 @@ export const fetchUser = (userId) => (dispatch, getState) => {
   const jwt = state.currentUser.jwt
 
   request
-    .get(`${baseUrl}/users/${userId}`)
+    .get(`${baseUrl}/profiles/${userId}`)
     .set('Authorization', `Bearer ${jwt}`)
     .then(result => {
       dispatch({
