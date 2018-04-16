@@ -48,14 +48,14 @@ class EditUserForm extends PureComponent {
     const {name, value} = event.target
 
     this.setState({
-      [name]: value
+      [name]: value || ' '
     })
   }
 
 
   render() {
     const { classes } = this.props;
-    const initialValues = this.props.initialValues || {}
+    const initialValues = this.props.initialValues || { }
 
     return (
       <form className={classes.container} onSubmit={this.handleSubmit}>
@@ -67,7 +67,7 @@ class EditUserForm extends PureComponent {
             label="Name"
             className={classes.textField}
             margin="normal"
-            value={this.state.name || initialValues.name || ''}
+            value={this.state.name || initialValues.name || ' '}
             onChange={this.handleChange}
           />
         </div>
