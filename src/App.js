@@ -20,7 +20,10 @@ import LogoutPage from './components/logout/LogoutPage'
 import ResetPasswordPage from './components/password/ResetPasswordPage'
 import AddProductContainer from './components/products/AddProductContainer'
 import SearchProductContainer from './components/products/SearchProductContainer'
+import MyProducts from './components/products/MyProducts'
+import ProductsPage from './components/products/ProductsPage'
 import Dashboard from './components/dashboard/Dashboard'
+
 import './styles/App.css';
 
 class App extends Component {
@@ -43,11 +46,11 @@ class App extends Component {
             <Route exact path="/translation" component={ ExampleTranslation } />
             <Route exact path="/orders" component={OrderList} />
             <Route exact path="/orders/:id" component={OrderDetail} />
-            <Route exact path="/products" component={ ProductsList } />
+            <Route exact path="/products" component={ ProductsPage } />
             <Route exact path="/products/:id" component={ Product } />
             <Route exact path="/productform" component={ ProductForm } />
-            <Route exact path="/product" component={ Product } />
             <Route exact path="/profiles/:id" component={ProfilePage} />
+            <Route exact path="/profiles/:id/products" component={ MyProducts } />
             <Route exact path="/addproduct" component={ AddProductContainer } />
             <Route exact path="/searchproduct" component={ SearchProductContainer } />
             <Route exact path="/reset-password" component={ ResetPasswordPage } />
