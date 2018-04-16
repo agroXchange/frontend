@@ -120,13 +120,8 @@ class ProductForm extends PureComponent {
         <form onSubmit={ this.handleSubmit } className="form-container">
           <Paper className="paper">
 
-<<<<<<< HEAD
-            <div id="addProduct">
-              <h2>Add Product</h2>
-=======
           <div id="addProduct">
               <h4>Add Product</h4>
->>>>>>> Add rerouting on add product click
 
               <Button
                 onClick={this.handleClickOpen}
