@@ -23,7 +23,7 @@ import SearchProductContainer from './components/products/SearchProductContainer
 import MyProducts from './components/products/MyProducts'
 import ProductsPage from './components/products/ProductsPage'
 import Dashboard from './components/dashboard/Dashboard'
-
+import Home from './components/default/default'
 import './styles/App.css';
 
 class App extends Component {
