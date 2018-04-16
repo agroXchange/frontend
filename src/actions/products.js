@@ -89,14 +89,15 @@ export const updateProduct = (productId, updates) => (dispatch, getState) => {
 }
 
 
-export const filterProducts = (name,number,country) => (dispatch) => {
-    console.log(name, number, country)
+export const filterProducts = (prefences) => (dispatch) => {
+  console.log(prefences)
 
     request
-        .get(`${baseUrl}/products`)
-        .then(result => {
+      .get(`${baseUrl}/search/products`)
+      .then(response => {
             dispatch({
-              type: FILTER_PRODUCTS
+              type: FILTER_PRODUCTS,
+              payload: response.body
             })
         })
         .catch(err => {

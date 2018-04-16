@@ -43,8 +43,8 @@ class ProductsPage extends PureComponent {
           onClick={this.handleClickOpen}
           variant="raised"
         >
-          Search
-              </Button>
+          Filter
+        </Button>
 
         <Dialog
           fullScreen={fullScreen}
