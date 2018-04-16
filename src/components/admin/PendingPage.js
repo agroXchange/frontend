@@ -69,11 +69,13 @@ class PendingPage extends PureComponent {
           <Card className={classes.card} zDepth={3} circle={true}>
             <CardHeader title={user.role} />
             <CardMedia>
+              <Link to={`/admin/profiles/${user.id}`}>
               <img
                 className={classes.media}
                 src={assignImage(user.profile.logo)}
                 alt=""
               />
+              </Link>
             </CardMedia>
             <CardContent>
               <p>{user.profile.name}</p>
