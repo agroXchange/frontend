@@ -11,6 +11,7 @@ import Button from "material-ui/Button";
 import Dialog, { DialogTitle, DialogActions } from "material-ui/Dialog";
 import { fetchPendingUsers, approveUser, deleteUser } from "../../actions/users";
 import compose from 'lodash/fp/compose'
+import {jwtPayload} from '../../jwt'
 
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
@@ -76,6 +77,7 @@ class PendingPage extends PureComponent {
 
     return (
       <MuiThemeProvider>
+      {console.log('role  ' + this.props.jwtDecoded[0])}
       {this.renderMessage(users)}
         {users.map(user => (
           <Card className={classes.card} zDepth={3} circle={true}>
@@ -93,6 +95,7 @@ class PendingPage extends PureComponent {
               <p>{user.profile.name}</p>
               <p>{user.profile.address}</p>
               <p>{user.profile.country}</p>
+
               <Button onClick={() => this.approveUser(user.id)} size="medium" color="primary">
                 Approve
               </Button>
@@ -124,8 +127,13 @@ class PendingPage extends PureComponent {
 }
 
 const mapStateToProps = function(state) {
+  const jwtDecoded = jwtPayload(state.currentUser.jwt)
   return {
     users: state.users,
+    currentUser: state.currentUser,
+    currentUserRole: jwtDecoded.role,
+    currentUserId: jwtDecoded.id,
+    jwtDecoded
   };
 };
 

@@ -16,12 +16,6 @@ class AdminProfilePage extends PureComponent {
     edit: false
   };
 
-  toggleEdit = () => {
-    this.setState({
-      edit: !this.state.edit
-    });
-  };
-
   handleEditClose = () => {
     this.setState({ edit: false });
   };
@@ -36,7 +30,7 @@ class AdminProfilePage extends PureComponent {
 
   updateUser = user => {
     this.props.updateUser(this.props.match.params.id, user);
-    this.toggleEdit();
+    this.handleEditClose();
   };
 
   render() {

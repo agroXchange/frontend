@@ -12,6 +12,7 @@ import Button from "material-ui/Button"
 import Paper from "material-ui/Paper"
 import Dialog, { DialogActions,  DialogContent, DialogContentText, DialogTitle } from "material-ui/Dialog"
 import { sendForgotPassword } from "../../actions/password"
+import {jwtPayload} from '../../jwt'
 
 class LoginPage extends PureComponent {
   state = {}
@@ -81,7 +82,7 @@ const mapStateToProps = function(state) {
   return {
     currentUser: state.currentUser,
     error: state.login.error,
-    success: state.password.message
+    success: state.password.message,
   }
 }
 
