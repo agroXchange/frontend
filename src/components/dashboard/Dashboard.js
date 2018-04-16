@@ -1,11 +1,14 @@
 import React, { PureComponent } from "react"
+import { connect } from "react-redux"
 import { withStyles } from "material-ui/styles"
-import { Link } from "react-router-dom"
+import { Link , Redirect} from "react-router-dom"
+import compose from "lodash/fp/compose"
 import Button from "material-ui/Button"
 import Grid from "material-ui/Grid"
 import Typography from "material-ui/Typography"
 import Card, { CardActions, CardContent } from "material-ui/Card"
 import Paper from "material-ui/Paper"
+import {jwtPayload} from '../../jwt'
 
 const styles = theme => ({
   card: {
@@ -27,6 +30,9 @@ const styles = theme => ({
 class Dashboard extends PureComponent {
   render() {
     const { classes, user } = this.props
+    if (this.props.currentUserRole === "admin") return <Redirect to="/admin" />;
+
+
     return (
       <Paper
         style={{
@@ -36,6 +42,7 @@ class Dashboard extends PureComponent {
         }}
       >
         <h1>Welcome User!</h1>
+        {console.log('role  ' + this.props.jwtPayload)}
         <Card className={classes.card}>
           <CardContent>
             <Typography gutterBottom variant="headline" component="h2">
@@ -97,4 +104,17 @@ class Dashboard extends PureComponent {
   }
 }
 
-export default withStyles(styles)(Dashboard)
+const mapStateToProps = function(state) {
+  const jwtDecoded = jwtPayload(state.currentUser.jwt)
+  return {
+    currentUser: state.currentUser,
+    currentUserRole: jwtDecoded.role,
+    currentUserId: jwtDecoded.id,
+    jwtDecoded
+  }
+}
+
+export default compose(
+  withStyles(styles),
+  connect(mapStateToProps)
+)(Dashboard)
