@@ -8,7 +8,7 @@ import {CardHeader, CardMedia, CardContent } from "material-ui/Card";
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from "material-ui/Button";
-import Dialog, { DialogTitle } from "material-ui/Dialog";
+import Dialog, { DialogTitle, DialogActions } from "material-ui/Dialog";
 import { fetchPendingUsers, approveUser, deleteUser } from "../../actions/users";
 import compose from 'lodash/fp/compose'
 
@@ -29,6 +29,18 @@ const style = theme => ({
 
 
 class PendingPage extends PureComponent {
+  state = {
+   open: false,
+ };
+
+ handleOpen = () => {
+   this.setState({open: true});
+ };
+
+ handleClose = () => {
+   this.setState({open: false});
+ };
+
   componentWillMount(props) {
     this.props.fetchPendingUsers();
   }
@@ -84,9 +96,25 @@ class PendingPage extends PureComponent {
               <Button onClick={() => this.approveUser(user.id)} size="medium" color="primary">
                 Approve
               </Button>
-              <IconButton onClick={() => this.deleteUser(user.id)}aria-label="Delete">
+              <IconButton onClick={this.handleOpen} aria-label="Delete">
                 <DeleteIcon />
               </IconButton>
+              <Dialog
+                open={this.state.open}
+                onRequestClose={this.handleClose}
+              >
+                <DialogTitle>
+                  {`Are you sure do you want to delete ${user.profile.name}?`}
+                </DialogTitle>
+                  <DialogActions>
+                    <Button onClick={this.handleClose} primary>
+                      {"Cancel"}
+                    </Button>
+                    <Button onClick={() => this.deleteUser(user.id)} primary>
+                      {"Yes"}
+                    </Button>
+                  </DialogActions>
+                </Dialog>
             </CardContent>
           </Card>
         ))}

@@ -1,4 +1,4 @@
-import { FETCH_USER, UPDATE_USER, APPROVE_USER, DELETE_USER } from '../actions/users'
+import { FETCH_USER, UPDATE_USER } from "../actions/users";
 
 export default function(state = null, { type, payload } = {}) {
   switch (type) {
@@ -9,13 +9,6 @@ export default function(state = null, { type, payload } = {}) {
         ...state,
         profile: payload
       };
-    case APPROVE_USER:
-      return payload
-    case DELETE_USER:
-      return {
-         ...state,
-         users: payload
-       }
     default:
       return state
   }
