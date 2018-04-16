@@ -37,24 +37,23 @@ export const fetchProduct = (id) => (dispatch, getState) => {
 }
 
 export const addProduct = (product, picture) => (dispatch, getState) =>{
-    const state = getState()
-    const jwt = state.currentUser.jwt
+  const state = getState()
+  const jwt = state.currentUser.jwt
 
-
-    request
-        .post(`${baseUrl}/products`)
-        .set("Authorization", `Bearer ${jwt}`)
-        .field(product)
-        .attach('productPhoto', picture)
-        .then(response => {
-            dispatch({
-                type: ADD_PRODUCT,
-              payload: response.body
-            })
-        })
-        .catch(err => {
-            console.error(err)
-        })
+  request
+    .post(`${baseUrl}/products`)
+    .set("Authorization", `Bearer ${jwt}`)
+    .attach("productPhoto", picture)
+    .field(product)
+    .then(response => {
+      dispatch({
+        type: ADD_PRODUCT,
+        payload: response.body
+      })
+    })
+    .catch(err => {
+      console.error(err)
+    })
 }
 
 
