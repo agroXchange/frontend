@@ -43,7 +43,7 @@ class defaultPage extends PureComponent {
 
     return (<div>
       <header>
-      <div class="header">
+      <div class="header-default">
         <div class="container">
           <div class="row"></div>
 

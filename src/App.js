@@ -21,6 +21,7 @@ import ResetPasswordPage from './components/password/ResetPasswordPage'
 import AddProductContainer from './components/products/AddProductContainer'
 import SearchProductContainer from './components/products/SearchProductContainer'
 import Dashboard from './components/dashboard/Dashboard'
+import Home from './components/default/default'
 import './styles/App.css';
 
 class App extends Component {

@@ -108,7 +108,7 @@ class NavBar extends PureComponent {
           <ListItemIcon>
             <SendIcon/>
           </ListItemIcon>
-          <Link to='/products'>My products</Link>
+          <Link to='/products/:id'>My products</Link>
         </ListItem>
 
         <ListItem button="button">
@@ -122,7 +122,7 @@ class NavBar extends PureComponent {
           <ListItemIcon>
             <SendIcon/>
           </ListItemIcon>
-          <Link to='/search'>AgroXpress</Link>
+          <Link to='/searchproduct'>AgroXpress</Link>
         </ListItem>
 
         <ListItem button="button">
