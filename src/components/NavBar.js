@@ -186,10 +186,10 @@ class NavBar extends PureComponent {
                   horizontal: 'right'
                 }} open={openNew} onClose={this.handleNewClose}>
                 <MenuItem>
-                  <button onClick={() => changeLanguage("en")}><img className="LanguageDetector" src="https://lipis.github.io/flag-icon-css/flags/4x3/gb.svg"/></button>
+                  <button onClick={() => changeLanguage("en")}><img className="LanguageDetector" src="/images/en.svg"/></button>
                 </MenuItem>
                 <MenuItem>
-                  <button onClick={() => changeLanguage("es")}><img className="LanguageDetector" src="https://lipis.github.io/flag-icon-css/flags/4x3/es.svg"/></button>
+                  <button onClick={() => changeLanguage("es")}><img className="LanguageDetector" src="/images/es.svg"/></button>
                 </MenuItem>
 
               </Menu>
