@@ -97,7 +97,7 @@ class UsersList extends PureComponent {
                   <Avatar>
                     <img
                       className={classes.media}
-                      src={assignImage(user.profile.logo)}
+                      src={assignImage(user.logo)}
                       alt=""
                     />
                   </Avatar>
@@ -105,10 +105,10 @@ class UsersList extends PureComponent {
               </ListItemAvatar>
 
               <ListItemText
-                primary={"Company name: " + user.profile.name}
+                primary={"Company name: " + user.name}
                 secondary={
                   "Chamber Of Commerce: " +
-                  this.renderChamberOfCommerce(user.profile.chamberOfCommerce)
+                  this.renderChamberOfCommerce(user.chamberOfCommerce)
                 }
               />
               <Link to={`/admin/profiles/${user.id}`}>
@@ -125,7 +125,7 @@ class UsersList extends PureComponent {
                   onRequestClose={this.handleClose}
                 >
                   <DialogTitle>
-                    {`Are you sure do you want to delete ${user.profile.name}?`}
+                    {`Are you sure do you want to delete ${user.name}?`}
                   </DialogTitle>
                   <DialogActions>
                     <Button onClick={this.handleClose} primary>
