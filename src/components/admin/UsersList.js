@@ -2,17 +2,24 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchUsers, deleteUser } from "../../actions/users";
-import { assignImage } from "./lib/lib";
+import { assignImage, searchingByName} from "./lib/lib";
 import compose from "lodash/fp/compose";
 import { withStyles } from "material-ui/styles";
-import List, { ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText } from "material-ui/List";
+import List, {
+  ListItem,
+  ListItemAvatar,
+  ListItemSecondaryAction,
+  ListItemText
+} from "material-ui/List";
 import DeleteIcon from "@material-ui/icons/Delete";
 import InfoIcon from "@material-ui/icons/Info";
+import SearchIcon from "@material-ui/icons/Search";
 import Button from "material-ui/Button";
 import IconButton from "material-ui/IconButton";
 import Avatar from "material-ui/Avatar";
 import Divider from "material-ui/Divider";
 import Dialog, { DialogTitle, DialogActions } from "material-ui/Dialog";
+import TextField from "material-ui/TextField";
 
 const style = theme => ({
   card: {
@@ -26,16 +33,18 @@ const style = theme => ({
 
 class UsersList extends PureComponent {
   state = {
-   open: false,
- };
+    open: false,
+    users: this.props.users,
+    term: ""
+  };
 
- handleOpen = () => {
-   this.setState({open: true});
- };
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
 
- handleClose = () => {
-   this.setState({open: false});
- };
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   componentWillMount(props) {
     this.props.fetchUsers();
@@ -43,7 +52,11 @@ class UsersList extends PureComponent {
 
   deleteUser = id => {
     this.props.deleteUser(id);
-    this.handleClose()
+    this.handleClose();
+  };
+
+  searchHandler = event => {
+    this.setState({ term: event.target.value });
   };
 
   renderMessage = users => {
@@ -67,9 +80,29 @@ class UsersList extends PureComponent {
 
     return (
       <div>
+        <form>
+          <div
+            style={{
+              display: "flex",
+              width: "300px",
+              margin: 0,
+              marginLeft: "20px",
+              marginTop: "20px"
+            }}
+          >
+            <IconButton>
+              <SearchIcon />
+            </IconButton>
+            <TextField
+              label="Search User"
+              type="text"
+              onChange={this.searchHandler}
+            />
+          </div>
+        </form>;
         <h1> Users List</h1>
         {this.renderMessage(users)}
-        {users.map(user => (
+        {users.filter(searchingByName(this.state.term)).map(user => (
           <List>
             <ListItem>
               <ListItemAvatar>
@@ -94,9 +127,7 @@ class UsersList extends PureComponent {
                 </IconButton>
               </Link>
               <ListItemSecondaryAction>
-                <IconButton
-                  onClick={this.handleOpen}
-                >
+                <IconButton onClick={this.handleOpen}>
                   <DeleteIcon />
                 </IconButton>
                 <Dialog
@@ -106,14 +137,14 @@ class UsersList extends PureComponent {
                   <DialogTitle>
                     {`Are you sure do you want to delete ${user.profile.name}?`}
                   </DialogTitle>
-                    <DialogActions>
-                      <Button onClick={this.handleClose} primary>
-                        {"Cancel"}
-                      </Button>
-                      <Button onClick={() => this.deleteUser(user.id)} primary>
-                        {"Yes"}
-                      </Button>
-                    </DialogActions>
+                  <DialogActions>
+                    <Button onClick={this.handleClose} primary>
+                      {"Cancel"}
+                    </Button>
+                    <Button onClick={() => this.deleteUser(user.id)} primary>
+                      {"Yes"}
+                    </Button>
+                  </DialogActions>
                 </Dialog>
               </ListItemSecondaryAction>
               <Divider inset={true} />

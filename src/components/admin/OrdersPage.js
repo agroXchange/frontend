@@ -8,7 +8,11 @@ import { CardHeader,CardMedia } from "material-ui/Card";
 import Button from "material-ui/Button";
 import Table, { TableBody, TableCell, TableHead, TableRow } from "material-ui/Table";
 import { fetchAllOrders } from "../../actions/orders";
+import { searchingByOrderName } from "./lib/lib";
 import Dialog, { DialogTitle } from "material-ui/Dialog";
+import TextField from "material-ui/TextField";
+import SearchIcon from "@material-ui/icons/Search";
+import IconButton from "material-ui/IconButton";
 
 const style = () => ({
   card: {
@@ -33,9 +37,18 @@ const style = () => ({
 });
 
 class OrdersPage extends PureComponent {
+  state = {
+    users: this.props.orders,
+    term: ""
+  };
+
   componentWillMount(props) {
     this.props.fetchAllOrders();
   }
+
+  searchHandler = event => {
+    this.setState({ term: event.target.value });
+  };
 
   renderMessage = orders => {
   return (
@@ -60,8 +73,28 @@ class OrdersPage extends PureComponent {
 
     return (
       <div>
+      <form>
+        <div
+          style={{
+            display: "flex",
+            width: "300px",
+            margin: 0,
+            marginLeft: "20px",
+            marginTop: "20px"
+          }}
+        >
+          <IconButton>
+            <SearchIcon />
+          </IconButton>
+          <TextField
+            label="Search Order"
+            type="text"
+            onChange={this.searchHandler}
+          />
+        </div>
+      </form>;
         {this.renderMessage(orders)}
-        {orders.map(order => (
+        {orders.filter(searchingByOrderName(this.state.term)).map(order => (
           <Card className={classes.card} zDepth={3} circle={true}>
             <CardHeader avatar={"#" + order.id} />
             <CardMedia>
@@ -88,7 +121,7 @@ class OrdersPage extends PureComponent {
               <TableBody>
                 <TableRow>
                   <TableCell>Product</TableCell>
-                  <TableCell>{order.product.name}</TableCell>
+                  <TableCell>{order.product.code.titleeng}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell>Date Order</TableCell>
