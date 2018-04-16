@@ -15,7 +15,8 @@ class SignupPage extends PureComponent {
   };
 
   render() {
-    const { t } = this.props;
+    const { t, authenticated } = this.props;
+    if (authenticated) return <Redirect to ="/dashboard" />
     if (this.props.signup.success) return <Redirect to="/" />;
 
     return (
@@ -42,7 +43,8 @@ class SignupPage extends PureComponent {
 
 const mapStateToProps = function(state) {
   return {
-    signup: state.signup
+    signup: state.signup,
+    authenticated: !!state.currentUser
   };
 };
 

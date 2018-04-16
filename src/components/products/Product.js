@@ -20,6 +20,7 @@ import { fetchProduct, updateProduct } from '../../actions/products'
 import { createOrder } from '../../actions/orders'
 import OrderForm from '../orders/OrderForm'
 import ProductForm from './ProductForm'
+import {jwtPayload} from "../../jwt"
 
 const styles = {
   dialog: {
@@ -166,10 +167,11 @@ class Product extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
+  const decodedJwt = jwtPayload(state.currentUser.jwt)
   return {
     product: state.product,
     currentUser: state.currentUser,
-    currentUserId: Number(state.currentUser.id)
+    currentUserId: decodedJwt.profileId
   }
 }
 
