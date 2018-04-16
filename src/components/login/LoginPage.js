@@ -34,7 +34,7 @@ class LoginPage extends PureComponent {
 
   render() {
     const { t } = this.props
-    if (this.props.currentUser) return <Redirect to="/" />;
+    if (this.props.currentUser) return <Redirect to="/dashboard" />;
 
     return (
       <Paper
