@@ -4,7 +4,7 @@ import {baseUrl} from "../constants"
 export const FETCH_ALL_PRODUCTS = "FETCH_ALL_PRODUCTS";
 export const FETCH_PRODUCT = "FETCH_PRODUCT"
 export const ADD_PRODUCT = "ADD_PRODUCT"
-export const SEARCH_PRODUCT = 'SEARCH_PRODUCT'
+export const FILTER_PRODUCTS = 'FILTER_PRODUCTS'
 export const FETCH_MY_PRODUCTS = "FETCH_MY_PRODUCTS"
 export const UPDATED_PRODUCT = 'UPDATE_PRODUCT'
 
@@ -89,14 +89,14 @@ export const updateProduct = (productId, updates) => (dispatch, getState) => {
 }
 
 
-export const searchProduct = (name,number,country) => (dispatch) => {
+export const filterProducts = (name,number,country) => (dispatch) => {
     console.log(name, number, country)
 
     request
         .get(`${baseUrl}/products`)
         .then(result => {
             dispatch({
-                type: SEARCH_PRODUCT
+              type: FILTER_PRODUCTS
             })
         })
         .catch(err => {

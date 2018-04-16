@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import SearchProductForm from './SearchProductForm'
-import { searchProduct } from '../../actions/products'
+import { filterProducts } from '../../actions/products'
 
 
 
@@ -10,7 +10,7 @@ class SearchProductContainer extends PureComponent {
 
 
     submit = (product) => {
-        this.props.searchProduct(product)
+        this.props.filterProducts(product)
     }
 
 
@@ -27,4 +27,4 @@ class SearchProductContainer extends PureComponent {
 
 
 
-export default connect(null, { searchProduct })(SearchProductContainer)
+export default connect(null, { filterProducts })(SearchProductContainer)

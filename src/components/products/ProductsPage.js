@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import ProductsList from './ProductsList'
 import { fetchAllProducts } from '../../actions/products'
+import Button from 'material-ui/Button'
 
 class ProductsPage extends PureComponent {
   state = {}
@@ -16,6 +17,7 @@ class ProductsPage extends PureComponent {
 
     return(
       <div>
+        <Button> Filter me </Button>
         <ProductsList products={ products } />
       </div>
     )
