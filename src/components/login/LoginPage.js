@@ -22,6 +22,9 @@ class LoginPage extends PureComponent {
 
   handleForgetSubmit = data => {
     this.props.sendForgotPassword(data.email)
+  }
+
+  handleClose = () => {
     this.setState({ forgotPassword: false })
   }
 
@@ -57,6 +60,7 @@ class LoginPage extends PureComponent {
         </Button>
         <Dialog
           open={this.state.forgotPassword}
+          onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">
