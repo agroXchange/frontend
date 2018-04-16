@@ -1,23 +1,68 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import ProductsList from './ProductsList'
-import { fetchAllProducts } from '../../actions/products'
+import { fetchAllProducts, filterProducts } from '../../actions/products'
 import Button from 'material-ui/Button'
+import Dialog, { DialogContent, DialogContentText, withMobileDialog, } from 'material-ui/Dialog'
+import SearchProductForm from './SearchProductForm';
 
 class ProductsPage extends PureComponent {
-  state = {}
+  state = {
+    open: false,
+  }
 
   componentWillMount(props) {
     this.props.fetchAllProducts()
   }
 
+ 
+  submit = (preferences) => {
+    //this.props.filterProducts(preferences)
+    console.log(preferences)
+    this.setState({ open: false })
+  }
+
+  handleClickOpen = () => {
+    this.setState({ open: true })
+  }
+
+  handleClose = () => {
+    this.setState({ open: false })
+  }
+ 
+
+
   render() {
-    const { products, currentUserRole } = this.props
+      const { fullScreen, products, currentUserRole } = this.props
     if (!products) return null
 
     return(
       <div>
-        <Button> Filter me </Button>
+
+        <Button
+          onClick={this.handleClickOpen}
+          variant="raised"
+        >
+          Search
+              </Button>
+
+        <Dialog
+          fullScreen={fullScreen}
+          open={this.state.open}
+          aria-labelledby="responsive-dialog-title"
+        >
+
+          <DialogContent>
+            <DialogContentText>
+              <SearchProductForm onSubmit = {this.submit}/>
+            </DialogContentText>
+          </DialogContent>
+
+          </Dialog>
+
+
+
+
         <ProductsList products={ products } />
       </div>
     )
@@ -31,4 +76,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchAllProducts })(ProductsPage)
+export default connect(mapStateToProps, { fetchAllProducts, filterProducts })(ProductsPage)
