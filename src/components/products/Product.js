@@ -9,6 +9,7 @@ import Paper from 'material-ui/Paper'
 import Grid from 'material-ui/Grid'
 import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
+import { LinearProgress } from 'material-ui/Progress';
 import Dialog, {
   DialogActions,
   DialogContent,
@@ -36,7 +37,8 @@ class Product extends PureComponent {
   state = {
     newOrder: false,
     confirmOrder: false,
-    editProduct: false
+    editProduct: false,
+    completed: 70
   }
 
   componentWillMount(props) {
@@ -77,10 +79,25 @@ class Product extends PureComponent {
     this.props.updateProduct(this.props.match.params.id, updates)
   }
 
+  progress = () => {
+    const { completed } = this.state;
+    if (completed === 100) {
+      this.setState({ completed: 0 });
+    } else {
+      const diff = Math.random() * 10;
+      const harvested = Date.parse(this.props.product.harvested)
+      const expired = Date.parse(this.props.product.expired)
+
+      console.log(harvested)
+      this.setState({ completed: Math.min(completed + diff, 100) });
+    }
+  };
+
+
   render() {
     const { classes, product, currentUser, currentUserId } = this.props
     if (!product) return null
-
+    
     return(
       <div className="product-container">
         <Paper className="paper">
@@ -92,6 +109,9 @@ class Product extends PureComponent {
                 product.photo : stockImage }
                 alt="product"
                 className="product-photo"/>
+
+              <LinearProgress variant="determinate" value={this.state.completed} />
+
             </Grid>
 
             <Grid item xs={12} sm={6}>

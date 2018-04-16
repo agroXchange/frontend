@@ -263,19 +263,19 @@ class ProductForm extends PureComponent {
           />
 
 
-              <TextField
-                id="price"
-                name="price"
-                label="Price per Kg"
-                value={this.state.price || initialValues.price || '' }
-                onChange={this.handleChange}
-                type="number"
-                style={classes.textField}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                margin="normal"
-              />
+            <TextField
+              id="price"
+              name="price"
+              label="Price per Kg"
+              value={this.state.price || initialValues.price || '' }
+              onChange={this.handleChange}
+              type="number"
+              style={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              margin="normal"
+            />
 
             <TextField
               id="currency"
