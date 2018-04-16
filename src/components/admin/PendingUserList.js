@@ -6,7 +6,7 @@ import {
   approveUser,
   deleteUser
 } from "../../actions/users";
-import { assignImage } from "./lib/lib";
+import { assignImage, searchingByName } from "./lib/lib";
 import compose from "lodash/fp/compose";
 import { withStyles } from "material-ui/styles";
 import List, {
@@ -22,6 +22,8 @@ import IconButton from "material-ui/IconButton";
 import Avatar from "material-ui/Avatar";
 import Divider from "material-ui/Divider";
 import Dialog, { DialogTitle, DialogActions } from "material-ui/Dialog";
+import SearchIcon from "@material-ui/icons/Search";
+import TextField from "material-ui/TextField";
 
 const style = theme => ({
   card: {
@@ -35,7 +37,9 @@ const style = theme => ({
 
 class UsersList extends PureComponent {
   state = {
-    open: false
+    open: false,
+    users: this.props.users,
+    term: ""
   };
 
 
@@ -55,6 +59,11 @@ class UsersList extends PureComponent {
     this.props.deleteUser(id);
     this.handleClose();
   };
+
+  searchHandler = event => {
+    this.setState({ term: event.target.value });
+  };
+
 
   renderMessage = users => {
     return (
@@ -87,9 +96,29 @@ class UsersList extends PureComponent {
 
     return (
       <div>
+      <form>
+        <div
+          style={{
+            display: "flex",
+            width: "300px",
+            margin: 0,
+            marginLeft: "20px",
+            marginTop: "20px"
+          }}
+        >
+          <IconButton>
+            <SearchIcon />
+          </IconButton>
+          <TextField
+            label="Search User"
+            type="text"
+            onChange={this.searchHandler}
+          />
+        </div>
+      </form>;
         <h1> Pending Users List</h1>
         {this.renderMessage(users)}
-        {users.map(user => (
+        {users.filter(searchingByName(this.state.term)).map(user => (
           <List>
             <ListItem>
               <ListItemAvatar>
