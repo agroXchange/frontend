@@ -77,7 +77,6 @@ class PendingPage extends PureComponent {
 
     return (
       <MuiThemeProvider>
-      {console.log('role  ' + this.props.jwtDecoded[0])}
       {this.renderMessage(users)}
         {users.map(user => (
           <Card className={classes.card} zDepth={3} circle={true}>
