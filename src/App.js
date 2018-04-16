@@ -20,6 +20,8 @@ import LogoutPage from './components/logout/LogoutPage'
 import ResetPasswordPage from './components/password/ResetPasswordPage'
 import AddProductContainer from './components/products/AddProductContainer'
 import SearchProductContainer from './components/products/SearchProductContainer'
+import Dashboard from './components/dashboard/Dashboard'
+
 
 import './styles/App.css';
 
@@ -50,6 +52,7 @@ class App extends Component {
             <Route exact path="/addproduct" component={ AddProductContainer } />
             <Route exact path="/searchproduct" component={ SearchProductContainer } />
             <Route exact path="/reset-password" component={ ResetPasswordPage } />
+            <Route exact path="/dashboard" component={ Dashboard } />
           </div>
         </Router>
       </MuiThemeProvider>
