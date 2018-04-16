@@ -132,7 +132,7 @@ class Product extends PureComponent {
               aria-labelledby="form-dialog-title"
             >
               <DialogTitle id="form-dialog-title">Edit Your Product</DialogTitle>
-                <ProductForm inititalValues={ this.props.product } onSubmit={ this.updateProduct }/>
+                <ProductForm edit={true} inititalValues={ this.props.product } onSubmit={ this.updateProduct }/>
             </Dialog>
 
             <Dialog

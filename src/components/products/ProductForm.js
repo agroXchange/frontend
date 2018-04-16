@@ -61,7 +61,7 @@ class ProductForm extends PureComponent {
     currency: 'EUR',
     open: false,
     code:'',
-    edit: true
+    edit: false
   }
 
   style = {
@@ -123,6 +123,9 @@ class ProductForm extends PureComponent {
     let title =''
     if (product.length > 0){  title = ( product[0].titleeng   )}
 
+    if (this.props.edit === true ) {
+      this.setState({edit: true})
+    }
 
     if(codes)
       return(
@@ -131,6 +134,7 @@ class ProductForm extends PureComponent {
 
 
           <Paper className="paper">
+
           { this.state.edit === false &&
           <div id="addProduct">
 
