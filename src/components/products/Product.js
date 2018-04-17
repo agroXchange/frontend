@@ -87,6 +87,7 @@ class Product extends PureComponent {
     const today = Date.parse(new Date())
     const p = Math.round(((today - start) / (end - start)) * 100) + '%'
     return p
+    
   }
 
   render() {
