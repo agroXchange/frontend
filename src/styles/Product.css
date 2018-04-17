@@ -29,7 +29,8 @@
   border: 1px solid black;
   box-sizing: border-box;
   height: 15px;
-  width: 100%;
+  width: 90%;
+  margin: auto;
 }
 
 .bar {
