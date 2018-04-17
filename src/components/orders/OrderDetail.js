@@ -1,43 +1,38 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import Paper from 'material-ui/Paper'
-import Grid from 'material-ui/Grid';
-import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card'
+import Card from "material-ui/Card";
+import { CardHeader, CardMedia } from "material-ui/Card";
 import Button from 'material-ui/Button'
-import Typography from 'material-ui/Typography'
-import { fetchOrder, changeStatus } from '../../actions/orders'
+import Table, { TableBody, TableCell, TableHead, TableRow } from "material-ui/Table";
+import {  fetchOrder, changeStatus } from '../../actions/orders'
 import { connect } from 'react-redux'
 import compose from 'lodash/fp/compose'
 import '../../styles/OrderList.css'
 import { translate } from "react-i18next"
+import { jwtPayload } from '../../jwt'
 
-const styles = theme => ({
- root: {
-   flexGrow: 1,
- },
- paper: {
-   padding: theme.spacing.unit * 2,
-   textAlign: 'center',
-   color: theme.palette.text.secondary,
- },
- card: {
-   maxWidth: 400,
-   margin: 50,
-   textAlign: "left",
-   display: "inline-block"
- },
- table: {
-   width: "15px",
-   fontSize: "12px"
- },
- number: {
-   fontSize: "15px"
- },
- button: {
-   margin: theme.spacing.unit,
- },
-})
+const style = () => ({
+  card: {
+    height: 700,
+    width: 400,
+    margin: 20,
+    textAlign: "center",
+    display: "inline-block"
+  },
+  media: {
+    height: 100
+  },
+  table: {
+    width: " 10px",
+    fontSize: "10px",
+    textAlign: "center"
+  },
+  seller: {
+    textAlign: "left",
+    fontSize: "5px"
+  }
+});
 
 class OrderDetail extends PureComponent {
   static propTypes = {
@@ -56,7 +51,7 @@ class OrderDetail extends PureComponent {
     window.location.reload()
   }
 
-  handleDecline = () => {
+  handleDecline = (value) => {
     const data = {
       status: 'Declined'
     }
@@ -64,101 +59,140 @@ class OrderDetail extends PureComponent {
     window.location.reload()
   }
 
-  render() {
-     const { classes, order } = this.props;
-     const { t } = this.props;
-     if (!order) return null
+  handleBuy = (value) => {
+    const data = {
+      status: 'Bought'
+    }
+    this.props.changeStatus(data, this.props.match.params.id)
+    window.location.reload()
+  }
 
-    return (
-      <div className={classes.root}>
-         <Card className={classes.card}>
-           <CardContent>
-             <Typography gutterBottom
-                variant="headline"
-                component="p"
-                className={classes.number}
-              >
-               {t('Order')} #{order.id}
-             </Typography>
-               <table className={classes.table}>
-                 <tr>
-                    <th>{t('Organization name')}</th>
-                    <td>{order.buyer.name}</td>
-                 </tr>
-                 <tr>
-                    <th>{t('Field')}</th>
-                    <td>{order.buyer.field}</td>
-                 </tr>
-                 <tr>
-                    <th>{t('Type')}</th>
-                    <td>{order.buyer.type}</td>
-                 </tr>
-                 <tr>
-                    <th>{t('COC')}</th>
-                    <td>{order.buyer.chamberOfCommerce}</td>
-                 </tr>
-                 <tr>
-                    <th>{t('Address')}</th>
-                    <td>{order.buyer.address}</td>
-                 </tr>
-                 <tr>
-                    <th>{t('Country')}</th>
-                    <td>{order.buyer.country}</td>
-                 </tr>
-                 <tr>
-                    <th>{t('Phone')}</th>
-                    <td>{order.buyer.phone}</td>
-                 </tr>
-                 <tr>
-                    <th>{t('email')}</th>
-                    <td>{order.buyer.email}</td>
-                 </tr>
-                 <tr>
-                    <th>{t('ICO')}</th>
-                    <td>{order.ICO}</td>
-                 </tr>
-                 <tr>
-                    <th>{t('volume')}</th>
-                    <td>{order.volume}</td>
-                 </tr>
-                 <tr>
-                    <th>{t('Comments')}</th>
-                    <td>{order.comments}</td>
-                 </tr>
-                 <tr>
-                    <th>{t('Status')}</th>
-                    <td>{order.status}</td>
-                 </tr>
-               </table>
-           </CardContent>
-           <Button
-              variant="raised"
-              color="primary"
-              className={classes.button}
-              onClick={this.handleApprove}
-              >
-           {t('ACCEPT')}
-          </Button>
-          <Button
-              variant="raised"
-              color="primary"
-              className={classes.button}
-              onClick={this.handleDecline}
-              >
-           {t('DECLINE')}
-          </Button>
-         </Card>
+  currentUser = (currentUser, order) => {
+    if (currentUser === order.product.seller.id) {
+       return (
+         <div>
+         <Button
+            variant="raised"
+            color="primary"
+            className={this.props.classes.button}
+            onClick={this.handleApprove}
+            >
+         {this.props.t('ACCEPT')}
+        </Button>
+        <Button
+            variant="raised"
+            color="primary"
+            className={this.props.classes.button}
+            onClick={this.handleDecline}
+            >
+         {this.props.t('DECLINE')}
+        </Button>
+        </div>
+      )
+  } else if (currentUser === order.buyer.id) {
+     return (
+       <div>
+       <Button
+          variant="raised"
+          color="primary"
+          className={this.props.classes.button}
+          onClick={this.handleBuy}
+          >
+       {this.props.t('BUY')}
+      </Button>
+      </div>
+     )
+  }
+}
+
+  render() {
+     const { classes, order  } = this.props;
+     const { t } = this.props;
+     if (!order) return null;
+
+
+  return (
+      <div>
+         <Card className={classes.card} zDepth={3} circle={true} >
+          <CardHeader avatar={"#" + order.id} />
+               <Table className={classes.table}>
+                <TableBody>
+                <TableRow>
+                   <TableCell><b>{t('Status')}</b></TableCell>
+                   <TableCell><mark><b>{order.status}</b></mark></TableCell>
+                </TableRow>
+                 <TableRow>
+                    <TableCell><b>{t('Organization name')}</b></TableCell>
+                    <TableCell>{order.buyer.name}</TableCell>
+                 </TableRow>
+                 <TableRow>
+                    <TableCell><b>{t('Field')}</b></TableCell>
+                    <TableCell>{order.buyer.field}</TableCell>
+                 </TableRow>
+                 <TableRow>
+                    <TableCell><b>{t('Type')}</b></TableCell>
+                    <TableCell>{order.buyer.type}</TableCell>
+                 </TableRow>
+                 <TableRow>
+                    <TableCell><b>{t('COC')}</b></TableCell>
+                    <TableCell>{order.buyer.chamberOfCommerce}</TableCell>
+                 </TableRow>
+                 <TableRow>
+                    <TableCell><b>{t('Address')}</b></TableCell>
+                    <TableCell>{order.buyer.address}</TableCell>
+                 </TableRow>
+                 <TableRow>
+                    <TableCell><b>{t('Country')}</b></TableCell>
+                    <TableCell>{order.buyer.country}</TableCell>
+                 </TableRow>
+                 <TableRow>
+                    <TableCell><b>{t('Phone')}</b></TableCell>
+                    <TableCell>{order.buyer.phone}</TableCell>
+                 </TableRow>
+                 <TableRow>
+                    <TableCell><b>{t('Email')}</b></TableCell>
+                    <TableCell>{order.buyer.email}</TableCell>
+                 </TableRow>
+                 <TableRow>
+                    <TableCell><b>{t('ICO')}</b></TableCell>
+                    <TableCell>{order.ICO}</TableCell>
+                 </TableRow>
+                 <TableRow>
+                    <TableCell><b>{t('Volume')}</b></TableCell>
+                    <TableCell>{order.volume}</TableCell>
+                 </TableRow>
+                 <TableRow>
+                    <TableCell><b>{t('Comments')}</b></TableCell>
+                    <TableCell>{order.comments}</TableCell>
+                 </TableRow>
+                </TableBody>
+              </Table>
+               {
+                 this.currentUser(this.props.currentProfileId, order)
+                }
+              <Button size="small"  color="primary" onClick={() => this.props.history.goBack()}>
+               {t('GO BACK')}
+              </Button>
+        </Card>
+
       </div>
       )
    }
 }
 
-const mapStateToProps = (state) => ({
- order: state.order
-})
+const mapStateToProps = function(state) {
+  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
+  return {
+    currentUser: state.currentUser,
+    currentUserId: jwtDecoded.id,
+    currentProfileId: jwtDecoded.profileId,
+    order: state.order,
+  }
+}
+
 
 export default compose(
   translate('detail'),
-  withStyles(styles),
+  withStyles(style),
   connect(mapStateToProps, { fetchOrder, changeStatus })
 )(OrderDetail);
