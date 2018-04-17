@@ -5,7 +5,6 @@ import SteppedSignupForm from "./SteppedSignupForm";
 import { Redirect } from "react-router-dom";
 import compose from "lodash/fp/compose";
 import { translate } from "react-i18next";
-import Typography from "material-ui/Typography";
 import Paper from "material-ui/Paper";
 
 class SignupPage extends PureComponent {
@@ -14,7 +13,7 @@ class SignupPage extends PureComponent {
   };
 
   render() {
-    const { t, authenticated } = this.props;
+    const { authenticated } = this.props;
     if (authenticated) return <Redirect to ="/dashboard" />
     if (this.props.signup.success) return <Redirect to="/" />;
 
