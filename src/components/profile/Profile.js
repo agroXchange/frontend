@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
+import { Link } from "react-router-dom"
 import {fetchUser, uploadLogo} from "../../actions/users"
 import Paper from "material-ui/Paper"
 import Typography from "material-ui/Typography"
@@ -113,6 +114,12 @@ class Profile extends PureComponent {
               !this.state.upload &&
               <Button onClick={this.handleClick} >
                 Upload Picture
+              </Button>
+            }
+            {
+              currentProfileId === user.id &&
+              <Button component={Link} to="/login">
+                Edit my profile
               </Button>
             }
           </div>
