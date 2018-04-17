@@ -1,105 +1,141 @@
-import React, {PureComponent} from "react";
-import {withStyles} from "material-ui/styles";
+import React, { PureComponent } from "react";
+import { withStyles } from "material-ui/styles";
 import compose from "lodash/fp/compose";
-import {translate} from "react-i18next";
-
-import './default.css'
+import { translate } from "react-i18next";
+import List, { ListItem, ListItemText } from "material-ui/List";
+import Card, { CardActions, CardContent, CardMedia, CardTitle } from "material-ui/Card";
+import Button from "material-ui/Button";
+import Typography from "material-ui/Typography";
+import Paper from "material-ui/Paper";
+import Divider from "material-ui/Divider";
 
 const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit,
-    width: 150
+  list: {
+    width: "100%",
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+    textAlign: "center",
+    display: "inline-block"
   },
-
-  container: {
-    display: "flex",
-    flexWrap: "wrap",
-    width: 320,
-    alignItem: "center"
-  },
-
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 300
+  foot: {
+    textAlign: "center"
   },
   root: {
-    width: '100%',
-    maxWidth: '360px',
+    width: "100%",
+    maxWidth: "360px",
     backgroundColor: theme.palette.background.paper
-  }
+  },
+  card: {
+  width:"100%",
+  height: '700px',
+  backgroundImage: `url(${"/default/farmer.jpg"})`,
+  display:'inline-block',
+  backgroundSize:'cover'
+},
+media: {
+  height: 0,
+  paddingTop: '56.25%', // 16:9
+},
+buttonContainer: {
+  marginTop: "40px",
+    marginBottom: "70px",
+    textAlign:'center'
+},
+button : {
+   margin: theme.spacing.unit,
+   backgroundColor: `#588D61`,
+   color: "white",
+   '&:hover': {
+      backgroundColor: `#8FBC8F`,
+    },
+},
+motto: {
+  fontSize:"60px",
+  color:"white",
+  textShadow:" 2px 2px black",
+   fontWeight: 900
+},
+secondaryText: {
+  fontSize: "30px",
+  color:"white",
+  textShadow:" 2px 2px black"
+},
+titleContainer: {
+  marginTop:"80px",
+  fontWeight: 900
+}
 });
 
 class defaultPage extends PureComponent {
-  state = {}
+  state = {};
 
   render() {
-    const {t} = this.props;
+    const { t, classes } = this.props;
 
-    return (<div>
-      <header>
-        <div class="header-default">
-          <div class="container">
-            <div class="row"></div>
+    return (
+      <div>
+        <div>
+          <Paper className={classes.card}>
+          <CardContent className={classes.titleContainer}>
+            <Typography className={classes.motto} gutterBottom variant="headline" component="h2">
+              We connect farmers with buyers
+            </Typography>
+            <Typography className={classes.secondaryText}component="p">
+              A MarketPlace for producer
+            </Typography>
+          </CardContent>
 
-            <div class="row header-info">
-              <div class="col-sm-10 col-sm-offset-1 text-center">
-                <h1 class="wow fadeIn" style={{
-                    "color" : "#f2f2f2"
-                  }}>We connect farmers with buyers</h1>
-                <br/>
-                <p class="lead wow fadeIn" data-wow-delay="0.5s">Ensuring safe and healthy food in a competing world can be a challenge. On Agro Xchange, we provide the necessary tools to make your job easier.</p>
 
-                <br/>
-                <div class="row">
-                  <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
-                    <div class="row">
-                      <div class="col-xs-6 text-right wow fadeInUp" data-wow-delay="1s">
-                        <a href="/login" class="btn btn-secondary btn-lg scroll">
-                          {t("Log in")}</a>
-                      </div>
-                      <br/>
-                      <br/>
-                      <div class="col-xs-6 text-left wow fadeInUp" data-wow-delay="1.4s">
-                        <a href="/signup" class="btn btn-primary btn-lg scroll">
-                          {t("Sign up")}</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          </Paper>
+          <div className={classes.buttonContainer}>
+          <Button
+            onClick={() => this.props.history.push('/login')}
+             size="large"
+             className={classes.button}
+             >
+          Log In
+         </Button>
+         <Button
+             onClick={() => this.props.history.push('/signup')}
+             variant="raised"
+             size="large"
+             className={classes.button}
+             >
+          Sign Up
+         </Button>
+         </div>
+         <Divider />
+        </div>
+        <div>
+          <div>
+            <Paper className={classes.container}>
+              <div className={classes.list}>
+                <List component="nav">
+                  <ListItem className={classes.foot}>
+                    <ListItemText primary="Connect with us on" />
+                  </ListItem>
+                  <ListItem className={classes.foot} component="a">
+                    <ListItemText primary="Juan R. Serrano Ochoa" />
+                  </ListItem>
 
+                    <ListItemText primary="+31 (0)6 1460 6798" />
+
+                  <ListItem className={classes.foot} component="a">
+                    <ListItemText primary="jserrano@contenemos.com" />
+                  </ListItem>
+
+                    <ListItemText primary="www.contenemos.com" />
+
+                  <ListItem className={classes.foot} component="a">
+                    <ListItemText secondary="Copyright 	&copy; 2018. All rights reserved." />
+                  </ListItem>
+                </List>
               </div>
-            </div>
+            </Paper>
           </div>
         </div>
-      </header>
-      <footer>
-        <div class="container">
-
-          <div class="row">
-            <div class="col-sm-8 margin-20">
-              <ul class="list-inline social">
-                <p>Connect with us on</p>
-                <p>Juan R. Serrano Ochoa</p>
-                <li>+31 (0)6 1460 6798</li>
-                <li>jserrano@contenemos.com</li>
-                <li>www.contenemos.com</li>
-              </ul>
-            </div>
-
-            <div class="col-sm-4 text-right">
-              <p>
-                <small>Copyright & copy; 2018. All rights reserved.
-                  <br/>
-                  Created by dream team corporation</small>
-              </p>
-            </div>
-          </div>
-
-        </div>
-      </footer>
-
-    </div>);
+      </div>
+    );
   }
 }
 
