@@ -4,7 +4,6 @@ import { withStyles } from "material-ui/styles"
 import { Link , Redirect} from "react-router-dom"
 import compose from "lodash/fp/compose"
 import Button from "material-ui/Button"
-import Grid from "material-ui/Grid"
 import Typography from "material-ui/Typography"
 import Card, { CardActions, CardContent } from "material-ui/Card"
 import Paper from "material-ui/Paper"
@@ -29,7 +28,8 @@ const styles = theme => ({
 
 class Dashboard extends PureComponent {
   render() {
-    const { classes, user } = this.props
+    const { classes, currentProfileId, currentUser } = this.props
+    if (!currentUser) return <Redirect to="/" />
     if (this.props.currentUserRole === "admin") return <Redirect to="/admin" />;
 
 
@@ -53,7 +53,7 @@ class Dashboard extends PureComponent {
             </div>
           </CardContent>
           <CardActions>
-            <Link to={`/profiles/1`}>
+            <Link to={`/profiles/${currentProfileId}`}>
               <Button size="medium" color="primary" variant="raised">
                 See your profile information
               </Button>
@@ -70,12 +70,12 @@ class Dashboard extends PureComponent {
             </Typography>
           </CardContent>
           <CardActions>
-            <Link to={`/productform`}>
+            <Link to={`/products/new`}>
               <Button size="medium" color="primary" variant="raised">
                 Add a new product
               </Button>
             </Link>
-            <Link to={`/products`}>
+            <Link to={`/profiles/${currentProfileId}/products`}>
               <Button size="medium" color="primary" variant="raised">
                 See all my products
               </Button>
@@ -105,12 +105,12 @@ class Dashboard extends PureComponent {
 }
 
 const mapStateToProps = function(state) {
-  const jwtDecoded = jwtPayload(state.currentUser.jwt)
+  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
     currentUser: state.currentUser,
     currentUserRole: jwtDecoded.role,
     currentUserId: jwtDecoded.id,
-    jwtDecoded
+    currentProfileId: jwtDecoded.profileId
   }
 }
 
