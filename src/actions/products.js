@@ -8,6 +8,9 @@ export const ADD_PRODUCT = "ADD_PRODUCT"
 export const FETCH_MY_PRODUCTS = "FETCH_MY_PRODUCTS"
 export const UPDATED_PRODUCT = 'UPDATE_PRODUCT'
 
+export const FILTER_PRODUCTS = "FILTER_PRODUCTS"
+
+
 export const fetchMyProducts = (profileId) => (dispatch, getState) => {
   const state = getState()
   const jwt = state.currentUser.jwt
@@ -104,3 +107,10 @@ export const updateProduct = (productId, updates) => (dispatch, getState) => {
 //             console.error(err)
 //         })
 //       }
+
+export const filterProducts = (parameter) => {
+  return {
+    type: FILTER_PRODUCTS,
+    payload: parameter
+  }
+}
