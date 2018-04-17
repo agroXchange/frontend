@@ -171,7 +171,7 @@ class EditProductForm extends PureComponent {
               marginBottom: 20
             }}
           >
-            Order
+            Save
           </Button>
 
         </Paper>

@@ -20,7 +20,7 @@ import '../../styles/Product.css'
 import { fetchProduct, updateProduct } from '../../actions/products'
 import { createOrder } from '../../actions/orders'
 import OrderForm from '../orders/OrderForm'
-import ProductForm from './ProductForm'
+import EditProductForm from './EditProductForm'
 import {jwtPayload} from "../../jwt"
 
 const styles = {
@@ -153,7 +153,7 @@ class Product extends PureComponent {
               aria-labelledby="form-dialog-title"
             >
               <DialogTitle id="form-dialog-title">Edit Your Product</DialogTitle>
-                <ProductForm edit={true} inititalValues={ this.props.product } onSubmit={ this.updateProduct }/>
+                <EditProductForm inititalValues={ this.props.product } onSubmit={ this.updateProduct }/>
             </Dialog>
 
             <Dialog
