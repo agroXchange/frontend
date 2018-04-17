@@ -3,8 +3,10 @@ import Select from "material-ui/Select";
 import { MenuItem } from "material-ui/Menu";
 import { withStyles } from "material-ui/styles";
 import Input, { InputLabel } from "material-ui/Input";
-import { FormControl} from "material-ui/Form";
 import Button from "material-ui/Button";
+import compose from "lodash/fp/compose";
+import { translate } from "react-i18next";
+
 
 import TextField from "material-ui/TextField";
 
@@ -54,7 +56,7 @@ class EditProfileForm extends PureComponent {
 
 
   render() {
-    const { classes } = this.props;
+    const { classes, t } = this.props;
     const initialValues = this.props.initialValues || { }
 
     return (
@@ -63,7 +65,7 @@ class EditProfileForm extends PureComponent {
           <TextField
             id="address"
             name="address"
-            label="Address"
+            label={t("address")}
             className={classes.textField}
             margin="normal"
             value={this.state.address || initialValues.address || ''}
@@ -74,7 +76,7 @@ class EditProfileForm extends PureComponent {
           <TextField
             id="phone"
             name="phone"
-            label="Phone number"
+            label={t("phone")}
             className={classes.textField}
             margin="normal"
             value={this.state.phone || initialValues.phone || ''}
@@ -85,7 +87,7 @@ class EditProfileForm extends PureComponent {
           <TextField
             id="email"
             name="email"
-            label="Email"
+            label={t("Email")}
             className={classes.textField}
             margin="normal"
             type="email"
@@ -97,7 +99,7 @@ class EditProfileForm extends PureComponent {
           <TextField
             id="chamberOfCommerce"
             name="chamberOfCommerce"
-            label="Chamber of Commerce number"
+            label={t("cocEdit")}
             className={classes.textField}
             margin="normal"
             value={this.state.chamberOfCommerce || initialValues.chamberOfCommerce || ''}
@@ -112,4 +114,4 @@ class EditProfileForm extends PureComponent {
   }
 }
 
-export default withStyles(styles)(EditProfileForm);
+export default compose(translate("user"), withStyles(styles))(EditProfileForm);
