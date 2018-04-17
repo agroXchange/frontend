@@ -74,42 +74,22 @@ class Product extends PureComponent {
     this.handleConfirmEdit()
   }
 
-  progress = () => {
-    const { completed } = this.state;
-    const start = Date.parse(this.props.product.harvested)
-    const end = Date.parse(this.props.product.expired)
-    const today = Date.parse(new Date())
-    if (completed === 100) {
-      this.setState({ completed: 0 });
-    } else {
-      const diff = Math.round(((today - start) / (end - start)) * 100)
-      console.log(diff)
-      this.setState({ completed: diff });
-      //this.setState({ completed: Math.round(((today - harvested) / (expired - harvested)), 100)})
-
-
-    //p = Math.round(((today - start) / (end - start)) * 100)
-    }
-  };
-
 
   render() {
     const { classes, product, currentUser, currentUserId, currentProfileId } = this.props
     if (!product) return null
+
     return(
 
       <div className="product-container">
         <Paper className="paper">
         <Paper><h2 className="title">{ product.code.titleeng }</h2></Paper>
           <Grid container className="container" spacing={24}>
-
             <Grid item xs={12}>
               <img src={ product.photo !== null ?
                 product.photo : stockImage }
                 alt="product"
                 className="product-photo"/>
-
-              <LinearProgress variant="determinate" value={this.state.completed} />
 
               { product.volume === 0 ? <h2>UNAVAILABLE</h2> : "" }
 
