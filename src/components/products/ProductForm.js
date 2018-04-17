@@ -14,7 +14,7 @@ import Typography from 'material-ui/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import '../../styles/ProductForm.css'
 import { fetchCodes } from '../../actions/codes'
-import Search from '@material-ui/icons/Search'
+import AddBox from '@material-ui/icons/AddBox'
 import Grid from 'material-ui/Grid';
 
 const classes = {
@@ -35,6 +35,10 @@ const classes = {
     width: 200,
     // width: '100%',
     // justify: 'center'
+  },
+  productstitle:{
+    marginLeft: 20,
+    paddingRight: 2,
   },
 }
 
@@ -136,7 +140,7 @@ class ProductForm extends PureComponent {
                 onClick={this.handleClickOpen}
                 variant="raised"
               >
-                <Search /> Products
+                <AddBox /><div className={classes.productstitle}> Product</div>
               </Button>
 
               <Dialog
@@ -354,6 +358,9 @@ class ProductForm extends PureComponent {
         >
           Save
         </Button>
+
+
+
 
         </Paper>
       </form>

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import ProductForm from './ProductForm'
+import Button from "material-ui/Button"
 import { addProduct } from '../../actions/products'
 import { jwtPayload } from '../../jwt'
 
@@ -35,6 +36,24 @@ class AddProductContainer extends PureComponent {
             return (
                 <div className="AddProductContainer">
                  <ProductForm onSubmit={this.submit}/>
+
+                    <Link to={`/dashboard`}>
+                        <Button
+                            color="primary"
+                            className="submit-btn"
+                            type="submit"
+                            style={{
+                                display: 'block',
+                                margin: 'auto',
+                                marginTop: 20,
+                                marginBottom: 20
+                            }}
+                        >
+                            Back
+                     </Button>
+                    </Link>
+
+
                 </div>
             )
         }

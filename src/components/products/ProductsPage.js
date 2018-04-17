@@ -5,6 +5,13 @@ import { fetchAllProducts, filterProducts } from '../../actions/products'
 import Button from 'material-ui/Button'
 import Dialog, { DialogContent, DialogContentText, withMobileDialog, } from 'material-ui/Dialog'
 import SearchProductForm from './SearchProductForm';
+import Tune from '@material-ui/icons/Tune'
+
+const classes = {
+  tuneIcon: {
+    marginRight: 100,
+  },
+}
 
 class ProductsPage extends PureComponent {
   state = {
@@ -43,6 +50,8 @@ class ProductsPage extends PureComponent {
           onClick={this.handleClickOpen}
           variant="raised"
         >
+        <Tune className={classes.tuneIcon}/>
+      
           Filter
         </Button>
 
