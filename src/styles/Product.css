@@ -27,12 +27,13 @@
 
 .percentage-bar {
   border: 1px solid black;
-  height: 20px;
+  box-sizing: border-box;
+  height: 15px;
   width: 100%;
 }
 
 .bar {
-  background-color: blue;
+  background-color: #5b8bbf;
   height: 100%;
   max-width: 100%;
 }

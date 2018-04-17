@@ -106,9 +106,11 @@ class Product extends PureComponent {
 
               { product.volume === 0 ? <h2>UNAVAILABLE</h2> : "" }
 
-
-              <div className="percentage-bar" >
-                <div className="bar" style={{ width: this.progress(product.harvested, product.expiration) }}></div>
+              <div>
+                <p>Remaining Time</p>
+                <div className="percentage-bar" >
+                  <div className="bar" style={{ width: this.progress(product.harvested, product.expiration) }}></div>
+                </div>
               </div>
 
             </Grid>
