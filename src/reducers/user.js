@@ -1,4 +1,4 @@
-import { FETCH_USER, UPDATE_USER } from "../actions/users";
+import {FETCH_USER, UPDATE_LOGO_SUCCESS, UPDATE_USER} from "../actions/users";
 
 export default function(state = null, { type, payload } = {}) {
   switch (type) {
@@ -7,8 +7,13 @@ export default function(state = null, { type, payload } = {}) {
     case UPDATE_USER:
       return {
         ...state,
-        profile: payload
+        ...payload
       };
+    case UPDATE_LOGO_SUCCESS:
+      return {
+        ...state,
+        ...payload
+      }
     default:
       return state
   }
