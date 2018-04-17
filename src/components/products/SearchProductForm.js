@@ -41,6 +41,10 @@ const classes = {
 
 const countries = [
     {
+        value: null,
+        label: 'All',
+    },
+    {
         value: 'Colombia',
         label: 'Colombia',
     },
