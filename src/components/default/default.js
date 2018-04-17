@@ -1,12 +1,7 @@
 import React, {PureComponent} from "react";
 import {withStyles} from "material-ui/styles";
-import PropTypes from 'prop-types';
-import Button from "material-ui/Button";
 import compose from "lodash/fp/compose";
 import {translate} from "react-i18next";
-import {Link} from 'react-router-dom'
-import Divider from 'material-ui/Divider';
-import Paper from 'material-ui/Paper';
 
 import './default.css'
 
@@ -40,7 +35,6 @@ class defaultPage extends PureComponent {
 
   render() {
     const {t} = this.props;
-    const {classes} = this.props;
 
     return (<div>
       <header>
