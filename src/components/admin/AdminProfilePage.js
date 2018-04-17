@@ -60,7 +60,7 @@ class AdminProfilePage extends PureComponent {
         </IconButton>
         <div className="info">
           <Typography variant="headline" component="h2">
-            {user.profile.name}
+            {user.name}
           </Typography>
 
           <Typography color="textSecondary">
@@ -105,18 +105,11 @@ class AdminProfilePage extends PureComponent {
 
           <div>
             <Button
-              onClick={() => this.props.history.push(`/orders/${user.id}`)}
+              onClick={() => this.props.history.push(`/admin/profiles/${user.id}/products`)}
               size="medium"
               color="primary"
             >
-              Orders
-            </Button>
-            <Button
-              onClick={() => this.props.history.push(`/products/${user.id}`)}
-              size="medium"
-              color="primary"
-            >
-              Products
+              View Products
             </Button>
           </div>
         </div>
