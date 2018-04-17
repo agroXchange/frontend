@@ -21,7 +21,6 @@ import TextField from "material-ui/TextField";
 import SearchIcon from "@material-ui/icons/Search";
 import IconButton from "material-ui/IconButton";
 import Select from "material-ui/Select";
-import Input, { InputLabel } from "material-ui/Input";
 import { FormControl } from "material-ui/Form";
 import { MenuItem } from "material-ui/Menu";
 import Paper from "material-ui/Paper";
@@ -62,9 +61,7 @@ const style = theme => ({
     width: "600px",
     marginTop: theme.spacing.unit * 3
   },
-  table2: {
-    minWidth: 500
-  },
+
   tableWrapper: {
     overflowX: "auto"
   }
@@ -210,7 +207,6 @@ class OrdersPage extends PureComponent {
 
 
     const { rowsPerPage, page } = this.state;
-    const counter = 0;
     const emptyRows =
       rowsPerPage -
       Math.min(
@@ -226,10 +222,11 @@ class OrdersPage extends PureComponent {
         <form>
           <div
             style={{
-              width: "400px",
+              display:'flex',
+              width: "550px",
               margin: 0,
-
-              marginTop: "20px"
+              marginLeft:20,
+              marginTop: "20px",
             }}
           >
             <IconButton>
@@ -241,10 +238,10 @@ class OrdersPage extends PureComponent {
             />
             <form
               style={{
-                width: "400px",
-                dislay: "flex",
 
-                marginTop: "20px"
+                display: "flex",
+
+
               }}
               autoComplete="off"
             >
@@ -350,7 +347,7 @@ class OrdersPage extends PureComponent {
                             className={this.props.classes.row}
                             key={order.id}
                           >
-                            <CustomTableCell><Link to={`/orders/${order.id}`}>{order.id}</Link></CustomTableCell>
+                            <CustomTableCell><Link to={`/admin/orders/${order.id}`}>{order.id}</Link></CustomTableCell>
                             <CustomTableCell>{order.date}</CustomTableCell>
                             <CustomTableCell>{order.status}</CustomTableCell>
                             <CustomTableCell>{order.comments}</CustomTableCell>
