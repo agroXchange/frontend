@@ -42,9 +42,12 @@ class Product extends PureComponent {
     completed: 0
   }
 
+
+
   componentWillMount(props) {
     this.props.fetchProduct(this.props.match.params.id)
   }
+
 
   handleClickOrderOpen = () => { this.setState({ newOrder: true }) }
 
@@ -78,10 +81,17 @@ class Product extends PureComponent {
     this.props.removeProduct(this.props.match.params.id)
   }
 
+  progress = (harvested, expiration) => {
+    const start = Date.parse(harvested)
+    const end = Date.parse(expiration)
+    const today = Date.parse(new Date())
+    const p = Math.round(((today - start) / (end - start)) * 100) + '%'
+    return p
+  }
+
   render() {
     const { classes, product, currentUser, currentUserId, currentProfileId } = this.props
     if (!product) return null
-
     return(
 
       <div className="product-container">
@@ -95,6 +105,11 @@ class Product extends PureComponent {
                 className="product-photo"/>
 
               { product.volume === 0 ? <h2>UNAVAILABLE</h2> : "" }
+
+
+              <div className="percentage-bar" >
+                <div className="bar" style={{ width: this.progress(product.harvested, product.expiration) }}></div>
+              </div>
 
             </Grid>
 
