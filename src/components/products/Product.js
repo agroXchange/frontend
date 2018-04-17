@@ -95,7 +95,7 @@ class Product extends PureComponent {
 
 
   render() {
-    const { classes, product, currentUser, currentUserId } = this.props
+    const { classes, product, currentUser, currentUserId, currentProfileId } = this.props
     if (!product) return null
 
     return(
@@ -121,7 +121,7 @@ class Product extends PureComponent {
               <p><b>Volume:</b> { product.volume } KG</p>
               <p><b>Price:</b> { product.price } { product.currency } per KG</p>
 
-              { currentUserId !== product.seller.id &&
+              { currentProfileId !== product.seller.id &&
 
                 <Link to={ `/profiles/${product.seller.id}` }>
                   <Button color="primary">View Seller</Button>
@@ -135,11 +135,11 @@ class Product extends PureComponent {
               <p><b>Country</b> { product.seller.country }</p>
               <p><b>City/Port:</b> { product.seller.city }</p>
 
-              { currentUserId === product.seller.id &&
+              { currentProfileId === product.seller.id &&
                 <Button onClick={ this.handleEditOpen }>Edit Product</Button>
               }
 
-              { currentUserId !== product.seller.id &&
+              { currentProfileId !== product.seller.id &&
                 <Button onClick={this.handleClickOrderOpen}>Make New Order</Button>
               }
 
