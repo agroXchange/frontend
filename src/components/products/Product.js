@@ -17,7 +17,7 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog'
 import '../../styles/Product.css'
-import { fetchProduct, updateProduct } from '../../actions/products'
+import { fetchProduct, updateProduct, removeProduct } from '../../actions/products'
 import { createOrder } from '../../actions/orders'
 import OrderForm from '../orders/OrderForm'
 import EditProductForm from './EditProductForm'
@@ -42,9 +42,12 @@ class Product extends PureComponent {
     completed: 0
   }
 
+
+
   componentWillMount(props) {
     this.props.fetchProduct(this.props.match.params.id)
   }
+
 
   handleClickOrderOpen = () => { this.setState({ newOrder: true }) }
 
@@ -74,24 +77,17 @@ class Product extends PureComponent {
     this.handleConfirmEdit()
   }
 
-  progress = () => {
-    const { completed } = this.state;
-    const start = Date.parse(this.props.product.harvested)
-    const end = Date.parse(this.props.product.expired)
+  removeProduct = () => {
+    this.props.removeProduct(this.props.match.params.id)
+  }
+
+  progress = (harvested, expiration) => {
+    const start = Date.parse(harvested)
+    const end = Date.parse(expiration)
     const today = Date.parse(new Date())
-    if (completed === 100) {
-      this.setState({ completed: 0 });
-    } else {
-      const diff = Math.round(((today - start) / (end - start)) * 100)
-      console.log(diff)
-      this.setState({ completed: diff });
-      //this.setState({ completed: Math.round(((today - harvested) / (expired - harvested)), 100)})
-
-
-    //p = Math.round(((today - start) / (end - start)) * 100)
-    }
-  };
-
+    const p = Math.round(((today - start) / (end - start)) * 100) + '%'
+    return p
+  }
 
   render() {
     const { classes, product, currentUser, currentUserId, currentProfileId } = this.props
@@ -102,16 +98,20 @@ class Product extends PureComponent {
         <Paper className="paper">
         <Paper><h2 className="title">{ product.code.titleeng }</h2></Paper>
           <Grid container className="container" spacing={24}>
-
             <Grid item xs={12}>
               <img src={ product.photo !== null ?
                 product.photo : stockImage }
                 alt="product"
                 className="product-photo"/>
 
-              <LinearProgress variant="determinate" value={this.state.completed} />
-
               { product.volume === 0 ? <h2>UNAVAILABLE</h2> : "" }
+
+              <div>
+                <p>Remaining Time</p>
+                <div className="percentage-bar" >
+                  <div className="bar" style={{ width: this.progress(product.harvested, product.expiration) }}></div>
+                </div>
+              </div>
 
             </Grid>
 
@@ -137,7 +137,10 @@ class Product extends PureComponent {
               <p><b>City/Port:</b> { product.seller.city }</p>
 
               { currentProfileId === product.seller.id &&
-                <Button onClick={ this.handleEditOpen }>Edit Product</Button>
+                <div>
+                  <Button onClick={ this.handleEditOpen }>Edit Product</Button>
+                  <Button onClick={ this.removeProduct }>Remove Product</Button>
+                </div>
               }
 
               { currentProfileId !== product.seller.id &&
@@ -206,5 +209,5 @@ const mapStateToProps = function(state, props) {
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { fetchProduct, createOrder, updateProduct })
+  connect(mapStateToProps, { fetchProduct, createOrder, updateProduct, removeProduct })
 )(Product)
