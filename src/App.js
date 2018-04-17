@@ -53,6 +53,8 @@ class App extends Component {
             <Route exact path="/searchproduct" component={ SearchProductContainer } />
             <Route exact path="/reset-password" component={ ResetPasswordPage } />
             <Route exact path="/dashboard" component={ Dashboard } />
+            <Route path="products?code=:query1&country=:query2"
+              component={ProductsPage} />
           </div>
         </Router>
       </MuiThemeProvider>

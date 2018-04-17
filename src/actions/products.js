@@ -98,6 +98,7 @@ export const filterProducts = (prefences) => (dispatch) => {
     request
       .get(`${baseUrl}/search/products`)
       .then(response => {
+        console.log(response)
             dispatch({
               type: FILTER_PRODUCTS,
               payload: response.body
@@ -106,5 +107,6 @@ export const filterProducts = (prefences) => (dispatch) => {
         .catch(err => {
             console.error(err)
         })
+
       }
 
