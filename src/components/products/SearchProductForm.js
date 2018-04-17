@@ -95,6 +95,11 @@ class SearchProductForm extends React.Component {
         this.props.fetchCodes()
     }
 
+    getName = (code) => {
+        let product = this.props.codes.filter(i => i.code.match(code))
+        return product[0].titleeng
+    }
+    
 
     render() {
         const { fullScreen, codes, vegetables, fruits, beans } = this.props
@@ -212,7 +217,7 @@ class SearchProductForm extends React.Component {
             </div>   
             <br/>
 
-                <div><h3>{title}</h3></div>
+                    <div><h3>{!this.state.code ? "< pick a product >" : this.getName(this.state.code)}</h3></div>
 
             <div> 
                         <TextField

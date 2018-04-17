@@ -60,7 +60,6 @@ class ProductForm extends PureComponent {
   state = {
     currency: 'EUR',
     open: false,
-    // code:''
   }
 
   style = {
@@ -114,8 +113,6 @@ class ProductForm extends PureComponent {
     let product = this.props.codes.filter(i => i.code.match(code))
     return product[0].titleeng 
   }
-
-
 
 
   render() {
