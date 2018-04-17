@@ -1,33 +1,23 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
-import {withStyles} from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Translate from '@material-ui/icons/Translate';
-import Switch from 'material-ui/Switch';
-import {FormControlLabel, FormGroup} from 'material-ui/Form';
-import Menu, {MenuItem} from 'material-ui/Menu';
-import compose from 'lodash/fp/compose'
-import {translate} from "react-i18next"
+import React, {PureComponent} from 'react'
+import PropTypes from 'prop-types'
+import AppBar from 'material-ui/AppBar'
+import Toolbar from 'material-ui/Toolbar'
+import Typography from 'material-ui/Typography'
+import IconButton from 'material-ui/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
+import Translate from '@material-ui/icons/Translate'
+import Menu, {MenuItem} from 'material-ui/Menu'
 import {Link} from 'react-router-dom'
-import {connect} from "react-redux";
-import { withRouter } from "react-router";
-import SwipeableDrawer from 'material-ui/SwipeableDrawer';
-import Button from 'material-ui/Button';
-import List from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-import {ListItem, ListItemIcon, ListItemText} from 'material-ui/List';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import StarIcon from '@material-ui/icons/Star';
-import SendIcon from '@material-ui/icons/Send';
-import MailIcon from '@material-ui/icons/Mail';
-import DeleteIcon from '@material-ui/icons/Delete';
-import ReportIcon from '@material-ui/icons/Report';
+import SwipeableDrawer from 'material-ui/SwipeableDrawer'
+import StarIcon from '@material-ui/icons/Star'
+import SendIcon from '@material-ui/icons/Send'
+import {ListItem, ListItemIcon} from 'material-ui/List';
+import {jwtPayload} from "../jwt"
+import compose from "redux/src/compose"
+import {translate} from "react-i18next"
+import {connect} from "react-redux"
+import {withStyles} from "material-ui"
+
 
 const styles = {
   list: {
@@ -39,45 +29,45 @@ const styles = {
   fullList: {
     width: 'auto'
   },
-};
+}
 
 class NavBar extends PureComponent {
 
   static propTypes = {
     classes: PropTypes.object.isRequired
-  };
+  }
 
   state = {
     auth: true,
     anchorEl: null,
     left: false
-  };
+  }
 
   toggleDrawer = (side, open) => () => {
     this.setState({[side]: open});
-  };
+  }
 
   handleChange = (event, checked) => {
     this.setState({auth: checked});
-  };
+  }
 
   handleMenu = event => {
     this.setState({anchorEl: event.currentTarget});
-  };
+  }
 
   handleNewMenu = event => {
     this.setState({El: event.currentTarget});
-  };
+  }
 
   handleClose = () => {
     this.setState({anchorEl: null});
-  };
+  }
 
   handleNewClose = () => {
     this.setState({El: null});
-  };
+  }
   render() {
-    const {classes, currentUser} = this.props;
+    const {classes, currentUser, currentProfileId} = this.props;
     const {auth, anchorEl, El} = this.state;
     const open = Boolean(anchorEl);
     const openNew = Boolean(El);
@@ -95,20 +85,20 @@ class NavBar extends PureComponent {
           <ListItemIcon>
             <StarIcon/>
           </ListItemIcon>
-          <Link to='/'>Home</Link>
+          <Link to='/dashboard'>Dashboard</Link>
         </ListItem>
         <ListItem button="button">
           <ListItemIcon>
             <SendIcon/>
           </ListItemIcon>
-          <Link to='/profile'>My profile</Link>
+          <Link to={`/profiles/${currentProfileId}`}>My profile</Link>
         </ListItem>
 
         <ListItem button="button">
           <ListItemIcon>
             <SendIcon/>
           </ListItemIcon>
-          <Link to='/products/:id'>My products</Link>
+          <Link to={`/profiles/${currentProfileId}/products`}>My products</Link>
         </ListItem>
 
         <ListItem button="button">
@@ -122,15 +112,10 @@ class NavBar extends PureComponent {
           <ListItemIcon>
             <SendIcon/>
           </ListItemIcon>
-          <Link to='/searchproduct'>AgroXpress</Link>
+          <Link to='/products'>Marketplace</Link>
         </ListItem>
 
-        <ListItem button="button">
-          <ListItemIcon>
-            <SendIcon/>
-          </ListItemIcon>
-          <Link to='/about'>About</Link>
-        </ListItem>
+
 
         <ListItem button="button">
           <ListItemIcon>
@@ -139,7 +124,7 @@ class NavBar extends PureComponent {
           <Link to='/logout'>Logout</Link>
         </ListItem>
       </div>
-    </div>);
+    </div>)
 
 
     return (<div>
@@ -165,12 +150,7 @@ class NavBar extends PureComponent {
 
           {
             auth && (<div>
-        {currentUser &&       <IconButton aria-owns={open
-                  ? 'menu-appbar'
-                  : null} aria-haspopup="true" onClick={this.handleMenu} color="inherit">
-                <AccountCircle/>
 
-              </IconButton> }
 
               <IconButton aria-owns={openNew
                   ? 'menu-lang'
@@ -193,40 +173,27 @@ class NavBar extends PureComponent {
                 </MenuItem>
 
               </Menu>
-
-              <Menu id="menu-appbar" anchorEl={anchorEl} anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
-                }} transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
-                }} open={open} onClose={this.handleClose}>
-                <MenuItem>
-                  <Link to='/orders'>Profile</Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link to='/profile'>My account</Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link to='/logout'>Log out</Link>
-                </MenuItem>
-
-              </Menu>
+              
 
             </div>)
           }
         </Toolbar>
       </AppBar>
-    </div>);
+    </div>)
   }
 }
 
 NavBar.propTypes = {
   classes: PropTypes.object.isRequired
-};
+}
 
 const mapStateToProps = function(state) {
-  return {currentUser: state.currentUser};
-};
+  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
+  return {
+    currentUser: state.currentUser,
+    currentUserId: jwtDecoded.id,
+    currentProfileId: jwtDecoded.profileId
+  }
+}
 
-export default compose(translate("translations"), connect(mapStateToProps), withStyles(styles))(NavBar);
+export default compose(translate("translations"), connect(mapStateToProps), withStyles(styles))(NavBar)

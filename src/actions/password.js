@@ -1,6 +1,5 @@
 import * as request from "superagent";
-
-const baseUrl = "http://localhost:4008";
+import {baseUrl} from "../constants"
 
 export const FORGOT_PASSWORD_SUCCESS = "FORGOT_PASSWORD_SUCCESS";
 export const FORGOT_PASSWORD_FAILED = "FORGOT_PASSWORD_FAILED";

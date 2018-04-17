@@ -19,7 +19,6 @@ import ProfilePage from './components/profile/ProfilePage'
 import LogoutPage from './components/logout/LogoutPage'
 import ResetPasswordPage from './components/password/ResetPasswordPage'
 import AddProductContainer from './components/products/AddProductContainer'
-import SearchProductContainer from './components/products/SearchProductContainer'
 import MyProducts from './components/products/MyProducts'
 import ProductsPage from './components/products/ProductsPage'
 import Dashboard from './components/dashboard/Dashboard'
@@ -38,26 +37,27 @@ class App extends Component {
             <Route exact path="/admin" component={AdminPage} />
             <Route exact path="/admin/pending" component={PendingUserList} />
             <Route exact path="/admin/products" component={ProductsList} />
-            <Route exact path="/admin/pending/profiles/:id" component={PendingUserPage} />
-            <Route exact path="/admin/profiles/:id/orders" component={OrderList} />
-            <Route exact path="/admin/profiles/:id/products" component={MyProducts} />
+            <Route exact path="/admin/pending/profiles/:id([0-9]+)" component={PendingUserPage} />
+            <Route exact path="/admin/profiles/:id([0-9]+)/orders" component={OrderList} />
+            <Route exact path="/admin/profiles/:id([0-9]+)/products" component={MyProducts} />
             <Route exact path="/admin/orders" component={OrdersPage} />
             <Route exact path="/admin/users" component={UsersList} />
-            <Route exact path="/admin/profiles/:id" component={AdminProfilePage} />
+            <Route exact path="/admin/profiles/:id([0-9]+)" component={AdminProfilePage} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/signup" component={SignupPage} />
             <Route exact path="/logout" component={LogoutPage} />
             <Route exact path="/translation" component={ ExampleTranslation } />
             <Route exact path="/orders" component={OrderList} />
-            <Route exact path="/orders/:id" component={OrderDetail} />
+            <Route exact path="/orders/:id([0-9]+)" component={OrderDetail} />
             <Route exact path="/products" component={ ProductsPage } />
-            <Route exact path="/products/:id" component={ Product } />
-            <Route exact path="/profiles/:id" component={ProfilePage} />
-            <Route exact path="/profiles/:id/products" component={ MyProducts } />
             <Route exact path="/products/new" component={ AddProductContainer } />
-            <Route exact path="/searchproduct" component={ SearchProductContainer } />
+            <Route exact path="/products/:id([0-9]+)" component={ Product } />
+            <Route exact path="/profiles/:id([0-9]+)" component={ProfilePage} />
+            <Route exact path="/profiles/:id([0-9]+)/products" component={ MyProducts } />
             <Route exact path="/reset-password" component={ ResetPasswordPage } />
             <Route exact path="/dashboard" component={ Dashboard } />
+            {/* <Route path="products?code=:query1&country=:query2"
+              component={ProductsPage} /> */}
           </div>
         </Router>
       </MuiThemeProvider>

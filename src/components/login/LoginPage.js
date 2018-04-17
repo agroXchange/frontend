@@ -10,9 +10,8 @@ import compose from "lodash/fp/compose"
 import Typography from "material-ui/Typography"
 import Button from "material-ui/Button"
 import Paper from "material-ui/Paper"
-import Dialog, { DialogActions,  DialogContent, DialogContentText, DialogTitle } from "material-ui/Dialog"
+import Dialog, {  DialogTitle } from "material-ui/Dialog"
 import { sendForgotPassword } from "../../actions/password"
-import {jwtPayload} from '../../jwt'
 
 class LoginPage extends PureComponent {
   state = {}

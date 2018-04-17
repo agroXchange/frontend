@@ -1,6 +1,5 @@
 import * as request from "superagent";
-
-const baseUrl = "http://localhost:4008";
+import {baseUrl} from "../constants"
 
 export const USER_SIGNUP_SUCCESS = "USER_SIGNUP_SUCCESS";
 export const USER_SIGNUP_FAILED = "USER_SIGNUP_FAILED";

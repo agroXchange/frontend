@@ -1,12 +1,11 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { signup } from "../../actions/users";
-import SignupForm from "./SignupForm";
+import SteppedSignupForm from "./SteppedSignupForm";
 import { Redirect } from "react-router-dom";
 import compose from "lodash/fp/compose";
 import { translate } from "react-i18next";
 import Typography from "material-ui/Typography";
-import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
 
 class SignupPage extends PureComponent {
@@ -15,7 +14,8 @@ class SignupPage extends PureComponent {
   };
 
   render() {
-    const { t } = this.props;
+    const { t, authenticated } = this.props;
+    if (authenticated) return <Redirect to ="/dashboard" />
     if (this.props.signup.success) return <Redirect to="/" />;
 
     return (
@@ -31,10 +31,8 @@ class SignupPage extends PureComponent {
           {t("Sign up form")}
         </Typography>
         <Typography color="textSecondary">{t("fieldsNecessary")}</Typography>
-        <SignupForm onSubmit={this.handleSubmit} />
+        <SteppedSignupForm onSubmit={this.handleSubmit} />
         <p style={{ color: "red" }}>{this.props.signup.error}</p>
-        <Typography color="textSecondary">{t("alreadyRegistered?")}</Typography>
-        <Button color="primary">{t("Log in")}</Button>
       </Paper>
     );
   }
@@ -42,7 +40,8 @@ class SignupPage extends PureComponent {
 
 const mapStateToProps = function(state) {
   return {
-    signup: state.signup
+    signup: state.signup,
+    authenticated: !!state.currentUser
   };
 };
 

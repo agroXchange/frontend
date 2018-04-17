@@ -23,13 +23,19 @@ const classes = {
         flexWrap: 'wrap',
     },
     textField: {
-        marginLeft: 5,
-        marginRight: 10,
-        marginBottom: 20,
-        width: 200,
+        width: '100%',
+        justify: 'center',
+        textAlign: 'center',
     },
     menu: {
-        width: 200,
+         width: '100%',
+        justify: 'center',
+        alignItems: 'center'
+    },
+    dialog:{
+        direction: 'row',
+        justify: 'center',
+
     },
 }
 
@@ -60,6 +66,7 @@ const countries = [
 class SearchProductForm extends React.Component {
     state = {
         open: false,
+        picked: false,
         country: 'Colombia'
     };
 
@@ -87,6 +94,7 @@ class SearchProductForm extends React.Component {
     handleClick = code => {
         this.setState({
             code: code,
+            picked: true,
             open: false
         })
     }
@@ -95,23 +103,25 @@ class SearchProductForm extends React.Component {
         this.props.fetchCodes()
     }
 
+    getName = (code) => {
+        if(!this.state.picked) return
+        let product = this.props.codes.filter(i => i.code.match(code))
+        return product[0].titleeng
+    }
+
 
     render() {
         const { fullScreen, codes, vegetables, fruits, beans } = this.props
 
-        let product = codes.filter(i => i.code.match(this.state.code))
-
-        let title = ''
-        if (product[0]) { title = (product[0].titleeng) }
-
         if (codes)
         return (
-            <form onSubmit={this.handleSubmit} className="form-container">
+            <form onSubmit={this.handleSubmit} className="form-container"
+                style={classes.form}
+                justify="center" 
+            >
             
                 <Paper className="paper">
-             <div id="search">    
-
-                <h2>Product Search</h2>
+                    <div id="search" >    
 
                         <Button 
                             onClick={this.handleClickOpen}
@@ -124,6 +134,8 @@ class SearchProductForm extends React.Component {
                         fullScreen={fullScreen}
                         open={this.state.open}
                         aria-labelledby="responsive-dialog-title"
+                        style = {classes.dialog}
+                        justify="center" 
                     >
 
                     <ExpansionPanel>
@@ -212,13 +224,12 @@ class SearchProductForm extends React.Component {
             </div>   
             <br/>
 
-                <div><h3>{title}</h3></div>
+                    <div><h3>{!this.state.code ? "< pick a product >" : this.getName(this.state.code)}</h3></div>
 
             <div> 
                         <TextField
                             id="code"
                             name="code"
-                            // label="HS Code"
                             style={classes.textField}
                             value={this.state.code}
                             onChange={this.handleChange}

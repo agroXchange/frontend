@@ -9,38 +9,38 @@ import { translate } from "react-i18next"
 class Profile extends PureComponent {
   render() {
     const { user, t } = this.props;
-    if (!user || !user.profile) return null
+    if (!user) return null
 
     return (
       <Paper className="outer-paper">
-        <div key={user.profile.id} className="user-card">
+        <div key={user.id} className="user-card">
           <div className="photo">
-            <img src={user.profile.logo} alt="img" width="100" />
+            <img src={user.logo} alt="img" width="100" />
           </div>
           <div className="info">
             <Typography variant="headline" component="h2">
-              {user.profile.name}
+              {user.name}
             </Typography>
             <Typography color="textSecondary">
-              {t("field")}: {user.profile.field}
+              {t("field")}: {user.field}
             </Typography>
             <Typography color="textSecondary">
-              {t("type")}: {user.profile.type}
+              {t("type")}: {user.type}
             </Typography>
             <Typography color="textSecondary">
-              {t("coc")}: {user.profile.chamberOfCommerce}
+              {t("coc")}: {user.chamberOfCommerce}
             </Typography>
             <Typography color="textSecondary">
-              {t("address")}: {user.profile.address}
+              {t("address")}: {user.address}
             </Typography>
             <Typography color="textSecondary">
-              {t("cityPort")}: {user.profile.city}
+              {t("cityPort")}: {user.city}
             </Typography>
             <Typography color="textSecondary">
-              {t("country")}: {user.profile.country}
+              {t("country")}: {user.country}
             </Typography>
             <Typography color="textSecondary">
-              {t("phone")}: {user.profile.phone}
+              {t("phone")}: {user.phone}
             </Typography>
             <Typography color="textSecondary">
               {t("Email")}: {user.email}

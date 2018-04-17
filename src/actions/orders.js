@@ -1,6 +1,5 @@
 import * as request from "superagent"
-
-const baseUrl = "http://localhost:4008"
+import {baseUrl} from "../constants"
 
 export const FETCH_ALL_ORDERS = "FETCH_ALL_ORDERS"
 export const FETCH_ORDER = "FETCH_ORDER"

@@ -1,12 +1,15 @@
 import * as request from "superagent";
-
-const baseUrl = "http://localhost:4008";
+import {baseUrl} from "../constants"
 
 export const FETCH_ALL_PRODUCTS = "FETCH_ALL_PRODUCTS";
 export const FETCH_PRODUCT = "FETCH_PRODUCT"
 export const ADD_PRODUCT = "ADD_PRODUCT"
-export const SEARCH_PRODUCT = 'SEARCH_PRODUCT'
+
 export const FETCH_MY_PRODUCTS = "FETCH_MY_PRODUCTS"
+export const UPDATED_PRODUCT = 'UPDATE_PRODUCT'
+
+export const FILTER_PRODUCTS = "FILTER_PRODUCTS"
+
 
 export const fetchMyProducts = (profileId) => (dispatch, getState) => {
   const state = getState()
@@ -71,18 +74,39 @@ export const addProduct = (product, picture) => (dispatch, getState) =>{
     })
 }
 
+export const updateProduct = (productId, updates) => (dispatch, getState) => {
+  const state = getState()
+  const jwt = state.currentUser.jwt
 
-export const searchProduct = (name,number,country) => (dispatch) => {
-    console.log(name, number, country)
+  request
+    .patch(`${baseUrl}/products/${productId}`)
+    .set('Authorization', `Bearer ${jwt}`)
+    .send(updates)
+    .then(response => dispatch ({
+      type: UPDATED_PRODUCT,
+      payload: response.body
+    }))
+    .catch(err => {
+        console.error(err)
+    })
+}
+
+
+export const filterProducts = (preferences) => (dispatch) => {
+  console.log(preferences)
 
     request
-        .get(`${baseUrl}/products`)
-        .then(result => {
+      .get(`${baseUrl}/search/products?code=${preferences.code}&country=${preferences.country}`)
+      .then(response => {
+        console.log(response)
             dispatch({
-                type: SEARCH_PRODUCT
+              type: FILTER_PRODUCTS,
+              payload: response.body
             })
         })
         .catch(err => {
             console.error(err)
         })
+
       }
+
