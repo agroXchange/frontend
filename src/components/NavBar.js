@@ -11,11 +11,29 @@ import Menu, {MenuItem} from 'material-ui/Menu'
 import compose from 'lodash/fp/compose'
 import {translate} from 'react-i18next'
 import {Link} from 'react-router-dom'
+<<<<<<< HEAD
 import {connect} from 'react-redux'
 import SwipeableDrawer from 'material-ui/SwipeableDrawer'
 import {ListItem, ListItemIcon} from 'material-ui/List'
 import StarIcon from '@material-ui/icons/Star'
 import SendIcon from '@material-ui/icons/Send'
+=======
+import {connect} from "react-redux";
+import { withRouter } from "react-router";
+import SwipeableDrawer from 'material-ui/SwipeableDrawer';
+import Button from 'material-ui/Button';
+import List from 'material-ui/List';
+import Divider from 'material-ui/Divider';
+import {ListItem, ListItemIcon, ListItemText} from 'material-ui/List';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import StarIcon from '@material-ui/icons/Star';
+import SendIcon from '@material-ui/icons/Send';
+import MailIcon from '@material-ui/icons/Mail';
+import DeleteIcon from '@material-ui/icons/Delete';
+import ReportIcon from '@material-ui/icons/Report';
+import {jwtPayload} from "../jwt"
+>>>>>>> Fix navbar links
 
 const styles = {
   list: {
@@ -65,7 +83,7 @@ class NavBar extends PureComponent {
     this.setState({El: null});
   }
   render() {
-    const {classes, currentUser} = this.props;
+    const {classes, currentUser, currentProfileId} = this.props;
     const {auth, anchorEl, El} = this.state;
     const open = Boolean(anchorEl);
     const openNew = Boolean(El);
@@ -83,20 +101,28 @@ class NavBar extends PureComponent {
           <ListItemIcon>
             <StarIcon/>
           </ListItemIcon>
-          <Link to='/'>Home</Link>
+          <Link to='/dashboard'>Dashboard</Link>
         </ListItem>
         <ListItem button="button">
           <ListItemIcon>
             <SendIcon/>
           </ListItemIcon>
+<<<<<<< HEAD
           <Link to='/dashboard'>My profile</Link>
+=======
+          <Link to={`/profiles/${currentProfileId}`}>My profile</Link>
+>>>>>>> Fix navbar links
         </ListItem>
 
         <ListItem button="button">
           <ListItemIcon>
             <SendIcon/>
           </ListItemIcon>
+<<<<<<< HEAD
           <Link to='/products/1'>My products</Link>
+=======
+          <Link to={`/profiles/${currentProfileId}/products`}>My products</Link>
+>>>>>>> Fix navbar links
         </ListItem>
 
         <ListItem button="button">
@@ -110,7 +136,7 @@ class NavBar extends PureComponent {
           <ListItemIcon>
             <SendIcon/>
           </ListItemIcon>
-          <Link to='/searchproduct'>AgroXpress</Link>
+          <Link to='/products'>Marketplace</Link>
         </ListItem>
 
 
@@ -172,6 +198,25 @@ class NavBar extends PureComponent {
 
               </Menu>
 
+<<<<<<< HEAD
+=======
+              <Menu id="menu-appbar" anchorEl={anchorEl} anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right'
+                }} transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right'
+                }} open={open} onClose={this.handleClose}>
+                <MenuItem>
+                  <Link to={`/profiles/${currentProfileId}`}>Profile</Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link to={`/profiles/${currentProfileId}`}>My account</Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link to='/logout'>Log out</Link>
+                </MenuItem>
+>>>>>>> Fix navbar links
 
 
             </div>)
@@ -187,7 +232,16 @@ NavBar.propTypes = {
 }
 
 const mapStateToProps = function(state) {
+<<<<<<< HEAD
   return {currentUser: state.currentUser};
+=======
+  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
+  return {
+    currentUser: state.currentUser,
+    currentUserId: jwtDecoded.id,
+    currentProfileId: jwtDecoded.profileId
+  }
+>>>>>>> Fix navbar links
 }
 
 export default compose(translate("translations"), connect(mapStateToProps), withStyles(styles))(NavBar)
