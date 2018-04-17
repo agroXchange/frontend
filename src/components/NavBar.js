@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
-import {withStyles} from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
@@ -8,14 +7,17 @@ import IconButton from 'material-ui/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import Translate from '@material-ui/icons/Translate'
 import Menu, {MenuItem} from 'material-ui/Menu'
-import compose from 'lodash/fp/compose'
-import {translate} from 'react-i18next'
 import {Link} from 'react-router-dom'
-import {connect} from 'react-redux'
 import SwipeableDrawer from 'material-ui/SwipeableDrawer'
-import {ListItem, ListItemIcon} from 'material-ui/List'
 import StarIcon from '@material-ui/icons/Star'
 import SendIcon from '@material-ui/icons/Send'
+import {ListItem, ListItemIcon} from 'material-ui/List';
+import {jwtPayload} from "../jwt"
+import compose from "redux/src/compose"
+import {translate} from "react-i18next"
+import {connect} from "react-redux"
+import {withStyles} from "material-ui"
+
 
 const styles = {
   list: {
@@ -65,7 +67,7 @@ class NavBar extends PureComponent {
     this.setState({El: null});
   }
   render() {
-    const {classes, currentUser} = this.props;
+    const {classes, currentUser, currentProfileId} = this.props;
     const {auth, anchorEl, El} = this.state;
     const open = Boolean(anchorEl);
     const openNew = Boolean(El);
@@ -83,20 +85,20 @@ class NavBar extends PureComponent {
           <ListItemIcon>
             <StarIcon/>
           </ListItemIcon>
-          <Link to='/'>Home</Link>
+          <Link to='/dashboard'>Dashboard</Link>
         </ListItem>
         <ListItem button="button">
           <ListItemIcon>
             <SendIcon/>
           </ListItemIcon>
-          <Link to='/dashboard'>My profile</Link>
+          <Link to={`/profiles/${currentProfileId}`}>My profile</Link>
         </ListItem>
 
         <ListItem button="button">
           <ListItemIcon>
             <SendIcon/>
           </ListItemIcon>
-          <Link to='/products/1'>My products</Link>
+          <Link to={`/profiles/${currentProfileId}/products`}>My products</Link>
         </ListItem>
 
         <ListItem button="button">
@@ -110,7 +112,7 @@ class NavBar extends PureComponent {
           <ListItemIcon>
             <SendIcon/>
           </ListItemIcon>
-          <Link to='/searchproduct'>AgroXpress</Link>
+          <Link to='/products'>Marketplace</Link>
         </ListItem>
 
 
@@ -171,8 +173,7 @@ class NavBar extends PureComponent {
                 </MenuItem>
 
               </Menu>
-
-
+              
 
             </div>)
           }
@@ -187,7 +188,12 @@ NavBar.propTypes = {
 }
 
 const mapStateToProps = function(state) {
-  return {currentUser: state.currentUser};
+  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
+  return {
+    currentUser: state.currentUser,
+    currentUserId: jwtDecoded.id,
+    currentProfileId: jwtDecoded.profileId
+  }
 }
 
 export default compose(translate("translations"), connect(mapStateToProps), withStyles(styles))(NavBar)
