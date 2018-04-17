@@ -115,7 +115,7 @@ class AdminPage extends PureComponent {
                   variant="headline"
                   component="h2"
                 >
-                  View Orders
+                  View All Orders
                 </Typography>
               </CardContent>
               <CardActions>
@@ -127,6 +127,35 @@ class AdminPage extends PureComponent {
             </Card>
           </Grid>
         </Grid>
+        <Grid item xs={12}>
+          <Grid
+            container
+            spacing={16}
+            className={classes.paper}
+            alignItems={alignItems}
+            direction={direction}
+            justify={justify}
+          >
+            <Card>
+              <CardContent>
+                <Typography
+                  className={classes.typo}
+                  gutterBottom
+                  variant="headline"
+                  component="h2"
+                >
+                  View All Products
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Link to={`/admin/products`}><Button size="medium" color="primary">
+                  See more
+                </Button>
+                </Link>
+              </CardActions>
+            </Card>
+          </Grid>
+          </Grid>
       </Grid>
     );
   }
