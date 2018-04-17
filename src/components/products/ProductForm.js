@@ -129,11 +129,7 @@ class ProductForm extends PureComponent {
       return(
         <form onSubmit={ this.handleSubmit } className="form-container">
 
-
-
           <Paper className="paper">
-
-          { this.state.edit === false &&
           <div id="addProduct">
 
               <Button
@@ -233,7 +229,6 @@ class ProductForm extends PureComponent {
               </Dialog>
             </div>
 
-          }
           <br />
 
             <div><h3>{!this.state.code ? "" : this.getName(this.state.code)  }</h3></div>
