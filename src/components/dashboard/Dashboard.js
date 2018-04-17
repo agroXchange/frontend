@@ -1,5 +1,7 @@
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
+import { fetchMyProducts } from '../../actions/products'
+import { fetchUser } from '../../actions/users'
 import { withStyles } from "material-ui/styles"
 import { Link , Redirect} from "react-router-dom"
 import compose from "lodash/fp/compose"
@@ -27,6 +29,11 @@ const styles = theme => ({
 })
 
 class Dashboard extends PureComponent {
+  componentWillMount(props) {
+    this.props.fetchMyProducts(this.props.currentProfileId)
+    this.props.fetchUser(this.props.currentProfileId)
+  }
+
   render() {
     const { classes, currentProfileId, currentUser } = this.props
     if (!currentUser) return <Redirect to="/" />
@@ -49,15 +56,13 @@ class Dashboard extends PureComponent {
               My profile
             </Typography>
             <div className="photo">
-              <img src="/images/profile.png" alt="" width="100" />
+              <img src={"/images/profile.png"} alt="" width="100" />
             </div>
           </CardContent>
           <CardActions>
-            <Link to={`/profiles/${currentProfileId}`}>
-              <Button size="medium" color="primary" variant="raised">
-                See your profile information
-              </Button>
-            </Link>
+            <Button size="medium" color="primary" variant="raised" component={Link} to={`/profiles/${currentProfileId}`}>
+              See your profile information
+            </Button>
           </CardActions>
         </Card>
         <Card className={classes.card}>
@@ -66,20 +71,16 @@ class Dashboard extends PureComponent {
               My products
             </Typography>
             <Typography color="textSecondary">
-              You currently have: 8 products on offer
+              You currently have: {this.props.products.length} products on offer
             </Typography>
           </CardContent>
           <CardActions>
-            <Link to={`/products/new`}>
-              <Button size="medium" color="primary" variant="raised">
-                Add a new product
-              </Button>
-            </Link>
-            <Link to={`/profiles/${currentProfileId}/products`}>
-              <Button size="medium" color="primary" variant="raised">
-                See all my products
-              </Button>
-            </Link>
+            <Button size="medium" color="primary" variant="raised" component={Link} to={`/products/new`}>
+              Add a new product
+            </Button>
+            <Button size="medium" color="primary" variant="raised" component={Link} to={`/profiles/${currentProfileId}/products`}>
+              See all my products
+            </Button>
           </CardActions>
         </Card>
         <Card className={classes.card}>
@@ -88,15 +89,13 @@ class Dashboard extends PureComponent {
               My orders
             </Typography>
             <Typography color="textSecondary">
-              You currently have: 3 orders
+              You currently have: {this.props.orders.length} orders
             </Typography>
           </CardContent>
           <CardActions>
-            <Link to={`/orders`}>
-              <Button size="medium" color="primary" variant="raised">
-                View all orders
-              </Button>
-            </Link>
+            <Button size="medium" color="primary" variant="raised" component={Link} to={`/orders`}>
+              View all orders
+            </Button>
           </CardActions>
         </Card>
       </Paper>
@@ -110,11 +109,19 @@ const mapStateToProps = function(state) {
     currentUser: state.currentUser,
     currentUserRole: jwtDecoded.role,
     currentUserId: jwtDecoded.id,
-    currentProfileId: jwtDecoded.profileId
+    currentProfileId: jwtDecoded.profileId,
+    orders: state.orders,
+    products: state.products,
+    user: state.user
   }
+}
+
+const mapDispatchToProps = {
+  fetchUser,
+  fetchMyProducts
 }
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps)
+  connect(mapStateToProps, mapDispatchToProps)
 )(Dashboard)
