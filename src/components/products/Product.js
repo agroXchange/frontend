@@ -9,6 +9,7 @@ import Paper from 'material-ui/Paper'
 import Grid from 'material-ui/Grid'
 import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
+import { LinearProgress } from 'material-ui/Progress';
 import Dialog, {
   DialogActions,
   DialogContent,
@@ -36,7 +37,8 @@ class Product extends PureComponent {
   state = {
     newOrder: false,
     confirmOrder: false,
-    editProduct: false
+    editProduct: false,
+    completed: 70
   }
 
   componentWillMount(props) {
@@ -77,8 +79,23 @@ class Product extends PureComponent {
     this.props.updateProduct(this.props.match.params.id, updates)
   }
 
+  progress = () => {
+    const { completed } = this.state;
+    if (completed === 100) {
+      this.setState({ completed: 0 });
+    } else {
+      const diff = Math.random() * 10;
+      const harvested = Date.parse(this.props.product.harvested)
+      const expired = Date.parse(this.props.product.expired)
+
+      console.log(harvested)
+      this.setState({ completed: Math.min(completed + diff, 100) });
+    }
+  };
+
+
   render() {
-    const { classes, product, currentUser, currentUserId } = this.props
+    const { classes, product, currentUser, currentUserId, currentProfileId } = this.props
     if (!product) return null
 
     return(
@@ -92,6 +109,9 @@ class Product extends PureComponent {
                 product.photo : stockImage }
                 alt="product"
                 className="product-photo"/>
+
+              <LinearProgress variant="determinate" value={this.state.completed} />
+
             </Grid>
 
             <Grid item xs={12} sm={6}>
@@ -101,7 +121,7 @@ class Product extends PureComponent {
               <p><b>Volume:</b> { product.volume } KG</p>
               <p><b>Price:</b> { product.price } { product.currency } per KG</p>
 
-              { currentUserId !== product.seller.id &&
+              { currentProfileId !== product.seller.id &&
 
                 <Link to={ `/profiles/${product.seller.id}` }>
                   <Button color="primary">View Seller</Button>
@@ -115,11 +135,11 @@ class Product extends PureComponent {
               <p><b>Country</b> { product.seller.country }</p>
               <p><b>City/Port:</b> { product.seller.city }</p>
 
-              { currentUserId === product.seller.id &&
+              { currentProfileId === product.seller.id &&
                 <Button onClick={ this.handleEditOpen }>Edit Product</Button>
               }
 
-              { currentUserId !== product.seller.id &&
+              { currentProfileId !== product.seller.id &&
                 <Button onClick={this.handleClickOrderOpen}>Make New Order</Button>
               }
 
@@ -166,12 +186,13 @@ class Product extends PureComponent {
 
 }
 
-const mapStateToProps = (state) => {
-  const decodedJwt = jwtPayload(state.currentUser.jwt)
+const mapStateToProps = function(state) {
+  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
     product: state.product,
     currentUser: state.currentUser,
-    currentUserId: decodedJwt.profileId
+    currentUserId: jwtDecoded.id,
+    currentProfileId: jwtDecoded.profileId
   }
 }
 
