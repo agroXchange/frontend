@@ -101,14 +101,14 @@ class NavBar extends PureComponent {
           <ListItemIcon>
             <SendIcon/>
           </ListItemIcon>
-          <Link to='/profile'>My profile</Link>
+          <Link to='/dashboard'>My profile</Link>
         </ListItem>
 
         <ListItem button="button">
           <ListItemIcon>
             <SendIcon/>
           </ListItemIcon>
-          <Link to='/products/:id'>My products</Link>
+          <Link to='/products/1'>My products</Link>
         </ListItem>
 
         <ListItem button="button">
@@ -125,12 +125,7 @@ class NavBar extends PureComponent {
           <Link to='/searchproduct'>AgroXpress</Link>
         </ListItem>
 
-        <ListItem button="button">
-          <ListItemIcon>
-            <SendIcon/>
-          </ListItemIcon>
-          <Link to='/about'>About</Link>
-        </ListItem>
+
 
         <ListItem button="button">
           <ListItemIcon>
@@ -165,12 +160,7 @@ class NavBar extends PureComponent {
 
           {
             auth && (<div>
-        {currentUser &&       <IconButton aria-owns={open
-                  ? 'menu-appbar'
-                  : null} aria-haspopup="true" onClick={this.handleMenu} color="inherit">
-                <AccountCircle/>
 
-              </IconButton> }
 
               <IconButton aria-owns={openNew
                   ? 'menu-lang'
@@ -194,24 +184,7 @@ class NavBar extends PureComponent {
 
               </Menu>
 
-              <Menu id="menu-appbar" anchorEl={anchorEl} anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
-                }} transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
-                }} open={open} onClose={this.handleClose}>
-                <MenuItem>
-                  <Link to='/orders'>Profile</Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link to='/profile'>My account</Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link to='/logout'>Log out</Link>
-                </MenuItem>
 
-              </Menu>
 
             </div>)
           }
