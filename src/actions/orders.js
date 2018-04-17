@@ -34,6 +34,7 @@ export const fetchAllOrders = () => (dispatch, getState) => {
     .catch(err => alert(err))
 }
 
+
 export const fetchOrder = (id) => (dispatch, getState) => {
   const state = getState()
   const jwt = state.currentUser.jwt

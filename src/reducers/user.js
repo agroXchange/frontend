@@ -6,8 +6,7 @@ export default function(state = null, { type, payload } = {}) {
       return payload
     case UPDATE_USER:
       return {
-        ...state,
-        profile: payload
+        ...payload
       };
     default:
       return state
