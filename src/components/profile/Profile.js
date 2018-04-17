@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
-import { Link } from "react-router-dom"
 import {fetchUser, uploadLogo} from "../../actions/users"
 import Paper from "material-ui/Paper"
 import Typography from "material-ui/Typography"
@@ -8,6 +7,8 @@ import compose from "lodash/fp/compose"
 import { translate } from "react-i18next"
 import {jwtPayload} from "../../jwt"
 import Button from "material-ui/Button"
+import Dialog, {  DialogTitle } from "material-ui/Dialog"
+import EditProfileForm from "./EditProfileForm"
 
 class Profile extends PureComponent {
   state = {
@@ -31,6 +32,18 @@ class Profile extends PureComponent {
     this.setState({
       upload: !this.state.upload
     })
+  }
+
+  handleEditProfileOpen = () => {
+    this.setState({ editProfile: true })
+  }
+
+  handleClose = () => {
+    this.setState({ editProfile: false })
+  }
+
+  handleEditProfileSubmit = data => {
+    // this.props.sendForgotPassword(data.email)
   }
 
   render() {
@@ -118,10 +131,20 @@ class Profile extends PureComponent {
             }
             {
               currentProfileId === user.id &&
-              <Button component={Link} to="/login">
+              <Button onClick={this.handleEditProfileOpen}>
                 Edit my profile
               </Button>
             }
+            <Dialog
+              open={this.state.editProfile}
+              onClose={this.handleClose}
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle id="form-dialog-title">
+                Edit your profile
+              </DialogTitle>
+              <EditProfileForm onSubmit={this.handleEditProfileSubmit} />
+            </Dialog>
           </div>
         </div>
       </Paper>
