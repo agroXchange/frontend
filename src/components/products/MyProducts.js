@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import ProductsList from './ProductsList'
 import { fetchMyProducts } from '../../actions/products'
+import {jwtPayload} from "../../jwt"
 
 class MyProducts extends PureComponent {
   state = {}
@@ -17,16 +18,23 @@ class MyProducts extends PureComponent {
 
     return(
       <div>
+
+
         <ProductsList products={ products } />
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = function(state) {
+  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
-    products: state.products
+    products: state.products,
+    currentUser: state.currentUser,
+    currentUserId: jwtDecoded.id,
+    currentProfileId: jwtDecoded.profileId
   }
 }
+
 
 export default connect(mapStateToProps, { fetchMyProducts })(MyProducts)
