@@ -97,7 +97,7 @@ class Product extends PureComponent {
   render() {
     const { classes, product, currentUser, currentUserId } = this.props
     if (!product) return null
-    
+
     return(
       <div className="product-container">
         <Paper className="paper">
@@ -186,12 +186,13 @@ class Product extends PureComponent {
 
 }
 
-const mapStateToProps = (state) => {
-  const decodedJwt = jwtPayload(state.currentUser.jwt)
+const mapStateToProps = function(state) {
+  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
     product: state.product,
     currentUser: state.currentUser,
-    currentUserId: decodedJwt.profileId
+    currentUserId: jwtDecoded.id,
+    currentProfileId: jwtDecoded.profileId
   }
 }
 

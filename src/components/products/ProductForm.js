@@ -70,9 +70,6 @@ class ProductForm extends PureComponent {
   alignItems: 'center',
   }
 
-  propTypes = {
-    classes: PropTypes.object.isRequired,
-  }
 
 
   handleClickOpen = () => {
@@ -123,9 +120,9 @@ class ProductForm extends PureComponent {
     let title =''
     if (product.length > 0){  title = ( product[0].titleeng   )}
 
-    if (this.props.edit === true ) {
-      this.setState({edit: true})
-    }
+    // if (this.props.edit === true ) {
+    //   this.setState({edit: true})
+    // }
 
     if(codes)
       return(
@@ -314,7 +311,6 @@ class ProductForm extends PureComponent {
           name="harvested"
           label="Harvested Date"
           type="date"
-          defaultValue={new Date}
             value={this.state.harvested || initialValues.harvested || '' }
           onChange={ this.handleChange }
           style={ classes.textField }
@@ -328,7 +324,6 @@ class ProductForm extends PureComponent {
             name="expiration"
           label="Expiry Date"
           type="date"
-            defaultValue={new Date}
             value={this.state.expiration || initialValues.expiration || '' }
           onChange={ this.handleChange }
           style={ classes.textField }
