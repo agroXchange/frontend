@@ -37,9 +37,9 @@ class ProductList extends PureComponent {
   classes: PropTypes.object.isRequired
   };
 
-  // componentDidMount(props) {
-  //   this.props.fetchAllProducts()
-  // }
+  componentDidMount(props) {
+    this.props.fetchAllProducts()
+  }
 
   render() {
     const { classes, products } = this.props;
