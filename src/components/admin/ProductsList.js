@@ -347,11 +347,11 @@ class OrdersPage extends PureComponent {
                             className={this.props.classes.row}
                             key={order.id}
                           >
-                            <CustomTableCell>{order.id}</CustomTableCell>
+                            <CustomTableCell><Link to={`/orders/${order.id}`}>{order.id}</Link></CustomTableCell>
                             <CustomTableCell>{order.date}</CustomTableCell>
                             <CustomTableCell>{order.status}</CustomTableCell>
                             <CustomTableCell>{order.comments}</CustomTableCell>
-                            <CustomTableCell>{order.buyer.name}</CustomTableCell>
+                            <CustomTableCell><Link to={`/admin/profiles/${order.buyer.id}`}>{order.buyer.name}</Link></CustomTableCell>
                           </TableRow>
                         ))}
                         {emptyRows > 0 && (
