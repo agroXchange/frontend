@@ -1,5 +1,6 @@
 import React, {PureComponent} from "react";
 import {withStyles} from "material-ui/styles";
+import PropTypes from 'prop-types';
 import Button from "material-ui/Button";
 import compose from "lodash/fp/compose";
 import {translate} from "react-i18next";
@@ -43,65 +44,66 @@ class defaultPage extends PureComponent {
 
     return (<div>
       <header>
-      <div class="header-default">
-        <div class="container">
-          <div class="row"></div>
+        <div class="header-default">
+          <div class="container">
+            <div class="row"></div>
 
-          <div class="row header-info">
-            <div class="col-sm-10 col-sm-offset-1 text-center">
-              <h1 class="wow fadeIn" style={{"color":"#f2f2f2"}}>We connect farmers with buyers</h1>
-              <br/>
-              <p class="lead wow fadeIn" data-wow-delay="0.5s">Ensuring safe and healthy food in a competing world can be a challenge.
-On Agro Xchange, we provide the necessary tools to make your job easier.</p>
-
+            <div class="row header-info">
+              <div class="col-sm-10 col-sm-offset-1 text-center">
+                <h1 class="wow fadeIn" style={{
+                    "color" : "#f2f2f2"
+                  }}>We connect farmers with buyers</h1>
+                <br/>
+                <p class="lead wow fadeIn" data-wow-delay="0.5s">Ensuring safe and healthy food in a competing world can be a challenge. On Agro Xchange, we provide the necessary tools to make your job easier.</p>
 
                 <br/>
                 <div class="row">
-              <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
-                <div class="row">
-                  <div class="col-xs-6 text-right wow fadeInUp" data-wow-delay="1s">
-                    <a href="/login" class="btn btn-secondary btn-lg scroll"> {t("Log in")}</a>
-                  </div>
-                    <br/>
-                    <br/>
-                  <div class="col-xs-6 text-left wow fadeInUp" data-wow-delay="1.4s">
-                    <a href="/signup" class="btn btn-primary btn-lg scroll">  {t("Sign up")}</a>
+                  <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+                    <div class="row">
+                      <div class="col-xs-6 text-right wow fadeInUp" data-wow-delay="1s">
+                        <a href="/login" class="btn btn-secondary btn-lg scroll">
+                          {t("Log in")}</a>
+                      </div>
+                      <br/>
+                      <br/>
+                      <div class="col-xs-6 text-left wow fadeInUp" data-wow-delay="1.4s">
+                        <a href="/signup" class="btn btn-primary btn-lg scroll">
+                          {t("Sign up")}</a>
+                      </div>
+                    </div>
                   </div>
                 </div>
+
               </div>
-            </div>
-
-
-
-
-
             </div>
           </div>
         </div>
-        </div>
       </header>
-
       <footer>
-  <div class="container">
+        <div class="container">
 
-  <div class="row">
-   <div class="col-sm-8 margin-20">
-     <ul class="list-inline social">
-       <p>Connect with us on</p>
-       <li>777112233</li>
-       <li>email</li>
-       <li>home</li>
-     </ul>
-   </div>
+          <div class="row">
+            <div class="col-sm-8 margin-20">
+              <ul class="list-inline social">
+                <p>Connect with us on</p>
+                <p>Juan R. Serrano Ochoa</p>
+                <li>+31 (0)6 1460 6798</li>
+                <li>jserrano@contenemos.com</li>
+                <li>www.contenemos.com</li>
+              </ul>
+            </div>
 
-   <div class="col-sm-4 text-right">
-     <p><small>Copyright &copy; 2018. All rights reserved. <br/>
-       Created by dream team corporation</small></p>
-   </div>
-  </div>
+            <div class="col-sm-4 text-right">
+              <p>
+                <small>Copyright & copy; 2018. All rights reserved.
+                  <br/>
+                  Created by dream team corporation</small>
+              </p>
+            </div>
+          </div>
 
-  </div>
-  </footer>
+        </div>
+      </footer>
 
     </div>);
   }
