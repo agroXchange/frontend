@@ -66,8 +66,51 @@ class NavBar extends PureComponent {
   handleNewClose = () => {
     this.setState({El: null});
   }
+
+  adminMenu = (user) => {
+    if (user === "admin") {
+      return (
+        <div>
+        <ListItem button="button">
+          <ListItemIcon>
+            <StarIcon/>
+          </ListItemIcon>
+          <Link to='/admin'>Admin Page</Link>
+        </ListItem>
+        <ListItem button="button">
+          <ListItemIcon>
+            <SendIcon/>
+          </ListItemIcon>
+          <Link to={`/admin/pending`}>Pending User</Link>
+        </ListItem>
+
+        <ListItem button="button">
+          <ListItemIcon>
+            <SendIcon/>
+          </ListItemIcon>
+          <Link to={`/admin/users`}>User Administration</Link>
+        </ListItem>
+
+        <ListItem button="button">
+          <ListItemIcon>
+            <SendIcon/>
+          </ListItemIcon>
+          <Link to='/admin/orders'>View All Order</Link>
+        </ListItem>
+        <ListItem button="button">
+          <ListItemIcon>
+            <SendIcon/>
+          </ListItemIcon>
+          <Link to='/admin/products'>View All Products</Link>
+        </ListItem>
+        </div>
+      )} else {
+        return 
+      }
+  }
+
   render() {
-    const {classes, currentUser, currentProfileId} = this.props;
+    const {classes, currentUser, currentProfileId, currentProfileRole} = this.props;
     const {auth, anchorEl, El} = this.state;
     const open = Boolean(anchorEl);
     const openNew = Boolean(El);
@@ -81,6 +124,7 @@ class NavBar extends PureComponent {
     const sideList = ( <div className={classes.list}>
 
       <div>
+      {this.adminMenu(currentProfileRole)}
         <ListItem button="button">
           <ListItemIcon>
             <StarIcon/>
@@ -173,7 +217,7 @@ class NavBar extends PureComponent {
                 </MenuItem>
 
               </Menu>
-              
+
 
             </div>)
           }
@@ -192,7 +236,8 @@ const mapStateToProps = function(state) {
   return {
     currentUser: state.currentUser,
     currentUserId: jwtDecoded.id,
-    currentProfileId: jwtDecoded.profileId
+    currentProfileId: jwtDecoded.profileId,
+    currentProfileRole: jwtDecoded.role
   }
 }
 

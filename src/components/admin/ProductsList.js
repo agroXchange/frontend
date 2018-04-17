@@ -206,6 +206,9 @@ class OrdersPage extends PureComponent {
   render() {
     const { classes } = this.props;
     const products = this.props.products;
+    if (!products) return null
+
+
     const { rowsPerPage, page } = this.state;
     const counter = 0;
     const emptyRows =
