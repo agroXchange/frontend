@@ -27,9 +27,14 @@ const classes = {
     marginRight: 10,
     marginBottom: 20,
     width: 200,
+    // width: '50%',
+    // justify: 'center',
+    // textAlign: 'center',
   },
   menu: {
     width: 200,
+    // width: '100%',
+    // justify: 'center'
   },
 }
 
@@ -60,6 +65,7 @@ class ProductForm extends PureComponent {
   state = {
     currency: 'EUR',
     open: false,
+    picked: false,
   }
 
   style = {
@@ -95,6 +101,7 @@ class ProductForm extends PureComponent {
   handleClick = code => {
     this.setState({
       code: code,
+      picked: true,
       open: false
     })
   }
@@ -110,6 +117,7 @@ class ProductForm extends PureComponent {
   }
 
   getName = (code) => {
+    if (!this.state.picked) return
     let product = this.props.codes.filter(i => i.code.match(code))
     return product[0].titleeng 
   }
@@ -228,7 +236,7 @@ class ProductForm extends PureComponent {
           }
           <br />
 
-            <div><h3>{!this.state.code ? "< pick a product >" : this.getName(this.state.code)  }</h3></div>
+            <div><h3>{!this.state.code ? "" : this.getName(this.state.code)  }</h3></div>
 
 
 

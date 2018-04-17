@@ -23,16 +23,19 @@ const classes = {
         flexWrap: 'wrap',
     },
     textField: {
-        // marginLeft: 10,
-        // marginRight: 10,
-        //marginBottom: 20,
         width: '100%',
         justify: 'center',
         textAlign: 'center',
     },
     menu: {
          width: '100%',
-        justify: 'center'
+        justify: 'center',
+        alignItems: 'center'
+    },
+    dialog:{
+        direction: 'row',
+        justify: 'center',
+
     },
 }
 
@@ -114,10 +117,11 @@ class SearchProductForm extends React.Component {
         return (
             <form onSubmit={this.handleSubmit} className="form-container"
                 style={classes.form}
+                justify="center" 
             >
             
                 <Paper className="paper">
-             <div id="search">    
+                    <div id="search" >    
 
                         <Button 
                             onClick={this.handleClickOpen}
@@ -131,6 +135,7 @@ class SearchProductForm extends React.Component {
                         open={this.state.open}
                         aria-labelledby="responsive-dialog-title"
                         style = {classes.dialog}
+                        justify="center" 
                     >
 
                     <ExpansionPanel>
