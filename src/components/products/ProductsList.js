@@ -47,9 +47,10 @@ class ProductList extends PureComponent {
     const { t, i18n } = this.props
     {/* specific for translation */}
 
+ if(!products) return null 
  return (
       <div>
-        { products.map(product =>
+        { products[0] && products[0].code && products.map(product =>
          <Card className={classes.card}>
            <CardMedia
             className={classes.media}

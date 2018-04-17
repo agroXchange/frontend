@@ -94,9 +94,10 @@ export const updateProduct = (productId, updates) => (dispatch, getState) => {
 
 export const filterProducts = (preferences) => (dispatch) => {
   console.log(preferences)
+  const {code, country} = preferences
 
     request
-      .get(`${baseUrl}/search/products?code=${preferences.code}&country=${preferences.country}`)
+      .get(`${baseUrl}/search/products?code=${code?code:""}&country=${country?country:""}`)
       .then(response => {
         console.log(response)
             dispatch({
