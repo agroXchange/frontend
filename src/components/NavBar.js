@@ -103,10 +103,14 @@ class NavBar extends PureComponent {
           </ListItemIcon>
           <Link to='/admin/products'>View All Products</Link>
         </ListItem>
+        <ListItem button="button">
+          <ListItemIcon>
+            <SendIcon/>
+          </ListItemIcon>
+          <Link to='/logout'>Logout</Link>
+        </ListItem>
         </div>
-      )} else {
-        return 
-      }
+      )}
   }
 
   render() {
@@ -125,6 +129,8 @@ class NavBar extends PureComponent {
 
       <div>
       {this.adminMenu(currentProfileRole)}
+      { currentProfileRole !== "admin" &&
+        <div>
         <ListItem button="button">
           <ListItemIcon>
             <StarIcon/>
@@ -167,6 +173,8 @@ class NavBar extends PureComponent {
           </ListItemIcon>
           <Link to='/logout'>Logout</Link>
         </ListItem>
+        </div>
+      }
       </div>
     </div>)
 

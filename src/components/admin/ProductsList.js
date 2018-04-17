@@ -193,7 +193,7 @@ class OrdersPage extends PureComponent {
   renderMessage = products => {
     return (
       <Dialog open={products.length === 0} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">There are no orders</DialogTitle>
+        <DialogTitle id="form-dialog-title">There are no products</DialogTitle>
         <Link to={`/admin`}>
           <Button size="medium" color="primary">
             Admin Page
@@ -345,7 +345,7 @@ class OrdersPage extends PureComponent {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {product.orders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(order => (
+                        {product.orders && product.orders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(order => (
                           <TableRow
                             className={this.props.classes.row}
                             key={order.id}
@@ -367,7 +367,7 @@ class OrdersPage extends PureComponent {
                         <TableRow>
                           <TablePagination
                             colSpan={3}
-                            count={product.orders.length}
+                            count={product.orders && product.orders.length}
                             rowsPerPage={rowsPerPage}
                             page={page}
                             onChangePage={this.handleChangePage}
