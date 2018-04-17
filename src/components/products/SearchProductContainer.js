@@ -25,6 +25,11 @@ class SearchProductContainer extends PureComponent {
 }
 
 
+const mapStateToProps = (state, props) => ({
+    codes: state.codes,
+    vegetables: state.codes.filter(x => x.code.match(/^07/)),
+    fruits: state.codes.filter(x => x.code.match(/^08/)),
+    beans: state.codes.filter(x => x.code.match(/^09/))
+})
 
-
-export default connect(null, { filterProducts })(SearchProductContainer)
+export default connect(mapStateToProps, { filterProducts })(SearchProductContainer)

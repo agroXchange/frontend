@@ -4,7 +4,7 @@ import {baseUrl} from "../constants"
 export const FETCH_ALL_PRODUCTS = "FETCH_ALL_PRODUCTS";
 export const FETCH_PRODUCT = "FETCH_PRODUCT"
 export const ADD_PRODUCT = "ADD_PRODUCT"
-export const FILTER_PRODUCTS = 'FILTER_PRODUCTS'
+
 export const FETCH_MY_PRODUCTS = "FETCH_MY_PRODUCTS"
 export const UPDATED_PRODUCT = 'UPDATE_PRODUCT'
 
@@ -89,18 +89,18 @@ export const updateProduct = (productId, updates) => (dispatch, getState) => {
 }
 
 
-export const filterProducts = (prefences) => (dispatch) => {
-  console.log(prefences)
+// export const filterProducts = (prefences) => (dispatch) => {
+//   console.log(prefences)
 
-    request
-      .get(`${baseUrl}/search/products`)
-      .then(response => {
-            dispatch({
-              type: FILTER_PRODUCTS,
-              payload: response.body
-            })
-        })
-        .catch(err => {
-            console.error(err)
-        })
-      }
+//     request
+//       .get(`${baseUrl}/search/products`)
+//       .then(response => {
+//             dispatch({
+//               type: FILTER_PRODUCTS,
+//               payload: response.body
+//             })
+//         })
+//         .catch(err => {
+//             console.error(err)
+//         })
+//       }

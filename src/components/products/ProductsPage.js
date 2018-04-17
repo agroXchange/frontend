@@ -17,8 +17,8 @@ class ProductsPage extends PureComponent {
 
  
   submit = (preferences) => {
-    //this.props.filterProducts(preferences)
-    console.log(preferences)
+    this.props.filterProducts(preferences)
+   
     this.setState({ open: false })
   }
 
