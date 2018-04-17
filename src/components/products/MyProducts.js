@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import ProductsList from './ProductsList'
 import { fetchMyProducts } from '../../actions/products'
+import { fetchUser } from '../../actions/users'
 import {jwtPayload} from "../../jwt"
 
 class MyProducts extends PureComponent {
@@ -9,15 +10,17 @@ class MyProducts extends PureComponent {
 
   componentWillMount(props) {
     this.props.fetchMyProducts(this.props.match.params.id)
+    this.props.fetchUser(this.props.match.params.id)
   }
 
 
   render() {
-    const { products } = this.props
+    const { products, currentProfileId } = this.props
     if (!products) return null
 
     return(
       <div>
+
 
 
         <ProductsList products={ products } />
@@ -30,6 +33,7 @@ const mapStateToProps = function(state) {
   const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
     products: state.products,
+    profile: state.users,
     currentUser: state.currentUser,
     currentUserId: jwtDecoded.id,
     currentProfileId: jwtDecoded.profileId
@@ -37,4 +41,4 @@ const mapStateToProps = function(state) {
 }
 
 
-export default connect(mapStateToProps, { fetchMyProducts })(MyProducts)
+export default connect(mapStateToProps, { fetchMyProducts, fetchUser })(MyProducts)
