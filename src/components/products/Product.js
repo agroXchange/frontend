@@ -143,8 +143,6 @@ class Product extends PureComponent {
                 <Button onClick={this.handleClickOrderOpen}>Make New Order</Button>
               }
 
-              <EditProductForm inititalValues={ product } onSubmit={ this.updateProduct }/>
-
             </Grid>
 
 
@@ -154,7 +152,7 @@ class Product extends PureComponent {
               aria-labelledby="form-dialog-title"
             >
               <DialogTitle id="form-dialog-title">Edit Your Product</DialogTitle>
-                <EditProductForm inititalValues={ product } onSubmit={ this.updateProduct }/>
+                <EditProductForm initialValues={ product } onSubmit={ this.updateProduct }/>
             </Dialog>
 
             <Dialog
