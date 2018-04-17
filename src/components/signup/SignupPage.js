@@ -23,14 +23,11 @@ class SignupPage extends PureComponent {
         style={{
           textAlign: "center",
           display: "inline-block",
-          marginTop: "40px"
+          marginTop: "40px",
+          itemAlign: "center",
         }}
         className="outer-paper"
       >
-        <Typography gutterBottom variant="headline" component="h1">
-          {t("Sign up form")}
-        </Typography>
-        <Typography color="textSecondary">{t("fieldsNecessary")}</Typography>
         <SteppedSignupForm onSubmit={this.handleSubmit} />
         <p style={{ color: "red" }}>{this.props.signup.error}</p>
       </Paper>
