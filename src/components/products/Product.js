@@ -17,7 +17,7 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog'
 import '../../styles/Product.css'
-import { fetchProduct, updateProduct } from '../../actions/products'
+import { fetchProduct, updateProduct, removeProduct } from '../../actions/products'
 import { createOrder } from '../../actions/orders'
 import OrderForm from '../orders/OrderForm'
 import EditProductForm from './EditProductForm'
@@ -74,6 +74,9 @@ class Product extends PureComponent {
     this.handleConfirmEdit()
   }
 
+  removeProduct = () => {
+    this.props.removeProduct(this.props.match.params.id)
+  }
 
   render() {
     const { classes, product, currentUser, currentUserId, currentProfileId } = this.props
@@ -117,7 +120,10 @@ class Product extends PureComponent {
               <p><b>City/Port:</b> { product.seller.city }</p>
 
               { currentProfileId === product.seller.id &&
-                <Button onClick={ this.handleEditOpen }>Edit Product</Button>
+                <div>
+                  <Button onClick={ this.handleEditOpen }>Edit Product</Button>
+                  <Button onClick={ this.removeProduct }>Remove Product</Button>
+                </div>
               }
 
               { currentProfileId !== product.seller.id &&
@@ -186,5 +192,5 @@ const mapStateToProps = function(state, props) {
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { fetchProduct, createOrder, updateProduct })
+  connect(mapStateToProps, { fetchProduct, createOrder, updateProduct, removeProduct })
 )(Product)
