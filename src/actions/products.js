@@ -116,7 +116,7 @@ export const filterProducts = (preferences) => (dispatch) => {
   const {code, country} = preferences
 
     request
-      .get(`${baseUrl}/search/products?code=${code?code:null}&country=${country?country:null}`)
+      .get(`${baseUrl}/search/products?code=${code ? code : '*'}&country=${country ? country : '*'}`)
       .then(response => {
         console.log(response)
             dispatch({

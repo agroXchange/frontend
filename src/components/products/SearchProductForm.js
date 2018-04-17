@@ -41,7 +41,7 @@ const classes = {
 
 const countries = [
     {
-        value: null,
+         value: '*',
         label: 'All',
     },
     {
@@ -71,7 +71,8 @@ class SearchProductForm extends React.Component {
     state = {
         open: false,
         picked: false,
-        country: 'Colombia'
+        country: '*',
+        code: ''
     };
 
     handleClickOpen = () => {
@@ -80,6 +81,7 @@ class SearchProductForm extends React.Component {
 
     handleClose = () => {
         this.setState({ open: false });
+        delete this.state.country
         console.log("should close")
     };
 
@@ -120,6 +122,7 @@ class SearchProductForm extends React.Component {
 
         if (codes)
         return (
+
             <form onSubmit={this.handleSubmit} className="form-container"
                 style={classes.form}
                 justify="center" 
@@ -277,22 +280,6 @@ class SearchProductForm extends React.Component {
                         </Button>
                     </div>
 
-                        <Button
-                            color="primary"
-                            className="submit-btn"
-                        type="submit"
-                            onClick={_ => this.handleClose()}
-                            style={{
-                                display: 'block',
-                                margin: 'auto',
-                                marginTop: 20,
-                                marginBottom: 20
-                            }}
-                        >
-                            Cancel
-                        </Button>
-
-                   
                     </Paper>
                 </form>
            
