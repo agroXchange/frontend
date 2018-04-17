@@ -6,10 +6,12 @@ import Button from 'material-ui/Button'
 import Dialog, { DialogContent, DialogContentText, withMobileDialog, } from 'material-ui/Dialog'
 import SearchProductForm from './SearchProductForm';
 import Tune from '@material-ui/icons/Tune'
+import Cached from '@material-ui/icons/Cached'
 
 const classes = {
   tuneIcon: {
-    marginRight: 100,
+    position: "relative",
+    right: 50,
   },
 }
 
@@ -38,13 +40,6 @@ class ProductsPage extends PureComponent {
   }
 
 
- 
-  handleRelease(props) {
-   
-    this.props.fetchAllProducts()
-  }
-
-
   render() {
       const { fullScreen, products, currentUserRole } = this.props
     if (!products) return null
@@ -61,12 +56,12 @@ class ProductsPage extends PureComponent {
           Filter
         </Button>
         <Button
-          onClick={this.handleRelease}
+          onClick={this.submit}
           variant="raised"
         >
-          <Tune className={classes.tuneIcon} />
-
-          All
+          <Cached className={classes.cachedIcon} />
+          <div>All</div>
+          
         </Button>
 
         <Dialog
@@ -81,7 +76,7 @@ class ProductsPage extends PureComponent {
             </DialogContentText>
           </DialogContent>
 
-          {/* <Button
+          <Button
             color="primary"
             className="submit-btn"
             type="submit"
@@ -94,7 +89,7 @@ class ProductsPage extends PureComponent {
             }}
           >
             Cancel
-                        </Button> */}
+                        </Button>
 
           </Dialog>
 
