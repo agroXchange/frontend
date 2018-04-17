@@ -6,7 +6,6 @@ import Typography from 'material-ui/Typography'
 import IconButton from 'material-ui/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import Translate from '@material-ui/icons/Translate'
-import Menu, {MenuItem} from 'material-ui/Menu'
 import {Link} from 'react-router-dom'
 import SwipeableDrawer from 'material-ui/SwipeableDrawer'
 import StarIcon from '@material-ui/icons/Star'
@@ -17,6 +16,7 @@ import compose from "redux/src/compose"
 import {translate} from "react-i18next"
 import {connect} from "react-redux"
 import {withStyles} from "material-ui"
+import Button from "material-ui/Button";
 
 
 const styles = {
@@ -29,6 +29,13 @@ const styles = {
   fullList: {
     width: 'auto'
   },
+  root: {
+   flexGrow: 1,
+ },
+ menuButton: {
+   marginLeft: -12,
+   marginRight: 20,
+ },
 }
 
 class NavBar extends PureComponent {
@@ -130,7 +137,7 @@ class NavBar extends PureComponent {
       <div>
       {this.adminMenu(currentProfileRole)}
       { currentProfileRole !== "admin" &&
-        <div>
+        <div className={classes.root}>
         <ListItem button="button">
           <ListItemIcon>
             <StarIcon/>
@@ -181,21 +188,21 @@ class NavBar extends PureComponent {
 
     return (<div>
 
-      <AppBar position="static" style={{backgroundColor:'#5088b7'}}>
+      <AppBar position="static" style={{backgroundColor:'white'}}>
         <Toolbar>
       <div>
-          {currentUser &&      <IconButton color="inherit" onClick={this.toggleDrawer('left', true)}>
+          {currentUser &&      <IconButton  float="left" style={{color:`#588D61`}}onClick={this.toggleDrawer('left', true)}>
               <MenuIcon/>
             </IconButton>}
 
-            <SwipeableDrawer open={this.state.left} onClose={this.toggleDrawer('left', false)} onOpen={this.toggleDrawer('left', true)}>
-              <div tabIndex={0} role="button" onClick={this.toggleDrawer('left', false)} onKeyDown={this.toggleDrawer('left', false)}>
+            <SwipeableDrawer className={classes.menuButton} open={this.state.left} onClose={this.toggleDrawer('left', false)} onOpen={this.toggleDrawer('left', true)}>
+              <div style={{color:`#588D61`}} tabIndex={0} role="button" onClick={this.toggleDrawer('left', false)} onKeyDown={this.toggleDrawer('left', false)}>
                 {sideList}
               </div>
             </SwipeableDrawer>
           </div>
 
-           <Typography variant="title" color="inherit" className={classes.flex}>
+           <Typography variant="title" className={classes.flex} style={{color:`#588D61`, fontSize:'30px'}} >
             AgroXchange
           </Typography>
 
@@ -210,21 +217,13 @@ class NavBar extends PureComponent {
                 <Translate/>
               </IconButton>
 
-              <Menu id="menu" anchorEl={El} anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
-                }} transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right'
-                }} open={openNew} onClose={this.handleNewClose}>
-                <MenuItem>
-                  <button onClick={() => changeLanguage("en")}><img className="LanguageDetector" src="/images/en.svg"/></button>
-                </MenuItem>
-                <MenuItem>
-                  <button onClick={() => changeLanguage("es")}><img className="LanguageDetector" src="/images/es.svg"/></button>
-                </MenuItem>
+                <IconButton style={{marginRight:"10px"}}>
+                  <Button size='small' onClick={() => changeLanguage("en")}><img className="LanguageDetector" src="/images/en.svg"/></Button>
 
-              </Menu>
+                  <Button  size='small' onClick={() => changeLanguage("es")}><img className="LanguageDetector" src="/images/es.svg"/></Button>
+                  </IconButton>
+
+
 
 
             </div>)
