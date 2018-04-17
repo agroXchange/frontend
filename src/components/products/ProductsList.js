@@ -47,8 +47,7 @@ class ProductList extends PureComponent {
     const { t, i18n } = this.props
     {/* specific for translation */}
 
-
-    return (
+ return (
       <div>
         { products.map(product =>
          <Card className={classes.card}>

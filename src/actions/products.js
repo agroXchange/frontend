@@ -92,25 +92,19 @@ export const updateProduct = (productId, updates) => (dispatch, getState) => {
 }
 
 
-// export const filterProducts = (prefences) => (dispatch) => {
-//   console.log(prefences)
+export const filterProducts = (prefences) => (dispatch) => {
+  console.log(prefences)
 
-//     request
-//       .get(`${baseUrl}/search/products`)
-//       .then(response => {
-//             dispatch({
-//               type: FILTER_PRODUCTS,
-//               payload: response.body
-//             })
-//         })
-//         .catch(err => {
-//             console.error(err)
-//         })
-//       }
+    request
+      .get(`${baseUrl}/search/products`)
+      .then(response => {
+            dispatch({
+              type: FILTER_PRODUCTS,
+              payload: response.body
+            })
+        })
+        .catch(err => {
+            console.error(err)
+        })
+      }
 
-export const filterProducts = (parameter) => {
-  return {
-    type: FILTER_PRODUCTS,
-    payload: parameter
-  }
-}
