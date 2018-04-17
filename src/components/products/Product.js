@@ -38,36 +38,29 @@ class Product extends PureComponent {
     newOrder: false,
     confirmOrder: false,
     editProduct: false,
-    completed: 70
+    confirmEdit: false,
+    completed: 0
   }
 
   componentWillMount(props) {
     this.props.fetchProduct(this.props.match.params.id)
   }
 
-  handleClickOrderOpen = () => {
-    this.setState({ newOrder: true });
-  }
+  handleClickOrderOpen = () => { this.setState({ newOrder: true }) }
 
-  handleOrderClose = () => {
-    this.setState({ newOrder: false });
-  }
+  handleOrderClose = () => { this.setState({ newOrder: false }) }
 
-  handleConfirmOpen = () => {
-    this.setState({ confirmOrder: true })
-  }
+  handleConfirmOpen = () => { this.setState({ confirmOrder: true }) }
 
-  handleConfirmClose = () => {
-    this.setState({ confirmOrder: false })
-  }
+  handleConfirmClose = () => { this.setState({ confirmOrder: false }) }
 
-  handleEditOpen = () => {
-    this.setState({ editProduct: true });
-  }
+  handleEditOpen = () => { this.setState({ editProduct: true }) }
 
-  handleEditClose = () => {
-    this.setState({ editProduct: false });
-  }
+  handleEditClose = () => { this.setState({ editProduct: false }) }
+
+  handleConfirmEdit = () => { this.setState({ confirmEdit: true }) }
+
+  handleConfirmEditClose = () => { this.setState({ confirmEdit: false })}
 
   createOrder = (order, productId, buyer) => {
     this.props.createOrder(order, this.props.match.params.id, this.props.currentUser)
@@ -77,19 +70,25 @@ class Product extends PureComponent {
 
   updateProduct = (updates) => {
     this.props.updateProduct(this.props.match.params.id, updates)
+    this.handleEditClose()
+    this.handleConfirmEdit()
   }
 
   progress = () => {
     const { completed } = this.state;
+    const start = Date.parse(this.props.product.harvested)
+    const end = Date.parse(this.props.product.expired)
+    const today = Date.parse(new Date())
     if (completed === 100) {
       this.setState({ completed: 0 });
     } else {
-      const diff = Math.random() * 10;
-      const harvested = Date.parse(this.props.product.harvested)
-      const expired = Date.parse(this.props.product.expired)
+      const diff = Math.round(((today - start) / (end - start)) * 100)
+      console.log(diff)
+      this.setState({ completed: diff });
+      //this.setState({ completed: Math.round(((today - harvested) / (expired - harvested)), 100)})
 
-      console.log(harvested)
-      this.setState({ completed: Math.min(completed + diff, 100) });
+
+    //p = Math.round(((today - start) / (end - start)) * 100)
     }
   };
 
@@ -97,8 +96,8 @@ class Product extends PureComponent {
   render() {
     const { classes, product, currentUser, currentUserId, currentProfileId } = this.props
     if (!product) return null
-
     return(
+
       <div className="product-container">
         <Paper className="paper">
         <Paper><h2 className="title">{ product.code.titleeng }</h2></Paper>
@@ -111,6 +110,8 @@ class Product extends PureComponent {
                 className="product-photo"/>
 
               <LinearProgress variant="determinate" value={this.state.completed} />
+
+              { product.volume === 0 ? <h2>UNAVAILABLE</h2> : "" }
 
             </Grid>
 
@@ -170,6 +171,14 @@ class Product extends PureComponent {
               aria-labelledby="form-dialog-title"
             >
               <DialogTitle id="form-dialog-title">Thankyou. Your order has been recieved.</DialogTitle>
+            </Dialog>
+
+            <Dialog
+              open={ this.state.confirmEdit }
+              onClose={ this.handleConfirmEditClose }
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle id="form-dialog-title">Thankyou. Your listing has been updated.</DialogTitle>
             </Dialog>
 
           </Grid>

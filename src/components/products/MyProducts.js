@@ -25,10 +25,15 @@ class MyProducts extends PureComponent {
         { currentProfileId === user.id ?
           <h2>My Products</h2> : <h2>{user.name}</h2> }
 
-        { products.length === 0 ?
+        { products.length === 0 && currentProfileId === user.id ?
           <div>
             <p>You currently have no products listed for sale.</p>
           </div> : " " }
+
+          { products.length === 0 && currentProfileId !== user.id ?
+            <div>
+              <p>This Organization currently has no products for sale.</p>
+            </div> : " " }
 
         { currentProfileId === user.id ?
           <Link to="/products/new">Add Product</Link> : " " }
