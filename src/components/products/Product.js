@@ -38,6 +38,7 @@ class Product extends PureComponent {
     newOrder: false,
     confirmOrder: false,
     editProduct: false,
+    confirmEdit: false,
     completed: 70
   }
 
@@ -45,29 +46,21 @@ class Product extends PureComponent {
     this.props.fetchProduct(this.props.match.params.id)
   }
 
-  handleClickOrderOpen = () => {
-    this.setState({ newOrder: true });
-  }
+  handleClickOrderOpen = () => { this.setState({ newOrder: true }) }
 
-  handleOrderClose = () => {
-    this.setState({ newOrder: false });
-  }
+  handleOrderClose = () => { this.setState({ newOrder: false }) }
 
-  handleConfirmOpen = () => {
-    this.setState({ confirmOrder: true })
-  }
+  handleConfirmOpen = () => { this.setState({ confirmOrder: true }) }
 
-  handleConfirmClose = () => {
-    this.setState({ confirmOrder: false })
-  }
+  handleConfirmClose = () => { this.setState({ confirmOrder: false }) }
 
-  handleEditOpen = () => {
-    this.setState({ editProduct: true });
-  }
+  handleEditOpen = () => { this.setState({ editProduct: true }) }
 
-  handleEditClose = () => {
-    this.setState({ editProduct: false });
-  }
+  handleEditClose = () => { this.setState({ editProduct: false }) }
+
+  handleConfirmEdit = () => { this.setState({ confirmEdit: true }) }
+
+  handleConfirmEditClose = () => { this.setState({ confirmEdit: false })}
 
   createOrder = (order, productId, buyer) => {
     this.props.createOrder(order, this.props.match.params.id, this.props.currentUser)
@@ -77,6 +70,8 @@ class Product extends PureComponent {
 
   updateProduct = (updates) => {
     this.props.updateProduct(this.props.match.params.id, updates)
+    this.handleEditClose()
+    this.handleConfirmEdit()
   }
 
   progress = () => {
@@ -170,6 +165,14 @@ class Product extends PureComponent {
               aria-labelledby="form-dialog-title"
             >
               <DialogTitle id="form-dialog-title">Thankyou. Your order has been recieved.</DialogTitle>
+            </Dialog>
+
+            <Dialog
+              open={ this.state.confirmEdit }
+              onClose={ this.handleConfirmEditClose }
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle id="form-dialog-title">Thankyou. Your listing has been updated.</DialogTitle>
             </Dialog>
 
           </Grid>
