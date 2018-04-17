@@ -4,6 +4,7 @@ import ProductsList from './ProductsList'
 import { fetchMyProducts } from '../../actions/products'
 import { fetchUser } from '../../actions/users'
 import {jwtPayload} from "../../jwt"
+import { Link } from 'react-router-dom'
 
 class MyProducts extends PureComponent {
   state = {}
@@ -15,15 +16,25 @@ class MyProducts extends PureComponent {
 
 
   render() {
-    const { products, currentProfileId } = this.props
+    const { products, currentProfileId, user } = this.props
     if (!products) return null
+    if (!user) return null
 
     return(
       <div>
+        { currentProfileId === user.id ?
+          <h2>My Products</h2> : <h2>{user.name}</h2> }
 
+        { products.length === 0 ?
+          <div>
+            <p>You currently have no products listed for sale.</p>
+          </div> : " " }
 
+        { currentProfileId === user.id ?
+          <Link to="/products/new">Add Product</Link> : " " }
 
         <ProductsList products={ products } />
+
       </div>
     )
   }
@@ -33,7 +44,7 @@ const mapStateToProps = function(state) {
   const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
     products: state.products,
-    profile: state.users,
+    user: state.user,
     currentUser: state.currentUser,
     currentUserId: jwtDecoded.id,
     currentProfileId: jwtDecoded.profileId
