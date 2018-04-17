@@ -1,33 +1,33 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
-import {withStyles} from 'material-ui/styles';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Translate from '@material-ui/icons/Translate';
-import Switch from 'material-ui/Switch';
-import {FormControlLabel, FormGroup} from 'material-ui/Form';
-import Menu, {MenuItem} from 'material-ui/Menu';
+import React, {PureComponent} from 'react'
+import PropTypes from 'prop-types'
+import {withStyles} from 'material-ui/styles'
+import AppBar from 'material-ui/AppBar'
+import Toolbar from 'material-ui/Toolbar'
+import Typography from 'material-ui/Typography'
+import IconButton from 'material-ui/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
+import AccountCircle from '@material-ui/icons/AccountCircle'
+import Translate from '@material-ui/icons/Translate'
+import Switch from 'material-ui/Switch'
+import {FormControlLabel, FormGroup} from 'material-ui/Form'
+import Menu, {MenuItem} from 'material-ui/Menu'
 import compose from 'lodash/fp/compose'
-import {translate} from "react-i18next"
+import {translate} from 'react-i18next'
 import {Link} from 'react-router-dom'
-import {connect} from "react-redux";
-import { withRouter } from "react-router";
-import SwipeableDrawer from 'material-ui/SwipeableDrawer';
-import Button from 'material-ui/Button';
-import List from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-import {ListItem, ListItemIcon, ListItemText} from 'material-ui/List';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import StarIcon from '@material-ui/icons/Star';
-import SendIcon from '@material-ui/icons/Send';
-import MailIcon from '@material-ui/icons/Mail';
-import DeleteIcon from '@material-ui/icons/Delete';
-import ReportIcon from '@material-ui/icons/Report';
+import {connect} from 'react-redux'
+import { withRouter } from 'react-router'
+import SwipeableDrawer from 'material-ui/SwipeableDrawer'
+import Button from 'material-ui/Button'
+import List from 'material-ui/List'
+import Divider from 'material-ui/Divider'
+import {ListItem, ListItemIcon, ListItemText} from 'material-ui/List'
+import InboxIcon from '@material-ui/icons/MoveToInbox'
+import DraftsIcon from '@material-ui/icons/Drafts'
+import StarIcon from '@material-ui/icons/Star'
+import SendIcon from '@material-ui/icons/Send'
+import MailIcon from '@material-ui/icons/Mail'
+import DeleteIcon from '@material-ui/icons/Delete'
+import ReportIcon from '@material-ui/icons/Report'
 
 const styles = {
   list: {
@@ -39,43 +39,43 @@ const styles = {
   fullList: {
     width: 'auto'
   },
-};
+}
 
 class NavBar extends PureComponent {
 
   static propTypes = {
     classes: PropTypes.object.isRequired
-  };
+  }
 
   state = {
     auth: true,
     anchorEl: null,
     left: false
-  };
+  }
 
   toggleDrawer = (side, open) => () => {
     this.setState({[side]: open});
-  };
+  }
 
   handleChange = (event, checked) => {
     this.setState({auth: checked});
-  };
+  }
 
   handleMenu = event => {
     this.setState({anchorEl: event.currentTarget});
-  };
+  }
 
   handleNewMenu = event => {
     this.setState({El: event.currentTarget});
-  };
+  }
 
   handleClose = () => {
     this.setState({anchorEl: null});
-  };
+  }
 
   handleNewClose = () => {
     this.setState({El: null});
-  };
+  }
   render() {
     const {classes, currentUser} = this.props;
     const {auth, anchorEl, El} = this.state;
@@ -134,7 +134,7 @@ class NavBar extends PureComponent {
           <Link to='/logout'>Logout</Link>
         </ListItem>
       </div>
-    </div>);
+    </div>)
 
 
     return (<div>
@@ -190,16 +190,16 @@ class NavBar extends PureComponent {
           }
         </Toolbar>
       </AppBar>
-    </div>);
+    </div>)
   }
 }
 
 NavBar.propTypes = {
   classes: PropTypes.object.isRequired
-};
+}
 
 const mapStateToProps = function(state) {
   return {currentUser: state.currentUser};
-};
+}
 
-export default compose(translate("translations"), connect(mapStateToProps), withStyles(styles))(NavBar);
+export default compose(translate("translations"), connect(mapStateToProps), withStyles(styles))(NavBar)
