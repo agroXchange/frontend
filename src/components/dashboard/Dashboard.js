@@ -28,7 +28,8 @@ const styles = theme => ({
 
 class Dashboard extends PureComponent {
   render() {
-    const { classes, currentProfileId } = this.props
+    const { classes, currentProfileId, currentUser } = this.props
+    if (!currentUser) return <Redirect to="/" />
     if (this.props.currentUserRole === "admin") return <Redirect to="/admin" />;
 
 
@@ -104,7 +105,7 @@ class Dashboard extends PureComponent {
 }
 
 const mapStateToProps = function(state) {
-  const jwtDecoded = jwtPayload(state.currentUser.jwt)
+  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
     currentUser: state.currentUser,
     currentUserRole: jwtDecoded.role,
