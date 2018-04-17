@@ -56,15 +56,13 @@ class Dashboard extends PureComponent {
               My profile
             </Typography>
             <div className="photo">
-                <img src={"/images/profile.png"} alt="" width="100" />
+              <img src={"/images/profile.png"} alt="" width="100" />
             </div>
           </CardContent>
           <CardActions>
-            <Link to={`/profiles/${currentProfileId}`}>
-              <Button size="medium" color="primary" variant="raised">
-                See your profile information
-              </Button>
-            </Link>
+            <Button size="medium" color="primary" variant="raised" component={Link} to={`/profiles/${currentProfileId}`}>
+              See your profile information
+            </Button>
           </CardActions>
         </Card>
         <Card className={classes.card}>
@@ -77,16 +75,12 @@ class Dashboard extends PureComponent {
             </Typography>
           </CardContent>
           <CardActions>
-            <Link to={`/products/new`}>
-              <Button size="medium" color="primary" variant="raised">
-                Add a new product
-              </Button>
-            </Link>
-            <Link to={`/profiles/${currentProfileId}/products`}>
-              <Button size="medium" color="primary" variant="raised">
-                See all my products
-              </Button>
-            </Link>
+            <Button size="medium" color="primary" variant="raised" component={Link} to={`/products/new`}>
+              Add a new product
+            </Button>
+            <Button size="medium" color="primary" variant="raised" component={Link} to={`/profiles/${currentProfileId}/products`}>
+              See all my products
+            </Button>
           </CardActions>
         </Card>
         <Card className={classes.card}>
@@ -99,11 +93,9 @@ class Dashboard extends PureComponent {
             </Typography>
           </CardContent>
           <CardActions>
-            <Link to={`/orders`}>
-              <Button size="medium" color="primary" variant="raised">
-                View all orders
-              </Button>
-            </Link>
+            <Button size="medium" color="primary" variant="raised" component={Link} to={`/orders`}>
+              View all orders
+            </Button>
           </CardActions>
         </Card>
       </Paper>
