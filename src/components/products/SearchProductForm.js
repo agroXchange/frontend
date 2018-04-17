@@ -76,6 +76,7 @@ class SearchProductForm extends React.Component {
 
     handleClose = () => {
         this.setState({ open: false });
+        console.log("should close")
     };
 
     handleSubmit = (e) => {
@@ -270,8 +271,24 @@ class SearchProductForm extends React.Component {
                         >
                             Save
                         </Button>
-
                     </div>
+
+                        <Button
+                            color="primary"
+                            className="submit-btn"
+                        type="submit"
+                            onClick={_ => this.handleClose()}
+                            style={{
+                                display: 'block',
+                                margin: 'auto',
+                                marginTop: 20,
+                                marginBottom: 20
+                            }}
+                        >
+                            Cancel
+                        </Button>
+
+                   
                     </Paper>
                 </form>
            
