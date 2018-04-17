@@ -36,7 +36,13 @@ class ProductsPage extends PureComponent {
   handleClose = () => {
     this.setState({ open: false })
   }
+
+
  
+  handleRelease(props) {
+   
+    this.props.fetchAllProducts()
+  }
 
 
   render() {
@@ -54,6 +60,14 @@ class ProductsPage extends PureComponent {
       
           Filter
         </Button>
+        <Button
+          onClick={this.handleRelease}
+          variant="raised"
+        >
+          <Tune className={classes.tuneIcon} />
+
+          All
+        </Button>
 
         <Dialog
           fullScreen={fullScreen}
@@ -67,9 +81,22 @@ class ProductsPage extends PureComponent {
             </DialogContentText>
           </DialogContent>
 
+          {/* <Button
+            color="primary"
+            className="submit-btn"
+            type="submit"
+            onClick={_ => this.handleClose()}
+            style={{
+              display: 'block',
+              margin: 'auto',
+              marginTop: 20,
+              marginBottom: 20
+            }}
+          >
+            Cancel
+                        </Button> */}
+
           </Dialog>
-
-
 
 
         <ProductsList products={ products } />
