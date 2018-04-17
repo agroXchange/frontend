@@ -55,7 +55,7 @@ export const fetchOrdersByBuyerId = (id) => (dispatch, getState) => {
   const jwt = state.currentUser.jwt
 
   request
-    .get(`${baseUrl}/profiles/${id}/orders`)
+    .get(`${baseUrl}/orders`)
     .set("Authorization", `Bearer ${jwt}`)
     .then(response => dispatch({
       type: FETCH_ORDERS_BY_BUYERID,
