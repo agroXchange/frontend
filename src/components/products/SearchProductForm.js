@@ -71,7 +71,8 @@ class SearchProductForm extends React.Component {
     state = {
         open: false,
         picked: false,
-        country: '*'
+        country: '*',
+        code: ''
     };
 
     handleClickOpen = () => {
