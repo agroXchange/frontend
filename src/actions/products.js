@@ -79,7 +79,7 @@ export const updateProduct = (productId, updates) => (dispatch, getState) => {
   const jwt = state.currentUser.jwt
 
   request
-    .put(`${baseUrl}/products/${productId}`)
+    .patch(`${baseUrl}/products/${productId}`)
     .set('Authorization', `Bearer ${jwt}`)
     .send(updates)
     .then(response => dispatch ({

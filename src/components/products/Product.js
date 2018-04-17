@@ -20,7 +20,7 @@ import '../../styles/Product.css'
 import { fetchProduct, updateProduct } from '../../actions/products'
 import { createOrder } from '../../actions/orders'
 import OrderForm from '../orders/OrderForm'
-import ProductForm from './ProductForm'
+import EditProductForm from './EditProductForm'
 import {jwtPayload} from "../../jwt"
 
 const styles = {
@@ -75,7 +75,7 @@ class Product extends PureComponent {
     this.handleConfirmOpen()
   }
 
-  updateProduct = (productId, updates) => {
+  updateProduct = (updates) => {
     this.props.updateProduct(this.props.match.params.id, updates)
   }
 
@@ -143,7 +143,6 @@ class Product extends PureComponent {
                 <Button onClick={this.handleClickOrderOpen}>Make New Order</Button>
               }
 
-
             </Grid>
 
 
@@ -153,7 +152,7 @@ class Product extends PureComponent {
               aria-labelledby="form-dialog-title"
             >
               <DialogTitle id="form-dialog-title">Edit Your Product</DialogTitle>
-                <ProductForm edit={true} inititalValues={ this.props.product } onSubmit={ this.updateProduct }/>
+                <EditProductForm initialValues={ product } onSubmit={ this.updateProduct }/>
             </Dialog>
 
             <Dialog
@@ -186,7 +185,7 @@ class Product extends PureComponent {
 
 }
 
-const mapStateToProps = function(state) {
+const mapStateToProps = function(state, props) {
   const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
     product: state.product,
