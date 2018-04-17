@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
-import {fetchUser, uploadLogo} from "../../actions/users"
+import { fetchUser, uploadLogo, updateProfile } from "../../actions/users"
 import Paper from "material-ui/Paper"
 import Typography from "material-ui/Typography"
 import compose from "lodash/fp/compose"
@@ -43,8 +43,9 @@ class Profile extends PureComponent {
   }
 
   handleEditProfileSubmit = data => {
-    // this.props.sendForgotPassword(data.email)
-  }
+    this.props.updateProfile(this.props.currentProfileId, data);
+    this.handleClose();
+  };
 
   render() {
     const { user, t, currentProfileId} = this.props;
@@ -162,7 +163,8 @@ const mapStateToProps = ({ user, currentUser }, props) => {
 
 const mapDispatchToProps = {
   fetchUser,
-  uploadLogo
+  uploadLogo,
+  updateProfile
 }
 
 export default compose(

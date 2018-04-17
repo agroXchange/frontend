@@ -1,8 +1,5 @@
 import React, { PureComponent } from "react";
-import Select from "material-ui/Select";
-import { MenuItem } from "material-ui/Menu";
 import { withStyles } from "material-ui/styles";
-import Input, { InputLabel } from "material-ui/Input";
 import Button from "material-ui/Button";
 import compose from "lodash/fp/compose";
 import { translate } from "react-i18next";
@@ -50,7 +47,7 @@ class EditProfileForm extends PureComponent {
     const {name, value} = event.target
 
     this.setState({
-      [name]: value || ' '
+      [name]: value
     })
   }
 

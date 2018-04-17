@@ -9,6 +9,7 @@ export const UPDATE_USER = "UPDATE_USER";
 export const APPROVE_USER = "APPROVE_USER";
 export const DELETE_USER = "DELETE_USER"
 export const FETCH_USER = "FETCH_USER";
+export const UPDATE_PROFILE = "UPDATE_PROFILE";
 
 export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS";
 export const USER_LOGIN_FAILED = "USER_LOGIN_FAILED";
@@ -169,4 +170,17 @@ export const signup = newUser => dispatch =>
 
 export const logout = () => ({
   type: USER_LOGOUT
-})
+});
+
+export const updateProfile = (id, updates) => (dispatch,getState) => {
+  const state = getState();
+  const jwt = state.currentUser.jwt;
+
+ request
+   .patch(`${baseUrl}/profiles/${id}`)
+   .set("Authorization", `Bearer ${jwt}`)
+   .send(updates)
+   .then(response => {
+      dispatch({ type: UPDATE_PROFILE, payload: response.body})
+    })
+}
