@@ -18,7 +18,6 @@ import ProfilePage from './components/profile/ProfilePage'
 import LogoutPage from './components/logout/LogoutPage'
 import ResetPasswordPage from './components/password/ResetPasswordPage'
 import AddProductContainer from './components/products/AddProductContainer'
-import SearchProductContainer from './components/products/SearchProductContainer'
 import MyProducts from './components/products/MyProducts'
 import ProductsPage from './components/products/ProductsPage'
 import Dashboard from './components/dashboard/Dashboard'
@@ -51,9 +50,10 @@ class App extends Component {
             <Route exact path="/products/:id([0-9]+)" component={ Product } />
             <Route exact path="/profiles/:id([0-9]+)" component={ProfilePage} />
             <Route exact path="/profiles/:id([0-9]+)/products" component={ MyProducts } />
-            <Route exact path="/searchproduct" component={ SearchProductContainer } />
             <Route exact path="/reset-password" component={ ResetPasswordPage } />
             <Route exact path="/dashboard" component={ Dashboard } />
+            {/* <Route path="products?code=:query1&country=:query2"
+              component={ProductsPage} /> */}
           </div>
         </Router>
       </MuiThemeProvider>

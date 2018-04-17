@@ -27,9 +27,14 @@ const classes = {
     marginRight: 10,
     marginBottom: 20,
     width: 200,
+    // width: '50%',
+    // justify: 'center',
+    // textAlign: 'center',
   },
   menu: {
     width: 200,
+    // width: '100%',
+    // justify: 'center'
   },
 }
 
@@ -60,8 +65,7 @@ class ProductForm extends PureComponent {
   state = {
     currency: 'EUR',
     open: false,
-    code:'',
-    edit: false
+    picked: false,
   }
 
   style = {
@@ -97,6 +101,7 @@ class ProductForm extends PureComponent {
   handleClick = code => {
     this.setState({
       code: code,
+      picked: true,
       open: false
     })
   }
@@ -111,28 +116,20 @@ class ProductForm extends PureComponent {
     this.props.fetchCodes()
   }
 
+  getName = (code) => {
+    if (!this.state.picked) return
+    let product = this.props.codes.filter(i => i.code.match(code))
+    return product[0].titleeng 
+  }
+
 
   render() {
     const { fullScreen, codes, vegetables, fruits, beans } = this.props
-    const initialValues = this.props.initialValues || {}
 
-    let product = codes.filter(i => i.code.match(this.state.code) )
-    let title =''
-    if (product.length > 0){  title = ( product[0].titleeng   )}
-
-    // if (this.props.edit === true ) {
-    //   this.setState({edit: true})
-    // }
-
-    if(codes)
       return(
         <form onSubmit={ this.handleSubmit } className="form-container">
 
-
-
           <Paper className="paper">
-
-          { this.state.edit === false &&
           <div id="addProduct">
 
               <Button
@@ -232,10 +229,9 @@ class ProductForm extends PureComponent {
               </Dialog>
             </div>
 
-          }
           <br />
 
-          <div><h3>{   title  }</h3></div>
+            <div><h3>{!this.state.code ? "" : this.getName(this.state.code)  }</h3></div>
 
 
 
@@ -244,7 +240,7 @@ class ProductForm extends PureComponent {
           name="description"
           label="Description"
           style={ classes.textField }
-          value={ this.state.description || initialValues.description || '' }
+          value={ this.state.description }
           onChange={ this.handleChange }
           margin="normal"
         />
@@ -254,7 +250,7 @@ class ProductForm extends PureComponent {
             name="certificate"
             label="Certification"
             style={classes.textField}
-            value={this.state.certificate || initialValues.certificate || '' }
+            value={this.state.certificate }
             onChange={this.handleChange}
             margin="normal"
           />
@@ -264,7 +260,7 @@ class ProductForm extends PureComponent {
               id="price"
               name="price"
               label="Price per Kg"
-              value={this.state.price || initialValues.price || '' }
+              value={this.state.price  }
               onChange={this.handleChange}
               type="number"
               style={classes.textField}
@@ -280,7 +276,7 @@ class ProductForm extends PureComponent {
               select
               label="Please select your currency"
               style={ classes.textField }
-              value={ this.state.currency || initialValues.currency || ''  }
+              value={ this.state.currency   }
               onChange={ this.handleChange }
               margin="normal"
             >
@@ -296,7 +292,7 @@ class ProductForm extends PureComponent {
           label="Volume"
           id="volume"
           name="volume"
-          value={ this.state.volume || initialValues.volume || '' }
+          value={ this.state.volume }
           onChange={ this.handleChange }
           style={ classes.textField }
           InputProps={{
@@ -311,7 +307,7 @@ class ProductForm extends PureComponent {
           name="harvested"
           label="Harvested Date"
           type="date"
-            value={this.state.harvested || initialValues.harvested || '' }
+            value={this.state.harvested }
           onChange={ this.handleChange }
           style={ classes.textField }
           InputLabelProps={{
@@ -324,7 +320,7 @@ class ProductForm extends PureComponent {
             name="expiration"
           label="Expiry Date"
           type="date"
-            value={this.state.expiration || initialValues.expiration || '' }
+            value={this.state.expiration}
           onChange={ this.handleChange }
           style={ classes.textField }
           InputLabelProps={{

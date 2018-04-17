@@ -21,5 +21,5 @@ export default {
   login,
   currentUser,
   codes,
-  password
+  password, 
 }

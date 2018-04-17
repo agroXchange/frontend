@@ -30,7 +30,7 @@ class AddProductContainer extends PureComponent {
         }
 
             return (
-                <div className="addProductContainer">
+                <div className="AddProductContainer">
                  <ProductForm onSubmit={this.submit}/>
                 </div>
             )
