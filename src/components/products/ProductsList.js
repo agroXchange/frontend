@@ -56,7 +56,10 @@ class ProductList extends PureComponent {
             image={ product.photo !== null ?
               product.photo : stockImage }
             title="product name - redux"
+
+
           />
+
            <CardContent>
              <p className={classes.number}>
                <h2> { product.name }</h2>

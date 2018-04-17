@@ -68,7 +68,7 @@ class EditProductForm extends PureComponent {
   }
 
   render() {
-    const initialValues = this.props.initialValues || {}
+    const initialValues = this.props.initialValues || " "
     return(
       <form onSubmit={ this.handleSubmit } className="form-container">
         <Paper style={ classes.paper }>

@@ -107,6 +107,8 @@ class Product extends PureComponent {
 
               <LinearProgress variant="determinate" value={this.state.completed} />
 
+              { product.volume === 0 ? <h2>UNAVAILABLE</h2> : "" }
+
             </Grid>
 
             <Grid item xs={12} sm={6}>
