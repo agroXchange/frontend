@@ -43,10 +43,17 @@ class AddProductContainer extends PureComponent {
                             className="submit-btn"
                             type="submit"
                             style={{
+                                justify: 'center',
+                                textAlign: 'center',
                                 display: 'block',
                                 margin: 'auto',
-                                marginTop: 20,
-                                marginBottom: 20
+                                marginTop: 10,
+                                marginBottom: 2,
+                                backgroundColor: `#white`,
+                                color: "#588D61",
+                                '&:hover': {
+                                    backgroundColor: `#8FBC8F`,
+                                }
                             }}
                         >
                             Back
