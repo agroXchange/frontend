@@ -1,12 +1,14 @@
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
-import {fetchUser, uploadLogo} from "../../actions/users"
+import { fetchUser, uploadLogo, updateProfile } from "../../actions/users"
 import Paper from "material-ui/Paper"
 import Typography from "material-ui/Typography"
 import compose from "lodash/fp/compose"
 import { translate } from "react-i18next"
 import {jwtPayload} from "../../jwt"
 import Button from "material-ui/Button"
+import Dialog, {  DialogTitle } from "material-ui/Dialog"
+import EditProfileForm from "./EditProfileForm"
 
 class Profile extends PureComponent {
   state = {
@@ -31,6 +33,19 @@ class Profile extends PureComponent {
       upload: !this.state.upload
     })
   }
+
+  handleEditProfileOpen = () => {
+    this.setState({ editProfile: true })
+  }
+
+  handleClose = () => {
+    this.setState({ editProfile: false })
+  }
+
+  handleEditProfileSubmit = data => {
+    this.props.updateProfile(this.props.currentProfileId, data);
+    this.handleClose();
+  };
 
   render() {
     const { user, t, currentProfileId} = this.props;
@@ -115,6 +130,22 @@ class Profile extends PureComponent {
                 Upload Picture
               </Button>
             }
+            {
+              currentProfileId === user.id &&
+              <Button onClick={this.handleEditProfileOpen}>
+                Edit my profile
+              </Button>
+            }
+            <Dialog
+              open={this.state.editProfile}
+              onClose={this.handleClose}
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle id="form-dialog-title">
+                Edit your profile
+              </DialogTitle>
+              <EditProfileForm onSubmit={this.handleEditProfileSubmit} />
+            </Dialog>
           </div>
         </div>
       </Paper>
@@ -132,7 +163,8 @@ const mapStateToProps = ({ user, currentUser }, props) => {
 
 const mapDispatchToProps = {
   fetchUser,
-  uploadLogo
+  uploadLogo,
+  updateProfile
 }
 
 export default compose(

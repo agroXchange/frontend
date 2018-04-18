@@ -54,6 +54,7 @@ i18n.use(LanguageDetector).init({
         'phone': 'Phone number',
         'registration': 'Registration number',
         'coc': 'Chamber of Commerce',
+        'cocEdit': 'Chamber of Commerce registration number',
         'cocOptional': 'Chamber of Commerce registration number (optional now)',
         'cocExplanation': 'To participate on this website, you will need to provide proof of your membership of your local chamber of commerce. If you have your registration number ready, please fill it in above. You can also do this after signing up. If you have any questions, please contact the webmaster.',
         'resetPassword': 'Reset password',
@@ -67,7 +68,8 @@ i18n.use(LanguageDetector).init({
         'Status': 'Status',
         'Ordered date': 'Ordered date',
         'GO TO SELLER PROFILE': 'GO TO SELLER PROFILE',
-        'SEE DETAILS': 'SEE DETAILS'
+        'SEE DETAILS': 'SEE DETAILS',
+        'GO BACK': 'GO BACK'
       },
       detail: {
         'Order': 'Order',
@@ -137,6 +139,7 @@ i18n.use(LanguageDetector).init({
         'phone': 'Número de telefono',
         'registration': 'Número de registro',
         'coc': 'Camara de Comercio',
+        'cocEdit': 'Registro de Camara de Comercio',
         'cocOptional': 'Registro de Camara de Comercio (Opcional ahora)',
         'cocExplanation': 'Para participar en este website, ud. necesita proveer el registro de membresía (pertenencia) de su camara de comercio local. Si ud. tiene su número de registro listo, por favor rellenelo (escríbalo) arriba. También puede hacerlo después de registrarse. Si usted tiene algunas preguntas, por favor contacte al administrador de la web.',
         'resetPassword': 'Restablecer la contraseña',
@@ -150,7 +153,8 @@ i18n.use(LanguageDetector).init({
         'Status': 'Estado',
         'Ordered date': 'Fecha ordenada',
         'GO TO SELLER PROFILE': 'IR AL PERFIL DEL VENDEDOR',
-        'SEE DETAILS': 'Ver detalles'
+        'SEE DETAILS': 'Ver detalles',
+        'GO BACK': 'REGRESA'
       },
       detail: {
         'Order': 'Orden',

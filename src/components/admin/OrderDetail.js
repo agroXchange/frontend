@@ -11,6 +11,7 @@ import compose from 'lodash/fp/compose'
 import '../../styles/OrderList.css'
 import { translate } from "react-i18next"
 import { jwtPayload } from '../../jwt'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 
 const style = () => ({
   card: {
@@ -67,43 +68,6 @@ class OrderDetail extends PureComponent {
     window.location.reload()
   }
 
-  currentUser = (currentUser, order) => {
-    if (currentUser === order.product.seller.id) {
-       return (
-         <div>
-         <Button
-            variant="raised"
-            color="primary"
-            className={this.props.classes.button}
-            onClick={this.handleApprove}
-            >
-         {this.props.t('ACCEPT')}
-        </Button>
-        <Button
-            variant="raised"
-            color="primary"
-            className={this.props.classes.button}
-            onClick={this.handleDecline}
-            >
-         {this.props.t('DECLINE')}
-        </Button>
-        </div>
-      )
-  } else if (currentUser === order.buyer.id) {
-     return (
-       <div>
-       <Button
-          variant="raised"
-          color="primary"
-          className={this.props.classes.button}
-          onClick={this.handleBuy}
-          >
-       {this.props.t('BUY')}
-      </Button>
-      </div>
-     )
-  }
-}
 
   render() {
      const { classes, order  } = this.props;
@@ -167,9 +131,7 @@ class OrderDetail extends PureComponent {
                  </TableRow>
                 </TableBody>
               </Table>
-               {
-                 this.currentUser(this.props.currentProfileId, order)
-                }
+              <br />
               <Button size="small"  color="primary" onClick={() => this.props.history.goBack()}>
                {t('GO BACK')}
               </Button>

@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import SignupPage from './components/signup/SignupPage'
 import AdminPage from './components/admin/LandingPage'
 import PendingUserList from './components/admin/PendingUserList'
 import AdminProfilePage from './components/admin/AdminProfilePage'
 import PendingUserPage from './components/admin/PendingUserPage'
+import AdminOrderDetail from './components/admin/OrderDetail'
 import ProductsList from './components/admin/ProductsList'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Product from './components/products/Product'
 import ExampleTranslation from './components/ExampleTranslation'
-import OrdersPage from './components/admin/OrdersPage'
+import OrdersListPage from './components/admin/OrdersListPage'
 import UsersList from './components/admin/UsersList'
 import OrderList from './components/orders/OrderList'
 import OrderDetail from './components/orders/OrderDetail'
@@ -40,7 +41,8 @@ class App extends Component {
             <Route exact path="/admin/pending/profiles/:id([0-9]+)" component={PendingUserPage} />
             <Route exact path="/admin/profiles/:id([0-9]+)/orders" component={OrderList} />
             <Route exact path="/admin/profiles/:id([0-9]+)/products" component={MyProducts} />
-            <Route exact path="/admin/orders" component={OrdersPage} />
+            <Route exact path="/admin/orders" component={OrdersListPage} />
+            <Route exact path="/admin/orders/:id([0-9]+)" component={AdminOrderDetail} />
             <Route exact path="/admin/users" component={UsersList} />
             <Route exact path="/admin/profiles/:id([0-9]+)" component={AdminProfilePage} />
             <Route exact path="/login" component={LoginPage} />
@@ -48,6 +50,7 @@ class App extends Component {
             <Route exact path="/logout" component={LogoutPage} />
             <Route exact path="/translation" component={ ExampleTranslation } />
             <Route exact path="/orders" component={OrderList} />
+            <Route exact path="/orders/received" component={OrderList} />
             <Route exact path="/orders/:id([0-9]+)" component={OrderDetail} />
             <Route exact path="/products" component={ ProductsPage } />
             <Route exact path="/products/new" component={ AddProductContainer } />
@@ -56,8 +59,8 @@ class App extends Component {
             <Route exact path="/profiles/:id([0-9]+)/products" component={ MyProducts } />
             <Route exact path="/reset-password" component={ ResetPasswordPage } />
             <Route exact path="/dashboard" component={ Dashboard } />
-            {/* <Route path="products?code=:query1&country=:query2"
-              component={ProductsPage} /> */}
+            <Route path="products?code=:query1&country=:query2"
+              component={ProductsPage} />
           </div>
         </Router>
       </MuiThemeProvider>

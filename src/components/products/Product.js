@@ -17,7 +17,7 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog'
 import '../../styles/Product.css'
-import { fetchProduct, updateProduct } from '../../actions/products'
+import { fetchProduct, updateProduct, removeProduct } from '../../actions/products'
 import { createOrder } from '../../actions/orders'
 import OrderForm from '../orders/OrderForm'
 import EditProductForm from './EditProductForm'
@@ -38,36 +38,32 @@ class Product extends PureComponent {
     newOrder: false,
     confirmOrder: false,
     editProduct: false,
-    completed: 70
+    confirmEdit: false,
+    completed: 0
   }
+
+
 
   componentWillMount(props) {
     this.props.fetchProduct(this.props.match.params.id)
   }
 
-  handleClickOrderOpen = () => {
-    this.setState({ newOrder: true });
-  }
 
-  handleOrderClose = () => {
-    this.setState({ newOrder: false });
-  }
+  handleClickOrderOpen = () => { this.setState({ newOrder: true }) }
 
-  handleConfirmOpen = () => {
-    this.setState({ confirmOrder: true })
-  }
+  handleOrderClose = () => { this.setState({ newOrder: false }) }
 
-  handleConfirmClose = () => {
-    this.setState({ confirmOrder: false })
-  }
+  handleConfirmOpen = () => { this.setState({ confirmOrder: true }) }
 
-  handleEditOpen = () => {
-    this.setState({ editProduct: true });
-  }
+  handleConfirmClose = () => { this.setState({ confirmOrder: false }) }
 
-  handleEditClose = () => {
-    this.setState({ editProduct: false });
-  }
+  handleEditOpen = () => { this.setState({ editProduct: true }) }
+
+  handleEditClose = () => { this.setState({ editProduct: false }) }
+
+  handleConfirmEdit = () => { this.setState({ confirmEdit: true }) }
+
+  handleConfirmEditClose = () => { this.setState({ confirmEdit: false })}
 
   createOrder = (order, productId, buyer) => {
     this.props.createOrder(order, this.props.match.params.id, this.props.currentUser)
@@ -77,40 +73,46 @@ class Product extends PureComponent {
 
   updateProduct = (updates) => {
     this.props.updateProduct(this.props.match.params.id, updates)
+    this.handleEditClose()
+    this.handleConfirmEdit()
   }
 
-  progress = () => {
-    const { completed } = this.state;
-    if (completed === 100) {
-      this.setState({ completed: 0 });
-    } else {
-      const diff = Math.random() * 10;
-      const harvested = Date.parse(this.props.product.harvested)
-      const expired = Date.parse(this.props.product.expired)
+  removeProduct = () => {
+    this.props.removeProduct(this.props.match.params.id)
+  }
 
-      console.log(harvested)
-      this.setState({ completed: Math.min(completed + diff, 100) });
-    }
-  };
-
+  progress = (harvested, expiration) => {
+    const start = Date.parse(harvested)
+    const end = Date.parse(expiration)
+    const today = Date.parse(new Date())
+    const p = Math.round(((today - start) / (end - start)) * 100) + '%'
+    return p
+    
+  }
 
   render() {
     const { classes, product, currentUser, currentUserId, currentProfileId } = this.props
     if (!product) return null
-
     return(
+
       <div className="product-container">
         <Paper className="paper">
         <Paper><h2 className="title">{ product.code.titleeng }</h2></Paper>
           <Grid container className="container" spacing={24}>
-
             <Grid item xs={12}>
               <img src={ product.photo !== null ?
                 product.photo : stockImage }
                 alt="product"
                 className="product-photo"/>
 
-              <LinearProgress variant="determinate" value={this.state.completed} />
+              { product.volume === 0 ? <h2>UNAVAILABLE</h2> : "" }
+
+              <div>
+                <p>Remaining Time</p>
+                <div className="percentage-bar" >
+                  <div className="bar" style={{ width: this.progress(product.harvested, product.expiration) }}></div>
+                </div>
+              </div>
 
             </Grid>
 
@@ -136,7 +138,10 @@ class Product extends PureComponent {
               <p><b>City/Port:</b> { product.seller.city }</p>
 
               { currentProfileId === product.seller.id &&
-                <Button onClick={ this.handleEditOpen }>Edit Product</Button>
+                <div>
+                  <Button onClick={ this.handleEditOpen }>Edit Product</Button>
+                  <Button onClick={ this.removeProduct }>Remove Product</Button>
+                </div>
               }
 
               { currentProfileId !== product.seller.id &&
@@ -172,6 +177,14 @@ class Product extends PureComponent {
               <DialogTitle id="form-dialog-title">Thankyou. Your order has been recieved.</DialogTitle>
             </Dialog>
 
+            <Dialog
+              open={ this.state.confirmEdit }
+              onClose={ this.handleConfirmEditClose }
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle id="form-dialog-title">Thankyou. Your listing has been updated.</DialogTitle>
+            </Dialog>
+
           </Grid>
 
           <Button color="inherit" onClick={() => this.props.history.goBack()}>
@@ -197,5 +210,5 @@ const mapStateToProps = function(state, props) {
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { fetchProduct, createOrder, updateProduct })
+  connect(mapStateToProps, { fetchProduct, createOrder, updateProduct, removeProduct })
 )(Product)

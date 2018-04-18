@@ -24,3 +24,16 @@
   height: 50px;
   padding-top: 1em;
 }
+
+.percentage-bar {
+  border: 1px solid black;
+  box-sizing: border-box;
+  height: 15px;
+  width: 100%;
+}
+
+.bar {
+  background-color: #5b8bbf;
+  height: 100%;
+  max-width: 100%;
+}

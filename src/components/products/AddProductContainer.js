@@ -2,8 +2,9 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom'
 import ProductForm from './ProductForm'
+import Button from "material-ui/Button"
 import { addProduct } from '../../actions/products'
-
+import { jwtPayload } from '../../jwt'
 
 
 class AddProductContainer extends PureComponent {
@@ -23,20 +24,50 @@ class AddProductContainer extends PureComponent {
 
     render() {
 
+        const { currentProfileId, currentUser } = this.props
+        if (!currentUser) return <Redirect to="/" />
+
         if (this.state.redirectToNext) {
             return (
-                <Redirect to={`profile/`} />
+                <Redirect to={`/profiles/${currentProfileId}/products/`} />
             )
         }
 
             return (
                 <div className="AddProductContainer">
                  <ProductForm onSubmit={this.submit}/>
+
+                    <Link to={`/dashboard`}>
+                        <Button
+                            color="primary"
+                            className="submit-btn"
+                            type="submit"
+                            style={{
+                                display: 'block',
+                                margin: 'auto',
+                                marginTop: 20,
+                                marginBottom: 20
+                            }}
+                        >
+                            Back
+                     </Button>
+                    </Link>
+
+
                 </div>
             )
         }
     }
 
 
+const mapStateToProps = function (state) {
+    const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
+    return {
+        currentUser: state.currentUser,
+        currentUserRole: jwtDecoded.role,
+        currentUserId: jwtDecoded.id,
+        currentProfileId: jwtDecoded.profileId
+    }
+}
 
-export default connect(null, { addProduct })(AddProductContainer)
+export default connect(mapStateToProps, { addProduct })(AddProductContainer)

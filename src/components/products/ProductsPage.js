@@ -5,6 +5,15 @@ import { fetchAllProducts, filterProducts } from '../../actions/products'
 import Button from 'material-ui/Button'
 import Dialog, { DialogContent, DialogContentText, withMobileDialog, } from 'material-ui/Dialog'
 import SearchProductForm from './SearchProductForm';
+import Tune from '@material-ui/icons/Tune'
+import Cached from '@material-ui/icons/Cached'
+
+const classes = {
+  tuneIcon: {
+    position: "relative",
+    right: 50,
+  },
+}
 
 class ProductsPage extends PureComponent {
   state = {
@@ -29,7 +38,6 @@ class ProductsPage extends PureComponent {
   handleClose = () => {
     this.setState({ open: false })
   }
- 
 
 
   render() {
@@ -43,7 +51,17 @@ class ProductsPage extends PureComponent {
           onClick={this.handleClickOpen}
           variant="raised"
         >
+        <Tune className={classes.tuneIcon}/>
+      
           Filter
+        </Button>
+        <Button
+          onClick={this.submit}
+          variant="raised"
+        >
+          <Cached className={classes.cachedIcon} />
+          <div>All</div>
+          
         </Button>
 
         <Dialog
@@ -58,9 +76,22 @@ class ProductsPage extends PureComponent {
             </DialogContentText>
           </DialogContent>
 
+          <Button
+            color="primary"
+            className="submit-btn"
+            type="submit"
+            onClick={_ => this.handleClose()}
+            style={{
+              display: 'block',
+              margin: 'auto',
+              marginTop: 20,
+              marginBottom: 20
+            }}
+          >
+            Cancel
+                        </Button>
+
           </Dialog>
-
-
 
 
         <ProductsList products={ products } />
