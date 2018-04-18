@@ -4,7 +4,7 @@ import { withStyles } from 'material-ui/styles'
 import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card'
 import Button from 'material-ui/Button'
 import { Link } from 'react-router-dom'
-import * as combine from "lodash/fp/compose";
+import * as combine from "lodash/fp/compose"
 import {translate, Trans} from 'react-i18next'
 import { fetchAllProducts } from '../../actions/products'
 import '../../styles/Product.css'
@@ -124,4 +124,4 @@ class ProductList extends PureComponent {
 export default combine(
   translate('orders'),
   withStyles(styles),
-)(ProductList);
+)(ProductList)

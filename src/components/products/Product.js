@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import compose from 'lodash/fp/compose'
+import * as combine from "lodash/fp/compose"
 import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
 import Grid from 'material-ui/Grid'
-import IconButton from "material-ui/IconButton";
-import ModeEditIcon from "@material-ui/icons/ModeEdit";
-import DeleteIcon from "@material-ui/icons/Delete";
+import IconButton from "material-ui/IconButton"
+import ModeEditIcon from "@material-ui/icons/ModeEdit"
+import DeleteIcon from "@material-ui/icons/Delete"
 import Button from 'material-ui/Button'
 import Dialog, { DialogTitle } from 'material-ui/Dialog'
 import '../../styles/Product.css'
@@ -17,10 +17,9 @@ import OrderForm from '../orders/OrderForm'
 import EditProductForm from './EditProductForm'
 import {jwtPayload} from "../../jwt"
 import { translate } from "react-i18next"
+import { Redirect } from 'react-router'
 
 const stockImage = "https://theculinarycook.com/wp-content/uploads/2012/04/vegetable-stock-679x509.jpg"
-const soldOutEng = "http://www.pngall.com/wp-content/uploads/2016/06/Sold-Out-PNG-File.png"
-const expired = "https://previews.123rf.com/images/chrisdorney/chrisdorney1302/chrisdorney130200004/17675884-expired-rubber-stamp.jpg"
 
 const styles = theme => ({
   dialog: {
@@ -48,7 +47,7 @@ class Product extends PureComponent {
     confirmOrder: false,
     editProduct: false,
     confirmEdit: false,
-    completed: 0
+    fireRedirect: false
   }
 
 
@@ -74,10 +73,18 @@ class Product extends PureComponent {
 
   handleConfirmEditClose = () => { this.setState({ confirmEdit: false })}
 
+  redirect = () => {
+    this.setState({ fireRedirect: true })
+  }
+
   createOrder = (order, productId, buyer) => {
     this.props.createOrder(order, this.props.match.params.id, this.props.currentUser)
+
+
     this.handleOrderClose()
     this.handleConfirmOpen()
+    setTimeout(_ => this.redirect(), 3000)
+
   }
 
   updateProduct = (updates) => {
@@ -101,7 +108,7 @@ class Product extends PureComponent {
   daysRemaining = (harvested, expiration) => {
     const today = new Date()
     const end = new Date(expiration)
-    const diffDays = parseInt((end - today) / (1000 * 60 * 60 * 24));
+    const diffDays = parseInt((end - today) / (1000 * 60 * 60 * 24))
     if(diffDays < 0) {
       return 0
     } else {
@@ -111,10 +118,15 @@ class Product extends PureComponent {
 
   render() {
     const { classes, t, product, currentUser, currentUserId, currentProfileId } = this.props
-
     if (!product) return null
-    return(
 
+    if (this.state.fireRedirect) {
+     return (
+       <Redirect to={`/orders`} />
+     )
+   }
+
+    return(
       <div className="product-container">
         <Button
          onClick={() => this.props.history.goBack()}
@@ -181,6 +193,8 @@ class Product extends PureComponent {
             </Grid>
 
             { currentProfileId !== product.seller.id &&
+              product.volume !== 0 &&
+              this.daysRemaining(product.harvested, product.expiration) !== 0 &&
               <Button
                 color="primary"
                 className={ classes.button }
@@ -252,7 +266,7 @@ const mapStateToProps = function(state, props) {
   }
 }
 
-export default compose(
+export default combine(
   translate("product"),
   withStyles(styles),
   connect(mapStateToProps, { fetchProduct, createOrder, updateProduct, removeProduct })

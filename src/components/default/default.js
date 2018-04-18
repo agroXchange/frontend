@@ -1,13 +1,13 @@
-import React, { PureComponent } from "react";
-import { withStyles } from "material-ui/styles";
-import compose from "lodash/fp/compose";
-import { translate } from "react-i18next";
-import List, { ListItem, ListItemText } from "material-ui/List";
-import { CardContent } from "material-ui/Card";
-import Button from "material-ui/Button";
-import Typography from "material-ui/Typography";
-import Paper from "material-ui/Paper";
-import Divider from "material-ui/Divider";
+import React, { PureComponent } from "react"
+import { withStyles } from "material-ui/styles"
+import * as combine from "lodash/fp/compose"
+import { translate } from "react-i18next"
+import List, { ListItem, ListItemText } from "material-ui/List"
+import { CardContent } from "material-ui/Card"
+import Button from "material-ui/Button"
+import Typography from "material-ui/Typography"
+import Paper from "material-ui/Paper"
+import Divider from "material-ui/Divider"
 
 const styles = theme => ({
   list: {
@@ -69,13 +69,13 @@ container: {
   margin:'auto',
   boxSizing:"border-box"
 }
-});
+})
 
 class defaultPage extends PureComponent {
-  state = {};
+  state = {}
 
   render() {
-    const { classes } = this.props;
+    const { classes } = this.props
 
     return (
       <div>
@@ -140,8 +140,8 @@ class defaultPage extends PureComponent {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default compose(translate("user"), withStyles(styles))(defaultPage);
+export default combine(translate("user"), withStyles(styles))(defaultPage)

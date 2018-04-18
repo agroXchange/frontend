@@ -4,7 +4,7 @@ import { fetchMyProducts } from '../../actions/products'
 import { fetchUser } from '../../actions/users'
 import { withStyles } from "material-ui/styles"
 import { Link , Redirect} from "react-router-dom"
-import compose from "lodash/fp/compose"
+import * as combine from "lodash/fp/compose"
 import Button from "material-ui/Button"
 import Typography from "material-ui/Typography"
 import Card, { CardActions, CardContent } from "material-ui/Card"
@@ -56,7 +56,7 @@ class Dashboard extends PureComponent {
   render() {
     const { classes, currentProfileId, currentUser, orders } = this.props
     if (!currentUser) return <Redirect to="/" />
-    if (this.props.currentUserRole === "admin") return <Redirect to="/admin" />;
+    if (this.props.currentUserRole === "admin") return <Redirect to="/admin" />
 
 
     return (
@@ -177,7 +177,7 @@ const mapStateToProps = function(state) {
 }
 
 
-export default compose(
+export default combine(
   withStyles(styles),
   connect(mapStateToProps, { fetchMyProducts, fetchUser, fetchUnseenOrders })
 )(Dashboard)

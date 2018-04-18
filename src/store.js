@@ -1,5 +1,5 @@
 import {createStore, applyMiddleware, combineReducers} from 'redux'
-import compose from 'lodash/fp/compose'
+import * as combine from "lodash/fp/compose"
 import ReduxThunk from 'redux-thunk'
 import reducers from './reducers'
 import {storeJwt, socketIo} from './middleware'
@@ -11,7 +11,7 @@ const devTools = window.devToolsExtension ? window.devToolsExtension() : f => f
 
 export const socket = new SocketIO()
 
-const enhancer = compose(
+const enhancer = combine(
 	applyMiddleware(ReduxThunk, storeJwt, socketIo(socket)),
 	devTools
 )
