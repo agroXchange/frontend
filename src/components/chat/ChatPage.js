@@ -1,59 +1,14 @@
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
-import { login } from "../../actions/users"
 import { Redirect } from "react-router-dom"
 import Typography from "material-ui/Typography"
 import Paper from "material-ui/Paper"
-import { sendForgotPassword } from "../../actions/password"
-import List, {ListItem, ListItemText} from "material-ui/List"
-import Divider from 'material-ui/Divider'
 import MessageForm from "./MessageForm"
-import StayScrolled from 'react-stay-scrolled'
 import MessageList from "./MessageList"
 import {getMessages, sendMessage} from "../../actions/chat"
-
-const messages = [
-  {
-    content: 'test',
-    sender: {
-      name: 'Test1'
-    }
-  },
-  {
-    content: 'asdlkfjalksdjf',
-    sender: {
-      name: 'Test1'
-    }
-  },
-  {
-    content: 'tesSLKJWt',
-    sender: {
-      name: 'Test2'
-    }
-  },
-  {
-    content: 'teSJDLKFJst',
-    sender: {
-      name: 'Test1'
-    }
-  },
-  {
-    content: 'sjlksjdflkjTEST',
-    sender: {
-      name: 'Test2'
-    }
-  }
-]
-
-const message = {
-  content: 'sjlksjdflkjTEST',
-  sender: {
-    name: 'Test2'
-  }
-}
+import Button from "material-ui/Button"
 
 class ChatPage extends PureComponent {
-  state = {messages}
 
   componentWillMount() {
     this.props.getMessages(1)
@@ -64,8 +19,9 @@ class ChatPage extends PureComponent {
   }
 
   render() {
-    //if (!this.props.currentUser) return <Redirect to="" />;
-    const {messages} = this.props
+    if (!this.props.currentUser) return <Redirect to="" />;
+    const {messages, order} = this.props
+    if (!order) return null
 
     return (
       <Paper
@@ -77,10 +33,21 @@ class ChatPage extends PureComponent {
         className="outer-paper"
       >
         <Typography gutterBottom variant="headline" component="h1">
-          Chat
+          Order #{order.id}
         </Typography>
         <MessageList messages={messages} />
         <MessageForm onSubmit={this.handleSubmit} />
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => this.props.history.goBack()}
+          style={{
+            marginBottom: 10,
+            marginTop: 10
+          }}
+        >
+          GO BACK
+        </Button>
       </Paper>
     )
   }
@@ -88,7 +55,9 @@ class ChatPage extends PureComponent {
 
 const mapStateToProps = function(state) {
   return {
-    messages: state.messages
+    currentUser: state.currentUser,
+    messages: state.messages,
+    order: state.order
   }
 }
 

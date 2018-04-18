@@ -62,6 +62,7 @@ class App extends Component {
             <Route exact path="/orders" component={OrderList} />
             <Route exact path="/orders/received" component={OrderList} />
             <Route exact path="/orders/:id([0-9]+)" component={OrderDetail} />
+            <Route exact path="/orders/:id([0-9]+)/chat" component={ ChatPage } />
             <Route exact path="/products" component={ ProductsPage } />
             <Route exact path="/products/new" component={ AddProductContainer } />
             <Route exact path="/products/:id([0-9]+)" component={ Product } />
@@ -69,7 +70,6 @@ class App extends Component {
             <Route exact path="/profiles/:id([0-9]+)/products" component={ MyProducts } />
             <Route exact path="/reset-password" component={ ResetPasswordPage } />
             <Route exact path="/dashboard" component={ Dashboard } />
-            <Route exact path="/testchat" component={ ChatPage } />
           </div>
         </Router>
       </MuiThemeProvider>

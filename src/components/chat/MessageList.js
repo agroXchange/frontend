@@ -22,8 +22,10 @@ class MessageList extends PureComponent {
     return (
       <List
         style ={{
-          maxHeight: 200,
-          overflow: 'auto'
+          maxHeight: '50vh',
+          maxWidth: '90vw',
+          overflowY: 'auto',
+          overflowWrap: 'break-word'
         }}
       >
         {
