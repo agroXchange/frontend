@@ -128,7 +128,8 @@ class Profile extends PureComponent {
               >
                 Upload Picture
               </Button>
-            }
+            </div>
+          )}
             {
               currentProfileId === user.id &&
               <Button onClick={this.handleEditProfileOpen}>
@@ -148,7 +149,6 @@ class Profile extends PureComponent {
                  />
             </Dialog>
           </div>
-        </div>
       </Paper>
     )
   }
