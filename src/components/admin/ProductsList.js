@@ -219,6 +219,16 @@ class OrdersPage extends PureComponent {
 
     return (
       <div>
+      <div>
+      <Button
+        onClick={() => this.props.history.goBack()}
+        size="medium"
+        color="primary"
+        style={{display:'flex', flex:1}}
+      >
+        Go Back
+      </Button>
+      </div>
         <form>
           <div
             style={{
@@ -226,7 +236,7 @@ class OrdersPage extends PureComponent {
               width: "550px",
               margin: 0,
               marginLeft:20,
-              marginTop: "20px",
+              marginTop: "20px"
             }}
           >
             <IconButton>
