@@ -4,7 +4,7 @@ import compose from 'lodash/fp/compose';
 import { withStyles } from 'material-ui/styles';
 import { Link } from 'react-router-dom';
 import Card from "material-ui/Card";
-import {CardHeader,CardMedia } from "material-ui/Card";
+import { CardMedia } from "material-ui/Card";
 import Button from 'material-ui/Button'
 import Table, { TableBody, TableCell, TableRow } from "material-ui/Table";
 import { InputLabel } from 'material-ui/Input';

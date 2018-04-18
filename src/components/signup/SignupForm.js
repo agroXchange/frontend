@@ -6,7 +6,7 @@ import Input, { InputLabel } from "material-ui/Input";
 import { FormControl, FormHelperText } from "material-ui/Form";
 import Typography from "material-ui/Typography";
 import Button from "material-ui/Button";
-import compose from "lodash/fp/compose";
+import * as combine from "lodash/fp/compose";
 import { translate } from "react-i18next";
 
 import TextField from "material-ui/TextField";
@@ -232,4 +232,4 @@ class SignupForm extends PureComponent {
   }
 }
 
-export default compose(translate("user"), withStyles(styles))(SignupForm);
+export default combine(translate("user"), withStyles(styles))(SignupForm);

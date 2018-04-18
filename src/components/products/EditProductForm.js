@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
 import compose from 'lodash/fp/compose'
 import MenuItem from 'material-ui/Menu/MenuItem';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import Paper from 'material-ui/Paper';
 import { withStyles } from 'material-ui/styles';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import { InputAdornment } from 'material-ui/Input';
 
 const styles = theme => ({
   container: {
