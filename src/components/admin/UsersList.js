@@ -104,7 +104,7 @@ class UsersList extends PureComponent {
         {users.filter(searchingByName(this.state.term)).map(user => (
           <List>
             <ListItem
-              onClick={() => this.props.history.push(`/profiles/${user.id}`)}
+              onClick={() => this.props.history.push(`/admin/profiles/${user.id}`)}
             >
               <ListItemAvatar>
                 <Avatar>

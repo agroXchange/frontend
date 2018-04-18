@@ -49,6 +49,7 @@ class App extends Component {
             <Route exact path="/admin/pending/profiles/:id([0-9]+)" component={PendingUserPage} />
             <Route exact path="/admin/profiles/:id([0-9]+)/orders" component={OrderList} />
             <Route exact path="/admin/profiles/:id([0-9]+)/products" component={MyProducts} />
+            <Route exact path="/admin/profiles/:id([0-9]+)" component={ProfilePage} />
             <Route exact path="/admin/orders" component={OrdersListPage} />
             <Route exact path="/admin/orders/:id([0-9]+)" component={AdminOrderDetail} />
             <Route exact path="/admin/users" component={UsersList} />
