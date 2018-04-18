@@ -26,6 +26,19 @@ import Checkbox from 'material-ui/Checkbox';
       backgroundColor: `#8FBC8F`,
     },
   },
+    thinbutton: {
+      justify: 'center',
+      textAlign: 'center',
+      display: 'block',
+      margin: 'auto',
+      marginTop: 10,
+      marginBottom: 2,
+      backgroundColor: `#white`,
+      color: "#588D61",
+      '&:hover': {
+        backgroundColor: `#8FBC8F`,
+      },
+    },
 
 });
 
@@ -108,10 +121,17 @@ class ProductsPage extends PureComponent {
             type="submit"
             onClick={_ => this.handleClose()}
             style={{
+              justify: 'center',
+              textAlign: 'center',
               display: 'block',
               margin: 'auto',
-              marginTop: -15,
-              marginBottom: 10
+              marginTop: 10,
+              marginBottom: 2,
+              backgroundColor: `#white`,
+              color: "#588D61",
+              '&:hover': {
+                backgroundColor: `#8FBC8F`,
+              }
             }}
           >
             Cancel
