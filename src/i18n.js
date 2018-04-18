@@ -135,7 +135,7 @@ i18n.use(LanguageDetector).init({
         'View Seller': 'Ver vendedor',
         'Volume': 'Volumen',
         'Price': 'Precio',
-        'Certification': 'certificación',
+        'Certification': 'Certificación',
         'Country': 'Estado',
         'City/Port': 'Ciudad',
         'Edit Product': 'Editar producto',
