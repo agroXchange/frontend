@@ -24,13 +24,22 @@ import MyProducts from './components/products/MyProducts'
 import ProductsPage from './components/products/ProductsPage'
 import Dashboard from './components/dashboard/Dashboard'
 import Home from './components/default/default'
+import { createMuiTheme } from 'material-ui/styles';
 import './styles/App.css';
+
+const  theme = createMuiTheme({
+  palette: {
+    primary: {
+      main:'#588D61'
+    },
+  },
+})
 
 class App extends Component {
 
   render() {
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider  theme={theme} >
         <Router>
           <div className="App">
             <NavBar />

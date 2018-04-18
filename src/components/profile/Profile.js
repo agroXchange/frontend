@@ -128,6 +128,7 @@ class Profile extends PureComponent {
               >
                 Upload Picture
               </Button>
+
             </div>
           )}
           {currentProfileId === user.id &&

@@ -37,6 +37,7 @@ class ProductsPage extends PureComponent {
     this.props.fetchAllProducts()
   }
 
+
   submit = (preferences) => {
     this.props.filterProducts(preferences)
     this.setState({ open: false })
@@ -62,21 +63,22 @@ class ProductsPage extends PureComponent {
         <Button
           onClick={this.handleClickOpen}
           variant="raised"
+          color="primary"
           className={classes.button}
         >
          <Settings/> 
-      
           Filter
         </Button>
 
         <Button
           onClick={this.submit}
           variant="raised"
+          color="primary"
           className={classes.button}
         >
           <Cached className={classes.cachedIcon} />
           <div>All</div>
-          
+
         </Button>
 
         <FormControlLabel disabled control={<Checkbox value="checkedD" />} label="Disabled" />

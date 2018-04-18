@@ -13,10 +13,7 @@ import { MenuItem } from "material-ui/Menu";
 import Select from "material-ui/Select";
 import { fetchOrdersByBuyer, fetchOrdersBySeller } from  '../../actions/orders';
 import { jwtPayload } from '../../jwt';
-
-
 import { translate } from 'react-i18next'
-
 const style = theme => ({
   card: {
     height: 400,
@@ -42,24 +39,18 @@ const style = theme => ({
     fontSize: "5px"
   }
 });
-
-
 class OrderList extends PureComponent {
   state = {
     status: 'All'
   }
-
   componentWillMount() {
     const received = this.props.location.pathname.split('/r')[1]
     return received ? this.props.fetchOrdersBySeller() : this.props.fetchOrdersByBuyer()
   }
-
-
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value  })
     console.log(event.target.value)
   }
-
   renderFilteredOrder = () => {
    if (this.state.status === 'Pending'||'Approved'||'Bought'||'Declined') {
     return (
@@ -85,7 +76,6 @@ class OrderList extends PureComponent {
                       <TableCell>{this.props.t('Order Volume')}</TableCell>
                       <TableCell>{order.volume}</TableCell>
                    </TableRow>
-
                    <TableRow>
                       <TableCell>{this.props.t('Status')}</TableCell>
                       <TableCell>{order.status}</TableCell>
@@ -113,7 +103,6 @@ class OrderList extends PureComponent {
        </div>
      )}
     }
-
     render() {
       const { classes, t} = this.props
       return (
@@ -176,7 +165,6 @@ class OrderList extends PureComponent {
                           <TableCell>{this.props.t('Order Volume')}</TableCell>
                           <TableCell>{order.volume}</TableCell>
                        </TableRow>
-
                        <TableRow>
                           <TableCell>{this.props.t('Status')}</TableCell>
                           <TableCell>{order.status}</TableCell>
@@ -206,7 +194,6 @@ class OrderList extends PureComponent {
     )
   }
 }
-
 const mapStateToProps = function(state) {
   const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
@@ -216,7 +203,6 @@ const mapStateToProps = function(state) {
     orders: state.orders,
   }
 }
-
 export default compose(
   translate('orders'),
   connect(mapStateToProps, { fetchOrdersByBuyer, fetchOrdersBySeller }),

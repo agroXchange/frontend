@@ -56,7 +56,7 @@ class OrdersPage extends PureComponent {
         <DialogTitle id="form-dialog-title">
           There are no orders
         </DialogTitle>
-        <Link to={`/admin`}>
+        <Link style={{textDecoration: 'none'}} to={`/admin`}>
           <Button size="medium" color="primary">
             Admin Page
           </Button>
@@ -92,7 +92,7 @@ class OrdersPage extends PureComponent {
             onChange={this.searchHandler}
           />
         </div>
-      </form>;
+      </form>
         {this.renderMessage(orders)}
         {orders.filter(searchingByOrderName(this.state.term)).map(order => (
           <Card className={classes.card} zDepth={3} circle={true}>

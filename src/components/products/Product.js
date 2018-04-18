@@ -134,9 +134,9 @@ class Product extends PureComponent {
 
               { currentProfileId !== product.seller.id &&
 
-                <Link to={ `/profiles/${product.seller.id}` }>
-                  <Button color="primary" className={classes.button}>View Seller</Button>
-                </Link>
+                <Link style={{textDecoration: 'none'}} to={ `/profiles/${product.seller.id}` }>
+                  <Button color="primary">View Seller</Button>
+
               }
             </Grid>
 
@@ -148,13 +148,15 @@ class Product extends PureComponent {
 
               { currentProfileId === product.seller.id &&
                 <div>
-                  <Button onClick={ this.handleEditOpen } className={classes.button}>Edit Product</Button>
-                  <Button onClick={ this.removeProduct } className={classes.button}>Remove Product</Button>
+                  <Button color="primary" onClick={ this.handleEditOpen }>Edit Product</Button>
+                  <Button color="primary" onClick={ this.removeProduct }>Remove Product</Button>
+
                 </div>
               }
 
               { currentProfileId !== product.seller.id &&
-                <Button onClick={this.handleClickOrderOpen} className={classes.button}>Make New Order</Button>
+
+                <Button color="primary" onClick={this.handleClickOrderOpen}>Make New Order</Button>
               }
 
             </Grid>
@@ -197,11 +199,9 @@ class Product extends PureComponent {
 
           </Grid>
 
-          <Button
-            className={classes.button}
-            color="inherit"
-            onClick={() => this.props.history.goBack()}
-          >
+
+          <Button color="primary" onClick={() => this.props.history.goBack()}>
+
           	Go Back
           </Button>
         </Paper>

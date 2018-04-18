@@ -37,7 +37,7 @@ class AddProductContainer extends PureComponent {
                 <div className="AddProductContainer">
                  <ProductForm onSubmit={this.submit}/>
 
-                    <Link to={`/dashboard`}>
+                    <Link style={{textDecoration: 'none'}} to={`/dashboard`}>
                         <Button
                             color="primary"
                             className="submit-btn"

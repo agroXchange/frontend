@@ -36,7 +36,7 @@ class MyProducts extends PureComponent {
             </div> : " " }
 
         { currentProfileId === user.id ?
-          <Link to="/products/new">Add Product</Link> : " " }
+          <Link style={{textDecoration: 'none'}} to="/products/new">Add Product</Link> : " " }
 
         <ProductsList products={ products } />
 

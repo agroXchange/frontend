@@ -47,7 +47,7 @@ class ProductList extends PureComponent {
     const { t, i18n } = this.props
     {/* specific for translation */}
 
- if(!products) return null 
+ if(!products) return null
  return (
       <div>
         { products[0] && products[0].code && products.map(product =>
@@ -94,7 +94,7 @@ class ProductList extends PureComponent {
            </CardContent>
            <CardActions>
 
-            <Link to={ `/products/${product.id}` }>
+            <Link style={{textDecoration: 'none'}} to={ `/products/${product.id}` }>
              <Button size="small" color="primary">
                {t('View Product')}
              </Button>

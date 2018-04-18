@@ -63,7 +63,7 @@ class UsersList extends PureComponent {
     return (
       <Dialog open={users.length === 0} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">There are not users</DialogTitle>
-        <Link to={`/admin`}>
+        <Link style={{textDecoration: 'none'}} to={`/admin`}>
           <Button size="medium" color="primary">
             Admin Page
           </Button>
@@ -106,7 +106,7 @@ class UsersList extends PureComponent {
           <List>
             <ListItem>
               <ListItemAvatar>
-                <Link to={`/admin/profiles/${user.id}`}>
+                <Link style={{textDecoration: 'none'}} to={`/admin/profiles/${user.id}`}>
                   <Avatar>
                     <img
                       className={classes.media}
@@ -121,7 +121,7 @@ class UsersList extends PureComponent {
                 primary={user.profile.name}
                 secondary={user.profile.country}
               />
-              <Link to={`/admin/profiles/${user.id}`}>
+              <Link style={{textDecoration: 'none'}} to={`/admin/profiles/${user.id}`}>
                 <IconButton>
                   <InfoIcon />
                 </IconButton>
