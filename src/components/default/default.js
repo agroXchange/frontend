@@ -81,7 +81,7 @@ class defaultPage extends PureComponent {
               We connect farmers with buyers
             </Typography>
             <Typography className={classes.secondaryText}component="p">
-              A MarketPlace for producer
+              A marketplace for producers
             </Typography>
           </CardContent>
 

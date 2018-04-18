@@ -31,7 +31,6 @@ const styles = theme => ({
 
 class Dashboard extends PureComponent {
 
-
   componentWillMount(props) {
     this.props.fetchMyProducts(this.props.currentProfileId)
     this.props.fetchUser(this.props.currentProfileId)
@@ -104,7 +103,7 @@ class Dashboard extends PureComponent {
             </Link>
             <Link to={`/orders/received`}>
               <Button size="medium" color="primary" variant="raised" >
-                View all Recieved orders
+                View all offers
               </Button>
             </Link>
           </CardActions>
@@ -127,12 +126,10 @@ const mapStateToProps = function(state) {
   }
 }
 
-const mapDispatchToProps = {
-  fetchUser,
-  fetchMyProducts
-}
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, mapDispatchToProps)
+
+  connect(mapStateToProps, { fetchMyProducts, fetchUser })
+
 )(Dashboard)
