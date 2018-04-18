@@ -9,6 +9,7 @@ import Button from "material-ui/Button"
 import Typography from "material-ui/Typography"
 import Card, { CardActions, CardContent } from "material-ui/Card"
 import Paper from "material-ui/Paper"
+import { fetchOrdersByBuyer } from '../../actions/orders'
 import {jwtPayload} from '../../jwt'
 
 const styles = theme => ({
@@ -29,6 +30,10 @@ const styles = theme => ({
 })
 
 class Dashboard extends PureComponent {
+  x = () => {
+    return fetchOrdersByBuyer()
+  }
+
   componentWillMount(props) {
     this.props.fetchMyProducts(this.props.currentProfileId)
     this.props.fetchUser(this.props.currentProfileId)
@@ -93,9 +98,16 @@ class Dashboard extends PureComponent {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="medium" color="primary" variant="raised" component={Link} to={`/orders`}>
-              View all orders
-            </Button>
+            <Link to={`/orders`}>
+              <Button size="medium" color="primary" variant="raised" onClick={ this.x }>
+                View all orders
+              </Button>
+            </Link>
+            <Link to={`/orders/received`}>
+              <Button size="medium" color="primary" variant="raised" >
+                View all Recieved orders
+              </Button>
+            </Link>
           </CardActions>
         </Card>
       </Paper>
@@ -123,5 +135,5 @@ const mapDispatchToProps = {
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(mapStateToProps, { fetchOrdersByBuyer })
 )(Dashboard)

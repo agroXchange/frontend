@@ -68,7 +68,8 @@ i18n.use(LanguageDetector).init({
         'Status': 'Status',
         'Ordered date': 'Ordered date',
         'GO TO SELLER PROFILE': 'GO TO SELLER PROFILE',
-        'SEE DETAILS': 'SEE DETAILS'
+        'SEE DETAILS': 'SEE DETAILS',
+        'GO BACK': 'GO BACK'
       },
       detail: {
         'Order': 'Order',
@@ -152,7 +153,8 @@ i18n.use(LanguageDetector).init({
         'Status': 'Estado',
         'Ordered date': 'Fecha ordenada',
         'GO TO SELLER PROFILE': 'IR AL PERFIL DEL VENDEDOR',
-        'SEE DETAILS': 'Ver detalles'
+        'SEE DETAILS': 'Ver detalles',
+        'GO BACK': 'REGRESA'
       },
       detail: {
         'Order': 'Orden',

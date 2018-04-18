@@ -50,6 +50,7 @@ class App extends Component {
             <Route exact path="/logout" component={LogoutPage} />
             <Route exact path="/translation" component={ ExampleTranslation } />
             <Route exact path="/orders" component={OrderList} />
+            <Route exact path="/orders/received" component={OrderList} />
             <Route exact path="/orders/:id([0-9]+)" component={OrderDetail} />
             <Route exact path="/products" component={ ProductsPage } />
             <Route exact path="/products/new" component={ AddProductContainer } />
