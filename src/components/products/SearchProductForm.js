@@ -64,7 +64,6 @@ const classes = {
             '&:hover': {
                 backgroundColor: `#8FBC8F`,
             },
-       
     },
 }
 

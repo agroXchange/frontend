@@ -40,6 +40,29 @@ const classes = {
     marginLeft: 20,
     paddingRight: 2,
   },
+  button: {
+    justify: 'center',
+    textAlign: 'center',
+    backgroundColor: `#588D61`,
+    color: "white",
+    '&:hover': {
+      backgroundColor: `#8FBC8F`,
+    },
+  },
+  thinbutton: {
+    justify: 'center',
+    textAlign: 'center',
+    display: 'block',
+    margin: 'auto',
+    marginTop: 10,
+    marginBottom: 2,
+    backgroundColor: `#white`,
+    color: "#588D61",
+    '&:hover': {
+      backgroundColor: `#8FBC8F`,
+    },
+  },
+
 }
 
 const currencies = [
@@ -141,7 +164,9 @@ class ProductForm extends PureComponent {
               <Button
                 onClick={this.handleClickOpen}
                 variant="raised"
+                style={classes.button}
               >
+              
                 <AddBox /><div className={classes.productstitle}> Product</div>
               </Button>
 
@@ -351,12 +376,7 @@ class ProductForm extends PureComponent {
           color="primary"
           className="submit-btn"
           type="submit"
-          style={{
-            display: 'block',
-            margin: 'auto',
-            marginTop: 20,
-            marginBottom: 20
-          }}
+          style={classes.thinbutton}
         >
           Save
         </Button>

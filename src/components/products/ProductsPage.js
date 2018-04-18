@@ -5,14 +5,14 @@ import { fetchAllProducts, filterProducts } from '../../actions/products'
 import Button from 'material-ui/Button'
 import Dialog, { DialogContent, DialogContentText, withMobileDialog, } from 'material-ui/Dialog'
 import SearchProductForm from './SearchProductForm';
-import Tune from '@material-ui/icons/Tune'
+import Settings from '@material-ui/icons/Settings'
 import Cached from '@material-ui/icons/Cached'
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
 import { withStyles } from "material-ui/styles";
 import compose from "lodash/fp/compose";
 import Checkbox from 'material-ui/Checkbox';
 
-// const classes = {
+
   const styles = theme => ({
   tuneIcon: {
     position: "relative",
@@ -26,20 +26,6 @@ import Checkbox from 'material-ui/Checkbox';
       backgroundColor: `#8FBC8F`,
     },
   },
-    thinbutton: {
-      justify: 'center',
-      textAlign: 'center',
-      display: 'block',
-      margin: 'auto',
-      marginTop: 10,
-      marginBottom: 2,
-      backgroundColor: `#white`,
-      color: "#588D61",
-      '&:hover': {
-        backgroundColor: `#8FBC8F`,
-      },
-    },
-
 });
 
 class ProductsPage extends PureComponent {
@@ -51,10 +37,8 @@ class ProductsPage extends PureComponent {
     this.props.fetchAllProducts()
   }
 
- 
   submit = (preferences) => {
     this.props.filterProducts(preferences)
-   
     this.setState({ open: false })
   }
 
@@ -70,7 +54,7 @@ class ProductsPage extends PureComponent {
   render() {
       const { fullScreen, classes, products, currentUserRole } = this.props
     if (!products) return null
-    console.log(products)
+    console.log(products[0])
 
     return(
       <div>
@@ -80,7 +64,7 @@ class ProductsPage extends PureComponent {
           variant="raised"
           className={classes.button}
         >
-        {/* <Tune className={classes.tuneIcon}/> */}
+         <Settings/> 
       
           Filter
         </Button>
@@ -135,7 +119,7 @@ class ProductsPage extends PureComponent {
             }}
           >
             Cancel
-                        </Button>
+          </Button>
 
           </Dialog>
 
