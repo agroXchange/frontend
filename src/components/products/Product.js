@@ -79,6 +79,8 @@ class Product extends PureComponent {
 
   createOrder = (order, productId, buyer) => {
     this.props.createOrder(order, this.props.match.params.id, this.props.currentUser)
+
+
     this.handleOrderClose()
     this.handleConfirmOpen()
     setTimeout(_ => this.redirect(), 3000)
@@ -125,9 +127,6 @@ class Product extends PureComponent {
    }
 
     return(
-
-
-
       <div className="product-container">
         <Button
          onClick={() => this.props.history.goBack()}
@@ -194,6 +193,8 @@ class Product extends PureComponent {
             </Grid>
 
             { currentProfileId !== product.seller.id &&
+              product.volume !== 0 &&
+              this.daysRemaining(product.harvested, product.expiration) !== 0 &&
               <Button
                 color="primary"
                 className={ classes.button }
