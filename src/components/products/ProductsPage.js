@@ -59,6 +59,17 @@ class ProductsPage extends PureComponent {
 
     return(
       <div>
+        <div className="product-container">
+          <Button
+            onClick={() => this.props.history.goBack()}
+            size="medium"
+            color="primary"
+            style={{ display: 'flex', flex: 1 }}
+          >
+            Go Back
+       </Button>
+       </div>
+
 
         <Button
           onClick={this.handleClickOpen}
