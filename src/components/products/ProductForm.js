@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'redux'
+import * as combine from 'lodash/fp/compose'
 import MenuItem from 'material-ui/Menu/MenuItem'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
@@ -393,8 +393,7 @@ const mapStateToProps = (state, props) => ({
   beans: state.codes.filter(x => x.code.match(/^09/))
 })
 
-export default compose(
-  translate("product"),
+export default combine(
   withMobileDialog(),
   connect(mapStateToProps, { fetchCodes })
 )(ProductForm)

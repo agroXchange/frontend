@@ -1,12 +1,11 @@
-import React, { PureComponent } from "react";
-import Select from "material-ui/Select";
-import { MenuItem } from "material-ui/Menu";
-import { withStyles } from "material-ui/styles";
-import Input, { InputLabel } from "material-ui/Input";
-import { FormControl} from "material-ui/Form";
-import Button from "material-ui/Button";
-
-import TextField from "material-ui/TextField";
+import React, { PureComponent } from "react"
+import Select from "material-ui/Select"
+import { MenuItem } from "material-ui/Menu"
+import { withStyles } from "material-ui/styles"
+import Input, { InputLabel } from "material-ui/Input"
+import { FormControl} from "material-ui/Form"
+import Button from "material-ui/Button"
+import TextField from "material-ui/TextField"
 
 const styles = theme => ({
   button: {

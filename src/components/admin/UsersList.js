@@ -1,24 +1,24 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { fetchUsers, deleteUser } from "../../actions/users";
-import { assignImage, searchingByName } from "./lib/lib";
-import compose from "lodash/fp/compose";
-import { withStyles } from "material-ui/styles";
+import React, { PureComponent } from "react"
+import { connect } from "react-redux"
+import { Link } from "react-router-dom"
+import { fetchUsers, deleteUser } from "../../actions/users"
+import { assignImage, searchingByName } from "./lib/lib"
+import * as combine from "lodash/fp/compose"
+import { withStyles } from "material-ui/styles"
 import List, {
   ListItem,
   ListItemAvatar,
   ListItemSecondaryAction,
   ListItemText
-} from "material-ui/List";
-import DeleteIcon from "@material-ui/icons/Delete";
-import SearchIcon from "@material-ui/icons/Search";
-import Button from "material-ui/Button";
-import IconButton from "material-ui/IconButton";
-import Avatar from "material-ui/Avatar";
-import Divider from "material-ui/Divider";
-import Dialog, { DialogTitle, DialogActions } from "material-ui/Dialog";
-import TextField from "material-ui/TextField";
+} from "material-ui/List"
+import DeleteIcon from "@material-ui/icons/Delete"
+import SearchIcon from "@material-ui/icons/Search"
+import Button from "material-ui/Button"
+import IconButton from "material-ui/IconButton"
+import Avatar from "material-ui/Avatar"
+import Divider from "material-ui/Divider"
+import Dialog, { DialogTitle, DialogActions } from "material-ui/Dialog"
+import TextField from "material-ui/TextField"
 
 const style = theme => ({
   card: {
@@ -28,35 +28,35 @@ const style = theme => ({
     textAlign: "center",
     display: "inline-block"
   }
-});
+})
 
 class UsersList extends PureComponent {
   state = {
     open: false,
     users: this.props.users,
     term: ""
-  };
+  }
 
   handleOpen = () => {
-    this.setState({ open: true });
-  };
+    this.setState({ open: true })
+  }
 
   handleClose = () => {
-    this.setState({ open: false });
-  };
+    this.setState({ open: false })
+  }
 
   componentWillMount(props) {
-    this.props.fetchUsers();
+    this.props.fetchUsers()
   }
 
   deleteUser = id => {
-    this.props.deleteUser(id);
-    this.handleClose();
-  };
+    this.props.deleteUser(id)
+    this.handleClose()
+  }
 
   searchHandler = event => {
-    this.setState({ term: event.target.value });
-  };
+    this.setState({ term: event.target.value })
+  }
 
   renderMessage = users => {
     return (
@@ -68,14 +68,14 @@ class UsersList extends PureComponent {
           </Button>
         </Link>
       </Dialog>
-    );
-  };
+    )
+  }
 
   render() {
-    const users = this.props.users;
-    const classes = this.props;
+    const users = this.props.users
+    const classes = this.props
 
-    if (!users) return null;
+    if (!users) return null
 
     return (
       <div>
@@ -153,17 +153,17 @@ class UsersList extends PureComponent {
           </List>
         ))}
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = function(state) {
   return {
     users: state.users
-  };
-};
+  }
+}
 
-export default compose(
+export default combine(
   withStyles(style),
   connect(mapStateToProps, { fetchUsers, deleteUser })
-)(UsersList);
+)(UsersList)

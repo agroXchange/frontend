@@ -5,10 +5,10 @@ import { fetchMyProducts } from '../../actions/products'
 import { fetchUser } from '../../actions/users'
 import {jwtPayload} from "../../jwt"
 import { Link } from 'react-router-dom'
-import { withStyles } from "material-ui/styles";
-import Button from "material-ui/Button";
-import compose from "lodash/fp/compose";
-import { translate } from "react-i18next";
+import { withStyles } from "material-ui/styles"
+import Button from "material-ui/Button"
+import * as combine from "lodash/fp/compose"
+import { translate } from "react-i18next"
 
 const styles = theme => ({
   button: {
@@ -16,7 +16,6 @@ const styles = theme => ({
     width: 150
   }
 })
-
 
 class MyProducts extends PureComponent {
   state = {}
@@ -42,7 +41,7 @@ class MyProducts extends PureComponent {
         >
          Go Back
        </Button>
-       
+
         { currentProfileId === user.id ?
           <h2>My Products</h2> : <h2>{user.name}</h2> }
 
@@ -85,6 +84,6 @@ const mapStateToProps = function(state) {
 }
 
 
-export default compose(
+export default combine(
   withStyles(styles),
   connect(mapStateToProps, { fetchMyProducts, fetchUser }))(MyProducts)
