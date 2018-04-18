@@ -54,7 +54,7 @@ class Dashboard extends PureComponent {
 
 
   render() {
-    const { classes, currentProfileId, currentUser, orders } = this.props
+    const { classes, currentProfileId, currentUser, unseenOrders } = this.props
     if (!currentUser) return <Redirect to="/" />
     if (this.props.currentUserRole === "admin") return <Redirect to="/admin" />
 
@@ -70,7 +70,7 @@ class Dashboard extends PureComponent {
         <h1>Welcome User!</h1>
         {console.log('role  ' + this.props.jwtPayload)}
         {
-          orders[0] &&
+          unseenOrders[0] &&
           <Card className={classes.card}>
             <CardContent>
               <Typography gutterBottom variant="headline" component="h2">
@@ -78,7 +78,7 @@ class Dashboard extends PureComponent {
               </Typography>
               {
                 !this.state.showAll &&
-                orders.slice(0,3).map(o => {
+                unseenOrders.slice(0,3).map(o => {
                   const {product, buyer} = o
                   return (
                     <Link to={`/orders/${o.id}`} ><Typography>{o.volume}kg of {product.code.titleeng} from {buyer.name}</Typography></Link>
@@ -87,7 +87,7 @@ class Dashboard extends PureComponent {
               }
               {
                 this.state.showAll &&
-                orders.map(o => {
+                unseenOrders.map(o => {
                   const {product, buyer} = o
                   return (
                     <Link to={`/orders/${o.id}`} ><Typography>{o.volume}kg of {product.code.titleeng} from {buyer.name}</Typography></Link>
@@ -95,7 +95,7 @@ class Dashboard extends PureComponent {
                 })
               }
               {
-                orders.length > 3 &&
+                unseenOrders.length > 3 &&
                 !this.state.showAll &&
                 <Button onClick={this.handleShowAll} >Show all</Button>
               }
@@ -171,6 +171,7 @@ const mapStateToProps = function(state) {
     currentUserId: jwtDecoded.id,
     currentProfileId: jwtDecoded.profileId,
     orders: state.orders,
+    unseenOrders: state.unseenOrders,
     products: state.products,
     user: state.user
   }

@@ -11,8 +11,6 @@ export default function(state = [], { type, payload } = {}) {
       return payload;
     case FETCH_ORDERS_BY_SELLER:
       return payload;
-    case FETCH_UNSEEN_ORDERS:
-      return payload
     case CREATE_ORDER:
       return [ ...state, payload ]
     default:
