@@ -22,11 +22,11 @@ import SendIcon from "@material-ui/icons/Send";
 import { ListItem, ListItemIcon } from "material-ui/List";
 import { jwtPayload } from "../jwt";
 import compose from "redux/src/compose";
-import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { withStyles } from "material-ui";
 import Button from "material-ui/Button";
 import { withRouter } from "react-router";
+import { translate } from 'react-i18next'
 
 const styles = {
   list: {
@@ -174,7 +174,8 @@ class NavBar extends PureComponent {
       classes,
       currentUser,
       currentProfileId,
-      currentProfileRole
+      currentProfileRole,
+      t
     } = this.props;
     const { auth, anchorEl, El } = this.state;
     const open = Boolean(anchorEl);
@@ -200,7 +201,7 @@ class NavBar extends PureComponent {
                   color="inherit"
                   onClick={() => this.props.history.push("/Dashboard")}
                 >
-                  Dashboard
+                  {t('Dashboard')}
                 </Button>
               </ListItem>
               <ListItem button="button">
@@ -211,7 +212,7 @@ class NavBar extends PureComponent {
                     this.props.history.push(`/profiles/${currentProfileId}`)
                   }
                 >
-                  My profile
+                  {t('My Profile')}
                 </Button>
               </ListItem>
 
@@ -225,7 +226,7 @@ class NavBar extends PureComponent {
                     )
                   }
                 >
-                  My products
+                  {t('My Products')}
                 </Button>
               </ListItem>
 
@@ -235,7 +236,7 @@ class NavBar extends PureComponent {
                   color="inherit"
                   onClick={() => this.props.history.push("/orders")}
                 >
-                  My orders
+                  {t('My Orders')}
                 </Button>
               </ListItem>
 
@@ -245,7 +246,7 @@ class NavBar extends PureComponent {
                   color="inherit"
                   onClick={() => this.props.history.push("/products")}
                 >
-                  Marketplace
+                  {t('Marketplace')}
                 </Button>
               </ListItem>
 
@@ -255,7 +256,7 @@ class NavBar extends PureComponent {
                   color="inherit"
                   onClick={() => this.props.history.push("/logout")}
                 >
-                  Logout
+                  {t('Logout')}
                 </Button>
               </ListItem>
               <ListItem />
@@ -353,7 +354,7 @@ const mapStateToProps = function(state) {
 
 export default compose(
   withRouter,
-  translate("translations"),
+  translate("navBar"),
   connect(mapStateToProps),
   withStyles(styles)
 )(NavBar);
