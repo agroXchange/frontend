@@ -173,24 +173,22 @@ class Product extends PureComponent {
               <p><b>{ t("Certification") }:</b> { product.certificate }</p>
               <p><b>{ t("Country") }:</b> { product.seller.country }</p>
               <p><b>{ t("City/Port") }:</b> { product.seller.city }</p>
-
-              { currentProfileId === product.seller.id &&
-                <div>
-
-                  <IconButton onClick={this.handleEditOpen}>
-                    <ModeEditIcon />
-                  </IconButton>
-
-                  <IconButton onClick={this.removeProduct}>
-                    <DeleteIcon />
-                  </IconButton>
-
-                </div>
-              }
-
-
-
             </Grid>
+
+            { currentProfileId === product.seller.id &&
+              <div>
+
+                <IconButton onClick={this.handleEditOpen} className={ classes.button }>
+                  <ModeEditIcon />
+                </IconButton>
+
+                <IconButton onClick={this.removeProduct} className={ classes.button }>
+                  <DeleteIcon />
+                </IconButton>
+
+              </div>
+            }
+
 
             { currentProfileId !== product.seller.id &&
               product.volume !== 0 &&
