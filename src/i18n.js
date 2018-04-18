@@ -52,7 +52,8 @@ i18n.use(LanguageDetector).init({
         'My Products': 'My Products',
         'Add Product': 'Add Product',
         'No Products': 'This Organization currently has no products for sale.',
-        'You Have No Products': 'You currently have no products listed for sale.'
+        'You Have No Products': 'You currently have no products listed for sale.',
+        'View Product': 'View Product'
       },
       profile: {
         'Name': 'Name',
@@ -175,7 +176,8 @@ i18n.use(LanguageDetector).init({
         'My Products': 'Mis Productos',
         'Add Product': 'Agregar producto',
         'No Products': 'Esta organización actualmente no tiene productos en venta.',
-        'You Have No Products': 'Actualmente no tiene productos en venta.'
+        'You Have No Products': 'Actualmente no tiene productos en venta.',
+        'View Product': 'Ver el producto'
       },
       profile: {
         'new': 'nuevo'
