@@ -19,7 +19,7 @@ import Checkbox from 'material-ui/Checkbox';
     right: 50,
   },
   button: {
-    //margin: theme.spacing.unit,
+    margin: theme.spacing.unit,
     backgroundColor: `#588D61`,
     color: "white",
     '&:hover': {
@@ -92,7 +92,7 @@ class ProductsPage extends PureComponent {
 
         </Button>
 
-        <FormControlLabel disabled control={<Checkbox value="checkedD" />} label="Disabled" />
+        {/* <FormControlLabel disabled control={<Checkbox value="checkedD" />} label="Disabled" /> */}
 
         <p>{
           // !products[0].currency ? "< select product >" : products[0].currency

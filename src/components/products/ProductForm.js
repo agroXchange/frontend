@@ -13,6 +13,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import '../../styles/ProductForm.css'
 import { fetchCodes } from '../../actions/codes'
 import AddBox from '@material-ui/icons/AddBox'
+import Grid from 'material-ui/Grid';
+import { translate } from "react-i18next";
 
 const classes = {
   container: {
@@ -148,7 +150,7 @@ class ProductForm extends PureComponent {
 
 
   render() {
-    const { fullScreen, vegetables, fruits, beans } = this.props
+    const { fullScreen, codes, t,  vegetables, fruits, beans } = this.props
 
       return(
         <form onSubmit={ this.handleSubmit } className="form-container">
@@ -176,7 +178,7 @@ class ProductForm extends PureComponent {
 
                 <ExpansionPanel>
                   <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                    <Typography className={classes.heading}>Vegetables ({vegetables.length})</Typography>
+                    <Typography className={classes.heading}>{t("Vegetables")} ({vegetables.length})</Typography>
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
 
@@ -204,7 +206,7 @@ class ProductForm extends PureComponent {
 
                 <ExpansionPanel>
                   <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                    <Typography className={classes.heading}>Fruits & Nuts ({fruits.length})</Typography>
+                    <Typography className={classes.heading}>{t("Fruits & Nuts")} ({fruits.length})</Typography>
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
 
@@ -231,7 +233,7 @@ class ProductForm extends PureComponent {
 
                 <ExpansionPanel>
                   <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                    <Typography className={classes.heading}>Beans & Crop ({beans.length})</Typography>
+                    <Typography className={classes.heading}>{t("Beans & Crop")} ({beans.length})</Typography>
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
 
@@ -397,6 +399,7 @@ const mapStateToProps = (state, props) => ({
 })
 
 export default compose(
+  translate("product"),
   withMobileDialog(),
   connect(mapStateToProps, { fetchCodes })
 )(ProductForm)

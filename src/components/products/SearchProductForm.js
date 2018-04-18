@@ -156,15 +156,9 @@ class SearchProductForm extends React.Component {
 
             <Paper className="paper">
 
-<<<<<<< HEAD
-                    <div style={{ textAlign: 'center'}}  >
-                        <br/>
-                        <Button
-=======
                     <div style={{ textAlign: 'center'}}  >    
                     <h3> Search: </h3>
                         <Button 
->>>>>>> Fix search form
                             onClick={this.handleClickOpen}
                             variant="raised"
                             style={classes.button}
