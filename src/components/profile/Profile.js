@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { fetchUser, uploadLogo, updateProfile } from "../../actions/users"
 import Paper from "material-ui/Paper"
 import Typography from "material-ui/Typography"
-import compose from "lodash/fp/compose"
+import * as combine from "lodash/fp/compose";
 import { translate } from "react-i18next"
 import { jwtPayload } from "../../jwt"
 import Button from "material-ui/Button"
@@ -172,7 +172,7 @@ const mapDispatchToProps = {
   updateProfile
 }
 
-export default compose(
+export default combine(
   translate("user"),
   connect(mapStateToProps, mapDispatchToProps)
 )(Profile)

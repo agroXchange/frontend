@@ -1,8 +1,7 @@
-import React, { PureComponent } from 'react';
-import { compose } from 'redux'
+import React from 'react';
+import * as combine from "lodash/fp/compose";
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types';
-
+import PropTypes from 'prop-types'
 import Button from 'material-ui/Button';
 import Dialog, { DialogContent, DialogContentText, withMobileDialog,} from 'material-ui/Dialog';
 import ExpansionPanel, { ExpansionPanelSummary, ExpansionPanelDetails,} from 'material-ui/ExpansionPanel';
@@ -11,7 +10,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MenuItem from 'material-ui/Menu/MenuItem';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
-import Icon from 'material-ui/Icon';
 import Search from '@material-ui/icons/Search';
 
 import { fetchCodes } from '../../actions/codes'
@@ -150,7 +148,7 @@ class SearchProductForm extends React.Component {
 
         if (codes)
         return (
-            
+
             <form onSubmit={this.handleSubmit} className="form-container"
                 style={classes.form}
                 justify="center"
@@ -158,11 +156,11 @@ class SearchProductForm extends React.Component {
 
             <Paper className="paper">
 
-                    <div style={{ textAlign: 'center'}}  >    
+                    <div style={{ textAlign: 'center'}}  >
                         <br/>
-                        <Button 
+                        <Button
                             onClick={this.handleClickOpen}
-                            variant="raised" 
+                            variant="raised"
                             style={classes.button}
                              color="primary"
                            >
@@ -327,7 +325,7 @@ const mapStateToProps = (state, props) => ({
     beans: state.codes.filter(x => x.code.match(/^09/))
 })
 
-export default compose(
+export default combine(
     withMobileDialog(),
     connect(mapStateToProps, { fetchCodes })
 )(SearchProductForm);

@@ -3,7 +3,7 @@ import { withStyles } from "material-ui/styles";
 import compose from "lodash/fp/compose";
 import { translate } from "react-i18next";
 import List, { ListItem, ListItemText } from "material-ui/List";
-import Card, { CardActions, CardContent, CardMedia, CardTitle } from "material-ui/Card";
+import { CardContent } from "material-ui/Card";
 import Button from "material-ui/Button";
 import Typography from "material-ui/Typography";
 import Paper from "material-ui/Paper";
@@ -75,7 +75,7 @@ class defaultPage extends PureComponent {
   state = {};
 
   render() {
-    const { t, classes } = this.props;
+    const { classes } = this.props;
 
     return (
       <div>
