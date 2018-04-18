@@ -2,20 +2,14 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import compose from 'lodash/fp/compose'
+import { translate } from "react-i18next";
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
 import Paper from 'material-ui/Paper'
 import Grid from 'material-ui/Grid'
 import Button from 'material-ui/Button'
-import Typography from 'material-ui/Typography'
-import { LinearProgress } from 'material-ui/Progress';
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from 'material-ui/Dialog'
+import Dialog, {  DialogTitle } from 'material-ui/Dialog'
 import '../../styles/Product.css'
 import { fetchProduct, updateProduct, removeProduct } from '../../actions/products'
 import { createOrder } from '../../actions/orders'
@@ -100,7 +94,7 @@ class Product extends PureComponent {
   }
 
   render() {
-    const { classes, product, currentUser, currentUserId, currentProfileId } = this.props
+    const { classes, t, product, currentUser, currentUserId, currentProfileId } = this.props
     if (!product) return null
     return(
 
@@ -223,6 +217,7 @@ const mapStateToProps = function(state, props) {
 }
 
 export default compose(
+  translate("product"),
   withStyles(styles),
   connect(mapStateToProps, { fetchProduct, createOrder, updateProduct, removeProduct })
 )(Product)
