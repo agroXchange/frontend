@@ -29,7 +29,9 @@ const styles = theme => ({
     marginRight: 20,
   },
   button : {
-  margin: theme.spacing.unit,
+  marginBottom: 20,
+  marginLeft: 20,
+  marginRight: 20,
   backgroundColor: `#588D61`,
   color: "white",
   '&:hover': {
@@ -174,23 +176,25 @@ class Product extends PureComponent {
                 </div>
               }
 
-              { currentProfileId !== product.seller.id &&
-                <Button
-                  color="primary"
-                  className={ classes.button }
-                  onClick={this.handleClickOrderOpen}
-                >
-                  New Order
-                </Button>
-              }
 
-              { currentProfileId !== product.seller.id &&
-                <Link style={{textDecoration: 'none'}} to={ `/profiles/${product.seller.id}` }>
-                  <Button color="primary" className={ classes.button }>View Seller</Button>
-                </Link>
-              }
 
             </Grid>
+
+            { currentProfileId !== product.seller.id &&
+              <Button
+                color="primary"
+                className={ classes.button }
+                onClick={this.handleClickOrderOpen}
+              >
+                New Order
+              </Button>
+            }
+
+            { currentProfileId !== product.seller.id &&
+              <Link style={{textDecoration: 'none'}} to={ `/profiles/${product.seller.id}` }>
+                <Button color="primary" className={ classes.button }>View Seller</Button>
+              </Link>
+            }
 
 
             <Dialog
