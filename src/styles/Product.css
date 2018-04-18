@@ -6,10 +6,12 @@
 
 .sold-out-img {
   color: red;
+  padding: 0;
 }
 
 .expired-img {
   color: red;
+  padding: 0;
 }
 
 .product-container {

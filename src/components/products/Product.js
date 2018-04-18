@@ -6,6 +6,7 @@ import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
 import Grid from 'material-ui/Grid'
 import IconButton from "material-ui/IconButton";
+import ModeEditIcon from "@material-ui/icons/ModeEdit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Button from 'material-ui/Button'
 import Dialog, { DialogTitle } from 'material-ui/Dialog'
@@ -168,11 +169,15 @@ class Product extends PureComponent {
 
               { currentProfileId === product.seller.id &&
                 <div>
-                  <Button color="primary" onClick={ this.handleEditOpen }>Edit Product</Button>
-                  <Button color="primary" onClick={ this.removeProduct }>Remove Product</Button>
+
+                  <IconButton onClick={this.handleEditOpen}>
+                    <ModeEditIcon />
+                  </IconButton>
+
                   <IconButton onClick={this.removeProduct}>
                     <DeleteIcon />
                   </IconButton>
+                  
                 </div>
               }
 

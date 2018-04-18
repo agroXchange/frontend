@@ -16,6 +16,7 @@ const styles = {
   card: {
     maxWidth: 400,
     minWidth: 300,
+    maxHeight: 350,
     margin: 20,
     textAlign: "left",
     display: "inline-block"
@@ -32,7 +33,8 @@ const styles = {
   },
   status: {
     height: 50,
-    marginBottom: 0,
+    marginBottom: -10,
+    marginTop: -10,
   }
 }
 
