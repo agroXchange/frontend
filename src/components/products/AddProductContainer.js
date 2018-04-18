@@ -7,6 +7,7 @@ import { addProduct } from '../../actions/products'
 import { jwtPayload } from '../../jwt'
 import { translate } from "react-i18next";
 import * as combine from "lodash/fp/compose";
+import { Link } from 'react-router-dom'
 
 class AddProductContainer extends PureComponent {
   state = {
