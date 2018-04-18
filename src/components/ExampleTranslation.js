@@ -46,8 +46,8 @@ class ExampleTranslation extends PureComponent {
             <p>{t('Country')} { profile.country }</p>
             <p>{t('City/Port')}: { profile.cityPort }</p>
 
-            <Button>{t('Edit Product')}</Button>{/*Don't forget buttonlabels! */}
-            <Button>{t('Make An Order')}</Button>
+            <Button color="primary">{t('Edit Product')}</Button>{/*Don't forget buttonlabels! */}
+            <Button color="primary">{t('Make An Order')}</Button>
 
 
             <p>{t('new')}: { profile.cityPort }</p>

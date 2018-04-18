@@ -87,7 +87,7 @@ class Product extends PureComponent {
     const today = Date.parse(new Date())
     const p = Math.round(((today - start) / (end - start)) * 100) + '%'
     return p
-    
+
   }
 
   render() {
@@ -125,7 +125,7 @@ class Product extends PureComponent {
 
               { currentProfileId !== product.seller.id &&
 
-                <Link to={ `/profiles/${product.seller.id}` }>
+                <Link style={{textDecoration: 'none'}} to={ `/profiles/${product.seller.id}` }>
                   <Button color="primary">View Seller</Button>
                 </Link>
               }
@@ -139,13 +139,13 @@ class Product extends PureComponent {
 
               { currentProfileId === product.seller.id &&
                 <div>
-                  <Button onClick={ this.handleEditOpen }>Edit Product</Button>
-                  <Button onClick={ this.removeProduct }>Remove Product</Button>
+                  <Button color="primary" onClick={ this.handleEditOpen }>Edit Product</Button>
+                  <Button color="primary" onClick={ this.removeProduct }>Remove Product</Button>
                 </div>
               }
 
               { currentProfileId !== product.seller.id &&
-                <Button onClick={this.handleClickOrderOpen}>Make New Order</Button>
+                <Button color="primary" onClick={this.handleClickOrderOpen}>Make New Order</Button>
               }
 
             </Grid>
@@ -187,7 +187,7 @@ class Product extends PureComponent {
 
           </Grid>
 
-          <Button color="inherit" onClick={() => this.props.history.goBack()}>
+          <Button color="primary" onClick={() => this.props.history.goBack()}>
           	Go Back
           </Button>
         </Paper>

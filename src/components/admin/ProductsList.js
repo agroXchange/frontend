@@ -191,7 +191,7 @@ class OrdersPage extends PureComponent {
     return (
       <Dialog open={products.length === 0} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">There are no products</DialogTitle>
-        <Link to={`/admin`}>
+        <Link style={{textDecoration: 'none'}} to={`/admin`}>
           <Button size="medium" color="primary">
             Admin Page
           </Button>

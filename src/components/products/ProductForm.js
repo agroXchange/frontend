@@ -123,7 +123,7 @@ class ProductForm extends PureComponent {
   getName = (code) => {
     if (!this.state.picked) return
     let product = this.props.codes.filter(i => i.code.match(code))
-    return product[0].titleeng 
+    return product[0].titleeng
   }
 
 
@@ -137,6 +137,7 @@ class ProductForm extends PureComponent {
           <div id="addProduct">
 
               <Button
+                color="primary"
                 onClick={this.handleClickOpen}
                 variant="raised"
               >

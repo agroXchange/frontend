@@ -5,10 +5,15 @@ import Button from "material-ui/Button";
 import Grid from "material-ui/Grid";
 import Typography from "material-ui/Typography";
 import Card, { CardActions, CardContent } from "material-ui/Card";
+import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
+import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes";
+import BuildIcon from "@material-ui/icons/Build";
+import DescriptionIndIcon from "@material-ui/icons/Description";
 
-const styles = theme => ({
+export const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    marginTop:"20px"
   },
   typo: {
     maxWidth: 400,
@@ -24,6 +29,20 @@ const styles = theme => ({
   },
   paper: {
     height: 200
+  },
+  button : {
+     margin: theme.spacing.unit,
+     backgroundColor: `#588D61`,
+     color: "white",
+     display:'inline-block',
+     textAlign:'center',
+     '&:hover': {
+        backgroundColor: `#8FBC8F`,
+      },
+  },
+  cardContent : {
+    display:'inline-block',
+    alignItem: 'center'
   }
 });
 
@@ -49,18 +68,21 @@ class AdminPage extends PureComponent {
             justify={justify}
           >
             <Card>
-              <CardContent>
+              <CardContent >
                 <Typography
                   className={classes.typo}
                   gutterBottom
                   variant="headline"
                   component="h2"
                 >
+                <AssignmentIndIcon />
+                <br />
                   View all pending request
                 </Typography>
               </CardContent>
-              <CardActions>
-                 <Link to={`/admin/pending`}><Button size="medium" color="primary">
+              <CardActions className={classes.cardContent}>
+                 <Link style={{textDecoration: 'none'}} to={`/admin/pending`}>
+                 <Button className={classes.button} size="medium" color="primary">
                   See more
                 </Button>
                 </Link>
@@ -85,12 +107,14 @@ class AdminPage extends PureComponent {
                   variant="headline"
                   component="h2"
                 >
+                <BuildIcon />
+                <br />
                   User Administration
                 </Typography>
               </CardContent>
-              <CardActions>
-              <Link to={`/admin/users`}>
-                <Button size="medium" color="primary">
+              <CardActions className={classes.cardContent}>
+              <Link style={{textDecoration: 'none'}} to={`/admin/users`}>
+                <Button className={classes.button} size="medium" color="primary">
                   See more
                 </Button>
                 </Link>
@@ -115,11 +139,14 @@ class AdminPage extends PureComponent {
                   variant="headline"
                   component="h2"
                 >
+                  <SpeakerNotesIcon />
+                  <br />
                   View All Orders
                 </Typography>
               </CardContent>
-              <CardActions>
-                <Link to={`/admin/orders`}><Button size="medium" color="primary">
+              <CardActions className={classes.cardContent}>
+                <Link style={{textDecoration: 'none'}} to={`/admin/orders`}>
+                <Button className={classes.button} size="medium" color="primary">
                   See more
                 </Button>
                 </Link>
@@ -144,11 +171,14 @@ class AdminPage extends PureComponent {
                   variant="headline"
                   component="h2"
                 >
+                  <DescriptionIndIcon />
+                  <br />
                   View All Products
                 </Typography>
               </CardContent>
-              <CardActions>
-                <Link to={`/admin/products`}><Button size="medium" color="primary">
+              <CardActions className={classes.cardContent}>
+                <Link style={{textDecoration: 'none'}} to={`/admin/products`}>
+                <Button className={classes.button} size="medium" color="primary">
                   See more
                 </Button>
                 </Link>

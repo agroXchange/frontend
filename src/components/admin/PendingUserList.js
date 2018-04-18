@@ -71,7 +71,7 @@ class UsersList extends PureComponent {
         <DialogTitle id="form-dialog-title">
           There are no pending users
         </DialogTitle>
-        <Link to={`/admin`}>
+        <Link style={{textDecoration: 'none'}} to={`/admin`}>
           <Button size="medium" color="primary">
             Admin Page
           </Button>
@@ -115,14 +115,14 @@ class UsersList extends PureComponent {
             onChange={this.searchHandler}
           />
         </div>
-      </form>;
+      </form>
         <h1> Pending Users List</h1>
         {this.renderMessage(users)}
         {users.filter(searchingByName(this.state.term)).map(user => (
           <List>
             <ListItem>
               <ListItemAvatar>
-                <Link to={`/admin/pending/profiles/${user.id}`}>
+                <Link style={{textDecoration: 'none'}} to={`/admin/pending/profiles/${user.id}`}>
                   <Avatar>
                     <img
                       className={classes.media}
@@ -140,7 +140,7 @@ class UsersList extends PureComponent {
                   this.renderChamberOfCommerce(user.chamberOfCommerce)
                 }
               />
-              <Link to={`/admin/profiles/${user.id}`}>
+              <Link style={{textDecoration: 'none'}} to={`/admin/profiles/${user.id}`}>
                 <IconButton>
                   <InfoIcon />
                 </IconButton>

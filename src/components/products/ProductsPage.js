@@ -24,10 +24,10 @@ class ProductsPage extends PureComponent {
     this.props.fetchAllProducts()
   }
 
- 
+
   submit = (preferences) => {
     this.props.filterProducts(preferences)
-   
+
     this.setState({ open: false })
   }
 
@@ -50,18 +50,20 @@ class ProductsPage extends PureComponent {
         <Button
           onClick={this.handleClickOpen}
           variant="raised"
+          color="primary"
         >
         <Tune className={classes.tuneIcon}/>
-      
+
           Filter
         </Button>
         <Button
           onClick={this.submit}
           variant="raised"
+          color="primary"
         >
           <Cached className={classes.cachedIcon} />
           <div>All</div>
-          
+
         </Button>
 
         <Dialog

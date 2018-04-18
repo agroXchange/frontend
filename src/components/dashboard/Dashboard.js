@@ -88,7 +88,7 @@ class Dashboard extends PureComponent {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button className={classes.button}size="medium" color="primary" variant="raised" component={Link} to={`/products/new`}>
+            <Button className={classes.button} size="medium" color="primary" variant="raised" component={Link} to={`/products/new`}>
               Add a new product
             </Button>
             <Button className={classes.button} size="medium" color="primary" variant="raised" component={Link} to={`/profiles/${currentProfileId}/products`}>

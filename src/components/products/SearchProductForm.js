@@ -90,7 +90,7 @@ class SearchProductForm extends React.Component {
         this.props.onSubmit(this.state)
     }
 
-    handleChange  = (e) => {     
+    handleChange  = (e) => {
         const { name, value } = e.target
 
         this.setState({
@@ -125,17 +125,18 @@ class SearchProductForm extends React.Component {
 
             <form onSubmit={this.handleSubmit} className="form-container"
                 style={classes.form}
-                justify="center" 
+                justify="center"
             >
-            
-                <Paper className="paper">
-                    <div id="search" >    
 
-                        <Button 
+                <Paper className="paper">
+                    <div id="search" >
+
+                        <Button
                             onClick={this.handleClickOpen}
-                            variant="raised" 
+                            variant="raised"
+                            color="primary"
                            >
-                            <Search/> Products 
+                            <Search/> Products
                         </Button>
 
                     <Dialog
@@ -143,7 +144,7 @@ class SearchProductForm extends React.Component {
                         open={this.state.open}
                         aria-labelledby="responsive-dialog-title"
                         style = {classes.dialog}
-                        justify="center" 
+                        justify="center"
                     >
 
                     <ExpansionPanel>
@@ -151,11 +152,11 @@ class SearchProductForm extends React.Component {
                             <Typography className={classes.heading}>Vegetables ({vegetables.length})</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
- 
+
                                 <DialogContent>
                                     <DialogContentText>
                                             {vegetables.map(veg =>
-                                             { 
+                                             {
                                                return  <div key={veg.code}>
                                                     <Button
                                                        color="primary"
@@ -188,7 +189,7 @@ class SearchProductForm extends React.Component {
                                                         <Button
                                                             size="small"
                                                             color="primary"
-                                                            className="button" 
+                                                            className="button"
                                                             type="button"
                                                             onClick={_ => this.handleClick(fruit.code)}
                                                         >
@@ -198,7 +199,7 @@ class SearchProductForm extends React.Component {
                                                 )}
                                         </DialogContentText>
                                     </DialogContent>
-                                
+
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
 
@@ -229,12 +230,12 @@ class SearchProductForm extends React.Component {
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
                 </Dialog>
-            </div>   
+            </div>
             <br/>
 
                     <div><h3>{!this.state.code ? "< pick a product >" : this.getName(this.state.code)}</h3></div>
 
-            <div> 
+            <div>
                         <TextField
                             id="code"
                             name="code"
@@ -282,7 +283,7 @@ class SearchProductForm extends React.Component {
 
                     </Paper>
                 </form>
-           
+
         );
     }
 }
@@ -299,9 +300,6 @@ const mapStateToProps = (state, props) => ({
 })
 
 export default compose(
-    withMobileDialog(), 
+    withMobileDialog(),
     connect(mapStateToProps, { fetchCodes })
 )(SearchProductForm);
-
-
-

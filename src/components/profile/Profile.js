@@ -126,13 +126,13 @@ class Profile extends PureComponent {
             {
               currentProfileId === user.id &&
               !this.state.upload &&
-              <Button onClick={this.handleClick} >
+              <Button color="primary" onClick={this.handleClick} >
                 Upload Picture
               </Button>
             }
             {
               currentProfileId === user.id &&
-              <Button onClick={this.handleEditProfileOpen}>
+              <Button color="primary" onClick={this.handleEditProfileOpen}>
                 Edit my profile
               </Button>
             }

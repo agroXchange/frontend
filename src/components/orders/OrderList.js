@@ -96,7 +96,7 @@ class OrderList extends PureComponent {
                    </TableRow>
                  </TableBody>
                </Table>
-               <Link to={`/orders/${order.id}`}>
+               <Link style={{textDecoration: 'none'}} to={`/orders/${order.id}`}>
                  <Button size="small"  color="primary">
                    {this.props.t('SEE DETAILS')}
                  </Button>
@@ -141,7 +141,7 @@ class OrderList extends PureComponent {
                      </TableRow>
                    </TableBody>
                  </Table>
-                 <Link to={`/orders/${order.id}`}>
+                 <Link style={{textDecoration: 'none'}} to={`/orders/${order.id}`}>
                    <Button size="small"  color="primary">
                      {this.props.t('SEE DETAILS')}
                    </Button>
