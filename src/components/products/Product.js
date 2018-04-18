@@ -152,13 +152,6 @@ class Product extends PureComponent {
               <p><b>Code:</b> { product.code.code }</p>
               <p><b>Volume:</b> { product.volume } KG</p>
               <p><b>Price:</b> { product.price } { product.currency } per KG</p>
-
-              { currentProfileId !== product.seller.id &&
-
-                <Link style={{textDecoration: 'none'}} to={ `/profiles/${product.seller.id}` }>
-                  <Button color="primary">View Seller</Button>
-                </Link>
-              }
             </Grid>
 
             <Grid item xs={12} sm={6}>
@@ -177,13 +170,24 @@ class Product extends PureComponent {
                   <IconButton onClick={this.removeProduct}>
                     <DeleteIcon />
                   </IconButton>
-                  
+
                 </div>
               }
 
               { currentProfileId !== product.seller.id &&
+                <Button
+                  color="primary"
+                  className={ classes.button }
+                  onClick={this.handleClickOrderOpen}
+                >
+                  New Order
+                </Button>
+              }
 
-                <Button color="primary" onClick={this.handleClickOrderOpen}>Make New Order</Button>
+              { currentProfileId !== product.seller.id &&
+                <Link style={{textDecoration: 'none'}} to={ `/profiles/${product.seller.id}` }>
+                  <Button color="primary" className={ classes.button }>View Seller</Button>
+                </Link>
               }
 
             </Grid>
