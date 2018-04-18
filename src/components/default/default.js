@@ -1,21 +1,21 @@
-import React, { PureComponent } from "react";
-import { connect } from 'react-redux';
-import { withStyles } from "material-ui/styles";
+import React, { PureComponent } from "react"
+import { connect } from 'react-redux'
+import { withStyles } from "material-ui/styles"
 import * as combine from "lodash/fp/compose"
-import { translate } from "react-i18next";
-import List, { ListItem, ListItemText } from "material-ui/List";
-import { CardContent } from "material-ui/Card";
-import Button from "material-ui/Button";
-import Typography from "material-ui/Typography";
-import Paper from "material-ui/Paper";
-import { closeWindow } from '../../actions/users';
-import Divider from "material-ui/Divider";
+import { translate } from "react-i18next"
+import List, { ListItem, ListItemText } from "material-ui/List"
+import { CardContent } from "material-ui/Card"
+import Button from "material-ui/Button"
+import Typography from "material-ui/Typography"
+import Paper from "material-ui/Paper"
+import { closeWindow } from '../../actions/users'
+import Divider from "material-ui/Divider"
 import Dialog, {
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-} from 'material-ui/Dialog';
+} from 'material-ui/Dialog'
 
 const styles = theme => ({
   list: {
@@ -85,18 +85,17 @@ class defaultPage extends PureComponent {
     }
 
   handleClickOpen = () => {
-       this.setState({ open: true });
+       this.setState({ open: true })
      }
 
   handleClose = () => {
     this.props.closeWindow()
-      this.setState({ open: false });
+      this.setState({ open: false })
     }
 
   render() {
 
-    const { t, classes } = this.props;
-    const {signup} = this.props;
+    const { t, classes, signup } = this.props
 
     if (signup.success === true) {
     this.handleClickOpen()
@@ -196,4 +195,4 @@ const mapStateToProps = function(state) {
   }
 }
 
-export default combine(translate("user"), withStyles(styles))(defaultPage)
+export default combine(translate("user"), withStyles(styles), connect(mapStateToProps))(defaultPage)
