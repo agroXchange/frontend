@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import {  Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import ProductForm from './ProductForm'
 import Button from "material-ui/Button"
 import { addProduct } from '../../actions/products'
