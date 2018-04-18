@@ -44,7 +44,8 @@ i18n.use(LanguageDetector).init({
        'HS Code': 'HS Code',
        'From country' : ' From country',
        'Search' : 'Search',
-        'GO BACK': 'GO BACK'
+        'GO BACK': 'GO BACK',
+        'Cancel': 'Cancel',
       },
       profile: {
         'Name': 'Name',
@@ -158,7 +159,8 @@ i18n.use(LanguageDetector).init({
         'HS Code': 'Código HS',
         'From country': 'Del pais',
         'Search': 'Buscar',
-         'GO BACK': 'REGRESA'
+         'GO BACK': 'REGRESA',
+        'Cancel': 'Cancelar',
       },
       profile: {
         'new': 'nuevo'

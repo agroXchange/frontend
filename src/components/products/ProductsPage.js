@@ -78,8 +78,8 @@ class ProductsPage extends PureComponent {
           color="primary"
           className={classes.button}
         >
-         <Settings/>
-          Filter
+         <Settings/> 
+          {t("Filter")}
         </Button>
 
         <Button
@@ -89,7 +89,7 @@ class ProductsPage extends PureComponent {
           className={classes.button}
         >
           <Cached className={classes.cachedIcon} />
-          <div>All</div>
+          <div>{t("All")}</div>
 
         </Button>
 
@@ -130,7 +130,7 @@ class ProductsPage extends PureComponent {
               }
             }}
           >
-            Cancel
+            {t("Cancel")}
           </Button>
 
           </Dialog>
