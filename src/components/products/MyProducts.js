@@ -34,6 +34,15 @@ class MyProducts extends PureComponent {
 
     return(
       <div>
+        <Button
+         onClick={() => this.props.history.goBack()}
+         size="medium"
+         color="primary"
+         style={{display:'flex', flex:1}}
+        >
+         Go Back
+       </Button>
+       
         { currentProfileId === user.id ?
           <h2>My Products</h2> : <h2>{user.name}</h2> }
 
