@@ -1,7 +1,15 @@
 .product-photo {
   max-width: 100%;
   margin-top: -1.3em;
-  
+
+}
+
+.sold-out-img {
+  color: red;
+}
+
+.expired-img {
+  color: red;
 }
 
 .product-container {

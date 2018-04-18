@@ -17,6 +17,10 @@ import EditProductForm from './EditProductForm'
 import {jwtPayload} from "../../jwt"
 import { translate } from "react-i18next"
 
+const stockImage = "https://theculinarycook.com/wp-content/uploads/2012/04/vegetable-stock-679x509.jpg"
+const soldOutEng = "http://www.pngall.com/wp-content/uploads/2016/06/Sold-Out-PNG-File.png"
+const expired = "https://previews.123rf.com/images/chrisdorney/chrisdorney1302/chrisdorney130200004/17675884-expired-rubber-stamp.jpg"
+
 const styles = theme => ({
   dialog: {
     marginBottom: 20,
@@ -33,7 +37,6 @@ const styles = theme => ({
  }
 })
 
-const stockImage = "https://theculinarycook.com/wp-content/uploads/2012/04/vegetable-stock-679x509.jpg"
 
 class Product extends PureComponent {
 
@@ -128,8 +131,10 @@ class Product extends PureComponent {
                 alt="product"
                 className="product-photo"/>
 
-              { product.volume === 0 ? <h2>SOLD OUT</h2> : "" }
-              { this.daysRemaining(product.harvested, product.expiration) === 0 ? <h2>EXPIRED</h2> : "" }
+              { product.volume === 0 ? <h2 className="sold-out-img">SOLD OUT</h2> : "" }
+
+              { this.daysRemaining(product.harvested, product.expiration) === 0 ?
+                <h2 className="expired-img">EXPIRED</h2> : "" }
 
               <div>
                 <p>{ this.daysRemaining(product.harvested, product.expiration)} days remaining</p>
