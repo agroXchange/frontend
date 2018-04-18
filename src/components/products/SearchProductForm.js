@@ -32,16 +32,39 @@ const classes = {
         justify: 'center',
         alignItems: 'center'
     },
+    form: {
+        width: '100%',
+        justify: 'center',
+        alignItems: 'center'
+    },
     dialog:{
         direction: 'row',
         justify: 'center',
-        textAlign: 'center'
-
+        textAlign: 'center',
+        color: "#588D61"
     },
     button: {
         justify: 'center',
-        textAlign: 'center'
-
+        textAlign: 'center',
+        backgroundColor: `#588D61`,
+        color: "white",
+        '&:hover': {
+            backgroundColor: `#8FBC8F`,
+        },
+    },
+        thinbutton: {
+            justify: 'center',
+            textAlign: 'center',
+            display: 'block',
+            margin: 'auto',
+            marginTop: 10,
+            marginBottom: 2,
+            backgroundColor: `#white`,
+            color: "#588D61",
+            '&:hover': {
+                backgroundColor: `#8FBC8F`,
+            },
+       
     },
 }
 
@@ -135,15 +158,18 @@ class SearchProductForm extends React.Component {
             >
             
             <Paper className="paper">
-                    <div style={classes.button}  >    
-<br/>
+
+                    <div style={{ textAlign: 'center'}}  >    
+                        <br/>
                         <Button 
                             onClick={this.handleClickOpen}
                             variant="raised" 
+                            style={classes.button}
                            >
                             <Search/> Products 
                         </Button>
                     </div>
+
                     <div>
                     <Dialog
                         fullScreen={fullScreen}
@@ -277,12 +303,7 @@ class SearchProductForm extends React.Component {
                             color="primary"
                             className="submit-btn"
                             type="submit"
-                            style={{
-                                display: 'block',
-                                margin: 'auto',
-                                marginTop: 10,
-                                marginBottom: 2
-                            }}
+                            style={classes.thinbutton}
                         >
                             Save
                         </Button>

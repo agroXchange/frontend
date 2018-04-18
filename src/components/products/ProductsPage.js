@@ -67,10 +67,11 @@ class ProductsPage extends PureComponent {
           variant="raised"
           className={classes.button}
         >
-        <Tune className={classes.tuneIcon}/>
+        {/* <Tune className={classes.tuneIcon}/> */}
       
           Filter
         </Button>
+
         <Button
           onClick={this.submit}
           variant="raised"
@@ -133,6 +134,7 @@ const mapStateToProps = (state) => {
 }
 
 export default compose(
+  withMobileDialog(),
 withStyles(styles),
 connect(mapStateToProps, { fetchAllProducts, filterProducts })
 )
