@@ -13,17 +13,20 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
   },
+  form: {
+    maxWidth: 270,
+  },
   textField: {
     marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 20,
-    width: 200,
+    marginRight: 'auto',
+    marginBottom: 'auto',
+    width: '90%',
   },
   menu: {
     width: 200,
   },
   paper: {
-    marginBottom: 20,
+    paddingBottom: 20,
     marginLeft: 20,
     marginRight: 20,
   },
@@ -79,8 +82,8 @@ class EditProductForm extends PureComponent {
     const { classes, t } = this.props
     const initialValues = this.props.initialValues || " "
     return(
-      <form onSubmit={ this.handleSubmit } className="form-container">
-        <Paper className={ classes.paper }>
+      <form onSubmit={ this.handleSubmit } className={ classes.form }>
+
           <TextField
             label={ t("Description") }
             id="description"
@@ -183,7 +186,7 @@ class EditProductForm extends PureComponent {
             { t("Save") }
           </Button>
 
-        </Paper>
+
       </form>
     )
   }

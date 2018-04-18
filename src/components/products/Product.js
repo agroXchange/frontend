@@ -25,7 +25,7 @@ const styles = theme => ({
   dialog: {
     marginBottom: 20,
     marginLeft: 20,
-    marginRight: 20,
+    marginRight: 20
   },
   button : {
   marginBottom: 20,
@@ -213,6 +213,7 @@ class Product extends PureComponent {
               open={this.state.editProduct}
               onClose={this.handleEditClose}
               aria-labelledby="form-dialog-title"
+              
             >
               <DialogTitle id="form-dialog-title"> { t("Edit Your Product") } </DialogTitle>
                 <EditProductForm initialValues={ product } onSubmit={ this.updateProduct }/>
