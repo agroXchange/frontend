@@ -144,7 +144,9 @@ class Profile extends PureComponent {
               <DialogTitle id="form-dialog-title">
                 Edit your profile
               </DialogTitle>
-              <EditProfileForm onSubmit={this.handleEditProfileSubmit} />
+              <EditProfileForm      onSubmit={this.handleEditProfileSubmit}
+                initialValues={ user }
+                 />
             </Dialog>
           </div>
         </div>
