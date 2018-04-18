@@ -1,13 +1,11 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import PropTypes from 'prop-types'
 import MenuItem from 'material-ui/Menu/MenuItem'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
-import { withStyles } from 'material-ui/styles'
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input'
+import { InputAdornment } from 'material-ui/Input'
 import Dialog, { DialogContent, DialogContentText, withMobileDialog, } from 'material-ui/Dialog'
 import ExpansionPanel, { ExpansionPanelSummary, ExpansionPanelDetails, } from 'material-ui/ExpansionPanel'
 import Typography from 'material-ui/Typography'
@@ -15,7 +13,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import '../../styles/ProductForm.css'
 import { fetchCodes } from '../../actions/codes'
 import AddBox from '@material-ui/icons/AddBox'
-import Grid from 'material-ui/Grid';
 
 const classes = {
   container: {
@@ -151,7 +148,7 @@ class ProductForm extends PureComponent {
 
 
   render() {
-    const { fullScreen, codes, vegetables, fruits, beans } = this.props
+    const { fullScreen, vegetables, fruits, beans } = this.props
 
       return(
         <form onSubmit={ this.handleSubmit } className="form-container">
@@ -167,7 +164,7 @@ class ProductForm extends PureComponent {
                 variant="raised"
                 style={classes.button}
               >
-              
+
                 <AddBox /><div className={classes.productstitle}> Product</div>
               </Button>
 

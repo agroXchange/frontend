@@ -15,13 +15,11 @@ import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import DescriptionIndIcon from "@material-ui/icons/Description";
 import Translate from "@material-ui/icons/Translate";
-import { Link } from "react-router-dom";
 import SwipeableDrawer from "material-ui/SwipeableDrawer";
 import StarIcon from "@material-ui/icons/Star";
-import SendIcon from "@material-ui/icons/Send";
-import { ListItem, ListItemIcon } from "material-ui/List";
+import { ListItem } from "material-ui/List";
 import { jwtPayload } from "../jwt";
-import compose from "redux/src/compose";
+import * as combine from "lodash/fp/compose";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { withStyles } from "material-ui";
@@ -168,8 +166,7 @@ class NavBar extends PureComponent {
       currentProfileId,
       currentProfileRole
     } = this.props;
-    const { auth, anchorEl, El } = this.state;
-    const open = Boolean(anchorEl);
+    const { auth, El } = this.state;
     const openNew = Boolean(El);
 
     const { i18n } = this.props;
@@ -320,11 +317,11 @@ class NavBar extends PureComponent {
 
                 <IconButton style={{ marginRight: "10px" }}>
                   <Button size="small" onClick={() => changeLanguage("en")}>
-                    <img className="LanguageDetector" src="/images/en.svg" />
+                    <img className="LanguageDetector" src="/images/en.svg" alt="EN" />
                   </Button>
 
                   <Button size="small" onClick={() => changeLanguage("es")}>
-                    <img className="LanguageDetector" src="/images/es.svg" />
+                    <img className="LanguageDetector" src="/images/es.svg" alt="ES" />
                   </Button>
                 </IconButton>
               </div>
@@ -350,7 +347,7 @@ const mapStateToProps = function(state) {
   };
 };
 
-export default compose(
+export default combine(
   withRouter,
   translate("translations"),
   connect(mapStateToProps),

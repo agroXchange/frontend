@@ -7,9 +7,9 @@ import Dialog, { DialogContent, DialogContentText, withMobileDialog, } from 'mat
 import SearchProductForm from './SearchProductForm';
 import Settings from '@material-ui/icons/Settings'
 import Cached from '@material-ui/icons/Cached'
-import { FormGroup, FormControlLabel } from 'material-ui/Form';
+import { FormControlLabel } from 'material-ui/Form';
 import { withStyles } from "material-ui/styles";
-import compose from "lodash/fp/compose";
+import * as combine from "lodash/fp/compose";
 import Checkbox from 'material-ui/Checkbox';
 
 
@@ -53,7 +53,7 @@ class ProductsPage extends PureComponent {
 
 
   render() {
-      const { fullScreen, classes, products, currentUserRole } = this.props
+    const { fullScreen, classes, products } = this.props
     if (!products) return null
     console.log(products[0])
 
@@ -66,7 +66,7 @@ class ProductsPage extends PureComponent {
           color="primary"
           className={classes.button}
         >
-         <Settings/> 
+         <Settings/>
           Filter
         </Button>
 
@@ -83,12 +83,10 @@ class ProductsPage extends PureComponent {
 
         <FormControlLabel disabled control={<Checkbox value="checkedD" />} label="Disabled" />
 
-<p>{
-        // !products[0].currency ? "< select product >" : products[0].currency
+        <p>{
+          // !products[0].currency ? "< select product >" : products[0].currency
         } </p>
 
-
-        
         <Dialog
           fullScreen={fullScreen}
           open={this.state.open}
@@ -139,12 +137,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default compose(
+export default combine(
   withMobileDialog(),
-withStyles(styles),
-connect(mapStateToProps, { fetchAllProducts, filterProducts })
-)
-(ProductsPage)
-
-
-
+  withStyles(styles),
+  connect(mapStateToProps, { fetchAllProducts, filterProducts })
+)(ProductsPage)
