@@ -135,7 +135,7 @@ class Product extends PureComponent {
               { currentProfileId !== product.seller.id &&
 
                 <Link to={ `/profiles/${product.seller.id}` }>
-                  <Button color="primary">View Seller</Button>
+                  <Button color="primary" className={classes.button}>View Seller</Button>
                 </Link>
               }
             </Grid>
