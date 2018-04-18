@@ -188,7 +188,7 @@ class Product extends PureComponent {
               aria-labelledby="form-dialog-title"
             >
               <DialogTitle id="form-dialog-title">Thankyou. Your listing has been updated.</DialogTitle>
-              {setTimeout(function() {window.location.href=`/dashboard`}, 5000)}
+                {setTimeout(function() {window.location.href=`/dashboard`}, 5000)} 
             </Dialog>
 
           </Grid>
