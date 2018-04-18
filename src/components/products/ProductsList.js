@@ -14,8 +14,8 @@ const stockImage = "https://theculinarycook.com/wp-content/uploads/2012/04/veget
 
 const styles = {
   card: {
-    maxWidth: 345,
-    minWidth: 240,
+    maxWidth: 400,
+    minWidth: 300,
     margin: 20,
     textAlign: "left",
     display: "inline-block"
