@@ -134,7 +134,7 @@ class Product extends PureComponent {
          color="primary"
          style={{display:'flex', flex:1}}
        >
-         Go Back
+         {t("GO BACK")}
        </Button>
 
         <Paper className="paper">
@@ -146,13 +146,13 @@ class Product extends PureComponent {
                 alt="product"
                 className="product-photo"/>
 
-              { product.volume === 0 ? <h2 className="sold-out-img">SOLD OUT</h2> : "" }
+              { product.volume === 0 ? <h2 className="sold-out-img"> { t("SOLD OUT") } </h2> : "" }
 
               { this.daysRemaining(product.harvested, product.expiration) === 0 ?
-                <h2 className="expired-img">EXPIRED</h2> : "" }
+                <h2 className="expired-img"> { t("EXPIRED") } </h2> : "" }
 
               <div>
-                <p>{ this.daysRemaining(product.harvested, product.expiration)} days remaining</p>
+                <p>{ this.daysRemaining(product.harvested, product.expiration)}  { t("remaining") } </p>
                 <div className="percentage-bar" >
                   <div className="bar" style={{ width: this.progress(product.harvested, product.expiration) }}></div>
                 </div>
@@ -161,36 +161,34 @@ class Product extends PureComponent {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <p><b>Harvested Dated:</b> { product.harvested }</p>
-              <p><b>Expiration Date:</b> { product.expiration }</p>
-              <p><b>Code:</b> { product.code.code }</p>
-              <p><b>Volume:</b> { product.volume } KG</p>
-              <p><b>Price:</b> { product.price } { product.currency } per KG</p>
+              <p><b>{ t("Harvest Date") }:</b> { product.harvested }</p>
+              <p><b>{ t("Expiry Date") }:</b> { product.expiration }</p>
+              <p><b>{ t("Code") }:</b> { product.code.code }</p>
+              <p><b>{ t("Volume") }:</b> { product.volume } KG</p>
+              <p><b>{ t("Price") }:</b> { product.price } { product.currency } per KG</p>
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <p><b>Description:</b> { product.description }</p>
-              <p><b>Certification:</b> { product.certificate }</p>
-              <p><b>Country</b> { product.seller.country }</p>
-              <p><b>City/Port:</b> { product.seller.city }</p>
-
-              { currentProfileId === product.seller.id &&
-                <div>
-
-                  <IconButton onClick={this.handleEditOpen}>
-                    <ModeEditIcon />
-                  </IconButton>
-
-                  <IconButton onClick={this.removeProduct}>
-                    <DeleteIcon />
-                  </IconButton>
-
-                </div>
-              }
-
-
-
+              <p><b>{ t("Description") }:</b> { product.description }</p>
+              <p><b>{ t("Certification") }:</b> { product.certificate }</p>
+              <p><b>{ t("Country") }:</b> { product.seller.country }</p>
+              <p><b>{ t("City/Port") }:</b> { product.seller.city }</p>
             </Grid>
+
+            { currentProfileId === product.seller.id &&
+              <div>
+
+                <IconButton onClick={this.handleEditOpen} className={ classes.button }>
+                  <ModeEditIcon />
+                </IconButton>
+
+                <IconButton onClick={this.removeProduct} className={ classes.button }>
+                  <DeleteIcon />
+                </IconButton>
+
+              </div>
+            }
+
 
             { currentProfileId !== product.seller.id &&
               product.volume !== 0 &&
@@ -216,7 +214,7 @@ class Product extends PureComponent {
               onClose={this.handleEditClose}
               aria-labelledby="form-dialog-title"
             >
-              <DialogTitle id="form-dialog-title">Edit Your Product</DialogTitle>
+              <DialogTitle id="form-dialog-title"> { t("Edit Your Product") } </DialogTitle>
                 <EditProductForm initialValues={ product } onSubmit={ this.updateProduct }/>
             </Dialog>
 

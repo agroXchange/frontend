@@ -27,7 +27,7 @@ class MyProducts extends PureComponent {
 
 
   render() {
-    const { classes, products, currentProfileId, user } = this.props
+    const { t, classes, products, currentProfileId, user } = this.props
     if (!products) return null
     if (!user) return null
 
@@ -39,20 +39,20 @@ class MyProducts extends PureComponent {
          color="primary"
          style={{display:'flex', flex:1}}
         >
-         Go Back
+         { t("GO BACK") }
        </Button>
 
         { currentProfileId === user.id ?
-          <h2>My Products</h2> : <h2>{user.name}</h2> }
+          <h2>{ t("My Products") }</h2> : <h2>{user.name}</h2> }
 
         { products.length === 0 && currentProfileId === user.id ?
           <div>
-            <p>You currently have no products listed for sale.</p>
+            <p>{ t("You Have No Products") }</p>
           </div> : " " }
 
           { products.length === 0 && currentProfileId !== user.id ?
             <div>
-              <p>This Organization currently has no products for sale.</p>
+              <p>{ t("No Products") }</p>
             </div> : " " }
 
         { currentProfileId === user.id ?
@@ -61,7 +61,7 @@ class MyProducts extends PureComponent {
               className={ classes.button }
               variant="raised"
               color="primary" >
-                Add Product
+                {t("Add Product")}
             </Button>
           </Link> : " " }
 
@@ -85,5 +85,6 @@ const mapStateToProps = function(state) {
 
 
 export default combine(
+  translate("product", "navBar"),
   withStyles(styles),
   connect(mapStateToProps, { fetchMyProducts, fetchUser }))(MyProducts)

@@ -74,10 +74,10 @@ class ProductList extends PureComponent {
              <CardContent>
 
               <div className={ classes.status }>
-               { product.volume === 0 ? <h3 className="sold-out-img">SOLD OUT</h3> : "" }
+               { product.volume === 0 ? <h3 className="sold-out-img">{ t("SOLD OUT") }</h3> : "" }
 
                { this.daysRemaining(product.harvested, product.expiration) === 0 ?
-                 <h3 className="expired-img">EXPIRED</h3> : "" }
+                 <h3 className="expired-img">{ t("EXPIRED") }</h3> : "" }
               </div>
 
                  <table>
@@ -122,6 +122,6 @@ class ProductList extends PureComponent {
 }
 
 export default combine(
-  translate('orders'),
+  translate("product"),
   withStyles(styles),
 )(ProductList)

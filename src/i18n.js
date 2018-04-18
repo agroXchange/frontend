@@ -45,6 +45,15 @@ i18n.use(LanguageDetector).init({
        'Search' : 'Search',
         'GO BACK': 'GO BACK',
         'Cancel': 'Cancel',
+        'SOLD OUT': 'SOLD OUT',
+        'EXPIRED': 'EXPIRED',
+        'remaining': 'days remaining',
+        'Edit Your Product': 'Edit Your Product',
+        'My Products': 'My Products',
+        'Add Product': 'Add Product',
+        'No Products': 'This Organization currently has no products for sale.',
+        'You Have No Products': 'You currently have no products listed for sale.',
+        'View Product': 'View Product'
       },
       profile: {
         'Name': 'Name',
@@ -158,8 +167,17 @@ i18n.use(LanguageDetector).init({
         'HS Code': 'Código HS',
         'From country': 'Del pais',
         'Search': 'Buscar',
-         'GO BACK': 'REGRESA',
+        'GO BACK': 'REGRESA',
         'Cancel': 'Cancelar',
+        'SOLD OUT': 'AGOTADO',
+        'EXPIRED': 'MUERTO',
+        'remaining': 'días restantes',
+        'Edit Your Product': 'Edita tu producto',
+        'My Products': 'Mis Productos',
+        'Add Product': 'Agregar producto',
+        'No Products': 'Esta organización actualmente no tiene productos en venta.',
+        'You Have No Products': 'Actualmente no tiene productos en venta.',
+        'View Product': 'Ver el producto'
       },
       profile: {
         'new': 'nuevo'
