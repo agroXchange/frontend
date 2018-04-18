@@ -233,9 +233,9 @@ class OrdersPage extends PureComponent {
           <div
             style={{
               display:'flex',
-              width: "550px",
+              
               margin: 0,
-              marginLeft:20,
+
               marginTop: "20px"
             }}
           >
