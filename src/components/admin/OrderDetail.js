@@ -11,7 +11,6 @@ import compose from 'lodash/fp/compose'
 import '../../styles/OrderList.css'
 import { translate } from "react-i18next"
 import { jwtPayload } from '../../jwt'
-import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 
 const style = () => ({
   card: {
@@ -22,16 +21,12 @@ const style = () => ({
     display: "inline-block"
   },
   media: {
-    height: 100
+    height: 200
   },
   table: {
-    width: " 10px",
+    width: 50,
     fontSize: "10px",
-    textAlign: "center"
-  },
-  seller: {
-    textAlign: "left",
-    fontSize: "5px"
+    textAlign: "center",
   }
 });
 
@@ -68,6 +63,43 @@ class OrderDetail extends PureComponent {
     window.location.reload()
   }
 
+  currentUser = (currentUser, order) => {
+    if (currentUser === order.product.seller.id) {
+       return (
+         <div>
+         <Button
+            variant="raised"
+            color="primary"
+            className={this.props.classes.button}
+            onClick={this.handleApprove}
+            >
+         {this.props.t('ACCEPT')}
+        </Button>
+        <Button
+            variant="raised"
+            color="primary"
+            className={this.props.classes.button}
+            onClick={this.handleDecline}
+            >
+         {this.props.t('DECLINE')}
+        </Button>
+        </div>
+      )
+  } else if (currentUser === order.buyer.id && order.status === "Approved") {
+     return (
+       <div>
+       <Button
+          variant="raised"
+          color="primary"
+          className={this.props.classes.button}
+          onClick={this.handleBuy}
+          >
+       {this.props.t('BUY')}
+      </Button>
+      </div>
+     )
+  }
+}
 
   render() {
      const { classes, order  } = this.props;
@@ -78,9 +110,12 @@ class OrderDetail extends PureComponent {
   return (
       <div>
          <Card className={classes.card} zDepth={3} circle={true} >
-          <CardHeader avatar={"#" + order.id} />
                <Table className={classes.table}>
                 <TableBody>
+                <TableRow>
+                   <TableCell><b>{t('Number')}</b></TableCell>
+                   <TableCell>{order.id}</TableCell>
+                </TableRow>
                 <TableRow>
                    <TableCell><b>{t('Status')}</b></TableCell>
                    <TableCell><mark><b>{order.status}</b></mark></TableCell>
@@ -131,12 +166,13 @@ class OrderDetail extends PureComponent {
                  </TableRow>
                 </TableBody>
               </Table>
-              <br />
+               {
+                 this.currentUser(this.props.currentProfileId, order)
+                }
               <Button size="small"  color="primary" onClick={() => this.props.history.goBack()}>
                {t('GO BACK')}
               </Button>
         </Card>
-
       </div>
       )
    }

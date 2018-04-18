@@ -115,8 +115,9 @@ class UsersList extends PureComponent {
               onClick={() => this.props.history.push(`/admin/profiles/${user.id}`)}
             >
               <ListItemAvatar>
-                <Avatar>
+                <Avatar >
                   <img
+                    style={{width:'50px'}}
                     className={classes.media}
                     src={assignImage(user.profile.logo)}
                     alt=""

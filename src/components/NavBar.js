@@ -85,6 +85,14 @@ class NavBar extends PureComponent {
     this.setState({ El: null });
   };
 
+  redirectDashboard = (user) => {
+    if(user !== null) {
+      return () => this.props.history.push("/dashboard")
+    } else {
+      return () => this.props.history.push("/")
+    }
+  }
+
   adminMenu = user => {
     if (user === "admin") {
       return (
@@ -299,7 +307,7 @@ class NavBar extends PureComponent {
             </div>
 
             <Typography
-              onClick={() => this.props.history.push("/dashboard")}
+              onClick={this.redirectDashboard(currentUser)}
               variant="title"
               className={classes.flex}
               style={{ color: `#588D61`, fontSize: "30px" }}
