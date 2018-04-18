@@ -25,7 +25,7 @@ const styles = theme => ({
   dialog: {
     marginBottom: 20,
     marginLeft: 20,
-    marginRight: 20,
+    marginRight: 20
   },
   button : {
   marginBottom: 20,
@@ -39,7 +39,6 @@ const styles = theme => ({
  }
 })
 
-
 class Product extends PureComponent {
 
   state = {
@@ -49,8 +48,6 @@ class Product extends PureComponent {
     confirmEdit: false,
     fireRedirect: false
   }
-
-
 
   componentWillMount(props) {
     this.props.fetchProduct(this.props.match.params.id)
@@ -208,11 +205,11 @@ class Product extends PureComponent {
               </Link>
             }
 
-
             <Dialog
               open={this.state.editProduct}
               onClose={this.handleEditClose}
               aria-labelledby="form-dialog-title"
+              
             >
               <DialogTitle id="form-dialog-title"> { t("Edit Your Product") } </DialogTitle>
                 <EditProductForm initialValues={ product } onSubmit={ this.updateProduct }/>
