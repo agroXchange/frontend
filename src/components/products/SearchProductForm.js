@@ -156,9 +156,15 @@ class SearchProductForm extends React.Component {
 
             <Paper className="paper">
 
+<<<<<<< HEAD
                     <div style={{ textAlign: 'center'}}  >
                         <br/>
                         <Button
+=======
+                    <div style={{ textAlign: 'center'}}  >    
+                    <h3> Search: </h3>
+                        <Button 
+>>>>>>> Fix search form
                             onClick={this.handleClickOpen}
                             variant="raised"
                             style={classes.button}
@@ -263,7 +269,7 @@ class SearchProductForm extends React.Component {
             </div>
             <br/>
 
-                    <div style={classes.dialog}><h4>{!this.state.code ? "< select product >" : this.getName(this.state.code)}</h4></div>
+                    <div style={classes.dialog}><h4>{!this.state.code ? "" : this.getName(this.state.code)}</h4></div>
 
             <div>
                         <TextField

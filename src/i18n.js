@@ -43,6 +43,7 @@ i18n.use(LanguageDetector).init({
        'Select product': 'Select product',
        'HS Code': 'HS Code',
        'From country' : ' From country',
+       'Search' : 'Search,'
       },
       profile: {
         'Name': 'Name',
@@ -156,6 +157,7 @@ i18n.use(LanguageDetector).init({
         'Select product': 'Seleccionar producto',
         'HS Code': 'Código HS',
         'From country': 'Del pais',
+        'Search': 'Buscar,'
       },
       profile: {
         'new': 'nuevo'
