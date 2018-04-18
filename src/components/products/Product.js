@@ -117,6 +117,7 @@ class Product extends PureComponent {
        >
          Go Back
        </Button>
+
         <Paper className="paper">
         <Paper><h2 className="title">{ product.code.titleeng }</h2></Paper>
           <Grid container className="container" spacing={24}>
@@ -139,9 +140,9 @@ class Product extends PureComponent {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <p><b>Code:</b> { product.code.code }</p>
               <p><b>Harvested Dated:</b> { product.harvested }</p>
               <p><b>Expiration Date:</b> { product.expiration }</p>
+              <p><b>Code:</b> { product.code.code }</p>
               <p><b>Volume:</b> { product.volume } KG</p>
               <p><b>Price:</b> { product.price } { product.currency } per KG</p>
 
