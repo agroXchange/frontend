@@ -43,6 +43,9 @@ i18n.use(LanguageDetector).init({
        'Select product': 'Select product',
        'HS Code': 'HS Code',
        'From country' : ' From country',
+       'Search' : 'Search',
+        'GO BACK': 'GO BACK',
+        'Cancel': 'Cancel',
       },
       profile: {
         'Name': 'Name',
@@ -127,7 +130,7 @@ i18n.use(LanguageDetector).init({
     es: {
       product: {
         'Code': 'Código',
-        'Harvested Dated': 'Fecha de cosecha',
+        'Harvested Date': 'Fecha de cosecha',
         'Expiration Date': 'Fecha de vencimiento',
         'View Seller': 'Ver vendedor',
         'Volume': 'Volumen',
@@ -141,7 +144,6 @@ i18n.use(LanguageDetector).init({
         'Description': 'Descripción',
         'Price per kg': 'Precio por kg',
         'Please select your currency': 'Seleccione su moneda',
-        'Harvested Date': 'Fecha de cosecha',
         'Expiry Date': 'Fecha de caducidad',
         'Please Upload a Photo': 'Por favor cargue una foto',
         'Choose file': 'Elija el archivo',
@@ -156,6 +158,9 @@ i18n.use(LanguageDetector).init({
         'Select product': 'Seleccionar producto',
         'HS Code': 'Código HS',
         'From country': 'Del pais',
+        'Search': 'Buscar',
+         'GO BACK': 'REGRESA',
+        'Cancel': 'Cancelar',
       },
       profile: {
         'new': 'nuevo'
