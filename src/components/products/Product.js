@@ -216,7 +216,7 @@ class Product extends PureComponent {
               onClose={this.handleEditClose}
               aria-labelledby="form-dialog-title"
             >
-              <DialogTitle id="form-dialog-title">Edit Your Product</DialogTitle>
+              <DialogTitle id="form-dialog-title"> { t("Edit Your Product") } </DialogTitle>
                 <EditProductForm initialValues={ product } onSubmit={ this.updateProduct }/>
             </Dialog>
 

@@ -47,7 +47,8 @@ i18n.use(LanguageDetector).init({
         'Cancel': 'Cancel',
         'SOLD OUT': 'SOLD OUT',
         'EXPIRED': 'EXPIRED',
-        'remaining': 'days remaining'
+        'remaining': 'days remaining',
+        'Edit Your Product': 'Edit Your Product'
       },
       profile: {
         'Name': 'Name',
@@ -165,7 +166,8 @@ i18n.use(LanguageDetector).init({
         'Cancel': 'Cancelar',
         'SOLD OUT': 'AGOTADO',
         'EXPIRED': 'MUERTO',
-        'remaining': 'días restantes'
+        'remaining': 'días restantes',
+        'Edit Your Product': 'Edita tu producto'
       },
       profile: {
         'new': 'nuevo'
