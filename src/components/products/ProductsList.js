@@ -14,8 +14,8 @@ const stockImage = "https://theculinarycook.com/wp-content/uploads/2012/04/veget
 
 const styles = {
   card: {
-    maxWidth: 345,
-    minWidth: 240,
+    maxWidth: 400,
+    minWidth: 300,
     margin: 20,
     textAlign: "left",
     display: "inline-block"
@@ -37,74 +37,79 @@ class ProductList extends PureComponent {
   classes: PropTypes.object.isRequired
   };
 
-  // componentDidMount(props) {
-  //   this.props.fetchAllProducts()
-  // }
+  daysRemaining = (harvested, expiration) => {
+    const today = new Date()
+    const end = new Date(expiration)
+    const diffDays = parseInt((end - today) / (1000 * 60 * 60 * 24));
+    if(diffDays < 0) {
+      return 0
+    } else {
+      return diffDays
+    }
+  }
 
   render() {
     const { classes, products } = this.props;
-
     const { t, i18n } = this.props
-    {/* specific for translation */}
 
- if(!products) return null
- return (
-      <div>
-        { products[0] && products[0].code && products.map(product =>
-         <Card className={classes.card}>
-           <CardMedia
-            className={classes.media}
-            image={ product.photo !== null ?
-              product.photo : stockImage }
-            title="product name - redux"
-
-
-          />
-
-           <CardContent>
-             <p className={classes.number}>
-               <h2> { product.name }</h2>
-             </p>
-
-               <table>
-
-                 <tr className={classes.table}>
-                    <th>{t('Product')}</th>
-                    <td>{product.code.titleeng}</td>
-                 </tr>
-
-                 <tr className={classes.table}>
-                    <th>{t('Volume')}</th>
-                    <td>{product.volume} KG</td>
-                 </tr>
-
-                 <tr className={classes.table}>
-                    <th>{t('Price')}</th>
-                    <td>{product.price} {product.currency} per KG</td>
-                 </tr>
-
-                 <tr className={classes.table}>
-                    <th>{t('Expiry Date')}</th>
-                    <td> {product.expiration}</td>
-                 </tr>
+   if(!products) return null
+   return (
+        <div>
+          { products[0] && products[0].code && products.map(product =>
+           <Card className={classes.card}>
+             <CardMedia
+              className={classes.media}
+              image={ product.photo !== null ?
+                product.photo : stockImage }
+              title="product name - redux"
 
 
-               </table>
+            />
 
-           </CardContent>
-           <CardActions>
+             <CardContent>
 
-            <Link style={{textDecoration: 'none'}} to={ `/products/${product.id}` }>
-             <Button size="small" color="primary">
-               {t('View Product')}
-             </Button>
-             </Link>
-           </CardActions>
-         </Card>
-         )}
-       </div>
-    )
-  }
+               { product.volume === 0 ? <h3>SOLD OUT</h3> : "" }
+               { this.daysRemaining(product.harvested, product.expiration) === 0 ? <h3>EXPIRED</h3> : "" }
+
+                 <table>
+
+                   <tr className={classes.table}>
+                      <th>{t('Product')}</th>
+                      <td>{product.code.titleeng}</td>
+                   </tr>
+
+                   <tr className={classes.table}>
+                      <th>{t('Volume')}</th>
+                      <td>{product.volume} KG</td>
+                   </tr>
+
+                   <tr className={classes.table}>
+                      <th>{t('Price')}</th>
+                      <td>{product.price} {product.currency} per KG</td>
+                   </tr>
+
+                   <tr className={classes.table}>
+                      <th>{t('Expiry Date')}</th>
+                      <td> {product.expiration}</td>
+                   </tr>
+
+
+                 </table>
+
+             </CardContent>
+             <CardActions>
+
+              <Link style={{textDecoration: 'none'}} to={ `/products/${product.id}` }>
+               <Button size="small" color="primary">
+                 {t('View Product')}
+               </Button>
+               </Link>
+             </CardActions>
+           </Card>
+           )}
+         </div>
+      )
+    }
 }
 
 const mapStateToProps = (state) => {
