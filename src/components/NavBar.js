@@ -24,7 +24,7 @@ import { connect } from "react-redux";
 import { withStyles } from "material-ui";
 import Button from "material-ui/Button";
 import { withRouter } from "react-router";
-import { translate } from 'react-i18next'
+
 
 const styles = {
   list: {
