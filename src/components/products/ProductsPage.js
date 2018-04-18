@@ -11,6 +11,7 @@ import { FormControlLabel } from 'material-ui/Form';
 import { withStyles } from "material-ui/styles";
 import * as combine from "lodash/fp/compose";
 import Checkbox from 'material-ui/Checkbox';
+import { translate } from "react-i18next";
 
 
   const styles = theme => ({
@@ -53,7 +54,7 @@ class ProductsPage extends PureComponent {
 
 
   render() {
-    const { fullScreen, classes, products } = this.props
+      const { fullScreen, classes, t, products, currentUserRole } = this.props
     if (!products) return null
     console.log(products[0])
 
@@ -66,7 +67,7 @@ class ProductsPage extends PureComponent {
             color="primary"
             style={{ display: 'flex', flex: 1 }}
           >
-            Go Back
+            {t("GO BACK")}
        </Button>
        </div>
 
@@ -149,7 +150,12 @@ const mapStateToProps = (state) => {
 }
 
 export default combine(
-  withMobileDialog(),
-  withStyles(styles),
-  connect(mapStateToProps, { fetchAllProducts, filterProducts })
-)(ProductsPage)
+  translate("product"),
+withMobileDialog(),
+withStyles(styles),
+connect(mapStateToProps, { fetchAllProducts, filterProducts })
+)
+(ProductsPage)
+
+
+

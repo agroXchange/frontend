@@ -166,8 +166,8 @@ class ProductForm extends PureComponent {
                 variant="raised"
                 style={classes.button}
               >
-
-                <AddBox /><div className={classes.productstitle}> Product</div>
+              
+                <AddBox /><div className={classes.productstitle}> {t("Product")}</div>
               </Button>
 
               <Dialog
@@ -269,7 +269,7 @@ class ProductForm extends PureComponent {
         <TextField
           id="description"
           name="description"
-          label="Description"
+              label={t("Description")}
           style={ classes.textField }
           value={ this.state.description }
           onChange={ this.handleChange }
@@ -279,7 +279,8 @@ class ProductForm extends PureComponent {
           <TextField
             id="certification"
             name="certificate"
-            label="Certification"
+            Expiration
+              label={t("Certification")}
             style={classes.textField}
             value={this.state.certificate }
             onChange={this.handleChange}
@@ -290,7 +291,7 @@ class ProductForm extends PureComponent {
             <TextField
               id="price"
               name="price"
-              label="Price per Kg"
+              label={t("Price per kg")}
               value={this.state.price  }
               onChange={this.handleChange}
               type="number"
@@ -305,7 +306,7 @@ class ProductForm extends PureComponent {
               id="currency"
               name="currency"
               select
-              label="Please select your currency"
+              label={t("Please select your currency")}
               style={ classes.textField }
               value={ this.state.currency   }
               onChange={ this.handleChange }
@@ -318,9 +319,8 @@ class ProductForm extends PureComponent {
               ))}
             </TextField>
 
-
         <TextField
-          label="Volume"
+          label={t("Volume")}
           id="volume"
           name="volume"
           value={ this.state.volume }
@@ -331,12 +331,10 @@ class ProductForm extends PureComponent {
           }}
         />
 
-
-
         <TextField
           id="harvested"
           name="harvested"
-          label="Harvested Date"
+              label={t("Harvested Date")}
           type="date"
             value={this.state.harvested }
           onChange={ this.handleChange }
@@ -349,7 +347,7 @@ class ProductForm extends PureComponent {
         <TextField
           id="expired"
             name="expiration"
-          label="Expiry Date"
+              label={t("Expiration Date")}
           type="date"
             value={this.state.expiration}
           onChange={ this.handleChange }
@@ -360,7 +358,7 @@ class ProductForm extends PureComponent {
         />
 
           <div className="upload">
-            <label htmlFor="photo">Please Upload a Photo </label>
+              <label htmlFor="photo">{t("Please Upload a Photo")} </label>
             <input
               accept="image/*"
               id="raised-button-file"
@@ -378,11 +376,8 @@ class ProductForm extends PureComponent {
           type="submit"
           style={classes.thinbutton}
         >
-          Save
+              {t("Save")}
         </Button>
-
-
-
 
         </Paper>
       </form>
