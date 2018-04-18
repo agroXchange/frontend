@@ -165,10 +165,10 @@ class OrderDetail extends PureComponent {
                  </TableRow>
                 </TableBody>
               </Table>
-               {
+              {this.props.currentUserRole !== 'admin' &&(
                  this.currentUser(this.props.currentProfileId, order)
-                }
-              <Button size="small"  color="primary" onClick={() => this.props.history.goBack()}>
+               )}
+              <Button style={{marginTop:'10px'}} size="small"  color="primary" onClick={() => this.props.history.goBack()}>
                {t('GO BACK')}
               </Button>
         </Card>
@@ -182,6 +182,7 @@ const mapStateToProps = function(state) {
   return {
     currentUser: state.currentUser,
     currentUserId: jwtDecoded.id,
+    currentUserRole: jwtDecoded.role,
     currentProfileId: jwtDecoded.profileId,
     order: state.order,
   }
