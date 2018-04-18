@@ -136,7 +136,7 @@ class Product extends PureComponent {
 
                 <Link style={{textDecoration: 'none'}} to={ `/profiles/${product.seller.id}` }>
                   <Button color="primary">View Seller</Button>
-
+                </Link>
               }
             </Grid>
 
