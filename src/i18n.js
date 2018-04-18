@@ -14,7 +14,6 @@ i18n.use(LanguageDetector).init({
       },
       product: {
         'Code':  'Code',
-        'Harvested Dated': 'Harvested Dated',
         'Expiration Date': 'Expiration Date',
         'View Seller': 'View Seller',
         'Volume': 'Volume',
@@ -28,7 +27,7 @@ i18n.use(LanguageDetector).init({
         'Description': 'Description',
         'Price per kg': 'Price per kg',
         'Please select your currency': 'Please select your currency',
-        'Harvested Date': 'Harvested Date',
+        'Harvest Date': 'Harvested Date',
         'Expiry Date': 'Expiry Date',
         'Please Upload a Photo': 'Please Upload a Photo',
         'Choose file': 'Choose file',
@@ -130,7 +129,7 @@ i18n.use(LanguageDetector).init({
     es: {
       product: {
         'Code': 'Código',
-        'Harvested Date': 'Fecha de cosecha',
+        'Harvest Date': 'Fecha de cosecha',
         'Expiration Date': 'Fecha de vencimiento',
         'View Seller': 'Ver vendedor',
         'Volume': 'Volumen',

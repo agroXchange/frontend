@@ -10,6 +10,7 @@ import login from './login'
 import currentUser from './currentUser'
 import codes from './codes'
 import currency from './currency'
+import messages from './messages'
 
 export default {
   signup,
@@ -23,5 +24,6 @@ export default {
   currentUser,
   codes,
   password,
-  currency
+  currency,
+  messages
 }
