@@ -8,14 +8,26 @@ import SearchProductForm from './SearchProductForm';
 import Tune from '@material-ui/icons/Tune'
 import Cached from '@material-ui/icons/Cached'
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
+import { withStyles } from "material-ui/styles";
+import compose from "lodash/fp/compose";
 import Checkbox from 'material-ui/Checkbox';
 
-const classes = {
+// const classes = {
+  const styles = theme => ({
   tuneIcon: {
     position: "relative",
     right: 50,
   },
-}
+  button: {
+    //margin: theme.spacing.unit,
+    backgroundColor: `#588D61`,
+    color: "white",
+    '&:hover': {
+      backgroundColor: `#8FBC8F`,
+    },
+  },
+
+});
 
 class ProductsPage extends PureComponent {
   state = {
@@ -43,7 +55,7 @@ class ProductsPage extends PureComponent {
 
 
   render() {
-      const { fullScreen, products, currentUserRole } = this.props
+      const { fullScreen, classes, products, currentUserRole } = this.props
     if (!products) return null
     console.log(products)
 
@@ -53,6 +65,7 @@ class ProductsPage extends PureComponent {
         <Button
           onClick={this.handleClickOpen}
           variant="raised"
+          className={classes.button}
         >
         <Tune className={classes.tuneIcon}/>
       
@@ -61,6 +74,7 @@ class ProductsPage extends PureComponent {
         <Button
           onClick={this.submit}
           variant="raised"
+          className={classes.button}
         >
           <Cached className={classes.cachedIcon} />
           <div>All</div>
@@ -118,4 +132,11 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchAllProducts, filterProducts })(ProductsPage)
+export default compose(
+withStyles(styles),
+connect(mapStateToProps, { fetchAllProducts, filterProducts })
+)
+(ProductsPage)
+
+
+
