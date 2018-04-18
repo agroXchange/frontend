@@ -10,7 +10,7 @@ import Divider from 'material-ui/Divider'
 import MessageForm from "./MessageForm"
 import StayScrolled from 'react-stay-scrolled'
 import MessageList from "./MessageList"
-import {sendMessage} from "../../actions/chat"
+import {getMessages, sendMessage} from "../../actions/chat"
 
 const messages = [
   {
@@ -55,13 +55,17 @@ const message = {
 class ChatPage extends PureComponent {
   state = {messages}
 
+  componentWillMount() {
+    this.props.getMessages(1)
+  }
+
   handleSubmit = (message) => {
     this.props.sendMessage(1, message)
   }
 
   render() {
     //if (!this.props.currentUser) return <Redirect to="" />;
-    const {messages} = this.state
+    const {messages} = this.props
 
     return (
       <Paper
@@ -84,10 +88,8 @@ class ChatPage extends PureComponent {
 
 const mapStateToProps = function(state) {
   return {
-    currentUser: state.currentUser,
-    error: state.login.error,
-    success: state.password.message,
+    messages: state.messages
   }
 }
 
-export default connect(mapStateToProps, { sendMessage })(ChatPage)
+export default connect(mapStateToProps, { sendMessage, getMessages })(ChatPage)
