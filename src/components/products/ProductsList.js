@@ -68,7 +68,7 @@ class ProductList extends PureComponent {
 
              <CardContent>
 
-               { product.volume === 0 ? <h3>UNAVAILABLE</h3> : "" }
+               { product.volume === 0 ? <h3>SOLD OUT</h3> : "" }
                { this.daysRemaining(product.harvested, product.expiration) === 0 ? <h2>EXPIRED</h2> : "" }
 
                  <table>

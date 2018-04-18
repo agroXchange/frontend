@@ -100,7 +100,7 @@ class Product extends PureComponent {
       return 0
     } else {
       return diffDays
-    }    
+    }
   }
 
   render() {
@@ -118,7 +118,7 @@ class Product extends PureComponent {
                 alt="product"
                 className="product-photo"/>
 
-              { product.volume === 0 ? <h2>UNAVAILABLE</h2> : "" }
+              { product.volume === 0 ? <h2>SOLD OUT</h2> : "" }
               { this.daysRemaining(product.harvested, product.expiration) === 0 ? <h2>EXPIRED</h2> : "" }
 
               <div>
