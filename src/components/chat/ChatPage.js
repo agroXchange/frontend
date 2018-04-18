@@ -11,11 +11,11 @@ import Button from "material-ui/Button"
 class ChatPage extends PureComponent {
 
   componentWillMount() {
-    this.props.getMessages(1)
+    this.props.getMessages(this.props.match.params.id)
   }
 
   handleSubmit = (message) => {
-    this.props.sendMessage(1, message)
+    this.props.sendMessage(this.props.match.params.id, message)
   }
 
   render() {
