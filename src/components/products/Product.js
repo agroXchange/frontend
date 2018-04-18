@@ -90,7 +90,13 @@ class Product extends PureComponent {
     const today = Date.parse(new Date())
     const p = Math.round(((today - start) / (end - start)) * 100) + '%'
     return p
+  }
 
+  daysRemaining = (harvested, expiration) => {
+    const today = new Date()
+    const end = new Date(expiration)
+    const diffDays = parseInt((end - today) / (1000 * 60 * 60 * 24));
+    return diffDays
   }
 
   render() {
@@ -111,7 +117,7 @@ class Product extends PureComponent {
               { product.volume === 0 ? <h2>UNAVAILABLE</h2> : "" }
 
               <div>
-                <p>Remaining Time</p>
+                <p>{ this.daysRemaining(product.harvested, product.expiration)} days remaining</p>
                 <div className="percentage-bar" >
                   <div className="bar" style={{ width: this.progress(product.harvested, product.expiration) }}></div>
                 </div>
@@ -188,7 +194,7 @@ class Product extends PureComponent {
               aria-labelledby="form-dialog-title"
             >
               <DialogTitle id="form-dialog-title">Thankyou. Your listing has been updated.</DialogTitle>
-                
+
             </Dialog>
 
           </Grid>
