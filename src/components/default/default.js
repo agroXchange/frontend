@@ -10,12 +10,7 @@ import Typography from "material-ui/Typography"
 import Paper from "material-ui/Paper"
 import { closeWindow } from '../../actions/users'
 import Divider from "material-ui/Divider"
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from 'material-ui/Dialog'
+import Dialog, { DialogActions, DialogContent, DialogContentText } from 'material-ui/Dialog'
 
 const styles = theme => ({
   list: {
