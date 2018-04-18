@@ -309,16 +309,9 @@ class NavBar extends PureComponent {
 
             {auth && (
               <div>
-                <IconButton
-                  aria-owns={openNew ? "menu-lang" : null}
-                  aria-haspopup="true"
-                  onClick={this.handleNewMenu}
-                  color="inherit"
-                >
-                  <Translate />
-                </IconButton>
 
-                <IconButton style={{ marginRight: "10px" }}>
+
+
                   <Button size="small" onClick={() => changeLanguage("en")}>
                     <img className="LanguageDetector" src="/images/en.svg" />
                   </Button>
@@ -326,7 +319,7 @@ class NavBar extends PureComponent {
                   <Button size="small" onClick={() => changeLanguage("es")}>
                     <img className="LanguageDetector" src="/images/es.svg" />
                   </Button>
-                </IconButton>
+
               </div>
             )}
           </Toolbar>

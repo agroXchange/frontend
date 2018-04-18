@@ -120,31 +120,25 @@ class UsersList extends PureComponent {
         {this.renderMessage(users)}
         {users.filter(searchingByName(this.state.term)).map(user => (
           <List>
-            <ListItem>
+            <ListItem onClick={() => this.props.history.push(`/admin/pending/profiles/${user.id}`)}>
               <ListItemAvatar>
-                <Link style={{textDecoration: 'none'}} to={`/admin/pending/profiles/${user.id}`}>
                   <Avatar>
                     <img
                       className={classes.media}
-                      src={assignImage(user.logo)}
+                      src={assignImage(user.profile.logo)}
                       alt=""
                     />
                   </Avatar>
-                </Link>
               </ListItemAvatar>
 
               <ListItemText
-                primary={"Company name: " + user.name}
+                primary={"Company name: " + user.profile.name}
                 secondary={
                   "Chamber Of Commerce: " +
-                  this.renderChamberOfCommerce(user.chamberOfCommerce)
+                  this.renderChamberOfCommerce(user.profile.chamberOfCommerce)
                 }
               />
-              <Link style={{textDecoration: 'none'}} to={`/admin/profiles/${user.id}`}>
-                <IconButton>
-                  <InfoIcon />
-                </IconButton>
-              </Link>
+              </ListItem>
               <ListItemSecondaryAction>
                 <IconButton onClick={this.handleOpen}>
                   <DeleteIcon />
@@ -167,7 +161,7 @@ class UsersList extends PureComponent {
                 </Dialog>
               </ListItemSecondaryAction>
               <Divider inset={true} />
-            </ListItem>
+
             <Divider inset={true} />
           </List>
         ))}

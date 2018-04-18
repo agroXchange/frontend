@@ -48,7 +48,7 @@ class Profile extends PureComponent {
   }
 
   render() {
-    const { user, t, currentProfileId } = this.props
+    const { user, t, currentProfileId, currentProfileRole } = this.props
     if (!user) return null
 
     return (
@@ -135,9 +135,9 @@ class Profile extends PureComponent {
             !this.state.upload && (
               <Button onClick={this.handleClick}>Upload Picture</Button>
             )}
-          {currentProfileId === user.id && (
+          {(currentProfileId === user.id || currentProfileRole === "admin") && (
             <Button onClick={this.handleEditProfileOpen}>
-              Edit my profile
+              Edit profile
             </Button>
           )}
           <Dialog
@@ -161,7 +161,8 @@ const mapStateToProps = ({ user, currentUser }, props) => {
   const jwtDecoded = currentUser ? jwtPayload(currentUser.jwt) : {}
   return {
     user,
-    currentProfileId: jwtDecoded.profileId
+    currentProfileId: jwtDecoded.profileId,
+    currentProfileRole : jwtDecoded.role
   }
 }
 

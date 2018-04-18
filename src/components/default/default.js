@@ -88,27 +88,27 @@ class defaultPage extends PureComponent {
             <Typography className={classes.secondaryText}component="p">
               A marketplace for producers
             </Typography>
+            <div className={classes.buttonContainer}>
+            <Button
+              onClick={() => this.props.history.push('/login')}
+               size="large"
+               className={classes.button}
+               >
+            Log In
+           </Button>
+           <Button
+               onClick={() => this.props.history.push('/signup')}
+               variant="raised"
+               size="large"
+               className={classes.button}
+               >
+            Sign Up
+           </Button>
+           </div>
           </CardContent>
 
 
           </Paper>
-          <div className={classes.buttonContainer}>
-          <Button
-            onClick={() => this.props.history.push('/login')}
-             size="large"
-             className={classes.button}
-             >
-          Log In
-         </Button>
-         <Button
-             onClick={() => this.props.history.push('/signup')}
-             variant="raised"
-             size="large"
-             className={classes.button}
-             >
-          Sign Up
-         </Button>
-         </div>
          <Divider />
         </div>
         <div>
