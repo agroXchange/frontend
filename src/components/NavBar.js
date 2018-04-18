@@ -1,30 +1,30 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import AppBar from "material-ui/AppBar";
-import Toolbar from "material-ui/Toolbar";
-import Typography from "material-ui/Typography";
-import IconButton from "material-ui/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import BuildIcon from "@material-ui/icons/Build";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import ShopIcon from "@material-ui/icons/Shop";
-import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes";
-import PermIdentityIcon from "@material-ui/icons/PermIdentity";
-import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
-import DescriptionIndIcon from "@material-ui/icons/Description";
-import SwipeableDrawer from "material-ui/SwipeableDrawer";
-import StarIcon from "@material-ui/icons/Star";
-import { ListItem } from "material-ui/List";
-import { jwtPayload } from "../jwt";
-import * as combine from "lodash/fp/compose";
-import { translate } from "react-i18next";
-import { connect } from "react-redux";
-import { withStyles } from "material-ui";
-import Button from "material-ui/Button";
-import { withRouter } from "react-router";
-
+import React, { PureComponent } from "react"
+import PropTypes from "prop-types"
+import AppBar from "material-ui/AppBar"
+import Toolbar from "material-ui/Toolbar"
+import Typography from "material-ui/Typography"
+import IconButton from "material-ui/IconButton"
+import MenuIcon from "@material-ui/icons/Menu"
+import BuildIcon from "@material-ui/icons/Build"
+import AccountCircleIcon from "@material-ui/icons/AccountCircle"
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks"
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
+import ShopIcon from "@material-ui/icons/Shop"
+import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes"
+import PermIdentityIcon from "@material-ui/icons/PermIdentity"
+import AssignmentIndIcon from "@material-ui/icons/AssignmentInd"
+import DescriptionIndIcon from "@material-ui/icons/Description"
+import Translate from "@material-ui/icons/Translate"
+import SwipeableDrawer from "material-ui/SwipeableDrawer"
+import StarIcon from "@material-ui/icons/Star"
+import { ListItem } from "material-ui/List"
+import { jwtPayload } from "../jwt"
+import * as combine from "lodash/fp/compose"
+import { translate } from "react-i18next"
+import { connect } from "react-redux"
+import { withStyles } from "material-ui"
+import Button from "material-ui/Button"
+import { withRouter } from "react-router"
 
 const styles = {
   list: {
@@ -46,42 +46,42 @@ const styles = {
   nav: {
     width: "500px"
   }
-};
+}
 
 class NavBar extends PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired
-  };
+  }
 
   state = {
     auth: true,
     anchorEl: null,
     left: false
-  };
+  }
 
   toggleDrawer = (side, open) => () => {
-    this.setState({ [side]: open });
-  };
+    this.setState({ [side]: open })
+  }
 
   handleChange = (event, checked) => {
-    this.setState({ auth: checked });
-  };
+    this.setState({ auth: checked })
+  }
 
   handleMenu = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
+    this.setState({ anchorEl: event.currentTarget })
+  }
 
   handleNewMenu = event => {
-    this.setState({ El: event.currentTarget });
-  };
+    this.setState({ El: event.currentTarget })
+  }
 
   handleClose = () => {
-    this.setState({ anchorEl: null });
-  };
+    this.setState({ anchorEl: null })
+  }
 
   handleNewClose = () => {
-    this.setState({ El: null });
-  };
+    this.setState({ El: null })
+  }
 
   redirectDashboard = (user) => {
     if(user !== null) {
@@ -163,9 +163,9 @@ class NavBar extends PureComponent {
             />
           </ListItem>
         </div>
-      );
+      )
     }
-  };
+  }
 
   render() {
     const {
@@ -174,15 +174,15 @@ class NavBar extends PureComponent {
       currentProfileId,
       currentProfileRole,
       t
-    } = this.props;
-    const { auth, El } = this.state;
-    const openNew = Boolean(El);
+    } = this.props
+    const { auth, El } = this.state
+    const openNew = Boolean(El)
 
-    const { i18n } = this.props;
+    const { i18n } = this.props
 
     const changeLanguage = lng => {
-      i18n.changeLanguage(lng);
-    };
+      i18n.changeLanguage(lng)
+    }
 
     const sideList = (
       <div className={classes.list}>
@@ -269,7 +269,7 @@ class NavBar extends PureComponent {
           )}
         </div>
       </div>
-    );
+    )
 
     return (
       <div>
@@ -331,27 +331,27 @@ class NavBar extends PureComponent {
           </Toolbar>
         </AppBar>
       </div>
-    );
+    )
   }
 }
 
 NavBar.propTypes = {
   classes: PropTypes.object.isRequired
-};
+}
 
 const mapStateToProps = function(state) {
-  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {};
+  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
     currentUser: state.currentUser,
     currentUserId: jwtDecoded.id,
     currentProfileId: jwtDecoded.profileId,
     currentProfileRole: jwtDecoded.role
-  };
-};
+  }
+}
 
 export default combine(
   withRouter,
   translate("navBar"),
   connect(mapStateToProps),
   withStyles(styles)
-)(NavBar);
+)(NavBar)

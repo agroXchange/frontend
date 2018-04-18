@@ -6,7 +6,7 @@ import LoginForm from "./LoginForm"
 import ForgotPasswordForm from "../password/ForgotPasswordForm"
 import { Redirect } from "react-router-dom"
 import { translate } from "react-i18next"
-import compose from "lodash/fp/compose"
+import * as combine from "lodash/fp/compose"
 import Typography from "material-ui/Typography"
 import Button from "material-ui/Button"
 import Paper from "material-ui/Paper"
@@ -85,7 +85,7 @@ const mapStateToProps = function(state) {
   }
 }
 
-export default compose(
+export default combine(
   translate("user"),
   connect(mapStateToProps, { login, sendForgotPassword })
 )(LoginPage)

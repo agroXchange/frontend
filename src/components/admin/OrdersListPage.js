@@ -1,18 +1,18 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import compose from "lodash/fp/compose";
-import { withStyles } from "material-ui/styles";
-import { Link } from "react-router-dom";
-import Card from "material-ui/Card";
-import { CardHeader,CardMedia } from "material-ui/Card";
-import Button from "material-ui/Button";
-import Table, { TableBody, TableCell, TableHead, TableRow } from "material-ui/Table";
-import { fetchAllOrders } from "../../actions/orders";
-import { searchingByOrderName } from "./lib/lib";
-import Dialog, { DialogTitle } from "material-ui/Dialog";
-import TextField from "material-ui/TextField";
-import SearchIcon from "@material-ui/icons/Search";
-import IconButton from "material-ui/IconButton";
+import React, { PureComponent } from "react"
+import { connect } from "react-redux"
+import * as combine from "lodash/fp/compose"
+import { withStyles } from "material-ui/styles"
+import { Link } from "react-router-dom"
+import Card from "material-ui/Card"
+import { CardHeader,CardMedia } from "material-ui/Card"
+import Button from "material-ui/Button"
+import Table, { TableBody, TableCell, TableHead, TableRow } from "material-ui/Table"
+import { fetchAllOrders } from "../../actions/orders"
+import { searchingByOrderName } from "./lib/lib"
+import Dialog, { DialogTitle } from "material-ui/Dialog"
+import TextField from "material-ui/TextField"
+import SearchIcon from "@material-ui/icons/Search"
+import IconButton from "material-ui/IconButton"
 
 const style = () => ({
   card: {
@@ -34,21 +34,21 @@ const style = () => ({
     textAlign: "left",
     fontSize: "5px"
   }
-});
+})
 
 class OrdersPage extends PureComponent {
   state = {
     users: this.props.orders,
     term: ""
-  };
+  }
 
   componentWillMount(props) {
-    this.props.fetchAllOrders();
+    this.props.fetchAllOrders()
   }
 
   searchHandler = event => {
-    this.setState({ term: event.target.value });
-  };
+    this.setState({ term: event.target.value })
+  }
 
   renderMessage = orders => {
   return (
@@ -62,14 +62,14 @@ class OrdersPage extends PureComponent {
           </Button>
         </Link>
       </Dialog>
-    );
-  };
+    )
+  }
 
 
 
   render() {
-    const { classes } = this.props;
-    const orders = this.props.orders;
+    const { classes } = this.props
+    const orders = this.props.orders
 
     return (
       <div>
@@ -162,17 +162,17 @@ class OrdersPage extends PureComponent {
           </Card>
         ))}
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = function(state) {
   return {
     orders: state.orders
-  };
-};
+  }
+}
 
-export default compose(
+export default combine(
   withStyles(style),
   connect(mapStateToProps, { fetchAllOrders })
-)(OrdersPage);
+)(OrdersPage)

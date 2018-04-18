@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from 'react-redux';
 import { withStyles } from "material-ui/styles";
-import compose from "lodash/fp/compose";
+import * as combine from "lodash/fp/compose"
 import { translate } from "react-i18next";
 import List, { ListItem, ListItemText } from "material-ui/List";
 import { CardContent } from "material-ui/Card";
@@ -77,22 +77,21 @@ container: {
   margin:'auto',
   boxSizing:"border-box"
 }
-});
+})
 
 class defaultPage extends PureComponent {
   state = {
       open: false,
-    };
-
+    }
 
   handleClickOpen = () => {
        this.setState({ open: true });
-     };
+     }
 
   handleClose = () => {
     this.props.closeWindow()
       this.setState({ open: false });
-    };
+    }
 
   render() {
 
@@ -101,8 +100,7 @@ class defaultPage extends PureComponent {
 
     if (signup.success === true) {
     this.handleClickOpen()
-    };
-
+    }
 
     return (
 
@@ -134,7 +132,6 @@ class defaultPage extends PureComponent {
            </Button>
            </div>
           </CardContent>
-
 
           </Paper>
 
@@ -188,7 +185,7 @@ class defaultPage extends PureComponent {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -199,5 +196,4 @@ const mapStateToProps = function(state) {
   }
 }
 
-
-export default compose(translate("user"),connect(mapStateToProps,{ closeWindow }),  withStyles(styles))(defaultPage);
+export default combine(translate("user"), withStyles(styles))(defaultPage)

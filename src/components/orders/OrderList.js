@@ -1,18 +1,18 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import compose from 'lodash/fp/compose';
-import { withStyles } from 'material-ui/styles';
-import { Link } from 'react-router-dom';
-import Card from "material-ui/Card";
-import { CardMedia } from "material-ui/Card";
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
+import * as combine from "lodash/fp/compose"
+import { withStyles } from 'material-ui/styles'
+import { Link } from 'react-router-dom'
+import Card from "material-ui/Card"
+import { CardMedia } from "material-ui/Card"
 import Button from 'material-ui/Button'
-import Table, { TableBody, TableCell, TableRow } from "material-ui/Table";
-import { InputLabel } from 'material-ui/Input';
-import { FormControl } from "material-ui/Form";
-import { MenuItem } from "material-ui/Menu";
-import Select from "material-ui/Select";
-import { fetchOrdersByBuyer, fetchOrdersBySeller } from  '../../actions/orders';
-import { jwtPayload } from '../../jwt';
+import Table, { TableBody, TableCell, TableRow } from "material-ui/Table"
+import { InputLabel } from 'material-ui/Input'
+import { FormControl } from "material-ui/Form"
+import { MenuItem } from "material-ui/Menu"
+import Select from "material-ui/Select"
+import { fetchOrdersByBuyer, fetchOrdersBySeller } from  '../../actions/orders'
+import { jwtPayload } from '../../jwt'
 import { translate } from 'react-i18next'
 const style = theme => ({
   card: {
@@ -38,7 +38,7 @@ const style = theme => ({
     textAlign: "left",
     fontSize: "5px"
   }
-});
+})
 class OrderList extends PureComponent {
   state = {
     status: 'All'
@@ -203,7 +203,7 @@ const mapStateToProps = function(state) {
     orders: state.orders,
   }
 }
-export default compose(
+export default combine(
   translate('orders'),
   connect(mapStateToProps, { fetchOrdersByBuyer, fetchOrdersBySeller }),
   withStyles(style)

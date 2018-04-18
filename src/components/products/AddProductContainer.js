@@ -1,53 +1,65 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { Link, Redirect } from 'react-router-dom'
+import {  Redirect } from 'react-router-dom'
 import ProductForm from './ProductForm'
 import Button from "material-ui/Button"
 import { addProduct } from '../../actions/products'
 import { jwtPayload } from '../../jwt'
-
+import { translate } from "react-i18next";
+import * as combine from "lodash/fp/compose";
 
 class AddProductContainer extends PureComponent {
+  state = {
+      redirectToNext: false
+  }
 
-    state = {
-        redirectToNext: false
-    }
+  submit = (product, image) => {
+      this.props.addProduct(product, image)
+      this.setState({ redirectToNext: true })
+  }
 
-    submit = (product, image) => {
-        this.props.addProduct(product, image)
-        this.setState({ redirectToNext: true })
-    }
+  render() {
+      const { currentProfileId, currentUser } = this.props
+      if (!currentUser) return <Redirect to="/" />
 
-    render() {
+      if (this.state.redirectToNext) {
+          return (
+              <Redirect to={`/profiles/${currentProfileId}/products/`} />
+          )
+      }
 
-        const { currentProfileId, currentUser } = this.props
-        if (!currentUser) return <Redirect to="/" />
+          return (
+              <div className="AddProductContainer">
+               <ProductForm onSubmit={this.submit}/>
 
-        if (this.state.redirectToNext) {
-            return (
-                <Redirect to={`/profiles/${currentProfileId}/products/`} />
-            )
-        }
+                  <Link style={{textDecoration: 'none'}} to={`/dashboard`}>
+                      <Button
+                          color="primary"
+                          className="submit-btn"
+                          type="submit"
+                          style={{
+                              justify: 'center',
+                              textAlign: 'center',
+                              display: 'block',
+                              margin: 'auto',
+                              marginTop: 10,
+                              marginBottom: 2,
+                              backgroundColor: `#white`,
+                              color: "#588D61",
+                              '&:hover': {
+                                  backgroundColor: `#8FBC8F`,
+                              }
+                          }}
+                      >
+                          Back
+                   </Button>
+                  </Link>
 
-            return (
-                <div className="AddProductContainer">
 
-                    <Button
-                        onClick={() => this.props.history.goBack()}
-                        size="medium"
-                        color="primary"
-                        style={{ display: 'flex', flex: 1 }}
-                    >
-                        Go Back
-                    </Button>
-
-                 <ProductForm onSubmit={this.submit}/>
-
-                </div>
-            )
-        }
-    }
-
+              </div>
+          )
+      }
+  }
 
 const mapStateToProps = function (state) {
     const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
@@ -59,4 +71,9 @@ const mapStateToProps = function (state) {
     }
 }
 
-export default connect(mapStateToProps, { addProduct })(AddProductContainer)
+
+export default combine(
+    translate("product"),
+    connect(mapStateToProps, { addProduct })
+)
+    (AddProductContainer)
