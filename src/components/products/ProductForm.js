@@ -334,7 +334,7 @@ class ProductForm extends PureComponent {
         <TextField
           id="harvested"
           name="harvested"
-              label={t("Harvested Date")}
+              label={t("Harvest Date")}
           type="date"
             value={this.state.harvested }
           onChange={ this.handleChange }
