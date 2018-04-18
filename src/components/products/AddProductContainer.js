@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { Link, Redirect } from 'react-router-dom'
+import {  Redirect } from 'react-router-dom'
 import ProductForm from './ProductForm'
 import Button from "material-ui/Button"
 import { addProduct } from '../../actions/products'
 import { jwtPayload } from '../../jwt'
+import { translate } from "react-i18next";
+import * as combine from "lodash/fp/compose";
 
 
 class AddProductContainer extends PureComponent {
@@ -20,7 +22,7 @@ class AddProductContainer extends PureComponent {
 
     render() {
 
-        const { currentProfileId, currentUser } = this.props
+        const { currentProfileId, currentUser,t } = this.props
         if (!currentUser) return <Redirect to="/" />
 
         if (this.state.redirectToNext) {
@@ -38,7 +40,7 @@ class AddProductContainer extends PureComponent {
                         color="primary"
                         style={{ display: 'flex', flex: 1 }}
                     >
-                        Go Back
+                        {t("GO BACK")}
                     </Button>
 
                  <ProductForm onSubmit={this.submit}/>
@@ -59,4 +61,9 @@ const mapStateToProps = function (state) {
     }
 }
 
-export default connect(mapStateToProps, { addProduct })(AddProductContainer)
+
+export default combine(
+    translate("product"),
+    connect(mapStateToProps, { addProduct })
+)
+    (AddProductContainer)
