@@ -99,7 +99,7 @@ class UsersList extends PureComponent {
               onChange={this.searchHandler}
             />
           </div>
-        </form>;
+        </form>
         <h1> Users List</h1>
         {this.renderMessage(users)}
         {users.filter(searchingByName(this.state.term)).map(user => (
