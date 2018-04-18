@@ -39,7 +39,6 @@ const styles = theme => ({
  }
 })
 
-
 class Product extends PureComponent {
 
   state = {
@@ -49,8 +48,6 @@ class Product extends PureComponent {
     confirmEdit: false,
     fireRedirect: false
   }
-
-
 
   componentWillMount(props) {
     this.props.fetchProduct(this.props.match.params.id)
@@ -207,7 +204,6 @@ class Product extends PureComponent {
                 <Button color="primary" className={ classes.button }>View Seller</Button>
               </Link>
             }
-
 
             <Dialog
               open={this.state.editProduct}
