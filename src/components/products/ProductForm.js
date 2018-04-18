@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'redux'
+import compose from 'lodash/fp/compose'
 import PropTypes from 'prop-types'
 import MenuItem from 'material-ui/Menu/MenuItem'
 import TextField from 'material-ui/TextField'
@@ -167,7 +167,7 @@ class ProductForm extends PureComponent {
                 variant="raised"
                 style={classes.button}
               >
-              
+
                 <AddBox /><div className={classes.productstitle}> Product</div>
               </Button>
 

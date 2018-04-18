@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
-import { compose } from 'redux'
+import compose from 'lodash/fp/compose'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types';
-
+import PropTypes from 'prop-types'
 import Button from 'material-ui/Button';
 import Dialog, { DialogContent, DialogContentText, withMobileDialog,} from 'material-ui/Dialog';
 import ExpansionPanel, { ExpansionPanelSummary, ExpansionPanelDetails,} from 'material-ui/ExpansionPanel';
@@ -150,7 +149,7 @@ class SearchProductForm extends React.Component {
 
         if (codes)
         return (
-            
+
             <form onSubmit={this.handleSubmit} className="form-container"
                 style={classes.form}
                 justify="center"
@@ -158,11 +157,11 @@ class SearchProductForm extends React.Component {
 
             <Paper className="paper">
 
-                    <div style={{ textAlign: 'center'}}  >    
+                    <div style={{ textAlign: 'center'}}  >
                         <br/>
-                        <Button 
+                        <Button
                             onClick={this.handleClickOpen}
-                            variant="raised" 
+                            variant="raised"
                             style={classes.button}
                              color="primary"
                            >
