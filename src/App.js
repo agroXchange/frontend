@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import SignupPage from './components/signup/SignupPage'
 import AdminPage from './components/admin/LandingPage'
 import PendingUserList from './components/admin/PendingUserList'
-import AdminProfilePage from './components/admin/AdminProfilePage'
 import PendingUserPage from './components/admin/PendingUserPage'
 import AdminOrderDetail from './components/admin/OrderDetail'
 import ProductsList from './components/admin/ProductsList'
@@ -50,10 +49,10 @@ class App extends Component {
             <Route exact path="/admin/pending/profiles/:id([0-9]+)" component={PendingUserPage} />
             <Route exact path="/admin/profiles/:id([0-9]+)/orders" component={OrderList} />
             <Route exact path="/admin/profiles/:id([0-9]+)/products" component={MyProducts} />
+            <Route exact path="/admin/profiles/:id([0-9]+)" component={ProfilePage} />
             <Route exact path="/admin/orders" component={OrdersListPage} />
             <Route exact path="/admin/orders/:id([0-9]+)" component={AdminOrderDetail} />
             <Route exact path="/admin/users" component={UsersList} />
-            <Route exact path="/admin/profiles/:id([0-9]+)" component={AdminProfilePage} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/signup" component={SignupPage} />
             <Route exact path="/logout" component={LogoutPage} />
@@ -68,8 +67,6 @@ class App extends Component {
             <Route exact path="/profiles/:id([0-9]+)/products" component={ MyProducts } />
             <Route exact path="/reset-password" component={ ResetPasswordPage } />
             <Route exact path="/dashboard" component={ Dashboard } />
-            <Route path="products?code=:query1&country=:query2"
-              component={ProductsPage} />
           </div>
         </Router>
       </MuiThemeProvider>

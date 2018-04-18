@@ -4,6 +4,14 @@ import LanguageDetector from "i18next-browser-languagedetector";
 i18n.use(LanguageDetector).init({
   resources: {
     en: {
+      navBar: {
+        'Dashboard': 'Dashboard',
+        'My Profile': 'My Profile',
+        'My Products': 'My Products',
+        'My Orders' : 'My Orders',
+        'Marketplace': 'Marketplace',
+        'Logout': 'Logout'
+      },
       product: {
         'Code':  'Code',
         'Harvested Dated': 'Harvested Dated',
@@ -29,12 +37,15 @@ i18n.use(LanguageDetector).init({
         'Back': 'Back',
        'Vegetables': 'Vegetables',
        'Fruits & Nuts': 'Fruits & Nuts',
-       'Beans & Crop': 'Beans & Crop', 
+       'Beans & Crop': 'Beans & Crop',
        'Filter': 'Filter',
        'All': 'All',
        'Select product': 'Select product',
        'HS Code': 'HS Code',
        'From country' : ' From country',
+       'Search' : 'Search',
+        'GO BACK': 'GO BACK',
+        'Cancel': 'Cancel',
       },
       profile: {
         'Name': 'Name',
@@ -119,7 +130,7 @@ i18n.use(LanguageDetector).init({
     es: {
       product: {
         'Code': 'Código',
-        'Harvested Dated': 'Fecha de cosecha',
+        'Harvested Date': 'Fecha de cosecha',
         'Expiration Date': 'Fecha de vencimiento',
         'View Seller': 'Ver vendedor',
         'Volume': 'Volumen',
@@ -133,7 +144,6 @@ i18n.use(LanguageDetector).init({
         'Description': 'Descripción',
         'Price per kg': 'Precio por kg',
         'Please select your currency': 'Seleccione su moneda',
-        'Harvested Date': 'Fecha de cosecha',
         'Expiry Date': 'Fecha de caducidad',
         'Please Upload a Photo': 'Por favor cargue una foto',
         'Choose file': 'Elija el archivo',
@@ -148,6 +158,9 @@ i18n.use(LanguageDetector).init({
         'Select product': 'Seleccionar producto',
         'HS Code': 'Código HS',
         'From country': 'Del pais',
+        'Search': 'Buscar',
+         'GO BACK': 'REGRESA',
+        'Cancel': 'Cancelar',
       },
       profile: {
         'new': 'nuevo'
@@ -207,6 +220,14 @@ i18n.use(LanguageDetector).init({
         'Ordered date': 'Fecha ordenada',
         'SEE DETAILS': 'Ver detalles',
         'GO BACK': 'REGRESA'
+      },
+      navBar: {
+        'Dashboard': 'Tablero',
+        'My Profile': 'Perfil',
+        'My Products': 'Mis Productos',
+        'My Orders' : 'Mis Ordenes',
+        'Marketplace': 'Mercado',
+        'Logout': 'Cerrar Sesión'
       },
       detail: {
         'Order': 'Orden',

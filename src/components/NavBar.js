@@ -14,19 +14,17 @@ import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import DescriptionIndIcon from "@material-ui/icons/Description";
-import Translate from "@material-ui/icons/Translate";
-import { Link } from "react-router-dom";
 import SwipeableDrawer from "material-ui/SwipeableDrawer";
 import StarIcon from "@material-ui/icons/Star";
-import SendIcon from "@material-ui/icons/Send";
-import { ListItem, ListItemIcon } from "material-ui/List";
+import { ListItem } from "material-ui/List";
 import { jwtPayload } from "../jwt";
-import compose from "redux/src/compose";
+import * as combine from "lodash/fp/compose";
 import { translate } from "react-i18next";
 import { connect } from "react-redux";
 import { withStyles } from "material-ui";
 import Button from "material-ui/Button";
 import { withRouter } from "react-router";
+
 
 const styles = {
   list: {
@@ -84,6 +82,14 @@ class NavBar extends PureComponent {
   handleNewClose = () => {
     this.setState({ El: null });
   };
+
+  redirectDashboard = (user) => {
+    if(user !== null) {
+      return () => this.props.history.push("/dashboard")
+    } else {
+      return () => this.props.history.push("/")
+    }
+  }
 
   adminMenu = user => {
     if (user === "admin") {
@@ -166,10 +172,10 @@ class NavBar extends PureComponent {
       classes,
       currentUser,
       currentProfileId,
-      currentProfileRole
+      currentProfileRole,
+      t
     } = this.props;
-    const { auth, anchorEl, El } = this.state;
-    const open = Boolean(anchorEl);
+    const { auth, El } = this.state;
     const openNew = Boolean(El);
 
     const { i18n } = this.props;
@@ -192,7 +198,7 @@ class NavBar extends PureComponent {
                   color="inherit"
                   onClick={() => this.props.history.push("/Dashboard")}
                 >
-                  Dashboard
+                  {t('Dashboard')}
                 </Button>
               </ListItem>
               <ListItem button="button">
@@ -203,7 +209,7 @@ class NavBar extends PureComponent {
                     this.props.history.push(`/profiles/${currentProfileId}`)
                   }
                 >
-                  My profile
+                  {t('My Profile')}
                 </Button>
               </ListItem>
 
@@ -217,7 +223,7 @@ class NavBar extends PureComponent {
                     )
                   }
                 >
-                  My products
+                  {t('My Products')}
                 </Button>
               </ListItem>
 
@@ -227,7 +233,7 @@ class NavBar extends PureComponent {
                   color="inherit"
                   onClick={() => this.props.history.push("/orders")}
                 >
-                  My orders
+                  {t('My Orders')}
                 </Button>
               </ListItem>
 
@@ -237,7 +243,7 @@ class NavBar extends PureComponent {
                   color="inherit"
                   onClick={() => this.props.history.push("/products")}
                 >
-                  Marketplace
+                  {t('Marketplace')}
                 </Button>
               </ListItem>
 
@@ -247,7 +253,7 @@ class NavBar extends PureComponent {
                   color="inherit"
                   onClick={() => this.props.history.push("/logout")}
                 >
-                  Logout
+                  {t('Logout')}
                 </Button>
               </ListItem>
               <ListItem />
@@ -299,7 +305,7 @@ class NavBar extends PureComponent {
             </div>
 
             <Typography
-              onClick={() => this.props.history.push("/")}
+              onClick={this.redirectDashboard(currentUser)}
               variant="title"
               className={classes.flex}
               style={{ color: `#588D61`, fontSize: "30px" }}
@@ -309,24 +315,17 @@ class NavBar extends PureComponent {
 
             {auth && (
               <div>
-                <IconButton
-                  aria-owns={openNew ? "menu-lang" : null}
-                  aria-haspopup="true"
-                  onClick={this.handleNewMenu}
-                  color="inherit"
-                >
-                  <Translate />
-                </IconButton>
 
-                <IconButton style={{ marginRight: "10px" }}>
+
+
                   <Button size="small" onClick={() => changeLanguage("en")}>
-                    <img className="LanguageDetector" src="/images/en.svg" />
+                    <img className="LanguageDetector" src="/images/en.svg" alt="EN" />
                   </Button>
 
                   <Button size="small" onClick={() => changeLanguage("es")}>
-                    <img className="LanguageDetector" src="/images/es.svg" />
+                    <img className="LanguageDetector" src="/images/es.svg" alt="ES" />
                   </Button>
-                </IconButton>
+
               </div>
             )}
           </Toolbar>
@@ -350,9 +349,9 @@ const mapStateToProps = function(state) {
   };
 };
 
-export default compose(
+export default combine(
   withRouter,
-  translate("translations"),
+  translate("navBar"),
   connect(mapStateToProps),
   withStyles(styles)
 )(NavBar);

@@ -4,7 +4,7 @@ import { withStyles } from "material-ui/styles";
 import compose from "lodash/fp/compose";
 import { translate } from "react-i18next";
 import List, { ListItem, ListItemText } from "material-ui/List";
-import Card, { CardActions, CardContent, CardMedia, CardTitle } from "material-ui/Card";
+import { CardContent } from "material-ui/Card";
 import Button from "material-ui/Button";
 import Typography from "material-ui/Typography";
 import Paper from "material-ui/Paper";
@@ -95,12 +95,14 @@ class defaultPage extends PureComponent {
     };
 
   render() {
+
     const { t, classes } = this.props;
     const {signup} = this.props;
 
     if (signup.success === true) {
     this.handleClickOpen()
     };
+
 
     return (
 
@@ -114,28 +116,28 @@ class defaultPage extends PureComponent {
             <Typography className={classes.secondaryText}component="p">
               A marketplace for producers
             </Typography>
+            <div className={classes.buttonContainer}>
+            <Button
+              onClick={() => this.props.history.push('/login')}
+               size="large"
+               className={classes.button}
+               >
+            Log In
+           </Button>
+           <Button
+               onClick={() => this.props.history.push('/signup')}
+               variant="raised"
+               size="large"
+               className={classes.button}
+               >
+            Sign Up
+           </Button>
+           </div>
           </CardContent>
 
 
           </Paper>
-          <div className={classes.buttonContainer}>
-          <Button
-            onClick={() => this.props.history.push('/login')}
-             size="large"
-             className={classes.button}
-             >
-          Log In
-         </Button>
-         <Button
-             onClick={() => this.props.history.push('/signup')}
-             variant="raised"
-             size="large"
-             className={classes.button}
-             >
-          Sign Up
-         </Button>
 
-         </div>
          <Divider />
 
          <Dialog

@@ -2,7 +2,7 @@ import React, { PureComponent } from "react"
 import { connect } from "react-redux"
 import { Redirect } from "react-router-dom"
 import { fetchUser } from "../../actions/users"
-import compose from "lodash/fp/compose"
+import * as combine from "lodash/fp/compose";
 import { translate } from "react-i18next"
 import Profile from "./Profile"
 
@@ -29,7 +29,7 @@ const mapDispatchToProps = {
   fetchUser
 }
 
-export default compose(
+export default combine(
   translate("user"),
   connect(mapStateToProps, mapDispatchToProps)
 )(ProfilePage)

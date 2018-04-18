@@ -1,4 +1,5 @@
-import {createStore, applyMiddleware, combineReducers, compose} from 'redux'
+import {createStore, applyMiddleware, combineReducers} from 'redux'
+import compose from 'lodash/fp/compose'
 import ReduxThunk from 'redux-thunk'
 import reducers from './reducers'
 import {storeJwt} from './middleware'

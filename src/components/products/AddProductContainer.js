@@ -13,14 +13,10 @@ class AddProductContainer extends PureComponent {
         redirectToNext: false
     }
 
-
     submit = (product, image) => {
         this.props.addProduct(product, image)
         this.setState({ redirectToNext: true })
     }
-
-
-
 
     render() {
 
@@ -35,31 +31,17 @@ class AddProductContainer extends PureComponent {
 
             return (
                 <div className="AddProductContainer">
+
+                    <Button
+                        onClick={() => this.props.history.goBack()}
+                        size="medium"
+                        color="primary"
+                        style={{ display: 'flex', flex: 1 }}
+                    >
+                        Go Back
+                    </Button>
+
                  <ProductForm onSubmit={this.submit}/>
-
-                    <Link style={{textDecoration: 'none'}} to={`/dashboard`}>
-                        <Button
-                            color="primary"
-                            className="submit-btn"
-                            type="submit"
-                            style={{
-                                justify: 'center',
-                                textAlign: 'center',
-                                display: 'block',
-                                margin: 'auto',
-                                marginTop: 10,
-                                marginBottom: 2,
-                                backgroundColor: `#white`,
-                                color: "#588D61",
-                                '&:hover': {
-                                    backgroundColor: `#8FBC8F`,
-                                }
-                            }}
-                        >
-                            Back
-                     </Button>
-                    </Link>
-
 
                 </div>
             )

@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { fetchCurrency } from '../../actions/currencys'
-import PropTypes from 'prop-types'
 
 class CurrencyPicker extends PureComponent {
 

@@ -69,7 +69,7 @@ const style = theme => ({
 
 const CustomTableCell = withStyles(theme => ({
   head: {
-    backgroundColor: "#3f51b5",
+    backgroundColor: "#8FBC8F",
     color: theme.palette.common.white
   },
   body: {
@@ -219,14 +219,24 @@ class OrdersPage extends PureComponent {
 
     return (
       <div>
+      <div>
+      <Button
+        onClick={() => this.props.history.goBack()}
+        size="medium"
+        color="primary"
+        style={{display:'flex', flex:1}}
+      >
+        Go Back
+      </Button>
+      </div>
         <form>
           <div
             style={{
               display:'flex',
-              width: "550px",
+
               margin: 0,
-              marginLeft:20,
-              marginTop: "20px",
+
+              marginTop: "20px"
             }}
           >
             <IconButton>
@@ -347,11 +357,11 @@ class OrdersPage extends PureComponent {
                             className={this.props.classes.row}
                             key={order.id}
                           >
-                            <CustomTableCell><Link to={`/admin/orders/${order.id}`}>{order.id}</Link></CustomTableCell>
+                            <CustomTableCell><Link style={{color:'#8FBC8F'}} to={`/admin/orders/${order.id}`}>{order.id}</Link></CustomTableCell>
                             <CustomTableCell>{order.date}</CustomTableCell>
                             <CustomTableCell>{order.status}</CustomTableCell>
                             <CustomTableCell>{order.comments}</CustomTableCell>
-                            <CustomTableCell><Link to={`/admin/profiles/${order.buyer.id}`}>{order.buyer.name}</Link></CustomTableCell>
+                            <CustomTableCell><Link style={{color:'#8FBC8F'}}  to={`/admin/profiles/${order.buyer.id}`}>{order.buyer.name}</Link></CustomTableCell>
                           </TableRow>
                         ))}
                         {emptyRows > 0 && (
