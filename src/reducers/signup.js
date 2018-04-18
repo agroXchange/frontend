@@ -1,5 +1,5 @@
 import {
-	USER_SIGNUP_SUCCESS, USER_SIGNUP_FAILED
+	USER_SIGNUP_SUCCESS, USER_SIGNUP_FAILED, CLOSE_WINDOW
 } from '../actions/users'
 
 export default function (state = {}, {type, payload}) {
@@ -13,6 +13,10 @@ export default function (state = {}, {type, payload}) {
       return {
         error: payload
       }
+			case CLOSE_WINDOW:
+	        return {
+	          success: false
+	        };
 
 		default:
       return state
