@@ -82,16 +82,24 @@ i18n.use(LanguageDetector).init({
       },
       orders: {
         'Order': 'Order',
+        'Order Number': 'Order Number',
         'Order Volume': 'Order Volume',
         'Comments': 'Comments',
         'Status': 'Status',
         'Ordered date': 'Ordered date',
+        'Pending': 'Pending',
+        'Approved': 'Approved',
+        'Declined': 'Declined',
+        'Bought': 'Bought',
+        'All': 'All',
         'GO TO SELLER PROFILE': 'GO TO SELLER PROFILE',
         'SEE DETAILS': 'SEE DETAILS',
         'GO BACK': 'GO BACK'
       },
       detail: {
         'Order': 'Order',
+        'Number': 'Number',
+        'Status': 'Status',
         'Organization name': 'Organization name',
         'Field': 'Field',
         'Type': 'Type',
@@ -104,7 +112,8 @@ i18n.use(LanguageDetector).init({
         'Volume': 'Volume',
         'Comments': 'Comments',
         'ACCEPT': 'ACCEPT',
-        'DECLINE': 'DECLINE'
+        'DECLINE': 'DECLINE',
+        'GO BACK': 'GO BACK'
       }
     },
     es: {
@@ -186,16 +195,23 @@ i18n.use(LanguageDetector).init({
       },
       orders: {
         'Order': 'Orden',
+        'Order Number': 'Número de orden',
         'Order Volume': 'Volumen de pedido',
         'Comments': 'Comentarios',
         'Status': 'Estado',
+        'Pending': 'Pendiente',
+        'Approved': 'Aprobado',
+        'Declined': 'Rechazado',
+        'Bought': 'Compró',
+        'All': 'Todas',
         'Ordered date': 'Fecha ordenada',
-        'GO TO SELLER PROFILE': 'IR AL PERFIL DEL VENDEDOR',
         'SEE DETAILS': 'Ver detalles',
         'GO BACK': 'REGRESA'
       },
       detail: {
         'Order': 'Orden',
+        'Number': 'Número',
+        'Status': 'Estado',
         'Organization name': 'Nombre de la Organización',
         'Field': 'Campo',
         'Type': 'Tipo',
@@ -208,7 +224,8 @@ i18n.use(LanguageDetector).init({
         'Volume': 'Volumen',
         'Comments': 'Comentarios',
         'ACCEPT': 'ACEPTAR',
-        'DECLINE': 'DISMINUCION'
+        'DECLINE': 'DISMINUCION',
+        'GO BACK': 'REGRESA'
       }
     }
   },

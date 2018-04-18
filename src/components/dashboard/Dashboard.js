@@ -9,7 +9,7 @@ import Button from "material-ui/Button"
 import Typography from "material-ui/Typography"
 import Card, { CardActions, CardContent } from "material-ui/Card"
 import Paper from "material-ui/Paper"
-import {fetchOrdersByBuyer, fetchUnseenOrders} from '../../actions/orders'
+import {fetchUnseenOrders} from '../../actions/orders'
 import {jwtPayload} from '../../jwt'
 
 const styles = theme => ({
@@ -38,6 +38,7 @@ const styles = theme => ({
 })
 
 class Dashboard extends PureComponent {
+  state = {}
 
   componentWillMount(props) {
     this.props.fetchMyProducts(this.props.currentProfileId)
@@ -150,8 +151,9 @@ class Dashboard extends PureComponent {
               </Button>
             </Link>
             <Link style={{textDecoration: 'none'}} to={`/orders/received`}>
-              <Button style={{backgroundColor: `#588D61`,'&:hover': {backgroundColor: `#8FBC8F`}}} size="medium" color="primary" variant="raised" >
-                View all Recieved orders
+              <Button size="medium" color="primary" variant="raised" >
+                View all recieved orders
+
               </Button>
             </Link>
           </CardActions>
@@ -177,5 +179,5 @@ const mapStateToProps = function(state) {
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { fetchOrdersByBuyer, fetchMyProducts, fetchUser, fetchUnseenOrders })
+  connect(mapStateToProps, { fetchMyProducts, fetchUser, fetchUnseenOrders })
 )(Dashboard)

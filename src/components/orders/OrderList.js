@@ -21,7 +21,7 @@ const style = theme => ({
   card: {
     height: 400,
     width: 300,
-    margin: 20,
+    margin: 10,
     textAlign: "center",
     display: "inline-block"
   },
@@ -33,7 +33,7 @@ const style = theme => ({
     height: 100
   },
   table: {
-    width: " 10px",
+    width: "10px",
     fontSize: "10px",
     textAlign: "center"
   },
@@ -68,7 +68,6 @@ class OrderList extends PureComponent {
           .filter(order => order.status === this.state.status)
           .map(order => (
          <Card className={this.props.classes.card} zDepth={3} circle={true}>
-           <CardHeader avatar={"#" + order.id} />
            <CardMedia>
              <img
                 className={this.props.classes.media}
@@ -79,13 +78,14 @@ class OrderList extends PureComponent {
                <Table className={this.props.classes.table}>
                 <TableBody>
                    <TableRow>
+                      <TableCell>{this.props.t('Order Number')}</TableCell>
+                      <TableCell>{order.id}</TableCell>
+                   </TableRow>
+                   <TableRow>
                       <TableCell>{this.props.t('Order Volume')}</TableCell>
                       <TableCell>{order.volume}</TableCell>
                    </TableRow>
-                   <TableRow>
-                      <TableCell>{this.props.t('Comments')}</TableCell>
-                      <TableCell>{order.comments}</TableCell>
-                   </TableRow>
+
                    <TableRow>
                       <TableCell>{this.props.t('Status')}</TableCell>
                       <TableCell>{order.status}</TableCell>
@@ -93,6 +93,10 @@ class OrderList extends PureComponent {
                    <TableRow>
                       <TableCell>{this.props.t('Ordered date')}</TableCell>
                       <TableCell>{order.date}</TableCell>
+                   </TableRow>
+                   <TableRow>
+                      <TableCell>{this.props.t('Comments')}</TableCell>
+                      <TableCell>{order.comments}</TableCell>
                    </TableRow>
                  </TableBody>
                </Table>
@@ -111,7 +115,7 @@ class OrderList extends PureComponent {
     }
 
     render() {
-      const { classes} = this.props
+      const { classes, t} = this.props
       return (
         <div>
           <form>
@@ -131,7 +135,7 @@ class OrderList extends PureComponent {
                 autoComplete="off"
               >
                 <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="satus">Status</InputLabel>
+                  <InputLabel htmlFor="status">{t('Status')}</InputLabel>
                   <Select
                     value={this.state.status}
                     onChange={this.handleChange}
@@ -140,11 +144,11 @@ class OrderList extends PureComponent {
                       id: "status"
                     }}
                   >
-                    <MenuItem value={"Pending"}>Pending</MenuItem>
-                    <MenuItem value={"Approved"}>Approved</MenuItem>
-                    <MenuItem value={"Declined"}>Declined</MenuItem>
-                    <MenuItem value={"Bought"}>Bought</MenuItem>
-                    <MenuItem value={"All"}>All</MenuItem>
+                    <MenuItem value={"Pending"}>{t('Pending')}</MenuItem>
+                    <MenuItem value={"Approved"}>{t('Approved')}</MenuItem>
+                    <MenuItem value={"Declined"}>{t('Declined')}</MenuItem>
+                    <MenuItem value={"Bought"}>{t('Bought')}</MenuItem>
+                    <MenuItem value={"All"}>{t('All')}</MenuItem>
                   </Select>
                 </FormControl>
               </form>
@@ -155,7 +159,6 @@ class OrderList extends PureComponent {
           <div>
             {this.props.orders.map(order => (
              <Card className={this.props.classes.card} zDepth={3} circle={true}>
-               <CardHeader avatar={"#" + order.id} />
                <CardMedia>
                  <img
                     className={this.props.classes.media}
@@ -166,13 +169,14 @@ class OrderList extends PureComponent {
                    <Table className={this.props.classes.table}>
                     <TableBody>
                        <TableRow>
+                         <TableCell>{this.props.t('Order Number')}</TableCell>
+                         <TableCell>{order.id}</TableCell>
+                       </TableRow>
+                       <TableRow>
                           <TableCell>{this.props.t('Order Volume')}</TableCell>
                           <TableCell>{order.volume}</TableCell>
                        </TableRow>
-                       <TableRow>
-                          <TableCell>{this.props.t('Comments')}</TableCell>
-                          <TableCell>{order.comments}</TableCell>
-                       </TableRow>
+
                        <TableRow>
                           <TableCell>{this.props.t('Status')}</TableCell>
                           <TableCell>{order.status}</TableCell>
@@ -180,6 +184,10 @@ class OrderList extends PureComponent {
                        <TableRow>
                           <TableCell>{this.props.t('Ordered date')}</TableCell>
                           <TableCell>{order.date}</TableCell>
+                       </TableRow>
+                       <TableRow>
+                          <TableCell>{this.props.t('Comments')}</TableCell>
+                          <TableCell>{order.comments}</TableCell>
                        </TableRow>
                      </TableBody>
                    </Table>

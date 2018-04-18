@@ -87,7 +87,7 @@ class Product extends PureComponent {
     const today = Date.parse(new Date())
     const p = Math.round(((today - start) / (end - start)) * 100) + '%'
     return p
-    
+
   }
 
   render() {
@@ -183,6 +183,7 @@ class Product extends PureComponent {
               aria-labelledby="form-dialog-title"
             >
               <DialogTitle id="form-dialog-title">Thankyou. Your listing has been updated.</DialogTitle>
+              {setTimeout(function() {window.location.href=`/dashboard`}, 5000)}
             </Dialog>
 
           </Grid>
