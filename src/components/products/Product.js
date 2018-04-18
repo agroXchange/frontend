@@ -96,7 +96,11 @@ class Product extends PureComponent {
     const today = new Date()
     const end = new Date(expiration)
     const diffDays = parseInt((end - today) / (1000 * 60 * 60 * 24));
-    return diffDays
+    if(diffDays < 0) {
+      return 0
+    } else {
+      return diffDays
+    }    
   }
 
   render() {
@@ -115,6 +119,7 @@ class Product extends PureComponent {
                 className="product-photo"/>
 
               { product.volume === 0 ? <h2>UNAVAILABLE</h2> : "" }
+              { this.daysRemaining(product.harvested, product.expiration) === 0 ? <h2>EXPIRED</h2> : "" }
 
               <div>
                 <p>{ this.daysRemaining(product.harvested, product.expiration)} days remaining</p>
