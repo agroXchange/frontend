@@ -45,6 +45,9 @@ i18n.use(LanguageDetector).init({
        'Search' : 'Search',
         'GO BACK': 'GO BACK',
         'Cancel': 'Cancel',
+        'SOLD OUT': 'SOLD OUT',
+        'EXPIRED': 'EXPIRED',
+        'remaining': 'days remaining'
       },
       profile: {
         'Name': 'Name',
@@ -158,8 +161,11 @@ i18n.use(LanguageDetector).init({
         'HS Code': 'Código HS',
         'From country': 'Del pais',
         'Search': 'Buscar',
-         'GO BACK': 'REGRESA',
+        'GO BACK': 'REGRESA',
         'Cancel': 'Cancelar',
+        'SOLD OUT': 'AGOTADO',
+        'EXPIRED': 'MUERTO',
+        'remaining': 'días restantes'
       },
       profile: {
         'new': 'nuevo'
