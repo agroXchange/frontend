@@ -9,6 +9,7 @@ import product from './product'
 import login from './login'
 import currentUser from './currentUser'
 import codes from './codes'
+import currency from './currency'
 
 export default {
   signup,
@@ -21,5 +22,6 @@ export default {
   login,
   currentUser,
   codes,
-  password, 
+  password,
+  currency
 }
