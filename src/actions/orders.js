@@ -5,6 +5,7 @@ export const FETCH_ALL_ORDERS = "FETCH_ALL_ORDERS"
 export const FETCH_ORDER = "FETCH_ORDER"
 export const FETCH_ORDERS_BY_BUYER = "FETCH_ORDERS_BY_BUYER"
 export const FETCH_ORDERS_BY_SELLER = "FETCH_ORDERS_BY_SELLER"
+export const FETCH_UNSEEN_ORDERS = 'FETCH_UNSEEN_ORDERS'
 export const CREATE_ORDER = "CREATE_ORDER"
 export const CHANGE_STATUS = "CHANGE_STATUS"
 
@@ -35,6 +36,21 @@ export const fetchAllOrders = () => (dispatch, getState) => {
     .catch(err => alert(err))
 }
 
+export const fetchUnseenOrders = () => (dispatch, getState) => {
+  const state = getState()
+  const jwt = state.currentUser.jwt
+
+  request
+    .get(`${baseUrl}/orders/received?unseen=true`)
+    .set("Authorization", `Bearer ${jwt}`)
+    .then(res => {
+      dispatch ({
+        type: FETCH_UNSEEN_ORDERS,
+        payload: res.body
+      })
+    })
+    .catch(err => console.log(err))
+}
 
 export const fetchOrder = (id) => (dispatch, getState) => {
   const state = getState()
