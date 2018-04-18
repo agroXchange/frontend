@@ -5,6 +5,8 @@ import compose from 'lodash/fp/compose'
 import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
 import Grid from 'material-ui/Grid'
+import IconButton from "material-ui/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
 import Button from 'material-ui/Button'
 import Dialog, { DialogTitle } from 'material-ui/Dialog'
 import '../../styles/Product.css'
@@ -163,7 +165,9 @@ class Product extends PureComponent {
                 <div>
                   <Button color="primary" onClick={ this.handleEditOpen }>Edit Product</Button>
                   <Button color="primary" onClick={ this.removeProduct }>Remove Product</Button>
-
+                  <IconButton onClick={this.removeProduct}>
+                    <DeleteIcon />
+                  </IconButton>
                 </div>
               }
 
