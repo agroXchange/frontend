@@ -46,7 +46,7 @@ const style = theme => ({
 
 class OrderList extends PureComponent {
   state = {
-    status: ''
+    status: 'All'
   }
 
   componentWillMount() {
@@ -108,51 +108,6 @@ class OrderList extends PureComponent {
          ))}
        </div>
      )}
-     else if (this.state.status === 'All') {
-      return (
-        <div>
-          {this.props.orders.map(order => (
-           <Card className={this.props.classes.card} zDepth={3} circle={true}>
-             <CardHeader avatar={"#" + order.id} />
-             <CardMedia>
-               <img
-                  className={this.props.classes.media}
-                  src={order.product.photo}
-                  alt=""
-                />
-             </CardMedia>
-                 <Table className={this.props.classes.table}>
-                  <TableBody>
-                     <TableRow>
-                        <TableCell>{this.props.t('Order Volume')}</TableCell>
-                        <TableCell>{order.volume}</TableCell>
-                     </TableRow>
-                     <TableRow>
-                        <TableCell>{this.props.t('Comments')}</TableCell>
-                        <TableCell>{order.comments}</TableCell>
-                     </TableRow>
-                     <TableRow>
-                        <TableCell>{this.props.t('Status')}</TableCell>
-                        <TableCell>{order.status}</TableCell>
-                     </TableRow>
-                     <TableRow>
-                        <TableCell>{this.props.t('Ordered date')}</TableCell>
-                        <TableCell>{order.date}</TableCell>
-                     </TableRow>
-                   </TableBody>
-                 </Table>
-                 <Link to={`/orders/${order.id}`}>
-                   <Button size="small"  color="primary">
-                     {this.props.t('SEE DETAILS')}
-                   </Button>
-                 </Link>
-                   <Button size="small"  color="primary" onClick={() => this.props.history.goBack()}>
-                    {this.props.t('GO BACK')}
-                   </Button>
-             </Card>
-           ))}
-         </div>
-       )}
     }
 
     render() {
@@ -196,6 +151,49 @@ class OrderList extends PureComponent {
             </div>
           </form>
           {this.renderFilteredOrder()}
+          { this.state.status === "All" &&
+          <div>
+            {this.props.orders.map(order => (
+             <Card className={this.props.classes.card} zDepth={3} circle={true}>
+               <CardHeader avatar={"#" + order.id} />
+               <CardMedia>
+                 <img
+                    className={this.props.classes.media}
+                    src={order.product.photo}
+                    alt=""
+                  />
+               </CardMedia>
+                   <Table className={this.props.classes.table}>
+                    <TableBody>
+                       <TableRow>
+                          <TableCell>{this.props.t('Order Volume')}</TableCell>
+                          <TableCell>{order.volume}</TableCell>
+                       </TableRow>
+                       <TableRow>
+                          <TableCell>{this.props.t('Comments')}</TableCell>
+                          <TableCell>{order.comments}</TableCell>
+                       </TableRow>
+                       <TableRow>
+                          <TableCell>{this.props.t('Status')}</TableCell>
+                          <TableCell>{order.status}</TableCell>
+                       </TableRow>
+                       <TableRow>
+                          <TableCell>{this.props.t('Ordered date')}</TableCell>
+                          <TableCell>{order.date}</TableCell>
+                       </TableRow>
+                     </TableBody>
+                   </Table>
+                   <Link to={`/orders/${order.id}`}>
+                     <Button size="small"  color="primary">
+                       {this.props.t('SEE DETAILS')}
+                     </Button>
+                   </Link>
+                     <Button size="small"  color="primary" onClick={() => this.props.history.goBack()}>
+                      {this.props.t('GO BACK')}
+                     </Button>
+               </Card>
+             ))}
+           </div>}
          </div>
     )
   }
