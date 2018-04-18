@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import {  Redirect } from 'react-router-dom'
+import {  Link, Redirect } from 'react-router-dom'
 import ProductForm from './ProductForm'
 import Button from "material-ui/Button"
 import { addProduct } from '../../actions/products'
 import { jwtPayload } from '../../jwt'
-import { translate } from "react-i18next";
-import * as combine from "lodash/fp/compose";
+import { translate } from "react-i18next"
+import * as combine from "lodash/fp/compose"
 
 class AddProductContainer extends PureComponent {
   state = {
