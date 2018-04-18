@@ -25,6 +25,8 @@ import Dashboard from './components/dashboard/Dashboard'
 import Home from './components/default/default'
 import { createMuiTheme } from 'material-ui/styles';
 import './styles/App.css';
+import MessageForm from "./components/chat/MessageForm"
+import ChatPage from "./components/chat/ChatPage"
 
 const  theme = createMuiTheme({
   palette: {
@@ -67,6 +69,7 @@ class App extends Component {
             <Route exact path="/profiles/:id([0-9]+)/products" component={ MyProducts } />
             <Route exact path="/reset-password" component={ ResetPasswordPage } />
             <Route exact path="/dashboard" component={ Dashboard } />
+            <Route exact path="/testchat" component={ ChatPage } />
           </div>
         </Router>
       </MuiThemeProvider>
