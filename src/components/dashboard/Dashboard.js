@@ -128,12 +128,8 @@ const mapStateToProps = function(state) {
   }
 }
 
-const mapDispatchToProps = {
-  fetchUser,
-  fetchMyProducts
-}
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { fetchOrdersByBuyer })
+  connect(mapStateToProps, { fetchOrdersByBuyer, fetchMyProducts, fetchUser })
 )(Dashboard)
