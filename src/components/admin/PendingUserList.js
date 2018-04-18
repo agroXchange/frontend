@@ -132,7 +132,7 @@ class UsersList extends PureComponent {
               <ListItemAvatar>
                   <Avatar>
                     <img
-                      className={classes.media}
+                      style={{width:'50px'}}
                       src={assignImage(user.profile.logo)}
                       alt=""
                     />

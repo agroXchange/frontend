@@ -25,6 +25,7 @@ import { connect } from "react-redux";
 import { withStyles } from "material-ui";
 import Button from "material-ui/Button";
 import { withRouter } from "react-router";
+import { translate } from 'react-i18next'
 
 const styles = {
   list: {
@@ -82,6 +83,14 @@ class NavBar extends PureComponent {
   handleNewClose = () => {
     this.setState({ El: null });
   };
+
+  redirectDashboard = (user) => {
+    if(user !== null) {
+      return () => this.props.history.push("/dashboard")
+    } else {
+      return () => this.props.history.push("/")
+    }
+  }
 
   adminMenu = user => {
     if (user === "admin") {
@@ -164,7 +173,8 @@ class NavBar extends PureComponent {
       classes,
       currentUser,
       currentProfileId,
-      currentProfileRole
+      currentProfileRole,
+      t
     } = this.props;
     const { auth, El } = this.state;
     const openNew = Boolean(El);
@@ -189,7 +199,7 @@ class NavBar extends PureComponent {
                   color="inherit"
                   onClick={() => this.props.history.push("/Dashboard")}
                 >
-                  Dashboard
+                  {t('Dashboard')}
                 </Button>
               </ListItem>
               <ListItem button="button">
@@ -200,7 +210,7 @@ class NavBar extends PureComponent {
                     this.props.history.push(`/profiles/${currentProfileId}`)
                   }
                 >
-                  My profile
+                  {t('My Profile')}
                 </Button>
               </ListItem>
 
@@ -214,7 +224,7 @@ class NavBar extends PureComponent {
                     )
                   }
                 >
-                  My products
+                  {t('My Products')}
                 </Button>
               </ListItem>
 
@@ -224,7 +234,7 @@ class NavBar extends PureComponent {
                   color="inherit"
                   onClick={() => this.props.history.push("/orders")}
                 >
-                  My orders
+                  {t('My Orders')}
                 </Button>
               </ListItem>
 
@@ -234,7 +244,7 @@ class NavBar extends PureComponent {
                   color="inherit"
                   onClick={() => this.props.history.push("/products")}
                 >
-                  Marketplace
+                  {t('Marketplace')}
                 </Button>
               </ListItem>
 
@@ -244,7 +254,7 @@ class NavBar extends PureComponent {
                   color="inherit"
                   onClick={() => this.props.history.push("/logout")}
                 >
-                  Logout
+                  {t('Logout')}
                 </Button>
               </ListItem>
               <ListItem />
@@ -296,7 +306,7 @@ class NavBar extends PureComponent {
             </div>
 
             <Typography
-              onClick={() => this.props.history.push("/dashboard")}
+              onClick={this.redirectDashboard(currentUser)}
               variant="title"
               className={classes.flex}
               style={{ color: `#588D61`, fontSize: "30px" }}
@@ -342,7 +352,7 @@ const mapStateToProps = function(state) {
 
 export default combine(
   withRouter,
-  translate("translations"),
+  translate("navBar"),
   connect(mapStateToProps),
   withStyles(styles)
 )(NavBar);

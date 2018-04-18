@@ -81,7 +81,7 @@ class LoginForm extends PureComponent {
           }
           label="Stay logged in."
         />
-        <Button style={{backgroundColor:'green'}}
+        <Button 
           variant="raised"
           color="primary"
           className={classes.button}

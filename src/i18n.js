@@ -4,6 +4,14 @@ import LanguageDetector from "i18next-browser-languagedetector";
 i18n.use(LanguageDetector).init({
   resources: {
     en: {
+      navBar: {
+        'Dashboard': 'Dashboard',
+        'My Profile': 'My Profile',
+        'My Products': 'My Products',
+        'My Orders' : 'My Orders',
+        'Marketplace': 'Marketplace',
+        'Logout': 'Logout'
+      },
       product: {
         'Code':  'Code',
         'Harvested Dated': 'Harvested Dated',
@@ -29,7 +37,7 @@ i18n.use(LanguageDetector).init({
         'Back': 'Back',
        'Vegetables': 'Vegetables',
        'Fruits & Nuts': 'Fruits & Nuts',
-       'Beans & Crop': 'Beans & Crop', 
+       'Beans & Crop': 'Beans & Crop',
        'Filter': 'Filter',
        'All': 'All',
        'Select product': 'Select product',
@@ -207,6 +215,14 @@ i18n.use(LanguageDetector).init({
         'Ordered date': 'Fecha ordenada',
         'SEE DETAILS': 'Ver detalles',
         'GO BACK': 'REGRESA'
+      },
+      navBar: {
+        'Dashboard': 'Tablero',
+        'My Profile': 'Perfil',
+        'My Products': 'Mis Productos',
+        'My Orders' : 'Mis Ordenes',
+        'Marketplace': 'Mercado',
+        'Logout': 'Cerrar Sesión'
       },
       detail: {
         'Order': 'Orden',
