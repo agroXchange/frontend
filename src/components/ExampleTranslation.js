@@ -3,9 +3,8 @@ import { connect } from 'react-redux'
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 // specific for translation
-import compose from 'lodash/fp/compose'
+import * as combine from "lodash/fp/compose";
 import {translate} from "react-i18next"
-{/* specific for translation */}
 
 const profile = {
   country: "Netherlands",
@@ -16,10 +15,7 @@ const profile = {
 class ExampleTranslation extends PureComponent {
 
   render() {
-
-    {/* specific for translation */}
     const { t } = this.props
-    {/* specific for translation */}
 
     const { product } = this.props
     return(
@@ -32,7 +28,7 @@ class ExampleTranslation extends PureComponent {
           <Grid item >
             <h2>{ product.name }</h2>
             <p>{t('Code')}: { product.code }</p>
-            <img src={ product.photo } className="product-photo"/>
+            <img src={ product.photo } className="product-photo" alt="product" />
             <p>{t('Harvested Dated')}: { product.harvested }</p>
             <p>{t('Expiration Date')}: { product.expiration }</p>
             <Button color="primary">{t('View Seller')}</Button>
@@ -66,9 +62,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-{/* for the export use default compose() and add the translate('') function BEFORE the MapStatesToPorps */}
-{/* the 'produt is a name for the category in the i18n.js file. Choose wisely!' */}
-export default compose(
+export default combine(
   translate('product'),
   translate('profile'),
   connect(mapStateToProps)

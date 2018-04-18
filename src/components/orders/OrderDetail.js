@@ -2,9 +2,8 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Card from "material-ui/Card";
-import { CardHeader, CardMedia } from "material-ui/Card";
 import Button from 'material-ui/Button'
-import Table, { TableBody, TableCell, TableHead, TableRow } from "material-ui/Table";
+import Table, { TableBody, TableCell, TableRow } from "material-ui/Table";
 import {  fetchOrder, changeStatus } from '../../actions/orders'
 import { connect } from 'react-redux'
 import compose from 'lodash/fp/compose'

@@ -10,7 +10,6 @@ import EditIcon from "@material-ui/icons/Edit";
 import compose from "lodash/fp/compose";
 import { translate } from "react-i18next";
 import Dialog, { DialogTitle } from "material-ui/Dialog";
-import { styles } from './LandingPage'
 
 class AdminProfilePage extends PureComponent {
   state = {

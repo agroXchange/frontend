@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react';
-import compose from 'lodash/fp/compose'
+import React from 'react';
+import * as combine from "lodash/fp/compose";
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Button from 'material-ui/Button';
@@ -10,7 +10,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MenuItem from 'material-ui/Menu/MenuItem';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
-import Icon from 'material-ui/Icon';
 import Search from '@material-ui/icons/Search';
 
 import { fetchCodes } from '../../actions/codes'
@@ -326,7 +325,7 @@ const mapStateToProps = (state, props) => ({
     beans: state.codes.filter(x => x.code.match(/^09/))
 })
 
-export default compose(
+export default combine(
     withMobileDialog(),
     connect(mapStateToProps, { fetchCodes })
 )(SearchProductForm);

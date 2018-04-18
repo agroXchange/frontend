@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import SearchProductForm from './SearchProductForm'
 import { searchProduct } from '../../actions/products'
 
