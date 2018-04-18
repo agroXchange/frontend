@@ -299,7 +299,7 @@ class NavBar extends PureComponent {
             </div>
 
             <Typography
-              onClick={() => this.props.history.push("/")}
+              onClick={() => this.props.history.push("/dashboard")}
               variant="title"
               className={classes.flex}
               style={{ color: `#588D61`, fontSize: "30px" }}
