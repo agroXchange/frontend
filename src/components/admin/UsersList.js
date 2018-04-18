@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchUsers, deleteUser } from "../../actions/users";
-import { assignImage, searchingByName} from "./lib/lib";
+import { assignImage, searchingByName } from "./lib/lib";
 import compose from "lodash/fp/compose";
 import { withStyles } from "material-ui/styles";
 import List, {
@@ -12,7 +12,6 @@ import List, {
   ListItemText
 } from "material-ui/List";
 import DeleteIcon from "@material-ui/icons/Delete";
-import InfoIcon from "@material-ui/icons/Info";
 import SearchIcon from "@material-ui/icons/Search";
 import Button from "material-ui/Button";
 import IconButton from "material-ui/IconButton";
@@ -63,7 +62,7 @@ class UsersList extends PureComponent {
     return (
       <Dialog open={users.length === 0} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">There are not users</DialogTitle>
-        <Link style={{textDecoration: 'none'}} to={`/admin`}>
+        <Link style={{ textDecoration: "none" }} to={`/admin`}>
           <Button size="medium" color="primary">
             Admin Page
           </Button>
@@ -80,6 +79,14 @@ class UsersList extends PureComponent {
 
     return (
       <div>
+      <Button
+        onClick={() => this.props.history.goBack()}
+        size="medium"
+        color="primary"
+        style={{display:'flex', flex:1}}
+      >
+        Go Back
+      </Button>
         <form>
           <div
             style={{
@@ -104,51 +111,43 @@ class UsersList extends PureComponent {
         {this.renderMessage(users)}
         {users.filter(searchingByName(this.state.term)).map(user => (
           <List>
-            <ListItem>
+            <ListItem
+              onClick={() => this.props.history.push(`/admin/profiles/${user.id}`)}
+            >
               <ListItemAvatar>
-                <Link style={{textDecoration: 'none'}} to={`/admin/profiles/${user.id}`}>
-                  <Avatar>
-                    <img
-                      className={classes.media}
-                      src={assignImage(user.profile.logo)}
-                      alt=""
-                    />
-                  </Avatar>
-                </Link>
+                <Avatar>
+                  <img
+                    className={classes.media}
+                    src={assignImage(user.profile.logo)}
+                    alt=""
+                  />
+                </Avatar>
               </ListItemAvatar>
 
               <ListItemText
                 primary={user.profile.name}
                 secondary={user.profile.country}
               />
-              <Link style={{textDecoration: 'none'}} to={`/admin/profiles/${user.id}`}>
-                <IconButton>
-                  <InfoIcon />
-                </IconButton>
-              </Link>
-              <ListItemSecondaryAction>
-                <IconButton onClick={this.handleOpen}>
-                  <DeleteIcon />
-                </IconButton>
-                <Dialog
-                  open={this.state.open}
-                  onRequestClose={this.handleClose}
-                >
-                  <DialogTitle>
-                    {`Are you sure do you want to delete ${user.profile.name}?`}
-                  </DialogTitle>
-                  <DialogActions>
-                    <Button onClick={this.handleClose} primary>
-                      {"Cancel"}
-                    </Button>
-                    <Button onClick={() => this.deleteUser(user.id)} primary>
-                      {"Yes"}
-                    </Button>
-                  </DialogActions>
-                </Dialog>
-              </ListItemSecondaryAction>
-              <Divider inset={true} />
             </ListItem>
+            <ListItemSecondaryAction>
+              <IconButton onClick={this.handleOpen}>
+                <DeleteIcon />
+              </IconButton>
+              <Dialog open={this.state.open} onRequestClose={this.handleClose}>
+                <DialogTitle>
+                  {`Are you sure do you want to delete ${user.profile.name}?`}
+                </DialogTitle>
+                <DialogActions>
+                  <Button onClick={this.handleClose} primary>
+                    {"Cancel"}
+                  </Button>
+                  <Button onClick={() => this.deleteUser(user.id)} primary>
+                    {"Yes"}
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </ListItemSecondaryAction>
+            <Divider inset={true} />
             <Divider inset={true} />
           </List>
         ))}
