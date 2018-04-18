@@ -2,26 +2,18 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import compose from 'lodash/fp/compose'
-<<<<<<< HEAD
-=======
-import { translate } from "react-i18next";
-import PropTypes from 'prop-types'
->>>>>>> 5a907a88972b9a50cf5f3484572f3ef607d0bfff
 import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
 import Grid from 'material-ui/Grid'
 import Button from 'material-ui/Button'
-<<<<<<< HEAD
 import Dialog, { DialogTitle } from 'material-ui/Dialog'
-=======
-import Dialog, {  DialogTitle } from 'material-ui/Dialog'
->>>>>>> 5a907a88972b9a50cf5f3484572f3ef607d0bfff
 import '../../styles/Product.css'
 import { fetchProduct, updateProduct, removeProduct } from '../../actions/products'
 import { createOrder } from '../../actions/orders'
 import OrderForm from '../orders/OrderForm'
 import EditProductForm from './EditProductForm'
 import {jwtPayload} from "../../jwt"
+import { translate } from "react-i18next"
 
 const styles = theme => ({
   dialog: {
@@ -110,11 +102,8 @@ class Product extends PureComponent {
   }
 
   render() {
-<<<<<<< HEAD
-    const { product, currentProfileId } = this.props
-=======
     const { classes, t, product, currentUser, currentUserId, currentProfileId } = this.props
->>>>>>> 5a907a88972b9a50cf5f3484572f3ef607d0bfff
+
     if (!product) return null
     return(
 
