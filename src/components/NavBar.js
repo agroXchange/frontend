@@ -14,7 +14,6 @@ import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes"
 import PermIdentityIcon from "@material-ui/icons/PermIdentity"
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd"
 import DescriptionIndIcon from "@material-ui/icons/Description"
-import Translate from "@material-ui/icons/Translate"
 import SwipeableDrawer from "material-ui/SwipeableDrawer"
 import StarIcon from "@material-ui/icons/Star"
 import { ListItem } from "material-ui/List"
@@ -25,6 +24,8 @@ import { connect } from "react-redux"
 import { withStyles } from "material-ui"
 import Button from "material-ui/Button"
 import { withRouter } from "react-router"
+import Select from "material-ui/Select"
+import { MenuItem } from 'material-ui/Menu';
 
 const styles = {
   list: {
@@ -56,7 +57,12 @@ class NavBar extends PureComponent {
   state = {
     auth: true,
     anchorEl: null,
-    left: false
+    left: false,
+    currency: '$'
+  }
+  handleChangeValue = (event) => {
+    this.setState({currency: event.target.value})
+
   }
 
   toggleDrawer = (side, open) => () => {
@@ -65,22 +71,6 @@ class NavBar extends PureComponent {
 
   handleChange = (event, checked) => {
     this.setState({ auth: checked })
-  }
-
-  handleMenu = event => {
-    this.setState({ anchorEl: event.currentTarget })
-  }
-
-  handleNewMenu = event => {
-    this.setState({ El: event.currentTarget })
-  }
-
-  handleClose = () => {
-    this.setState({ anchorEl: null })
-  }
-
-  handleNewClose = () => {
-    this.setState({ El: null })
   }
 
   redirectDashboard = (user) => {
@@ -168,18 +158,8 @@ class NavBar extends PureComponent {
   }
 
   render() {
-    const {
-      classes,
-      currentUser,
-      currentProfileId,
-      currentProfileRole,
-      t
-    } = this.props
-    const { auth, El } = this.state
-    const openNew = Boolean(El)
-
-    const { i18n } = this.props
-
+    const { classes, currentUser, currentProfileId, currentProfileRole, t } = this.props
+    const { auth, i18n } = this.state
     const changeLanguage = lng => {
       i18n.changeLanguage(lng)
     }
@@ -285,7 +265,6 @@ class NavBar extends PureComponent {
                   <MenuIcon />
                 </IconButton>
               )}
-
               <SwipeableDrawer
                 className={classes.menuButton}
                 open={this.state.left}
@@ -303,7 +282,6 @@ class NavBar extends PureComponent {
                 </div>
               </SwipeableDrawer>
             </div>
-
             <Typography
               onClick={this.redirectDashboard(currentUser)}
               variant="title"
@@ -312,21 +290,29 @@ class NavBar extends PureComponent {
             >
               AgroXchange
             </Typography>
-
             {auth && (
               <div>
-
-
-
                   <Button size="small" onClick={() => changeLanguage("en")}>
                     <img className="LanguageDetector" src="/images/en.svg" alt="EN" />
                   </Button>
-
                   <Button size="small" onClick={() => changeLanguage("es")}>
                     <img className="LanguageDetector" src="/images/es.svg" alt="ES" />
                   </Button>
-
-              </div>
+                  <Select
+                    style={{decoration:'none'}}
+                    value={this.state.currency}
+                    onChange={this.handleChangeValue}
+                    inputProps={{
+                      name: "name",
+                      id: "age-simple"
+                    }}
+                  >
+                    <MenuItem value={"$"} >$</MenuItem>
+                    <MenuItem value={"&euro;"}>&euro;</MenuItem>
+                    <MenuItem value={"₡"}>₡</MenuItem>
+                    <MenuItem value={"COP$"}>COP$</MenuItem>
+                  </Select>
+                </div>
             )}
           </Toolbar>
         </AppBar>

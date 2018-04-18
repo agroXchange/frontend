@@ -1,22 +1,11 @@
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
-import {
-  fetchPendingUsers,
-  approveUser,
-  deleteUser
-} from "../../actions/users"
+import { fetchPendingUsers, approveUser, deleteUser } from "../../actions/users"
 import { assignImage, searchingByName } from "./lib/lib"
 import * as combine from "lodash/fp/compose"
-import { withStyles } from "material-ui/styles"
-import List, {
-  ListItem,
-  ListItemAvatar,
-  ListItemSecondaryAction,
-  ListItemText
-} from "material-ui/List"
+import List, { ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText } from "material-ui/List"
 import DeleteIcon from "@material-ui/icons/Delete"
-import InfoIcon from "@material-ui/icons/Info"
 import Button from "material-ui/Button"
 import IconButton from "material-ui/IconButton"
 import Avatar from "material-ui/Avatar"
@@ -24,16 +13,6 @@ import Divider from "material-ui/Divider"
 import Dialog, { DialogTitle, DialogActions } from "material-ui/Dialog"
 import SearchIcon from "@material-ui/icons/Search"
 import TextField from "material-ui/TextField"
-
-const style = theme => ({
-  card: {
-    height: 550,
-    width: 300,
-    margin: 20,
-    textAlign: "center",
-    display: "inline-block"
-  }
-})
 
 class UsersList extends PureComponent {
   state = {
@@ -90,8 +69,6 @@ class UsersList extends PureComponent {
 
   render() {
     const users = this.props.users
-    const classes = this.props
-
     if (!users) return null
 
     return (
@@ -185,6 +162,5 @@ const mapStateToProps = function(state) {
 }
 
 export default combine(
-  withStyles(style),
   connect(mapStateToProps, { fetchPendingUsers, approveUser, deleteUser })
 )(UsersList)
