@@ -30,11 +30,6 @@ const styles = theme => ({
 })
 
 class Dashboard extends PureComponent {
-  state = {}
-
-  x = () => {
-    return fetchOrdersByBuyer()
-  }
 
   componentWillMount(props) {
     this.props.fetchMyProducts(this.props.currentProfileId)
@@ -47,6 +42,7 @@ class Dashboard extends PureComponent {
       showAll: true
     })
   }
+
 
   render() {
     const { classes, currentProfileId, currentUser, orders } = this.props
@@ -141,13 +137,13 @@ class Dashboard extends PureComponent {
           </CardContent>
           <CardActions>
             <Link to={`/orders`}>
-              <Button size="medium" color="primary" variant="raised" onClick={ this.x }>
+              <Button size="medium" color="primary" variant="raised" >
                 View all orders
               </Button>
             </Link>
             <Link to={`/orders/received`}>
               <Button size="medium" color="primary" variant="raised" >
-                View all Recieved orders
+                View all offers
               </Button>
             </Link>
           </CardActions>
