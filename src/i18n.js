@@ -15,7 +15,26 @@ i18n.use(LanguageDetector).init({
         'Country': 'Country',
         'City/Port': 'City/Port',
         'Edit Product': 'Edit Product',
-        'Make An Order': 'Make An Order'
+        'Make An Order': 'Make An Order',
+        'Product': 'Product',
+        'Description': 'Description',
+        'Price per kg': 'Price per kg',
+        'Please select your currency': 'Please select your currency',
+        'Harvested Date': 'Harvested Date',
+        'Expiry Date': 'Expiry Date',
+        'Please Upload a Photo': 'Please Upload a Photo',
+        'Choose file': 'Choose file',
+        'No file chosen': 'No file chosen',
+        'Save': 'Save',
+        'Back': 'Back',
+       'Vegetables': 'Vegetables',
+       'Fruits & Nuts': 'Fruits & Nuts',
+       'Beans & Crop': 'Beans & Crop', 
+       'Filter': 'Filter',
+       'All': 'All',
+       'Select product': 'Select product',
+       'HS Code': 'HS Code',
+       'From country' : ' From country',
       },
       profile: {
         'Name': 'Name',
@@ -63,16 +82,24 @@ i18n.use(LanguageDetector).init({
       },
       orders: {
         'Order': 'Order',
+        'Order Number': 'Order Number',
         'Order Volume': 'Order Volume',
         'Comments': 'Comments',
         'Status': 'Status',
         'Ordered date': 'Ordered date',
+        'Pending': 'Pending',
+        'Approved': 'Approved',
+        'Declined': 'Declined',
+        'Bought': 'Bought',
+        'All': 'All',
         'GO TO SELLER PROFILE': 'GO TO SELLER PROFILE',
         'SEE DETAILS': 'SEE DETAILS',
         'GO BACK': 'GO BACK'
       },
       detail: {
         'Order': 'Order',
+        'Number': 'Number',
+        'Status': 'Status',
         'Organization name': 'Organization name',
         'Field': 'Field',
         'Type': 'Type',
@@ -85,7 +112,8 @@ i18n.use(LanguageDetector).init({
         'Volume': 'Volume',
         'Comments': 'Comments',
         'ACCEPT': 'ACCEPT',
-        'DECLINE': 'DECLINE'
+        'DECLINE': 'DECLINE',
+        'GO BACK': 'GO BACK'
       }
     },
     es: {
@@ -100,7 +128,26 @@ i18n.use(LanguageDetector).init({
         'Country': 'Estado',
         'City/Port': 'Ciudad',
         'Edit Product': 'Editar producto',
-        'Make An Order': 'Hacer un pedido'
+        'Make An Order': 'Hacer un pedido',
+        'Product': 'Producto',
+        'Description': 'Descripción',
+        'Price per kg': 'Precio por kg',
+        'Please select your currency': 'Seleccione su moneda',
+        'Harvested Date': 'Fecha de cosecha',
+        'Expiry Date': 'Fecha de caducidad',
+        'Please Upload a Photo': 'Por favor cargue una foto',
+        'Choose file': 'Elija el archivo',
+        'No file chosen': 'Ningún archivo elegido',
+        'Save': 'Salvar',
+        'Back': 'Atrás',
+        'Vegetables': 'Vegetales',
+        'Fruits & Nuts': 'Frutas & Nueces',
+        'Beans & Crop' :'Frijoles & Cultivo',
+        'Filter': 'Filtrar',
+        'All': 'Todas',
+        'Select product': 'Seleccionar producto',
+        'HS Code': 'Código HS',
+        'From country': 'Del pais',
       },
       profile: {
         'new': 'nuevo'
@@ -148,16 +195,23 @@ i18n.use(LanguageDetector).init({
       },
       orders: {
         'Order': 'Orden',
+        'Order Number': 'Número de orden',
         'Order Volume': 'Volumen de pedido',
         'Comments': 'Comentarios',
         'Status': 'Estado',
+        'Pending': 'Pendiente',
+        'Approved': 'Aprobado',
+        'Declined': 'Rechazado',
+        'Bought': 'Compró',
+        'All': 'Todas',
         'Ordered date': 'Fecha ordenada',
-        'GO TO SELLER PROFILE': 'IR AL PERFIL DEL VENDEDOR',
         'SEE DETAILS': 'Ver detalles',
         'GO BACK': 'REGRESA'
       },
       detail: {
         'Order': 'Orden',
+        'Number': 'Número',
+        'Status': 'Estado',
         'Organization name': 'Nombre de la Organización',
         'Field': 'Campo',
         'Type': 'Tipo',
@@ -170,7 +224,8 @@ i18n.use(LanguageDetector).init({
         'Volume': 'Volumen',
         'Comments': 'Comentarios',
         'ACCEPT': 'ACEPTAR',
-        'DECLINE': 'DISMINUCION'
+        'DECLINE': 'DISMINUCION',
+        'GO BACK': 'REGRESA'
       }
     }
   },

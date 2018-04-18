@@ -21,16 +21,12 @@ const style = () => ({
     display: "inline-block"
   },
   media: {
-    height: 100
+    height: 200
   },
   table: {
-    width: " 10px",
+    width: 50,
     fontSize: "10px",
-    textAlign: "center"
-  },
-  seller: {
-    textAlign: "left",
-    fontSize: "5px"
+    textAlign: "center",
   }
 });
 
@@ -89,7 +85,7 @@ class OrderDetail extends PureComponent {
         </Button>
         </div>
       )
-  } else if (currentUser === order.buyer.id) {
+  } else if (currentUser === order.buyer.id && order.status === "Approved") {
      return (
        <div>
        <Button
@@ -114,9 +110,12 @@ class OrderDetail extends PureComponent {
   return (
       <div>
          <Card className={classes.card} zDepth={3} circle={true} >
-          <CardHeader avatar={"#" + order.id} />
                <Table className={classes.table}>
                 <TableBody>
+                <TableRow>
+                   <TableCell><b>{t('Number')}</b></TableCell>
+                   <TableCell>{order.id}</TableCell>
+                </TableRow>
                 <TableRow>
                    <TableCell><b>{t('Status')}</b></TableCell>
                    <TableCell><mark><b>{order.status}</b></mark></TableCell>
@@ -174,7 +173,6 @@ class OrderDetail extends PureComponent {
                {t('GO BACK')}
               </Button>
         </Card>
-
       </div>
       )
    }

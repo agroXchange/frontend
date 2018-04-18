@@ -9,7 +9,7 @@ import Button from "material-ui/Button"
 import Typography from "material-ui/Typography"
 import Card, { CardActions, CardContent } from "material-ui/Card"
 import Paper from "material-ui/Paper"
-import { fetchOrdersByBuyer } from '../../actions/orders'
+import {fetchUnseenOrders} from '../../actions/orders'
 import {jwtPayload} from '../../jwt'
 
 const styles = theme => ({
@@ -38,17 +38,23 @@ const styles = theme => ({
 })
 
 class Dashboard extends PureComponent {
-  x = () => {
-    return fetchOrdersByBuyer()
-  }
+  state = {}
 
   componentWillMount(props) {
     this.props.fetchMyProducts(this.props.currentProfileId)
     this.props.fetchUser(this.props.currentProfileId)
+    this.props.fetchUnseenOrders()
   }
 
+  handleShowAll = () => {
+    this.setState({
+      showAll: true
+    })
+  }
+
+
   render() {
-    const { classes, currentProfileId, currentUser } = this.props
+    const { classes, currentProfileId, currentUser, orders } = this.props
     if (!currentUser) return <Redirect to="/" />
     if (this.props.currentUserRole === "admin") return <Redirect to="/admin" />;
 
@@ -63,6 +69,39 @@ class Dashboard extends PureComponent {
       >
         <h1>Welcome User!</h1>
         {console.log('role  ' + this.props.jwtPayload)}
+        {
+          orders[0] &&
+          <Card className={classes.card}>
+            <CardContent>
+              <Typography gutterBottom variant="headline" component="h2">
+                New orders received:
+              </Typography>
+              {
+                !this.state.showAll &&
+                orders.slice(0,3).map(o => {
+                  const {product, buyer} = o
+                  return (
+                    <Link to={`/orders/${o.id}`} ><Typography>{o.volume}kg of {product.code.titleeng} from {buyer.name}</Typography></Link>
+                  )
+                })
+              }
+              {
+                this.state.showAll &&
+                orders.map(o => {
+                  const {product, buyer} = o
+                  return (
+                    <Link to={`/orders/${o.id}`} ><Typography>{o.volume}kg of {product.code.titleeng} from {buyer.name}</Typography></Link>
+                  )
+                })
+              }
+              {
+                orders.length > 3 &&
+                !this.state.showAll &&
+                <Button onClick={this.handleShowAll} >Show all</Button>
+              }
+            </CardContent>
+          </Card>
+        }
         <Card className={classes.card}>
           <CardContent>
             <Typography gutterBottom variant="headline" component="h2">
@@ -112,8 +151,9 @@ class Dashboard extends PureComponent {
               </Button>
             </Link>
             <Link style={{textDecoration: 'none'}} to={`/orders/received`}>
-              <Button style={{backgroundColor: `#588D61`,'&:hover': {backgroundColor: `#8FBC8F`}}} size="medium" color="primary" variant="raised" >
-                View all Recieved orders
+              <Button size="medium" color="primary" variant="raised" >
+                View all recieved orders
+
               </Button>
             </Link>
           </CardActions>
@@ -139,5 +179,5 @@ const mapStateToProps = function(state) {
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { fetchOrdersByBuyer, fetchMyProducts, fetchUser })
+  connect(mapStateToProps, { fetchMyProducts, fetchUser, fetchUnseenOrders })
 )(Dashboard)

@@ -23,13 +23,22 @@ import OrderForm from '../orders/OrderForm'
 import EditProductForm from './EditProductForm'
 import {jwtPayload} from "../../jwt"
 
-const styles = {
+const styles = theme => ({
   dialog: {
     marginBottom: 20,
     marginLeft: 20,
     marginRight: 20,
-  }
-}
+  },
+  button : {
+  margin: theme.spacing.unit,
+  backgroundColor: `#588D61`,
+  color: "white",
+  '&:hover': {
+     backgroundColor: `#8FBC8F`,
+   }
+ }
+})
+
 const stockImage = "https://theculinarycook.com/wp-content/uploads/2012/04/vegetable-stock-679x509.jpg"
 
 class Product extends PureComponent {
@@ -127,7 +136,7 @@ class Product extends PureComponent {
 
                 <Link style={{textDecoration: 'none'}} to={ `/profiles/${product.seller.id}` }>
                   <Button color="primary">View Seller</Button>
-                </Link>
+
               }
             </Grid>
 
@@ -141,10 +150,12 @@ class Product extends PureComponent {
                 <div>
                   <Button color="primary" onClick={ this.handleEditOpen }>Edit Product</Button>
                   <Button color="primary" onClick={ this.removeProduct }>Remove Product</Button>
+
                 </div>
               }
 
               { currentProfileId !== product.seller.id &&
+
                 <Button color="primary" onClick={this.handleClickOrderOpen}>Make New Order</Button>
               }
 
@@ -183,11 +194,14 @@ class Product extends PureComponent {
               aria-labelledby="form-dialog-title"
             >
               <DialogTitle id="form-dialog-title">Thankyou. Your listing has been updated.</DialogTitle>
+              {setTimeout(function() {window.location.href=`/dashboard`}, 5000)}
             </Dialog>
 
           </Grid>
 
+
           <Button color="primary" onClick={() => this.props.history.goBack()}>
+
           	Go Back
           </Button>
         </Paper>

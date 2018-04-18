@@ -5,15 +5,28 @@ import { fetchAllProducts, filterProducts } from '../../actions/products'
 import Button from 'material-ui/Button'
 import Dialog, { DialogContent, DialogContentText, withMobileDialog, } from 'material-ui/Dialog'
 import SearchProductForm from './SearchProductForm';
-import Tune from '@material-ui/icons/Tune'
+import Settings from '@material-ui/icons/Settings'
 import Cached from '@material-ui/icons/Cached'
+import { FormGroup, FormControlLabel } from 'material-ui/Form';
+import { withStyles } from "material-ui/styles";
+import compose from "lodash/fp/compose";
+import Checkbox from 'material-ui/Checkbox';
 
-const classes = {
+
+  const styles = theme => ({
   tuneIcon: {
     position: "relative",
     right: 50,
   },
-}
+  button: {
+    //margin: theme.spacing.unit,
+    backgroundColor: `#588D61`,
+    color: "white",
+    '&:hover': {
+      backgroundColor: `#8FBC8F`,
+    },
+  },
+});
 
 class ProductsPage extends PureComponent {
   state = {
@@ -27,7 +40,6 @@ class ProductsPage extends PureComponent {
 
   submit = (preferences) => {
     this.props.filterProducts(preferences)
-
     this.setState({ open: false })
   }
 
@@ -41,8 +53,9 @@ class ProductsPage extends PureComponent {
 
 
   render() {
-      const { fullScreen, products, currentUserRole } = this.props
+      const { fullScreen, classes, products, currentUserRole } = this.props
     if (!products) return null
+    console.log(products[0])
 
     return(
       <div>
@@ -51,21 +64,31 @@ class ProductsPage extends PureComponent {
           onClick={this.handleClickOpen}
           variant="raised"
           color="primary"
+          className={classes.button}
         >
-        <Tune className={classes.tuneIcon}/>
-
+         <Settings/> 
           Filter
         </Button>
+
         <Button
           onClick={this.submit}
           variant="raised"
           color="primary"
+          className={classes.button}
         >
           <Cached className={classes.cachedIcon} />
           <div>All</div>
 
         </Button>
 
+        <FormControlLabel disabled control={<Checkbox value="checkedD" />} label="Disabled" />
+
+<p>{
+        // !products[0].currency ? "< select product >" : products[0].currency
+        } </p>
+
+
+        
         <Dialog
           fullScreen={fullScreen}
           open={this.state.open}
@@ -84,14 +107,21 @@ class ProductsPage extends PureComponent {
             type="submit"
             onClick={_ => this.handleClose()}
             style={{
+              justify: 'center',
+              textAlign: 'center',
               display: 'block',
               margin: 'auto',
-              marginTop: 20,
-              marginBottom: 20
+              marginTop: 10,
+              marginBottom: 2,
+              backgroundColor: `#white`,
+              color: "#588D61",
+              '&:hover': {
+                backgroundColor: `#8FBC8F`,
+              }
             }}
           >
             Cancel
-                        </Button>
+          </Button>
 
           </Dialog>
 
@@ -109,4 +139,12 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchAllProducts, filterProducts })(ProductsPage)
+export default compose(
+  withMobileDialog(),
+withStyles(styles),
+connect(mapStateToProps, { fetchAllProducts, filterProducts })
+)
+(ProductsPage)
+
+
+
