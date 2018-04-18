@@ -47,14 +47,14 @@ class EditProfileForm extends PureComponent {
     const {name, value} = event.target
 
     this.setState({
-      [name]: value
+      [name]: value || " "
     })
   }
 
 
   render() {
     const { classes, t } = this.props;
-    const initialValues = this.props.initialValues || { }
+    const initialValues = this.props.initialValues || " "
 
     return (
       <form className={classes.container} onSubmit={this.handleSubmit}>

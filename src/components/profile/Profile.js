@@ -128,25 +128,26 @@ class Profile extends PureComponent {
               >
                 Upload Picture
               </Button>
-            </div>
-          )}
-          {currentProfileId === user.id &&
-            !this.state.upload && (
-              <Button onClick={this.handleClick}>Upload Picture</Button>
-            )}
-          {currentProfileId === user.id && (
-            <Button onClick={this.handleEditProfileOpen}>
-              Edit my profile
-            </Button>
-          )}
-          <Dialog
-            open={this.state.editProfile}
-            onClose={this.handleClose}
-            aria-labelledby="form-dialog-title"
-          >
-            <DialogTitle id="form-dialog-title">Edit your profile</DialogTitle>
-            <EditProfileForm onSubmit={this.handleEditProfileSubmit} />
-          </Dialog>
+            }
+            {
+              currentProfileId === user.id &&
+              <Button onClick={this.handleEditProfileOpen}>
+                Edit my profile
+              </Button>
+            }
+            <Dialog
+              open={this.state.editProfile}
+              onClose={this.handleClose}
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle id="form-dialog-title">
+                Edit your profile
+              </DialogTitle>
+              <EditProfileForm      onSubmit={this.handleEditProfileSubmit}
+                initialValues={ user }
+                 />
+            </Dialog>
+          </div>
         </div>
       </Paper>
     )
