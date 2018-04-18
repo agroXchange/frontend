@@ -63,6 +63,11 @@ secondaryText: {
 titleContainer: {
   marginTop:"80px",
   fontWeight: 900
+},
+container: {
+  width: "100%",
+  margin:'auto',
+  boxSizing:"border-box"
 }
 });
 

@@ -26,7 +26,15 @@ const styles = theme => ({
   paper: {
     height: 200,
     minWidth: 400
-  }
+  },
+  button : {
+     margin: theme.spacing.unit,
+     backgroundColor: `#588D61`,
+     color: "white",
+     '&:hover': {
+        backgroundColor: `#8FBC8F`,
+      },
+  },
 })
 
 class Dashboard extends PureComponent {
@@ -103,7 +111,7 @@ class Dashboard extends PureComponent {
             </div>
           </CardContent>
           <CardActions>
-            <Button size="medium" color="primary" variant="raised" component={Link} to={`/profiles/${currentProfileId}`}>
+            <Button className={classes.button} size="medium" color="primary" variant="raised" component={Link} to={`/profiles/${currentProfileId}`}>
               See your profile information
             </Button>
           </CardActions>
@@ -118,10 +126,10 @@ class Dashboard extends PureComponent {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="medium" color="primary" variant="raised" component={Link} to={`/products/new`}>
+            <Button className={classes.button}size="medium" color="primary" variant="raised" component={Link} to={`/products/new`}>
               Add a new product
             </Button>
-            <Button size="medium" color="primary" variant="raised" component={Link} to={`/profiles/${currentProfileId}/products`}>
+            <Button className={classes.button} size="medium" color="primary" variant="raised" component={Link} to={`/profiles/${currentProfileId}/products`}>
               See all my products
             </Button>
           </CardActions>
@@ -136,14 +144,14 @@ class Dashboard extends PureComponent {
             </Typography>
           </CardContent>
           <CardActions>
-            <Link to={`/orders`}>
-              <Button size="medium" color="primary" variant="raised" >
+            <Link style={{textDecoration: 'none'}}  to={`/orders`}>
+              <Button className={classes.button} size="medium" color="primary" variant="raised" onClick={ this.x }>
                 View all orders
               </Button>
             </Link>
-            <Link to={`/orders/received`}>
-              <Button size="medium" color="primary" variant="raised" >
-                View all offers
+            <Link style={{textDecoration: 'none'}} to={`/orders/received`}>
+              <Button style={{backgroundColor: `#588D61`,'&:hover': {backgroundColor: `#8FBC8F`}}} size="medium" color="primary" variant="raised" >
+                View all Recieved orders
               </Button>
             </Link>
           </CardActions>
