@@ -11,8 +11,8 @@ const stockImage = "https://theculinarycook.com/wp-content/uploads/2012/04/veget
 
 const styles = {
   card: {
-    maxWidth: 345,
-    minWidth: 240,
+    maxWidth: 400,
+    minWidth: 300,
     margin: 20,
     textAlign: "left",
     display: "inline-block"
@@ -34,12 +34,20 @@ class ProductList extends PureComponent {
   classes: PropTypes.object.isRequired
   };
 
-  // componentDidMount(props) {
-  //   this.props.fetchAllProducts()
-  // }
+  daysRemaining = (harvested, expiration) => {
+    const today = new Date()
+    const end = new Date(expiration)
+    const diffDays = parseInt((end - today) / (1000 * 60 * 60 * 24));
+    if(diffDays < 0) {
+      return 0
+    } else {
+      return diffDays
+    }
+  }
 
   render() {
     const { classes, products } = this.props;
+<<<<<<< HEAD
 
     const { t } = this.props
 
@@ -59,6 +67,28 @@ class ProductList extends PureComponent {
                <p className={classes.number}>
                  <h2> { product.name }</h2>
                </p>
+=======
+    const { t, i18n } = this.props
+
+   if(!products) return null
+   return (
+        <div>
+          { products[0] && products[0].code && products.map(product =>
+           <Card className={classes.card}>
+             <CardMedia
+              className={classes.media}
+              image={ product.photo !== null ?
+                product.photo : stockImage }
+              title="product name - redux"
+
+
+            />
+
+             <CardContent>
+
+               { product.volume === 0 ? <h3>SOLD OUT</h3> : "" }
+               { this.daysRemaining(product.harvested, product.expiration) === 0 ? <h3>EXPIRED</h3> : "" }
+>>>>>>> 5a907a88972b9a50cf5f3484572f3ef607d0bfff
 
                  <table>
 
@@ -95,10 +125,17 @@ class ProductList extends PureComponent {
                </Link>
              </CardActions>
            </Card>
+<<<<<<< HEAD
          )}
        </div>
     )
   }
+=======
+           )}
+         </div>
+      )
+    }
+>>>>>>> 5a907a88972b9a50cf5f3484572f3ef607d0bfff
 }
 
 export default combine(

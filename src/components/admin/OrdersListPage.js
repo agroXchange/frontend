@@ -73,6 +73,14 @@ class OrdersPage extends PureComponent {
 
     return (
       <div>
+      <Button
+        onClick={() => this.props.history.goBack()}
+        size="medium"
+        color="primary"
+        style={{display:'flex', flex:1}}
+      >
+        Go Back
+      </Button>
       <form>
         <div
           style={{

@@ -2,11 +2,20 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import compose from 'lodash/fp/compose'
+<<<<<<< HEAD
+=======
+import { translate } from "react-i18next";
+import PropTypes from 'prop-types'
+>>>>>>> 5a907a88972b9a50cf5f3484572f3ef607d0bfff
 import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
 import Grid from 'material-ui/Grid'
 import Button from 'material-ui/Button'
+<<<<<<< HEAD
 import Dialog, { DialogTitle } from 'material-ui/Dialog'
+=======
+import Dialog, {  DialogTitle } from 'material-ui/Dialog'
+>>>>>>> 5a907a88972b9a50cf5f3484572f3ef607d0bfff
 import '../../styles/Product.css'
 import { fetchProduct, updateProduct, removeProduct } from '../../actions/products'
 import { createOrder } from '../../actions/orders'
@@ -87,15 +96,38 @@ class Product extends PureComponent {
     const today = Date.parse(new Date())
     const p = Math.round(((today - start) / (end - start)) * 100) + '%'
     return p
+  }
 
+  daysRemaining = (harvested, expiration) => {
+    const today = new Date()
+    const end = new Date(expiration)
+    const diffDays = parseInt((end - today) / (1000 * 60 * 60 * 24));
+    if(diffDays < 0) {
+      return 0
+    } else {
+      return diffDays
+    }
   }
 
   render() {
+<<<<<<< HEAD
     const { product, currentProfileId } = this.props
+=======
+    const { classes, t, product, currentUser, currentUserId, currentProfileId } = this.props
+>>>>>>> 5a907a88972b9a50cf5f3484572f3ef607d0bfff
     if (!product) return null
     return(
 
       <div className="product-container">
+        <Button
+         onClick={() => this.props.history.goBack()}
+         size="medium"
+         color="primary"
+         style={{display:'flex', flex:1}}
+       >
+         Go Back
+       </Button>
+
         <Paper className="paper">
         <Paper><h2 className="title">{ product.code.titleeng }</h2></Paper>
           <Grid container className="container" spacing={24}>
@@ -105,10 +137,11 @@ class Product extends PureComponent {
                 alt="product"
                 className="product-photo"/>
 
-              { product.volume === 0 ? <h2>UNAVAILABLE</h2> : "" }
+              { product.volume === 0 ? <h2>SOLD OUT</h2> : "" }
+              { this.daysRemaining(product.harvested, product.expiration) === 0 ? <h2>EXPIRED</h2> : "" }
 
               <div>
-                <p>Remaining Time</p>
+                <p>{ this.daysRemaining(product.harvested, product.expiration)} days remaining</p>
                 <div className="percentage-bar" >
                   <div className="bar" style={{ width: this.progress(product.harvested, product.expiration) }}></div>
                 </div>
@@ -117,9 +150,9 @@ class Product extends PureComponent {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <p><b>Code:</b> { product.code.code }</p>
               <p><b>Harvested Dated:</b> { product.harvested }</p>
               <p><b>Expiration Date:</b> { product.expiration }</p>
+              <p><b>Code:</b> { product.code.code }</p>
               <p><b>Volume:</b> { product.volume } KG</p>
               <p><b>Price:</b> { product.price } { product.currency } per KG</p>
 
@@ -185,16 +218,11 @@ class Product extends PureComponent {
               aria-labelledby="form-dialog-title"
             >
               <DialogTitle id="form-dialog-title">Thankyou. Your listing has been updated.</DialogTitle>
-              {setTimeout(function() {window.location.href=`/dashboard`}, 5000)}
+
             </Dialog>
 
           </Grid>
 
-
-          <Button color="primary" onClick={() => this.props.history.goBack()}>
-
-          	Go Back
-          </Button>
         </Paper>
 
       </div>
@@ -214,6 +242,7 @@ const mapStateToProps = function(state, props) {
 }
 
 export default compose(
+  translate("product"),
   withStyles(styles),
   connect(mapStateToProps, { fetchProduct, createOrder, updateProduct, removeProduct })
 )(Product)

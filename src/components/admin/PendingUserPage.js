@@ -109,23 +109,6 @@ class AdminProfilePage extends PureComponent {
               />
             )}
           </Dialog>
-
-          <div>
-            <Button
-              onClick={() => this.props.history.push(`/orders/${user.id}`)}
-              size="medium"
-              color="primary"
-            >
-              Orders
-            </Button>
-            <Button
-              onClick={() => this.props.history.push(`/products/${user.id}`)}
-              size="medium"
-              color="primary"
-            >
-              Products
-            </Button>
-          </div>
         </div>
         <Button
           onClick={() => this.approveUser(user.id)}
