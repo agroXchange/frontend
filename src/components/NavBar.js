@@ -14,7 +14,6 @@ import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import DescriptionIndIcon from "@material-ui/icons/Description";
-import Translate from "@material-ui/icons/Translate";
 import SwipeableDrawer from "material-ui/SwipeableDrawer";
 import StarIcon from "@material-ui/icons/Star";
 import { ListItem } from "material-ui/List";
