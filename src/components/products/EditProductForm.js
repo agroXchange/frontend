@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react'
-import compose from 'lodash/fp/compose'
-import MenuItem from 'material-ui/Menu/MenuItem';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
-import Paper from 'material-ui/Paper';
-import { withStyles } from 'material-ui/styles';
-import { InputAdornment } from 'material-ui/Input';
+import * as combine from "lodash/fp/compose"
+import MenuItem from 'material-ui/Menu/MenuItem'
+import TextField from 'material-ui/TextField'
+import Button from 'material-ui/Button'
+import Paper from 'material-ui/Paper'
+import { withStyles } from 'material-ui/styles'
+import { InputAdornment } from 'material-ui/Input'
 
 const styles = theme => ({
   container: {
@@ -191,4 +191,4 @@ class EditProductForm extends PureComponent {
 
 }
 
-export default compose(withStyles(styles))(EditProductForm)
+export default combine(withStyles(styles))(EditProductForm)

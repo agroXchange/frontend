@@ -1,35 +1,35 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { fetchUser, updateUser, approveUser } from "../../actions/users";
-import { assignImage } from "./lib/lib";
-import Button from "material-ui/Button";
-import Typography from "material-ui/Typography";
-import EditUserForm from "./EditUserForm";
-import IconButton from "material-ui/IconButton";
-import EditIcon from "@material-ui/icons/Edit";
-import compose from "lodash/fp/compose";
-import { translate } from "react-i18next";
-import Dialog, { DialogTitle } from "material-ui/Dialog";
+import React, { PureComponent } from "react"
+import { connect } from "react-redux"
+import { fetchUser, updateUser, approveUser } from "../../actions/users"
+import { assignImage } from "./lib/lib"
+import Button from "material-ui/Button"
+import Typography from "material-ui/Typography"
+import EditUserForm from "./EditUserForm"
+import IconButton from "material-ui/IconButton"
+import EditIcon from "@material-ui/icons/Edit"
+import * as combine from "lodash/fp/compose"
+import { translate } from "react-i18next"
+import Dialog, { DialogTitle } from "material-ui/Dialog"
 
 class AdminProfilePage extends PureComponent {
   state = {
     edit: false
-  };
+  }
 
 
   approveUser = id => {
     this.props.approveUser(id);
     this.props.history.goBack()
-   };
+   }
 
 
   handleEditClose = () => {
     this.setState({ edit: false });
-  };
+  }
 
   handleEditOpen = () => {
     this.setState({ edit: true });
-  };
+  }
 
   componentWillMount(props) {
     this.props.fetchUser(this.props.match.params.id);
@@ -118,17 +118,17 @@ class AdminProfilePage extends PureComponent {
           Approve
         </Button>
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = function(state) {
   return {
     user: state.user
-  };
-};
+  }
+}
 
-export default compose(
+export default combine(
   translate("user"),
   connect(mapStateToProps, { fetchUser, updateUser, approveUser })
 )(AdminProfilePage);
