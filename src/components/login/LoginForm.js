@@ -2,8 +2,10 @@ import React, { PureComponent } from "react";
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
 import Button from "material-ui/Button";
+import Checkbox from 'material-ui/Checkbox'
 import compose from "lodash/fp/compose";
 import { translate } from "react-i18next";
+import {FormControlLabel} from "material-ui/Form/index"
 
 const styles = theme => ({
   button: {
@@ -73,6 +75,12 @@ class LoginForm extends PureComponent {
             onChange={this.handleChange}
           />
         </div>
+        <FormControlLabel
+          control={
+            <Checkbox style={{marginLeft: 10, color: 'green'}} />
+          }
+          label="Stay logged in."
+        />
         <Button style={{backgroundColor:'green'}}
           variant="raised"
           color="primary"

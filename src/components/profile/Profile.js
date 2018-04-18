@@ -1,14 +1,54 @@
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
-import { fetchUser } from "../../actions/users"
+import { fetchUser, uploadLogo, updateProfile } from "../../actions/users"
 import Paper from "material-ui/Paper"
 import Typography from "material-ui/Typography"
 import compose from "lodash/fp/compose"
 import { translate } from "react-i18next"
+import {jwtPayload} from "../../jwt"
+import Button from "material-ui/Button"
+import Dialog, {  DialogTitle } from "material-ui/Dialog"
+import EditProfileForm from "./EditProfileForm"
 
 class Profile extends PureComponent {
+  state = {
+    upload: false
+  }
+
+  handleClick = () => {
+    this.setState({
+      upload: !this.state.upload
+    })
+  }
+
+  handleFileChange = (e) => {
+    this.setState({
+      picture: e.target.files[0]
+    })
+  }
+
+  handleSubmit = (id) => {
+    this.props.uploadLogo(id, this.state.picture)
+    this.setState({
+      upload: !this.state.upload
+    })
+  }
+
+  handleEditProfileOpen = () => {
+    this.setState({ editProfile: true })
+  }
+
+  handleClose = () => {
+    this.setState({ editProfile: false })
+  }
+
+  handleEditProfileSubmit = data => {
+    this.props.updateProfile(this.props.currentProfileId, data);
+    this.handleClose();
+  };
+
   render() {
-    const { user, t } = this.props;
+    const { user, t, currentProfileId} = this.props;
     if (!user) return null
 
     return (
@@ -46,18 +86,85 @@ class Profile extends PureComponent {
               {t("Email")}: {user.email}
             </Typography>
           </div>
+          <div>
+            {
+              this.state.upload && (
+                <div>
+                  <Typography
+                    color="textSecondary"
+                    style={{
+                      marginTop: 10
+                    }}
+                  >
+                    Please Upload a Photo
+                  </Typography>
+                  <input
+                    accept="image/*"
+                    id="raised-button-file"
+                    type="file"
+                    name="photo"
+                    className="upload-input"
+                    style={{
+                      marginTop: 10,
+                      marginBottom: 10
+                    }}
+                    onChange={this.handleFileChange}
+                  />
+                  <Button
+                    variant="raised"
+                    color="primary"
+                    style={{
+                      marginBottom: 10
+                    }}
+                    onClick={_ => this.handleSubmit(user.id)}
+                  >
+                    Upload Picture
+                  </Button>
+                </div>
+              )
+            }
+            {
+              currentProfileId === user.id &&
+              !this.state.upload &&
+              <Button onClick={this.handleClick} >
+                Upload Picture
+              </Button>
+            }
+            {
+              currentProfileId === user.id &&
+              <Button onClick={this.handleEditProfileOpen}>
+                Edit my profile
+              </Button>
+            }
+            <Dialog
+              open={this.state.editProfile}
+              onClose={this.handleClose}
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle id="form-dialog-title">
+                Edit your profile
+              </DialogTitle>
+              <EditProfileForm onSubmit={this.handleEditProfileSubmit} />
+            </Dialog>
+          </div>
         </div>
       </Paper>
     )
   }
 }
 
-const mapStateToProps = ({ user }, props) => ({
-  user
-})
+const mapStateToProps = ({ user, currentUser }, props) => {
+  const jwtDecoded = currentUser ? jwtPayload(currentUser.jwt) : {}
+  return {
+    user,
+    currentProfileId: jwtDecoded.profileId
+  }
+}
 
 const mapDispatchToProps = {
-  fetchUser
+  fetchUser,
+  uploadLogo,
+  updateProfile
 }
 
 export default compose(

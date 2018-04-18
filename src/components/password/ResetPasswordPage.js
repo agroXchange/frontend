@@ -1,13 +1,11 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { resetPassword } from "../../actions/password";
 import ResetPasswordForm from "./ResetPasswordForm";
 import { Redirect } from "react-router-dom";
 import { translate } from "react-i18next";
 import compose from "lodash/fp/compose";
 import Typography from "material-ui/Typography";
-import Button from "material-ui/Button";
 import Paper from "material-ui/Paper";
 
 class ResetPasswordPage extends PureComponent {

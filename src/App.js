@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import SignupPage from './components/signup/SignupPage'
 import AdminPage from './components/admin/LandingPage'
 import PendingUserList from './components/admin/PendingUserList'
 import AdminProfilePage from './components/admin/AdminProfilePage'
 import PendingUserPage from './components/admin/PendingUserPage'
+import AdminOrderDetail from './components/admin/OrderDetail'
+import ProductsList from './components/admin/ProductsList'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Product from './components/products/Product'
 import ExampleTranslation from './components/ExampleTranslation'
-import OrdersPage from './components/admin/OrdersPage'
+import OrdersListPage from './components/admin/OrdersListPage'
 import UsersList from './components/admin/UsersList'
 import OrderList from './components/orders/OrderList'
 import OrderDetail from './components/orders/OrderDetail'
@@ -18,7 +20,6 @@ import ProfilePage from './components/profile/ProfilePage'
 import LogoutPage from './components/logout/LogoutPage'
 import ResetPasswordPage from './components/password/ResetPasswordPage'
 import AddProductContainer from './components/products/AddProductContainer'
-import SearchProductContainer from './components/products/SearchProductContainer'
 import MyProducts from './components/products/MyProducts'
 import ProductsPage from './components/products/ProductsPage'
 import Dashboard from './components/dashboard/Dashboard'
@@ -36,8 +37,12 @@ class App extends Component {
             <Route exact path="/" component={ Home } />
             <Route exact path="/admin" component={AdminPage} />
             <Route exact path="/admin/pending" component={PendingUserList} />
+            <Route exact path="/admin/products" component={ProductsList} />
             <Route exact path="/admin/pending/profiles/:id([0-9]+)" component={PendingUserPage} />
-            <Route exact path="/admin/orders" component={OrdersPage} />
+            <Route exact path="/admin/profiles/:id([0-9]+)/orders" component={OrderList} />
+            <Route exact path="/admin/profiles/:id([0-9]+)/products" component={MyProducts} />
+            <Route exact path="/admin/orders" component={OrdersListPage} />
+            <Route exact path="/admin/orders/:id([0-9]+)" component={AdminOrderDetail} />
             <Route exact path="/admin/users" component={UsersList} />
             <Route exact path="/admin/profiles/:id([0-9]+)" component={AdminProfilePage} />
             <Route exact path="/login" component={LoginPage} />
@@ -52,9 +57,10 @@ class App extends Component {
             <Route exact path="/products/:id([0-9]+)" component={ Product } />
             <Route exact path="/profiles/:id([0-9]+)" component={ProfilePage} />
             <Route exact path="/profiles/:id([0-9]+)/products" component={ MyProducts } />
-            <Route exact path="/searchproduct" component={ SearchProductContainer } />
             <Route exact path="/reset-password" component={ ResetPasswordPage } />
             <Route exact path="/dashboard" component={ Dashboard } />
+            <Route path="products?code=:query1&country=:query2"
+              component={ProductsPage} />
           </div>
         </Router>
       </MuiThemeProvider>

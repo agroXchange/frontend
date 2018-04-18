@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react"
+import { Link } from "react-router-dom"
 import Select from "material-ui/Select"
 import { MenuItem } from "material-ui/Menu"
 import { withStyles } from "material-ui/styles"
@@ -43,8 +44,12 @@ const styles = theme => ({
 })
 
 function getSteps() {
-  return ["About your organization", "Your contact details", "Create an account"]
-};
+  return [
+    "About your organization",
+    "Your contact details",
+    "Create an account"
+  ]
+}
 
 class SteppedSignupForm extends PureComponent {
   state = {
@@ -89,13 +94,16 @@ class SteppedSignupForm extends PureComponent {
     const { activeStep, errorSteps } = this.state
 
     return (
+
       <div className={classes.root}>
+        <Typography gutterBottom variant="headline" component="h1">
+          {t("Sign up form")}
+        </Typography>
+        <Typography color="textSecondary">{t("fieldsNecessary")}</Typography>
         <Stepper activeStep={activeStep} alternativeLabel>
           {steps.map((label, i) => (
             <Step key={label}>
-              <StepLabel error={errorSteps.includes(i)}>
-                {label}
-              </StepLabel>
+              <StepLabel error={errorSteps.includes(i)}>{label}</StepLabel>
             </Step>
           ))}
         </Stepper>
@@ -104,11 +112,17 @@ class SteppedSignupForm extends PureComponent {
           onFieldValidation={this.updateErrorSteps}
           onSubmit={this.handleSubmit}
         >
-          {activeStep === 0 &&
+          {activeStep === 0 && (
+            <div>
               <div>
-                <div>
-                  <Typography color="textSecondary" margin="normal">{t("alreadyRegistered?")}</Typography>
-                  <Button color="primary">{t("Log in")}</Button>
+                <Typography color="textSecondary" margin="normal">
+                  {t("alreadyRegistered?")}
+                </Typography>
+                <Button color="primary" component={Link} to="/login">
+                  {t("Log in")}
+                </Button>
+              </div>
+              <div>
                 <TextField
                   required
                   id="name"
@@ -120,64 +134,68 @@ class SteppedSignupForm extends PureComponent {
                   value={this.state.name}
                   onChange={this.handleChange}
                 />
-            </div>
-                <div>
-                  <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="field">{t("field")}*</InputLabel>
-                    <Select
-                      required
-                      input={<Input name="field" id="field" />}
-                      value={this.state.field}
-                      onChange={this.handleChange}
-                    >
-                      <MenuItem value="producer">{t("producer")}</MenuItem>
-                      <MenuItem value="trader">{t("trader")}</MenuItem>
-                      <MenuItem value="logistics">{t("logistics")}</MenuItem>
-                      <MenuItem value="insurance">{t("insurance")}</MenuItem>
-                      <MenuItem value="other">{t("other")}</MenuItem>
-                    </Select>
-                    <FormHelperText>{t("whatField?")}</FormHelperText>
-                  </FormControl>
-                </div>
-                <div>
-                  <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="type">{t("type")}*</InputLabel>
-                    <Select
-                      required
-                      value={this.state.type}
-                      onChange={this.handleChange}
-                      inputProps={{
-                        name: "type",
-                        id: "type"
-                      }}
-                    >
-                      <MenuItem value="cooperative">{t("cooperative")}</MenuItem>
-                      <MenuItem value="association">{t("association")}</MenuItem>
-                      <MenuItem value="private">{t("private")}</MenuItem>
-                      <MenuItem value="ngo">{t("ngo")}</MenuItem>
-                      <MenuItem value="other">{t("other")}</MenuItem>
-                    </Select>
-                    <FormHelperText>{t("whatType?")}</FormHelperText>
-                  </FormControl>
-                </div>
-                <div>
-                  <TextField
-                    id="chamberOfCommerce"
-                    name="chamberOfCommerce"
-                    label={t("registration")}
-                    className={classes.textField}
-                    helperText={t("cocOptional")}
-                    margin="normal"
-                    value={this.state.chamberOfCommerce}
-                    onChange={this.handleChange}
-                  />
-                  <Typography color="textSecondary" style={{ padding: 20 }}>{t("cocExplanation")}</Typography>
-                </div>
-              <Button variant="raised" onClick={this.clickNext}>Next</Button>
               </div>
-          }
+              <div>
+                <FormControl className={classes.formControl}>
+                  <InputLabel htmlFor="field">{t("field")}*</InputLabel>
+                  <Select
+                    required
+                    input={<Input name="field" id="field" />}
+                    value={this.state.field}
+                    onChange={this.handleChange}
+                  >
+                    <MenuItem value="producer">{t("producer")}</MenuItem>
+                    <MenuItem value="trader">{t("trader")}</MenuItem>
+                    <MenuItem value="logistics">{t("logistics")}</MenuItem>
+                    <MenuItem value="insurance">{t("insurance")}</MenuItem>
+                    <MenuItem value="other">{t("other")}</MenuItem>
+                  </Select>
+                  <FormHelperText>{t("whatField?")}</FormHelperText>
+                </FormControl>
+              </div>
+              <div>
+                <FormControl className={classes.formControl}>
+                  <InputLabel htmlFor="type">{t("type")}*</InputLabel>
+                  <Select
+                    required
+                    value={this.state.type}
+                    onChange={this.handleChange}
+                    inputProps={{
+                      name: "type",
+                      id: "type"
+                    }}
+                  >
+                    <MenuItem value="cooperative">{t("cooperative")}</MenuItem>
+                    <MenuItem value="association">{t("association")}</MenuItem>
+                    <MenuItem value="private">{t("private")}</MenuItem>
+                    <MenuItem value="ngo">{t("ngo")}</MenuItem>
+                    <MenuItem value="other">{t("other")}</MenuItem>
+                  </Select>
+                  <FormHelperText>{t("whatType?")}</FormHelperText>
+                </FormControl>
+              </div>
+              <div>
+                <TextField
+                  id="chamberOfCommerce"
+                  name="chamberOfCommerce"
+                  label={t("registration")}
+                  className={classes.textField}
+                  helperText={t("cocOptional")}
+                  margin="normal"
+                  value={this.state.chamberOfCommerce}
+                  onChange={this.handleChange}
+                />
+                <Typography color="textSecondary" style={{ padding: 20 }}>
+                  {t("cocExplanation")}
+                </Typography>
+              </div>
+              <Button variant="raised" onClick={this.clickNext}>
+                Next
+              </Button>
+            </div>
+          )}
 
-          {activeStep === 1 &&
+          {activeStep === 1 && (
             <div>
               <div>
                 <TextField
@@ -227,11 +245,15 @@ class SteppedSignupForm extends PureComponent {
                   onChange={this.handleChange}
                 />
               </div>
-              <Button variant="raised" onClick={this.clickBack}>Back</Button>
-              <Button variant="raised" onClick={this.clickNext}>Next</Button>
+              <Button variant="raised" onClick={this.clickBack}>
+                Back
+              </Button>
+              <Button variant="raised" onClick={this.clickNext}>
+                Next
+              </Button>
             </div>
-          }
-          {activeStep === 2 &&
+          )}
+          {activeStep === 2 && (
             <div>
               <div>
                 <TextField
@@ -278,14 +300,18 @@ class SteppedSignupForm extends PureComponent {
                 this.state.password !== this.state.confirmPassword && (
                   <p style={{ color: "red" }}>{t("confirmError")}</p>
                 )}
-              <Button variant="raised" onClick={this.clickBack}>Back</Button>
-              <Button variant="raised" type="submit">Submit</Button>
+              <Button variant="raised" onClick={this.clickBack}>
+                Back
+              </Button>
+              <Button variant="raised" type="submit">
+                Submit
+              </Button>
             </div>
-          }
+          )}
         </form>
       </div>
     )
   }
 }
 
-export default compose(translate("user"), withStyles(styles))(SteppedSignupForm);
+export default compose(translate("user"), withStyles(styles))(SteppedSignupForm)

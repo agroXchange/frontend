@@ -9,6 +9,7 @@ import Paper from 'material-ui/Paper'
 import Grid from 'material-ui/Grid'
 import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
+import { LinearProgress } from 'material-ui/Progress';
 import Dialog, {
   DialogActions,
   DialogContent,
@@ -16,10 +17,10 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog'
 import '../../styles/Product.css'
-import { fetchProduct, updateProduct } from '../../actions/products'
+import { fetchProduct, updateProduct, removeProduct } from '../../actions/products'
 import { createOrder } from '../../actions/orders'
 import OrderForm from '../orders/OrderForm'
-import ProductForm from './ProductForm'
+import EditProductForm from './EditProductForm'
 import {jwtPayload} from "../../jwt"
 
 const styles = {
@@ -36,36 +37,33 @@ class Product extends PureComponent {
   state = {
     newOrder: false,
     confirmOrder: false,
-    editProduct: false
+    editProduct: false,
+    confirmEdit: false,
+    completed: 0
   }
+
+
 
   componentWillMount(props) {
     this.props.fetchProduct(this.props.match.params.id)
   }
 
-  handleClickOrderOpen = () => {
-    this.setState({ newOrder: true });
-  }
 
-  handleOrderClose = () => {
-    this.setState({ newOrder: false });
-  }
+  handleClickOrderOpen = () => { this.setState({ newOrder: true }) }
 
-  handleConfirmOpen = () => {
-    this.setState({ confirmOrder: true })
-  }
+  handleOrderClose = () => { this.setState({ newOrder: false }) }
 
-  handleConfirmClose = () => {
-    this.setState({ confirmOrder: false })
-  }
+  handleConfirmOpen = () => { this.setState({ confirmOrder: true }) }
 
-  handleEditOpen = () => {
-    this.setState({ editProduct: true });
-  }
+  handleConfirmClose = () => { this.setState({ confirmOrder: false }) }
 
-  handleEditClose = () => {
-    this.setState({ editProduct: false });
-  }
+  handleEditOpen = () => { this.setState({ editProduct: true }) }
+
+  handleEditClose = () => { this.setState({ editProduct: false }) }
+
+  handleConfirmEdit = () => { this.setState({ confirmEdit: true }) }
+
+  handleConfirmEditClose = () => { this.setState({ confirmEdit: false })}
 
   createOrder = (order, productId, buyer) => {
     this.props.createOrder(order, this.props.match.params.id, this.props.currentUser)
@@ -73,25 +71,49 @@ class Product extends PureComponent {
     this.handleConfirmOpen()
   }
 
-  updateProduct = (productId, updates) => {
+  updateProduct = (updates) => {
     this.props.updateProduct(this.props.match.params.id, updates)
+    this.handleEditClose()
+    this.handleConfirmEdit()
+  }
+
+  removeProduct = () => {
+    this.props.removeProduct(this.props.match.params.id)
+  }
+
+  progress = (harvested, expiration) => {
+    const start = Date.parse(harvested)
+    const end = Date.parse(expiration)
+    const today = Date.parse(new Date())
+    const p = Math.round(((today - start) / (end - start)) * 100) + '%'
+    return p
+    
   }
 
   render() {
-    const { classes, product, currentUser, currentUserId } = this.props
+    const { classes, product, currentUser, currentUserId, currentProfileId } = this.props
     if (!product) return null
-
     return(
+
       <div className="product-container">
         <Paper className="paper">
         <Paper><h2 className="title">{ product.code.titleeng }</h2></Paper>
           <Grid container className="container" spacing={24}>
-
             <Grid item xs={12}>
               <img src={ product.photo !== null ?
                 product.photo : stockImage }
                 alt="product"
                 className="product-photo"/>
+
+              { product.volume === 0 ? <h2>UNAVAILABLE</h2> : "" }
+
+              <div>
+                <p>Remaining Time</p>
+                <div className="percentage-bar" >
+                  <div className="bar" style={{ width: this.progress(product.harvested, product.expiration) }}></div>
+                </div>
+              </div>
+
             </Grid>
 
             <Grid item xs={12} sm={6}>
@@ -101,7 +123,7 @@ class Product extends PureComponent {
               <p><b>Volume:</b> { product.volume } KG</p>
               <p><b>Price:</b> { product.price } { product.currency } per KG</p>
 
-              { currentUserId !== product.seller.id &&
+              { currentProfileId !== product.seller.id &&
 
                 <Link to={ `/profiles/${product.seller.id}` }>
                   <Button color="primary">View Seller</Button>
@@ -115,14 +137,16 @@ class Product extends PureComponent {
               <p><b>Country</b> { product.seller.country }</p>
               <p><b>City/Port:</b> { product.seller.city }</p>
 
-              { currentUserId === product.seller.id &&
-                <Button onClick={ this.handleEditOpen }>Edit Product</Button>
+              { currentProfileId === product.seller.id &&
+                <div>
+                  <Button onClick={ this.handleEditOpen }>Edit Product</Button>
+                  <Button onClick={ this.removeProduct }>Remove Product</Button>
+                </div>
               }
 
-              { currentUserId !== product.seller.id &&
+              { currentProfileId !== product.seller.id &&
                 <Button onClick={this.handleClickOrderOpen}>Make New Order</Button>
               }
-
 
             </Grid>
 
@@ -133,7 +157,7 @@ class Product extends PureComponent {
               aria-labelledby="form-dialog-title"
             >
               <DialogTitle id="form-dialog-title">Edit Your Product</DialogTitle>
-                <ProductForm edit={true} inititalValues={ this.props.product } onSubmit={ this.updateProduct }/>
+                <EditProductForm initialValues={ product } onSubmit={ this.updateProduct }/>
             </Dialog>
 
             <Dialog
@@ -153,6 +177,14 @@ class Product extends PureComponent {
               <DialogTitle id="form-dialog-title">Thankyou. Your order has been recieved.</DialogTitle>
             </Dialog>
 
+            <Dialog
+              open={ this.state.confirmEdit }
+              onClose={ this.handleConfirmEditClose }
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle id="form-dialog-title">Thankyou. Your listing has been updated.</DialogTitle>
+            </Dialog>
+
           </Grid>
 
           <Button color="inherit" onClick={() => this.props.history.goBack()}>
@@ -166,16 +198,17 @@ class Product extends PureComponent {
 
 }
 
-const mapStateToProps = (state) => {
-  const decodedJwt = jwtPayload(state.currentUser.jwt)
+const mapStateToProps = function(state, props) {
+  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
     product: state.product,
     currentUser: state.currentUser,
-    currentUserId: decodedJwt.profileId
+    currentUserId: jwtDecoded.id,
+    currentProfileId: jwtDecoded.profileId
   }
 }
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { fetchProduct, createOrder, updateProduct })
+  connect(mapStateToProps, { fetchProduct, createOrder, updateProduct, removeProduct })
 )(Product)
