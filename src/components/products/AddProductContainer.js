@@ -8,7 +8,6 @@ import { jwtPayload } from '../../jwt'
 import { translate } from "react-i18next"
 import * as combine from "lodash/fp/compose"
 
-
 class AddProductContainer extends PureComponent {
   state = {
       redirectToNext: false
