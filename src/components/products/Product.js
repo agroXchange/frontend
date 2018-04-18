@@ -109,6 +109,14 @@ class Product extends PureComponent {
     return(
 
       <div className="product-container">
+        <Button
+         onClick={() => this.props.history.goBack()}
+         size="medium"
+         color="primary"
+         style={{display:'flex', flex:1}}
+       >
+         Go Back
+       </Button>
         <Paper className="paper">
         <Paper><h2 className="title">{ product.code.titleeng }</h2></Paper>
           <Grid container className="container" spacing={24}>
@@ -204,11 +212,6 @@ class Product extends PureComponent {
 
           </Grid>
 
-
-          <Button color="primary" onClick={() => this.props.history.goBack()}>
-
-          	Go Back
-          </Button>
         </Paper>
 
       </div>
