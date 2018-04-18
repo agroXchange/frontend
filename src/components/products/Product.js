@@ -23,13 +23,22 @@ import OrderForm from '../orders/OrderForm'
 import EditProductForm from './EditProductForm'
 import {jwtPayload} from "../../jwt"
 
-const styles = {
+const styles = theme => ({
   dialog: {
     marginBottom: 20,
     marginLeft: 20,
     marginRight: 20,
-  }
-}
+  },
+  button : {
+  margin: theme.spacing.unit,
+  backgroundColor: `#588D61`,
+  color: "white",
+  '&:hover': {
+     backgroundColor: `#8FBC8F`,
+   }
+ }
+})
+
 const stockImage = "https://theculinarycook.com/wp-content/uploads/2012/04/vegetable-stock-679x509.jpg"
 
 class Product extends PureComponent {
@@ -87,7 +96,7 @@ class Product extends PureComponent {
     const today = Date.parse(new Date())
     const p = Math.round(((today - start) / (end - start)) * 100) + '%'
     return p
-    
+
   }
 
   render() {
@@ -139,13 +148,13 @@ class Product extends PureComponent {
 
               { currentProfileId === product.seller.id &&
                 <div>
-                  <Button onClick={ this.handleEditOpen }>Edit Product</Button>
-                  <Button onClick={ this.removeProduct }>Remove Product</Button>
+                  <Button onClick={ this.handleEditOpen } className={classes.button}>Edit Product</Button>
+                  <Button onClick={ this.removeProduct } className={classes.button}>Remove Product</Button>
                 </div>
               }
 
               { currentProfileId !== product.seller.id &&
-                <Button onClick={this.handleClickOrderOpen}>Make New Order</Button>
+                <Button onClick={this.handleClickOrderOpen} className={classes.button}>Make New Order</Button>
               }
 
             </Grid>
@@ -187,7 +196,11 @@ class Product extends PureComponent {
 
           </Grid>
 
-          <Button color="inherit" onClick={() => this.props.history.goBack()}>
+          <Button
+            className={classes.button}
+            color="inherit"
+            onClick={() => this.props.history.goBack()}
+          >
           	Go Back
           </Button>
         </Paper>
