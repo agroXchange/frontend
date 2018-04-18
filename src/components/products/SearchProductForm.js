@@ -35,6 +35,12 @@ const classes = {
     dialog:{
         direction: 'row',
         justify: 'center',
+        textAlign: 'center'
+
+    },
+    button: {
+        justify: 'center',
+        textAlign: 'center'
 
     },
 }
@@ -122,22 +128,23 @@ class SearchProductForm extends React.Component {
 
         if (codes)
         return (
-
+            
             <form onSubmit={this.handleSubmit} className="form-container"
                 style={classes.form}
                 justify="center" 
             >
             
-                <Paper className="paper">
-                    <div id="search" >    
-
+            <Paper className="paper">
+                    <div style={classes.button}  >    
+<br/>
                         <Button 
                             onClick={this.handleClickOpen}
                             variant="raised" 
                            >
                             <Search/> Products 
                         </Button>
-
+                    </div>
+                    <div>
                     <Dialog
                         fullScreen={fullScreen}
                         open={this.state.open}
@@ -232,16 +239,17 @@ class SearchProductForm extends React.Component {
             </div>   
             <br/>
 
-                    <div><h3>{!this.state.code ? "< pick a product >" : this.getName(this.state.code)}</h3></div>
+                    <div style={classes.dialog}><h4>{!this.state.code ? "< select product >" : this.getName(this.state.code)}</h4></div>
 
             <div> 
                         <TextField
                             id="code"
                             name="code"
+                            label="HS Code"
                             style={classes.textField}
                             value={this.state.code}
                             onChange={this.handleChange}
-                            placeholder="HS Number"
+                            // placeholder="HS Number"
                             margin="normal"
                         />
             </div>
@@ -251,7 +259,7 @@ class SearchProductForm extends React.Component {
                             id="country"
                             name="country"
                             select
-                            label="Please select your country"
+                            label="From country"
                             style={classes.textField}
                             value={this.state.country}
                             onChange={this.handleChange}
@@ -272,8 +280,8 @@ class SearchProductForm extends React.Component {
                             style={{
                                 display: 'block',
                                 margin: 'auto',
-                                marginTop: 20,
-                                marginBottom: 20
+                                marginTop: 10,
+                                marginBottom: 2
                             }}
                         >
                             Save

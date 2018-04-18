@@ -136,6 +136,8 @@ class ProductForm extends PureComponent {
           <Paper className="paper">
           <div id="addProduct">
 
+          <br/>
+
               <Button
                 onClick={this.handleClickOpen}
                 variant="raised"

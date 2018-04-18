@@ -7,6 +7,8 @@ import Dialog, { DialogContent, DialogContentText, withMobileDialog, } from 'mat
 import SearchProductForm from './SearchProductForm';
 import Tune from '@material-ui/icons/Tune'
 import Cached from '@material-ui/icons/Cached'
+import { FormGroup, FormControlLabel } from 'material-ui/Form';
+import Checkbox from 'material-ui/Checkbox';
 
 const classes = {
   tuneIcon: {
@@ -43,6 +45,7 @@ class ProductsPage extends PureComponent {
   render() {
       const { fullScreen, products, currentUserRole } = this.props
     if (!products) return null
+    console.log(products)
 
     return(
       <div>
@@ -64,6 +67,14 @@ class ProductsPage extends PureComponent {
           
         </Button>
 
+        <FormControlLabel disabled control={<Checkbox value="checkedD" />} label="Disabled" />
+
+<p>{
+        // !products[0].currency ? "< select product >" : products[0].currency
+        } </p>
+
+
+        
         <Dialog
           fullScreen={fullScreen}
           open={this.state.open}
@@ -84,8 +95,8 @@ class ProductsPage extends PureComponent {
             style={{
               display: 'block',
               margin: 'auto',
-              marginTop: 20,
-              marginBottom: 20
+              marginTop: -15,
+              marginBottom: 10
             }}
           >
             Cancel
