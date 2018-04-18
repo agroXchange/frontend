@@ -103,7 +103,7 @@ class Dashboard extends PureComponent {
             </Link>
             <Link to={`/orders/received`}>
               <Button size="medium" color="primary" variant="raised" >
-                View all offers
+                View all recieved orders
               </Button>
             </Link>
           </CardActions>
