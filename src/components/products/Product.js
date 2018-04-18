@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import compose from 'lodash/fp/compose'
+import * as combine from "lodash/fp/compose"
 import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
 import Grid from 'material-ui/Grid'
-import IconButton from "material-ui/IconButton";
-import ModeEditIcon from "@material-ui/icons/ModeEdit";
-import DeleteIcon from "@material-ui/icons/Delete";
+import IconButton from "material-ui/IconButton"
+import ModeEditIcon from "@material-ui/icons/ModeEdit"
+import DeleteIcon from "@material-ui/icons/Delete"
 import Button from 'material-ui/Button'
 import Dialog, { DialogTitle } from 'material-ui/Dialog'
 import '../../styles/Product.css'
@@ -108,7 +108,7 @@ class Product extends PureComponent {
   daysRemaining = (harvested, expiration) => {
     const today = new Date()
     const end = new Date(expiration)
-    const diffDays = parseInt((end - today) / (1000 * 60 * 60 * 24));
+    const diffDays = parseInt((end - today) / (1000 * 60 * 60 * 24))
     if(diffDays < 0) {
       return 0
     } else {
@@ -266,7 +266,7 @@ const mapStateToProps = function(state, props) {
   }
 }
 
-export default compose(
+export default combine(
   translate("product"),
   withStyles(styles),
   connect(mapStateToProps, { fetchProduct, createOrder, updateProduct, removeProduct })

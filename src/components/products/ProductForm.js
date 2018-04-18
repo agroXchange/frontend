@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'redux'
+import * as combine from 'lodash/fp/compose'
 import MenuItem from 'material-ui/Menu/MenuItem'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
@@ -13,6 +13,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import '../../styles/ProductForm.css'
 import { fetchCodes } from '../../actions/codes'
 import AddBox from '@material-ui/icons/AddBox'
+import Grid from 'material-ui/Grid';
+import { translate } from "react-i18next";
 
 const classes = {
   container: {
@@ -148,7 +150,7 @@ class ProductForm extends PureComponent {
 
 
   render() {
-    const { fullScreen, vegetables, fruits, beans } = this.props
+    const { fullScreen, codes, t,  vegetables, fruits, beans } = this.props
 
       return(
         <form onSubmit={ this.handleSubmit } className="form-container">
@@ -164,8 +166,8 @@ class ProductForm extends PureComponent {
                 variant="raised"
                 style={classes.button}
               >
-
-                <AddBox /><div className={classes.productstitle}> Product</div>
+              
+                <AddBox /><div className={classes.productstitle}> {t("Product")}</div>
               </Button>
 
               <Dialog
@@ -176,7 +178,7 @@ class ProductForm extends PureComponent {
 
                 <ExpansionPanel>
                   <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                    <Typography className={classes.heading}>Vegetables ({vegetables.length})</Typography>
+                    <Typography className={classes.heading}>{t("Vegetables")} ({vegetables.length})</Typography>
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
 
@@ -204,7 +206,7 @@ class ProductForm extends PureComponent {
 
                 <ExpansionPanel>
                   <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                    <Typography className={classes.heading}>Fruits & Nuts ({fruits.length})</Typography>
+                    <Typography className={classes.heading}>{t("Fruits & Nuts")} ({fruits.length})</Typography>
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
 
@@ -231,7 +233,7 @@ class ProductForm extends PureComponent {
 
                 <ExpansionPanel>
                   <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                    <Typography className={classes.heading}>Beans & Crop ({beans.length})</Typography>
+                    <Typography className={classes.heading}>{t("Beans & Crop")} ({beans.length})</Typography>
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails>
 
@@ -267,7 +269,7 @@ class ProductForm extends PureComponent {
         <TextField
           id="description"
           name="description"
-          label="Description"
+              label={t("Description")}
           style={ classes.textField }
           value={ this.state.description }
           onChange={ this.handleChange }
@@ -277,7 +279,8 @@ class ProductForm extends PureComponent {
           <TextField
             id="certification"
             name="certificate"
-            label="Certification"
+            Expiration
+              label={t("Certification")}
             style={classes.textField}
             value={this.state.certificate }
             onChange={this.handleChange}
@@ -288,7 +291,7 @@ class ProductForm extends PureComponent {
             <TextField
               id="price"
               name="price"
-              label="Price per Kg"
+              label={t("Price per kg")}
               value={this.state.price  }
               onChange={this.handleChange}
               type="number"
@@ -303,7 +306,7 @@ class ProductForm extends PureComponent {
               id="currency"
               name="currency"
               select
-              label="Please select your currency"
+              label={t("Please select your currency")}
               style={ classes.textField }
               value={ this.state.currency   }
               onChange={ this.handleChange }
@@ -316,9 +319,8 @@ class ProductForm extends PureComponent {
               ))}
             </TextField>
 
-
         <TextField
-          label="Volume"
+          label={t("Volume")}
           id="volume"
           name="volume"
           value={ this.state.volume }
@@ -329,12 +331,10 @@ class ProductForm extends PureComponent {
           }}
         />
 
-
-
         <TextField
           id="harvested"
           name="harvested"
-          label="Harvested Date"
+              label={t("Harvest Date")}
           type="date"
             value={this.state.harvested }
           onChange={ this.handleChange }
@@ -347,7 +347,7 @@ class ProductForm extends PureComponent {
         <TextField
           id="expired"
             name="expiration"
-          label="Expiry Date"
+              label={t("Expiration Date")}
           type="date"
             value={this.state.expiration}
           onChange={ this.handleChange }
@@ -358,7 +358,7 @@ class ProductForm extends PureComponent {
         />
 
           <div className="upload">
-            <label htmlFor="photo">Please Upload a Photo </label>
+              <label htmlFor="photo">{t("Please Upload a Photo")} </label>
             <input
               accept="image/*"
               id="raised-button-file"
@@ -376,11 +376,8 @@ class ProductForm extends PureComponent {
           type="submit"
           style={classes.thinbutton}
         >
-          Save
+              {t("Save")}
         </Button>
-
-
-
 
         </Paper>
       </form>
@@ -396,7 +393,7 @@ const mapStateToProps = (state, props) => ({
   beans: state.codes.filter(x => x.code.match(/^09/))
 })
 
-export default compose(
+export default combine(
   withMobileDialog(),
   connect(mapStateToProps, { fetchCodes })
 )(ProductForm)

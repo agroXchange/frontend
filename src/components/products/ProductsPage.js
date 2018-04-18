@@ -11,6 +11,7 @@ import { FormControlLabel } from 'material-ui/Form';
 import { withStyles } from "material-ui/styles";
 import * as combine from "lodash/fp/compose";
 import Checkbox from 'material-ui/Checkbox';
+import { translate } from "react-i18next";
 
 
   const styles = theme => ({
@@ -19,7 +20,7 @@ import Checkbox from 'material-ui/Checkbox';
     right: 50,
   },
   button: {
-    //margin: theme.spacing.unit,
+    margin: theme.spacing.unit,
     backgroundColor: `#588D61`,
     color: "white",
     '&:hover': {
@@ -53,12 +54,23 @@ class ProductsPage extends PureComponent {
 
 
   render() {
-    const { fullScreen, classes, products } = this.props
+      const { fullScreen, classes, t, products, currentUserRole } = this.props
     if (!products) return null
     console.log(products[0])
 
     return(
       <div>
+        <div className="product-container">
+          <Button
+            onClick={() => this.props.history.goBack()}
+            size="medium"
+            color="primary"
+            style={{ display: 'flex', flex: 1 }}
+          >
+            {t("GO BACK")}
+       </Button>
+       </div>
+
 
         <Button
           onClick={this.handleClickOpen}
@@ -66,8 +78,8 @@ class ProductsPage extends PureComponent {
           color="primary"
           className={classes.button}
         >
-         <Settings/>
-          Filter
+         <Settings/> 
+          {t("Filter")}
         </Button>
 
         <Button
@@ -77,11 +89,11 @@ class ProductsPage extends PureComponent {
           className={classes.button}
         >
           <Cached className={classes.cachedIcon} />
-          <div>All</div>
+          <div>{t("All")}</div>
 
         </Button>
 
-        <FormControlLabel disabled control={<Checkbox value="checkedD" />} label="Disabled" />
+        {/* <FormControlLabel disabled control={<Checkbox value="checkedD" />} label="Disabled" /> */}
 
         <p>{
           // !products[0].currency ? "< select product >" : products[0].currency
@@ -118,7 +130,7 @@ class ProductsPage extends PureComponent {
               }
             }}
           >
-            Cancel
+            {t("Cancel")}
           </Button>
 
           </Dialog>
@@ -138,7 +150,12 @@ const mapStateToProps = (state) => {
 }
 
 export default combine(
-  withMobileDialog(),
-  withStyles(styles),
-  connect(mapStateToProps, { fetchAllProducts, filterProducts })
-)(ProductsPage)
+  translate("product"),
+withMobileDialog(),
+withStyles(styles),
+connect(mapStateToProps, { fetchAllProducts, filterProducts })
+)
+(ProductsPage)
+
+
+
