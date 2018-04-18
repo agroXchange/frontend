@@ -72,18 +72,14 @@ class ProductList extends PureComponent {
               />
 
              <CardContent>
-<<<<<<< 40901fc3f6f05156e19ae9776ffc5185af0b62e1
-               <p className={classes.number}>
-                 <h2> { product.name }</h2>
-               </p>
-=======
+
               <div className={ classes.status }>
                { product.volume === 0 ? <h3 className="sold-out-img">SOLD OUT</h3> : "" }
 
                { this.daysRemaining(product.harvested, product.expiration) === 0 ?
                  <h3 className="expired-img">EXPIRED</h3> : "" }
               </div>
->>>>>>> Styled Product status message
+
                  <table>
 
                    <tr className={classes.table}>
