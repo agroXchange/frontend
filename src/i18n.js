@@ -48,7 +48,11 @@ i18n.use(LanguageDetector).init({
         'SOLD OUT': 'SOLD OUT',
         'EXPIRED': 'EXPIRED',
         'remaining': 'days remaining',
-        'Edit Your Product': 'Edit Your Product'
+        'Edit Your Product': 'Edit Your Product',
+        'My Products': 'My Products',
+        'Add Product': 'Add Product',
+        'No Products': 'This Organization currently has no products for sale.',
+        'You Have No Products': 'You currently have no products listed for sale.'
       },
       profile: {
         'Name': 'Name',
@@ -167,7 +171,11 @@ i18n.use(LanguageDetector).init({
         'SOLD OUT': 'AGOTADO',
         'EXPIRED': 'MUERTO',
         'remaining': 'días restantes',
-        'Edit Your Product': 'Edita tu producto'
+        'Edit Your Product': 'Edita tu producto',
+        'My Products': 'Mis Productos',
+        'Add Product': 'Agregar producto',
+        'No Products': 'Esta organización actualmente no tiene productos en venta.',
+        'You Have No Products': 'Actualmente no tiene productos en venta.'
       },
       profile: {
         'new': 'nuevo'
