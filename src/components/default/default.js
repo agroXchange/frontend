@@ -1,7 +1,4 @@
-import React, { PureComponent } from "react"
-import { connect } from 'react-redux'
-import { withStyles } from "material-ui/styles"
-import * as combine from "lodash/fp/compose"
+import React, { PureComponent } from "reactr
 import { translate } from "react-i18next"
 import List, { ListItem, ListItemText } from "material-ui/List"
 import { CardContent } from "material-ui/Card"
@@ -139,7 +136,7 @@ class defaultPage extends PureComponent {
          >
            <DialogContent>
              <DialogContentText id="alert-dialog-description">
-              Thank You for registering. Please wait approval from admin.
+              Thank you for registering. Please wait approval from admin.
              </DialogContentText>
            </DialogContent>
            <DialogActions>
