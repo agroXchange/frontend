@@ -13,8 +13,8 @@ class MessageList extends PureComponent {
   componentDidUpdate() {
     this.scrollToBottom();
     const {messages, markMessage} = this.props
-    const msgId = messages[messages.length - 1].id
-    markMessage(msgId)
+    if (messages[0]) markMessage(messages[messages.length - 1].id)
+
   }
 
   scrollToBottom() {
