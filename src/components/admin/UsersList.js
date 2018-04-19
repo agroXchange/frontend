@@ -119,7 +119,7 @@ class UsersList extends PureComponent {
             />
           </div>
         </form>
-        <h1 style={{color:'#588D61'}}> Users List</h1>
+        <h1> Users List</h1>
         {this.renderMessage(users)}
         {users.filter(searchingByName(this.state.term)).map(user => (
           <List style={{width:'85%', display:'inline-block'}}>
