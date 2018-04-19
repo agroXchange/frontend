@@ -1,4 +1,7 @@
 import React, { PureComponent } from "react"
+import { connect } from 'react-redux'
+import { withStyles } from "material-ui/styles"
+import * as combine from "lodash/fp/compose"
 import { translate } from "react-i18next"
 import List, { ListItem, ListItemText } from "material-ui/List"
 import { CardContent } from "material-ui/Card"
