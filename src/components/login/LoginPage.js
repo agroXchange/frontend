@@ -50,10 +50,10 @@ class LoginPage extends PureComponent {
         </Typography>
         <LoginForm onSubmit={this.handleSubmit} />
         {this.props.error && (
-          <span style={{ color: "red" }}>{this.props.error}</span>
+          <div><span style={{ color: "red" }}>{this.props.error}</span></div>
         )}
         {this.props.success && (
-          <span style={{ color: "green" }}>{this.props.success}<br/></span>
+          <div><span style={{ color: "green" }}>{this.props.success}</span></div>
         )}
         <Button color="primary" onClick={this.handleForgotPasswordOpen}>
           {t("forgotPassword?")}
