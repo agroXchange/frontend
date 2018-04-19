@@ -4,6 +4,7 @@ import SignupPage from './components/signup/SignupPage'
 import AdminPage from './components/admin/LandingPage'
 import PendingUserList from './components/admin/PendingUserList'
 import PendingUserPage from './components/admin/PendingUserPage'
+import AdminProfilePage from './components/admin/AdminProfilePage'
 import ProductsList from './components/admin/ProductsList'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Product from './components/products/Product'
@@ -51,7 +52,7 @@ class App extends Component {
             <Route exact path="/admin/pending/profiles/:id([0-9]+)" component={PendingUserPage} />
             <Route exact path="/admin/profiles/:id([0-9]+)/orders" component={OrderList} />
             <Route exact path="/admin/profiles/:id([0-9]+)/products" component={MyProducts} />
-            <Route exact path="/admin/profiles/:id([0-9]+)" component={ProfilePage} />
+            <Route exact path="/admin/profiles/:id([0-9]+)" component={AdminProfilePage} />
             <Route exact path="/admin/orders" component={OrdersListPage} />
             <Route exact path="/admin/orders/:id([0-9]+)" component={OrderDetail} />
             <Route exact path="/admin/users" component={UsersList} />
