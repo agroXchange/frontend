@@ -191,7 +191,7 @@ class OrderDetail extends PureComponent {
               {this.props.currentUserRole !== 'admin' &&(
                  this.currentUser(this.props.currentProfileId, order)
                )}
-                <Link to={`${order.id}/chat`}>
+                <Link to={`/orders/${order.id}/chat`}>
                   <br />
                   <Button
                      variant="raised"
