@@ -106,7 +106,7 @@ class UsersList extends PureComponent {
         <h1> Pending Users List</h1>
         {this.renderMessage(users)}
         {users.filter(searchingByName(this.state.term)).map(user => (
-          <List>
+          <List style={{width:'75%', display:'inline-block'}}>
             <ListItem onClick={() => this.props.history.push(`/admin/pending/profiles/${user.id}`)}>
               <ListItemAvatar>
                   <Avatar>

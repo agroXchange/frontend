@@ -20,6 +20,7 @@ import Divider from "material-ui/Divider"
 import Dialog, { DialogTitle, DialogActions } from "material-ui/Dialog"
 import TextField from "material-ui/TextField"
 import {jwtPayload} from '../../jwt'
+import Typography from "material-ui/Typography"
 
 const style = theme => ({
   card: {
@@ -72,6 +73,15 @@ class UsersList extends PureComponent {
     )
   }
 
+  pendingUser = user => {
+    if (user.approved === true) {
+      return  <Typography style={{color: 'green'}}> Approved </Typography>
+
+    } else {
+      return <Typography style={{color: 'red'}}> Pending Request </Typography>
+    }
+  }
+
   render() {
     const users = this.props.users
     const classes = this.props
@@ -112,7 +122,7 @@ class UsersList extends PureComponent {
         <h1> Users List</h1>
         {this.renderMessage(users)}
         {users.filter(searchingByName(this.state.term)).map(user => (
-          <List>
+          <List style={{width:'85%', display:'inline-block'}}>
             <ListItem
               onClick={() => this.props.history.push(`/admin/profiles/${user.id}`)}
             >
@@ -132,6 +142,9 @@ class UsersList extends PureComponent {
                 secondary={user.profile.country}
               />
             </ListItem>
+
+            {this.pendingUser(user)}
+
             <ListItemSecondaryAction>
               <IconButton onClick={() => this.handleOpen(user.id)}>
                 <DeleteIcon />

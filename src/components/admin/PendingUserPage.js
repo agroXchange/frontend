@@ -69,7 +69,7 @@ class AdminProfilePage extends PureComponent {
         <IconButton onClick={this.handleEditOpen} aria-label="Edit">
           <EditIcon />
         </IconButton>
-        <div className="info">
+        <div className="info" style={{fontSize:'20px'}}>
           <Typography variant="headline" component="h2">
             {user.name}
           </Typography>
