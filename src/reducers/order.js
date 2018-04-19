@@ -9,7 +9,7 @@ export default function(state = null, { type, payload } = {}) {
       const {messages, ...rest} = payload
       return rest
     case CHANGE_STATUS:
-      return {...state, ...payload}
+      return {...state,...payload} 
     default:
       return state;
     }
