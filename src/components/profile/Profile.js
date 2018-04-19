@@ -15,6 +15,11 @@ class Profile extends PureComponent {
     upload: false
   }
 
+  componentWillMount(props) {
+    if (this.props.user == null)
+      this.props.fetchUser(this.props.currentProfileId)
+  }
+
   handleClick = () => {
     this.setState({
       upload: !this.state.upload
@@ -52,18 +57,27 @@ class Profile extends PureComponent {
     if (!user) return null
 
     return (
+      <div>
+        <Button
+          onClick={() => this.props.history.goBack()}
+          size="medium"
+          color="primary"
+          style={{ display: "flex", flex: 1, margin: 15 }}
+        >
+          {t("goBack")}
+        </Button>
       <Paper
         style={{
           textAlign: "center",
-          display: "inline-block",
-          marginTop: "40px"
+          display: "inline-block"
         }}
       >
-        <div className="photo">
+        <div className="photo"
+          style={{ marginTop: 15 }}>
           {user.logo === "null" ? (
-            <img src={"/images/profile.png"} alt={"default"} width="200" />
+            <img src={"/images/profile.png"} alt={"default"} width="150" />
           ) : (
-            <img src={user.logo} alt={"profilepicture"} width="200" />
+            <img src={user.logo} alt={"profilepicture"} width="150" />
           )}
         </div>
         <div className="info">
@@ -104,7 +118,7 @@ class Profile extends PureComponent {
                   marginTop: 10
                 }}
               >
-                Please Upload a Photo
+                {t("PleaseUploadPhoto")}
               </Typography>
               <input
                 accept="image/*"
@@ -126,18 +140,17 @@ class Profile extends PureComponent {
                 }}
                 onClick={_ => this.handleSubmit(user.id)}
               >
-                Upload Picture
+                {t("uploadPicture")}
               </Button>
-
             </div>
           )}
           {currentProfileId === user.id &&
             !this.state.upload && (
-              <Button onClick={this.handleClick}>Upload Picture</Button>
+              <Button onClick={this.handleClick}>{t("uploadPicture")}</Button>
             )}
           {(currentProfileId === user.id || currentProfileRole === "admin") && (
             <Button onClick={this.handleEditProfileOpen}>
-              Edit profile
+              {t("editMyProfile")}
             </Button>
           )}
           <Dialog
@@ -145,7 +158,7 @@ class Profile extends PureComponent {
             onClose={this.handleClose}
             aria-labelledby="form-dialog-title"
           >
-            <DialogTitle id="form-dialog-title">Edit your profile</DialogTitle>
+            <DialogTitle id="form-dialog-title">{t("editProfile")}</DialogTitle>
             <EditProfileForm
               onSubmit={this.handleEditProfileSubmit}
               initialValues={user}
@@ -153,6 +166,8 @@ class Profile extends PureComponent {
           </Dialog>
         </div>
       </Paper>
+    </div>
+
     )
   }
 }

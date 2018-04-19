@@ -11,6 +11,7 @@ import Card, { CardActions, CardContent } from "material-ui/Card"
 import Paper from "material-ui/Paper"
 import {fetchUnseenOrders} from '../../actions/orders'
 import {jwtPayload} from '../../jwt'
+import { translate } from "react-i18next"
 
 const styles = theme => ({
   card: {
@@ -31,10 +32,16 @@ const styles = theme => ({
      margin: theme.spacing.unit,
      backgroundColor: `#588D61`,
      color: "white",
+     display:'inline-block',
+     textAlign:'center',
      '&:hover': {
         backgroundColor: `#8FBC8F`,
       },
   },
+  cardContent : {
+    display:'inline-block',
+    alignItem: 'center'
+  }
 })
 
 class Dashboard extends PureComponent {
@@ -54,7 +61,7 @@ class Dashboard extends PureComponent {
 
 
   render() {
-    const { classes, currentProfileId, currentUser, unseenOrders } = this.props
+    const { classes, currentProfileId, currentUser, orders, t, user,  unseenOrders} = this.props
     if (!currentUser) return <Redirect to="/" />
     if (this.props.currentUserRole === "admin") return <Redirect to="/admin" />
 
@@ -67,14 +74,17 @@ class Dashboard extends PureComponent {
           marginTop: "40px"
         }}
       >
-        <h1>Welcome User!</h1>
+        <h1>{t("Welcome")} {user.name}</h1>
+          <Button className={classes.button} size="medium" color="primary" variant="raised" component={Link} to={`/products`}>
+            {t("goToMarketplace")}
+          </Button>
         {console.log('role  ' + this.props.jwtPayload)}
         {
           unseenOrders[0] &&
           <Card className={classes.card}>
             <CardContent>
               <Typography gutterBottom variant="headline" component="h2">
-                New orders received:
+                {t("newOrdersReceived")}
               </Typography>
               {
                 !this.state.showAll &&
@@ -105,55 +115,58 @@ class Dashboard extends PureComponent {
         <Card className={classes.card}>
           <CardContent>
             <Typography gutterBottom variant="headline" component="h2">
-              My profile
+              {t("myProfile")}
             </Typography>
             <div className="photo">
-              <img src={"/images/profile.png"} alt="" width="100" />
+              {user.logo === "null" ? (
+                <img src={"/images/profile.png"} alt={"default"} width="150" />
+              ) : (
+                <img src={user.logo} alt={"profilepicture"} width="150" />
+              )}
             </div>
           </CardContent>
-          <CardActions>
+          <CardActions className={classes.cardContent}>
             <Button className={classes.button} size="medium" color="primary" variant="raised" component={Link} to={`/profiles/${currentProfileId}`}>
-              See your profile information
+              {t("seeYourProfileInformation")}
             </Button>
           </CardActions>
         </Card>
         <Card className={classes.card}>
           <CardContent>
             <Typography gutterBottom variant="headline" component="h2">
-              My products
+            {t("myProducts")}
             </Typography>
             <Typography color="textSecondary">
-              You currently have: {this.props.products.length} products on offer
+              {t("yourCurrentlyHave")}{this.props.products.length} {t("productsOnOffer")}
             </Typography>
           </CardContent>
           <CardActions>
             <Button className={classes.button} size="medium" color="primary" variant="raised" component={Link} to={`/products/new`}>
-              Add a new product
+              {t("addNewProduct")}
             </Button>
             <Button className={classes.button} size="medium" color="primary" variant="raised" component={Link} to={`/profiles/${currentProfileId}/products`}>
-              See all my products
+              {t("seeAllMyProducts")}
             </Button>
           </CardActions>
         </Card>
         <Card className={classes.card}>
           <CardContent>
             <Typography gutterBottom variant="headline" component="h2">
-              My orders
+              {t("myOrders")}
             </Typography>
             <Typography color="textSecondary">
-              You currently have: {this.props.orders.length} orders
+              {t("yourCurrentlyHave")}{this.props.orders.length} {t("orders")}
             </Typography>
           </CardContent>
           <CardActions>
             <Link style={{textDecoration: 'none'}}  to={`/orders`}>
               <Button className={classes.button} size="medium" color="primary" variant="raised" onClick={ this.x }>
-                View all orders
+                {t("viewAllOrders")}
               </Button>
             </Link>
             <Link style={{textDecoration: 'none'}} to={`/orders/received`}>
               <Button size="medium" color="primary" variant="raised" >
-                View all recieved orders
-
+                {t("viewAllReceivedOrders")}
               </Button>
             </Link>
           </CardActions>
@@ -179,6 +192,7 @@ const mapStateToProps = function(state) {
 
 
 export default combine(
+  translate("user"),
   withStyles(styles),
   connect(mapStateToProps, { fetchMyProducts, fetchUser, fetchUnseenOrders })
 )(Dashboard)

@@ -1,6 +1,6 @@
 import {FETCH_USER, UPDATE_LOGO_SUCCESS, UPDATE_USER, UPDATE_PROFILE} from "../actions/users";
 
-export default function(state = null, { type, payload } = {}) {
+export default function(state = {}, { type, payload } = {}) {
   switch (type) {
     case FETCH_USER:
       return payload

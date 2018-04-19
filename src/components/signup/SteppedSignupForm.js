@@ -190,7 +190,7 @@ class SteppedSignupForm extends PureComponent {
                 </Typography>
               </div>
               <Button color="primary" variant="raised" onClick={this.clickNext}>
-                Next
+                {t("Next")}
               </Button>
             </div>
           )}
@@ -245,11 +245,12 @@ class SteppedSignupForm extends PureComponent {
                   onChange={this.handleChange}
                 />
               </div>
-              <Button color="primary" variant="raised" onClick={this.clickBack}>
-                Back
+              <Button color="primary" variant="raised" onClick={this.clickBack} style={{
+                margin: 10}}>
+                {t("Back")}
               </Button>
               <Button color="primary" variant="raised" onClick={this.clickNext}>
-                Next
+                {t("Next")}
               </Button>
             </div>
           )}
@@ -300,11 +301,12 @@ class SteppedSignupForm extends PureComponent {
                 this.state.password !== this.state.confirmPassword && (
                   <p style={{ color: "red" }}>{t("confirmError")}</p>
                 )}
-              <Button color="primary" variant="raised" onClick={this.clickBack}>
-                Back
+              <Button color="primary" variant="raised" onClick={this.clickBack} style={{
+                margin: 10}}>
+                {t("Back")}
               </Button>
               <Button color="primary" variant="raised" type="submit">
-                Submit
+                {t("Submit")}
               </Button>
             </div>
           )}
