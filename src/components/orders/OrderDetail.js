@@ -191,9 +191,7 @@ class OrderDetail extends PureComponent {
               {this.props.currentUserRole !== 'admin' &&(
                  this.currentUser(this.props.currentProfileId, order)
                )}
-              <Button style={{marginTop:'10px'}} size="small"  color="primary" onClick={() => this.props.history.goBack()}>
-               {t('GO BACK')}
-              </Button>
+
 
                 <Link to={`orders/${order.id}/chat`}>
                   <br />
