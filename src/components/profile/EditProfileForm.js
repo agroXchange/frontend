@@ -84,7 +84,7 @@ class EditProfileForm extends PureComponent {
           <TextField
             id="email"
             name="email"
-            label={t("Email")}
+            label={t("contactEmail")}
             className={classes.textField}
             margin="normal"
             type="email"
@@ -104,7 +104,7 @@ class EditProfileForm extends PureComponent {
           />
         </div>
         <Button variant="raised" color="primary" className={classes.button} type="submit">
-          {t("editMyProfile")}
+          {t("updateProfile")}
         </Button>
       </form>
     );

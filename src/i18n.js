@@ -59,7 +59,7 @@ i18n.use(LanguageDetector).init({
         'Name': 'Name',
       },
       user: {
-        'Email': 'Contact email',
+        'Email': 'Email',
         'Log in': 'Log in',
         'Sign up': 'Sign up',
         'Sign up form': 'Sign up form',
@@ -120,7 +120,9 @@ i18n.use(LanguageDetector).init({
         'Stay logged in': 'Stay logged in',
         'Welcome': 'Welcome',
         'goBack': 'Go back',
-        'goToMarketplace': 'Go to the marketplace!'
+        'goToMarketplace': 'Go to the marketplace!',
+        'contactEmail': 'Contact email',
+        'updateProfile': 'Update profile'
       },
       orders: {
         'Order': 'Order',
@@ -206,7 +208,7 @@ i18n.use(LanguageDetector).init({
         'new': 'nuevo'
       },
       user: {
-        'Email': 'Email de contacto',
+        'Email': 'Email',
         'Log in': 'Iniciar sesión',
         'Sign up': 'Registrar',
         'Sign up form': 'Crear una cuenta',
@@ -267,7 +269,9 @@ i18n.use(LanguageDetector).init({
         'Stay logged in': 'Permanecer conectado',
         'Welcome': 'Bienvenido',
         'goBack': 'Atrás',
-        'goToMarketplace': '¡Vamos al mercado!'
+        'goToMarketplace': '¡Vamos al mercado!',
+        'contactEmail': 'Email de contacto',
+        'updateProfile': 'Actualiza su perfil'
       },
       orders: {
         'Order': 'Orden',
