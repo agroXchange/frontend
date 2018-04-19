@@ -122,7 +122,7 @@ i18n.use(LanguageDetector).init({
         'goBack': 'Go back',
         'goToMarketplace': 'Go to the marketplace!',
         'contactEmail': 'Contact email',
-        'updateProfile': 'Update profile'
+        'updateProfile': 'Update profile',
         'newMessages': 'Unread messages:'
       },
       orders: {
@@ -276,7 +276,7 @@ i18n.use(LanguageDetector).init({
         'goBack': 'Atrás',
         'goToMarketplace': '¡Vamos al mercado!',
         'contactEmail': 'Email de contacto',
-        'updateProfile': 'Actualiza su perfil'
+        'updateProfile': 'Actualiza su perfil',
         'newMessages': 'Mensajes no leídos:'
       },
       orders: {
