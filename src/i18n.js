@@ -120,7 +120,8 @@ i18n.use(LanguageDetector).init({
         'Stay logged in': 'Stay logged in',
         'Welcome': 'Welcome',
         'goBack': 'Go back',
-        'goToMarketplace': 'Go to the marketplace!'
+        'goToMarketplace': 'Go to the marketplace!',
+        'newMessages': 'Unread messages:'
       },
       orders: {
         'Order': 'Order',
@@ -271,7 +272,8 @@ i18n.use(LanguageDetector).init({
         'Stay logged in': 'Permanecer conectado',
         'Welcome': 'Bienvenido',
         'goBack': 'Atrás',
-        'goToMarketplace': '¡Vamos al mercado!'
+        'goToMarketplace': '¡Vamos al mercado!',
+        'newMessages': 'Mensajes no leídos:'
       },
       orders: {
         'Order': 'Orden',

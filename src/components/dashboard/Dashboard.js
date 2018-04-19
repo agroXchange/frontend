@@ -12,6 +12,7 @@ import Paper from "material-ui/Paper"
 import {fetchUnseenOrders} from '../../actions/orders'
 import {jwtPayload} from '../../jwt'
 import { translate } from "react-i18next"
+import {getUnreadMessages} from "../../actions/chat"
 
 const styles = theme => ({
   card: {
@@ -51,6 +52,7 @@ class Dashboard extends PureComponent {
     this.props.fetchMyProducts(this.props.currentProfileId)
     this.props.fetchUser(this.props.currentProfileId)
     this.props.fetchUnseenOrders()
+    this.props.getUnreadMessages()
   }
 
   handleShowAll = () => {
@@ -61,7 +63,7 @@ class Dashboard extends PureComponent {
 
 
   render() {
-    const { classes, currentProfileId, currentUser, orders, t, user,  unseenOrders} = this.props
+    const { classes, currentProfileId, currentUser, unreadMessages, t, user,  unseenOrders} = this.props
     if (!currentUser) return <Redirect to="/" />
     if (this.props.currentUserRole === "admin") return <Redirect to="/admin" />
 
@@ -112,9 +114,40 @@ class Dashboard extends PureComponent {
             </CardContent>
           </Card>
         }
+        {
+          unreadMessages[0] &&
+          <Card className={classes.card}>
+            <CardContent>
+              <Typography gutterBottom variant="title" component="h2">
+                {t("newMessages")}
+              </Typography>
+              {
+                !this.state.showAll &&
+                unreadMessages.slice(0,3).map(o => {
+                  return (
+                    <Link to={`/orders/${o}/chat`} ><Typography>Order #{o}</Typography></Link>
+                  )
+                })
+              }
+              {
+                this.state.showAll &&
+                unreadMessages.map(o => {
+                  return (
+                    <Link to={`/orders/${o}/chat`} ><Typography>Order #{o}</Typography></Link>
+                  )
+                })
+              }
+              {
+                unreadMessages.length > 3 &&
+                !this.state.showAll &&
+                <Button onClick={this.handleShowAll} >Show all</Button>
+              }
+            </CardContent>
+          </Card>
+        }
         <Card className={classes.card}>
           <CardContent>
-            <Typography gutterBottom variant="headline" component="h2">
+            <Typography gutterBottom variant="title" component="h2">
               {t("myProfile")}
             </Typography>
             <div className="photo">
@@ -186,7 +219,8 @@ const mapStateToProps = function(state) {
     orders: state.orders,
     unseenOrders: state.unseenOrders,
     products: state.products,
-    user: state.user
+    user: state.user,
+    unreadMessages: state.unreadMessages
   }
 }
 
@@ -194,5 +228,5 @@ const mapStateToProps = function(state) {
 export default combine(
   translate("user"),
   withStyles(styles),
-  connect(mapStateToProps, { fetchMyProducts, fetchUser, fetchUnseenOrders })
+  connect(mapStateToProps, { fetchMyProducts, fetchUser, fetchUnseenOrders, getUnreadMessages })
 )(Dashboard)

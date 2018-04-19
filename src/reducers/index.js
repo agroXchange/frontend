@@ -13,6 +13,7 @@ import currency from './currency'
 import messages from './messages'
 import unseenOrders from './unseenOrders'
 import dashboard from './dashboard'
+import unreadMessages from './unreadMessages'
 import language from './language'
 
 export default {
@@ -31,5 +32,6 @@ export default {
   messages,
   unseenOrders,
   dashboard,
+  unreadMessages,
   language
 }
