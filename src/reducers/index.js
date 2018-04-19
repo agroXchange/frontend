@@ -12,6 +12,7 @@ import codes from './codes'
 import currency from './currency'
 import messages from './messages'
 import unseenOrders from './unseenOrders'
+import dashboard from './dashboard'
 
 export default {
   signup,
@@ -27,5 +28,6 @@ export default {
   password,
   currency,
   messages,
-  unseenOrders
+  unseenOrders,
+  dashboard
 }
