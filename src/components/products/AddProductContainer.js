@@ -14,8 +14,12 @@ class AddProductContainer extends PureComponent {
   }
 
   submit = (product, image) => {
-      this.props.addProduct(product, image)
-      this.setState({ redirectToNext: true })
+      this.props.addProduct(product, image).then(stuff => {
+
+
+          this.setState({ redirectToNext: true })
+
+      } )
   }
 
   render() {
