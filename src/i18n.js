@@ -120,7 +120,8 @@ i18n.use(LanguageDetector).init({
         'Stay logged in': 'Stay logged in',
         'Welcome': 'Welcome',
         'goBack': 'Go back',
-        'goToMarketplace': 'Go to the marketplace!'
+        'goToMarketplace': 'Go to the marketplace!',
+        'newMessages': 'Unread messages:'
       },
       orders: {
         'Order': 'Order',
@@ -136,7 +137,11 @@ i18n.use(LanguageDetector).init({
         'All': 'All',
         'GO TO SELLER PROFILE': 'GO TO SELLER PROFILE',
         'SEE DETAILS': 'SEE DETAILS',
-        'GO BACK': 'GO BACK'
+        'GO BACK': 'GO BACK',
+        'goBack': 'Go back',
+        'Product Info': 'Product Info',
+        'Order Info': 'Order Info',
+
       },
       detail: {
         'Order': 'Order',
@@ -267,7 +272,8 @@ i18n.use(LanguageDetector).init({
         'Stay logged in': 'Permanecer conectado',
         'Welcome': 'Bienvenido',
         'goBack': 'Atrás',
-        'goToMarketplace': '¡Vamos al mercado!'
+        'goToMarketplace': '¡Vamos al mercado!',
+        'newMessages': 'Mensajes no leídos:'
       },
       orders: {
         'Order': 'Orden',
@@ -282,7 +288,10 @@ i18n.use(LanguageDetector).init({
         'All': 'Todas',
         'Ordered date': 'Fecha ordenada',
         'SEE DETAILS': 'Ver detalles',
-        'GO BACK': 'REGRESA'
+        'GO BACK': 'REGRESA',
+        'goBack': 'Atrás',
+        'Product Info': 'Información del producto',
+        'Order Info': 'Información del pedido'
       },
       navBar: {
         'Dashboard': 'Tablero',
