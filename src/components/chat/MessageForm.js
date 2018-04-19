@@ -1,6 +1,9 @@
 import React, { PureComponent } from "react";
 import { withStyles } from "material-ui/styles";
 import TextField from "material-ui/TextField";
+import SendIcon from "@material-ui/icons/Send"
+import IconButton from 'material-ui/IconButton'
+
 
 const styles = theme => ({
   button: {
@@ -9,16 +12,16 @@ const styles = theme => ({
   },
 
   container: {
-    display: "flex",
+    display: "inline-block",
     flexWrap: "wrap",
-    width: 320,
+    maxWidth: 420,
     alignItem: "center"
   },
 
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 300
+    width: 280,
   }
 });
 
@@ -42,7 +45,6 @@ class MessageForm extends PureComponent {
   };
 
   render() {
-    const { t } = this.props;
     const { classes } = this.props;
 
     return (
@@ -59,6 +61,7 @@ class MessageForm extends PureComponent {
             value={this.state.message}
             onChange={this.handleChange}
           />
+          <IconButton type="submit" ><SendIcon/></IconButton>
         </div>
       </form>
     );
