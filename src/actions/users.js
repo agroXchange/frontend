@@ -146,14 +146,10 @@ export const login = (email, password) => dispatch =>
       });
     })
     .catch(err => {
-      if (err.status === 400) {
         dispatch({
           type: USER_LOGIN_FAILED,
           payload: err.response.body.message || "Unknown error"
         });
-      } else {
-        console.error(err);
-      }
     });
 
 export const signup = newUser => dispatch =>
