@@ -37,6 +37,7 @@ class ChatPage extends PureComponent {
         </Typography>
         <MessageList messages={messages} />
         <MessageForm onSubmit={this.handleSubmit} />
+        <div>
         <Button
           size="small"
           color="primary"
@@ -48,6 +49,7 @@ class ChatPage extends PureComponent {
         >
           GO BACK
         </Button>
+        </div>
       </Paper>
     )
   }
