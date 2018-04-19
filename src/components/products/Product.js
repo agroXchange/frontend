@@ -36,7 +36,13 @@ const styles = theme => ({
   '&:hover': {
      backgroundColor: `#8FBC8F`,
    }
- }
+ },
+  red: {
+    backgroundColor: 'red'
+  },
+  green: {
+    backgroundColor: '#588D61'
+  }
 })
 
 class Product extends PureComponent {
@@ -106,7 +112,7 @@ class Product extends PureComponent {
     const today = new Date()
     const end = new Date(expiration)
     const diffDays = parseInt((end - today) / (1000 * 60 * 60 * 24))
-    if(diffDays < 0) {
+    if(diffDays <= 0) {
       return 0
     } else {
       return diffDays
@@ -151,7 +157,14 @@ class Product extends PureComponent {
               <div>
                 <p>{ this.daysRemaining(product.harvested, product.expiration)}  { t("remaining") } </p>
                 <div className="percentage-bar" >
-                  <div className="bar" style={{ width: this.progress(product.harvested, product.expiration) }}></div>
+
+                { this.daysRemaining(product.harvested, product.expiration) <= 5 ?
+
+                  <div className="bar" style={{ width: this.progress(product.harvested, product.expiration), backgroundColor: 'red' }}></div>
+
+                  : <div className="bar" style={{ width: this.progress(product.harvested, product.expiration), backgroundColor: '#588D61'}}></div>
+
+                }
                 </div>
               </div>
 
@@ -209,7 +222,7 @@ class Product extends PureComponent {
               open={this.state.editProduct}
               onClose={this.handleEditClose}
               aria-labelledby="form-dialog-title"
-              
+
             >
               <DialogTitle id="form-dialog-title"> { t("Edit Your Product") } </DialogTitle>
                 <EditProductForm initialValues={ product } onSubmit={ this.updateProduct }/>
