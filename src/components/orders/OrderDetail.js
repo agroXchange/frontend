@@ -16,8 +16,6 @@ import { jwtPayload } from '../../jwt'
 
 const style = () => ({
   card: {
-    height: 700,
-    width: 370,
     margin: 20,
     textAlign: "center",
     display: "inline-block"
@@ -101,6 +99,7 @@ class OrderDetail extends PureComponent {
    else if (currentUser === order.buyer.id && order.status === "Approved") {
      return (
        <div>
+       <br/>
        <Button
           variant="raised"
           color="primary"
@@ -130,6 +129,7 @@ class OrderDetail extends PureComponent {
         >
           Go Back
         </Button>
+
          <Card className={classes.card} zDepth={3} circle={true} >
                <Table className={classes.table}>
                 <TableBody>
@@ -139,7 +139,7 @@ class OrderDetail extends PureComponent {
                 </TableRow>
                 <TableRow>
                    <TableCell><b>{t('Status')}</b></TableCell>
-                   <TableCell><mark><b>{order.status}</b></mark></TableCell>
+                   <TableCell><mark className={order.status}><b>{order.status}</b></mark></TableCell>
                 </TableRow>
                  <TableRow>
                     <TableCell><b>{t('Organization name')}</b></TableCell>
@@ -191,11 +191,10 @@ class OrderDetail extends PureComponent {
               {this.props.currentUserRole !== 'admin' &&(
                  this.currentUser(this.props.currentProfileId, order)
                )}
-              <Button style={{marginTop:'10px'}} size="small"  color="primary" onClick={() => this.props.history.goBack()}>
-               {t('GO BACK')}
-              </Button>
-                }
+
+
                 <Link to={`orders/${order.id}/chat`}>
+                  <br />
                   <Button
                      variant="raised"
                      color="primary"

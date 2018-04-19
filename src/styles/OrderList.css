@@ -6,3 +6,8 @@
 table {
   left: 0px;
 }
+
+.Pending {background-color: #ccffcc}
+.Approved {background-color: #ffffcc}
+.Purchased {background-color:  #e6e6e6}
+.Declined {background-color:  #b3b3b3}
