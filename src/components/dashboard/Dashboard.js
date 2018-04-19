@@ -12,6 +12,7 @@ import Paper from "material-ui/Paper"
 import {fetchUnseenOrders} from '../../actions/orders'
 import {jwtPayload} from '../../jwt'
 import { translate } from "react-i18next"
+import {fetchDashboard} from "../../actions/dashboard"
 import {getUnreadMessages} from "../../actions/chat"
 
 const styles = theme => ({
@@ -49,9 +50,9 @@ class Dashboard extends PureComponent {
   state = {}
 
   componentWillMount(props) {
-    this.props.fetchMyProducts(this.props.currentProfileId)
     this.props.fetchUser(this.props.currentProfileId)
     this.props.fetchUnseenOrders()
+    this.props.fetchDashboard()
     this.props.getUnreadMessages()
   }
 
@@ -63,10 +64,9 @@ class Dashboard extends PureComponent {
 
 
   render() {
-    const { classes, currentProfileId, currentUser, unreadMessages, t, user,  unseenOrders} = this.props
+    const { classes, currentProfileId, currentUser, unreadMessages, t, user,  unseenOrders, dashboard} = this.props
     if (!currentUser) return <Redirect to="/" />
     if (this.props.currentUserRole === "admin") return <Redirect to="/admin" />
-
 
     return (
       <Paper
@@ -170,7 +170,7 @@ class Dashboard extends PureComponent {
             {t("myProducts")}
             </Typography>
             <Typography color="textSecondary">
-              {t("yourCurrentlyHave")}{this.props.products.length} {t("productsOnOffer")}
+              {t("yourCurrentlyHave")}{dashboard.products} {t("productsOnOffer")}
             </Typography>
           </CardContent>
           <CardActions>
@@ -188,7 +188,7 @@ class Dashboard extends PureComponent {
               {t("myOrders")}
             </Typography>
             <Typography color="textSecondary">
-              {t("yourCurrentlyHave")}{this.props.orders.length} {t("orders")}
+              {t("yourCurrentlyHave")}{dashboard.orders} {t("orders")}
             </Typography>
           </CardContent>
           <CardActions>
@@ -220,6 +220,7 @@ const mapStateToProps = function(state) {
     unseenOrders: state.unseenOrders,
     products: state.products,
     user: state.user,
+    dashboard: state.dashboard
     unreadMessages: state.unreadMessages
   }
 }
@@ -228,5 +229,5 @@ const mapStateToProps = function(state) {
 export default combine(
   translate("user"),
   withStyles(styles),
-  connect(mapStateToProps, { fetchMyProducts, fetchUser, fetchUnseenOrders, getUnreadMessages })
+  connect(mapStateToProps, { fetchMyProducts, fetchUser, fetchUnseenOrders, getUnreadMessages, fetchDashboard })
 )(Dashboard)
