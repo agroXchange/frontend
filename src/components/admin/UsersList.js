@@ -75,10 +75,10 @@ class UsersList extends PureComponent {
 
   pendingUser = user => {
     if (user.approved === true) {
-      return  <Typography style={{color: 'green',marginTop:-10 }}> Approved </Typography>
+      return  <Typography style={{color: 'green',marginTop:-10 }}> User approved </Typography>
 
     } else {
-      return <Typography style={{color: 'red', marginTop:-20}}> Pending Request </Typography>
+      return <Typography style={{color: 'red', marginTop:-20}}> Pending request </Typography>
     }
   }
 
@@ -141,7 +141,7 @@ class UsersList extends PureComponent {
                 primary={user.profile.name}
                 secondary={user.profile.country}
               />
-              <ListItemText>
+              <ListItemText style={{textAlign:'center'}}>
               {this.pendingUser(user)}
               </ ListItemText>
 

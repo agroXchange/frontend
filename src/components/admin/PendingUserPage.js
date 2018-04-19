@@ -114,13 +114,15 @@ class AdminProfilePage extends PureComponent {
             )}
           </Dialog>
         </div>
-        <Button
+        { user.approved !== false &&
+      (<Button
           onClick={() => this.approveUser(user.id)}
           size="medium"
           color="primary"
         >
           Approve
         </Button>
+      )}
       </div>
     )
   }
