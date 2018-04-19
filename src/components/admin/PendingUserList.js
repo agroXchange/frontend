@@ -22,12 +22,12 @@ class UsersList extends PureComponent {
   }
 
 
-  handleOpen = () => {
-    this.setState({ open: true })
+  handleOpen = id => {
+    this.setState({ [`open${id}`]: true })
   }
 
-  handleClose = () => {
-    this.setState({ open: false })
+  handleClose = id => {
+    this.setState({ [`open${id}`]: false })
   }
 
   componentWillMount(props) {
@@ -125,18 +125,18 @@ class UsersList extends PureComponent {
               />
               </ListItem>
               <ListItemSecondaryAction>
-                <IconButton onClick={this.handleOpen}>
+                <IconButton onClick={() => this.handleOpen(user.id)}>
                   <DeleteIcon />
                 </IconButton>
                 <Dialog
-                  open={this.state.open}
-                  onRequestClose={this.handleClose}
+                  open={this.state[`open${user.id}`]}
+                  onRequestClose={_ => this.handleClose(user.id)}
                 >
                   <DialogTitle>
-                    {`Are you sure do you want to delete ${user.name}?`}
+                    {`Are you sure do you want to delete ${user.profile.name}?`}
                   </DialogTitle>
                   <DialogActions>
-                    <Button onClick={this.handleClose} primary>
+                    <Button onClick={() => this.handleClose(user.id)} primary>
                       {"Cancel"}
                     </Button>
                     <Button onClick={() => this.deleteUser(user.id)} primary>
