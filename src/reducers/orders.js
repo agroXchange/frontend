@@ -6,11 +6,11 @@ import {
 export default function(state = [], { type, payload } = {}) {
   switch (type) {
     case FETCH_ALL_ORDERS:
-      return payload;
+      return payload
     case FETCH_ORDERS_BY_BUYER:
-      return payload;
+      return payload
     case FETCH_ORDERS_BY_SELLER:
-      return payload;
+      return payload
     case CREATE_ORDER:
       return [ ...state, payload ]
     default:
