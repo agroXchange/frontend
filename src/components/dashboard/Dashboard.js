@@ -80,7 +80,6 @@ class Dashboard extends PureComponent {
           <Button className={classes.button} size="medium" color="primary" variant="raised" component={Link} to={`/products`}>
             {t("goToMarketplace")}
           </Button>
-        {console.log('role  ' + this.props.jwtPayload)}
         {
           unseenOrders[0] &&
           <Card className={classes.card}>
