@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import Card from "material-ui/Card"
 import { CardMedia } from "material-ui/Card"
 import Button from 'material-ui/Button'
-import Table, { TableBody, TableCell, TableRow } from "material-ui/Table"
+import Table, { TableHead, TableBody, TableCell, TableRow } from "material-ui/Table"
 import { InputLabel } from 'material-ui/Input'
 import { FormControl } from "material-ui/Form"
 import { MenuItem } from "material-ui/Menu"
@@ -14,10 +14,11 @@ import Select from "material-ui/Select"
 import { fetchOrdersByBuyer, fetchOrdersBySeller } from  '../../actions/orders'
 import { jwtPayload } from '../../jwt'
 import { translate } from 'react-i18next'
+
 const style = theme => ({
   card: {
-    height: 400,
-    width: 300,
+    height: 600,
+    width: 280,
     margin: 10,
     textAlign: "center",
     display: "inline-block"
@@ -32,13 +33,15 @@ const style = theme => ({
   table: {
     width: "10px",
     fontSize: "10px",
-    textAlign: "center"
+    textAlign: "center",
+    margin: "10px"
   },
-  seller: {
-    textAlign: "left",
-    fontSize: "5px"
+  header: {
+    fontSize: "15px",
+    textAlign: "left"
   }
 })
+
 class OrderList extends PureComponent {
   state = {
     status: 'All'
@@ -49,10 +52,11 @@ class OrderList extends PureComponent {
   }
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value  })
-    console.log(event.target.value)
   }
+
   renderFilteredOrder = () => {
-   if (this.state.status === 'Pending'||'Approved'||'Bought'||'Declined') {
+   const {currentProfileId} = this.props
+   if (this.state.status === 'Pending'||'Approved'||'Purchased'||'Declined') {
     return (
       <div>
         {this.props.orders
@@ -67,6 +71,20 @@ class OrderList extends PureComponent {
               />
            </CardMedia>
                <Table className={this.props.classes.table}>
+               <TableHead className={this.props.classes.header}>Product Info</TableHead>
+                <TableBody>
+                   <TableRow>
+                      <TableCell>{this.props.t('Product Volume')}</TableCell>
+                      <TableCell>{order.product.volume}</TableCell>
+                   </TableRow>
+                   <TableRow>
+                      <TableCell>{this.props.t('Product Description')}</TableCell>
+                      <TableCell>{order.product.description}</TableCell>
+                   </TableRow>
+                </TableBody>
+                </Table>
+                <Table className={this.props.classes.table}>
+                <TableHead className={this.props.classes.header}>Order Info</TableHead>
                 <TableBody>
                    <TableRow>
                       <TableCell>{this.props.t('Order Number')}</TableCell>
@@ -85,6 +103,18 @@ class OrderList extends PureComponent {
                       <TableCell>{order.date}</TableCell>
                    </TableRow>
                    <TableRow>
+                      <TableCell>{this.props.t(this.props.currentProfileId === order.seller.id ? 'Buyer name' : 'Seller name')}</TableCell>
+                      <TableCell>
+                      {this.currentProfileId === order.seller.id ?
+                        <Link to={`/profiles/${order.buyer.id}`} >
+                            {order.buyer.name}
+                        </Link> :
+                        <Link to={`/profiles/${order.seller.id}`}>
+                            {order.seller.name}
+                        </Link>}
+                      </TableCell>
+                   </TableRow>
+                   <TableRow>
                       <TableCell>{this.props.t('Comments')}</TableCell>
                       <TableCell>{order.comments}</TableCell>
                    </TableRow>
@@ -95,18 +125,24 @@ class OrderList extends PureComponent {
                    {this.props.t('SEE DETAILS')}
                  </Button>
                </Link>
-                 <Button size="small"  color="primary" onClick={() => this.props.history.goBack()}>
-                  {this.props.t('GO BACK')}
-                 </Button>
            </Card>
          ))}
        </div>
      )}
     }
+
     render() {
       const { classes, t} = this.props
       return (
         <div>
+          <Button
+            onClick={() => this.props.history.goBack()}
+            size="medium"
+            color="primary"
+            style={{display:'flex', flex:1}}
+          >
+            Go Back
+          </Button>
           <form>
             <div
               style={{
@@ -136,7 +172,7 @@ class OrderList extends PureComponent {
                     <MenuItem value={"Pending"}>{t('Pending')}</MenuItem>
                     <MenuItem value={"Approved"}>{t('Approved')}</MenuItem>
                     <MenuItem value={"Declined"}>{t('Declined')}</MenuItem>
-                    <MenuItem value={"Bought"}>{t('Bought')}</MenuItem>
+                    <MenuItem value={"Purchased"}>{t('Purchased')}</MenuItem>
                     <MenuItem value={"All"}>{t('All')}</MenuItem>
                   </Select>
                 </FormControl>
@@ -156,6 +192,20 @@ class OrderList extends PureComponent {
                   />
                </CardMedia>
                    <Table className={this.props.classes.table}>
+                    <TableHead className={this.props.classes.header}>Product Info</TableHead>
+                    <TableBody>
+                       <TableRow>
+                          <TableCell>{this.props.t('Product Volume')}</TableCell>
+                          <TableCell>{order.product.volume}</TableCell>
+                       </TableRow>
+                       <TableRow>
+                          <TableCell>{this.props.t('Product Description')}</TableCell>
+                          <TableCell>{order.product.description}</TableCell>
+                       </TableRow>
+                    </TableBody>
+                    </Table>
+                   <Table className={this.props.classes.table}>
+                   <TableHead className={this.props.classes.header}>Order Info</TableHead>
                     <TableBody>
                        <TableRow>
                          <TableCell>{this.props.t('Order Number')}</TableCell>
@@ -170,8 +220,20 @@ class OrderList extends PureComponent {
                           <TableCell>{order.status}</TableCell>
                        </TableRow>
                        <TableRow>
-                          <TableCell>{this.props.t('Ordered date')}</TableCell>
+                          <TableCell>{this.props.t('Ordered Date')}</TableCell>
                           <TableCell>{order.date}</TableCell>
+                       </TableRow>
+                       <TableRow>
+                          <TableCell>{this.props.t(this.props.currentProfileId === order.seller.id ? 'Buyer name' : 'Seller name')}</TableCell>
+                          <TableCell>
+                          {this.currentProfileId === order.seller.id ?
+                            <Link to={`/profiles/${order.buyer.id}`} >
+                                {order.buyer.name}
+                            </Link> :
+                            <Link to={`/profiles/${order.seller.id}`}>
+                                {order.seller.name}
+                            </Link>}
+                          </TableCell>
                        </TableRow>
                        <TableRow>
                           <TableCell>{this.props.t('Comments')}</TableCell>
@@ -184,9 +246,6 @@ class OrderList extends PureComponent {
                        {this.props.t('SEE DETAILS')}
                      </Button>
                    </Link>
-                     <Button size="small"  color="primary" onClick={() => this.props.history.goBack()}>
-                      {this.props.t('GO BACK')}
-                     </Button>
                </Card>
              ))}
            </div>}
@@ -194,10 +253,12 @@ class OrderList extends PureComponent {
     )
   }
 }
+
 const mapStateToProps = function(state) {
   const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
     currentUser: state.currentUser,
+    currentUserRole: jwtDecoded.role,
     currentUserId: jwtDecoded.id,
     currentProfileId: jwtDecoded.profileId,
     orders: state.orders,
