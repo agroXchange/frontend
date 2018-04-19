@@ -12,6 +12,7 @@ import Paper from "material-ui/Paper"
 import {fetchUnseenOrders} from '../../actions/orders'
 import {jwtPayload} from '../../jwt'
 import { translate } from "react-i18next"
+import {fetchDashboard} from "../../actions/dashboard"
 
 const styles = theme => ({
   card: {
@@ -48,9 +49,9 @@ class Dashboard extends PureComponent {
   state = {}
 
   componentWillMount(props) {
-    this.props.fetchMyProducts(this.props.currentProfileId)
     this.props.fetchUser(this.props.currentProfileId)
     this.props.fetchUnseenOrders()
+    this.props.fetchDashboard()
   }
 
   handleShowAll = () => {
@@ -61,7 +62,7 @@ class Dashboard extends PureComponent {
 
 
   render() {
-    const { classes, currentProfileId, currentUser, orders, t, user,  unseenOrders} = this.props
+    const { classes, currentProfileId, currentUser, t, user,  unseenOrders, dashboard} = this.props
     if (!currentUser) return <Redirect to="/" />
     if (this.props.currentUserRole === "admin") return <Redirect to="/admin" />
 
@@ -137,7 +138,7 @@ class Dashboard extends PureComponent {
             {t("myProducts")}
             </Typography>
             <Typography color="textSecondary">
-              {t("yourCurrentlyHave")}{this.props.products.length} {t("productsOnOffer")}
+              {t("yourCurrentlyHave")}{dashboard.products} {t("productsOnOffer")}
             </Typography>
           </CardContent>
           <CardActions>
@@ -155,7 +156,7 @@ class Dashboard extends PureComponent {
               {t("myOrders")}
             </Typography>
             <Typography color="textSecondary">
-              {t("yourCurrentlyHave")}{this.props.orders.length} {t("orders")}
+              {t("yourCurrentlyHave")}{dashboard.orders} {t("orders")}
             </Typography>
           </CardContent>
           <CardActions>
@@ -186,7 +187,8 @@ const mapStateToProps = function(state) {
     orders: state.orders,
     unseenOrders: state.unseenOrders,
     products: state.products,
-    user: state.user
+    user: state.user,
+    dashboard: state.dashboard
   }
 }
 
@@ -194,5 +196,5 @@ const mapStateToProps = function(state) {
 export default combine(
   translate("user"),
   withStyles(styles),
-  connect(mapStateToProps, { fetchMyProducts, fetchUser, fetchUnseenOrders })
+  connect(mapStateToProps, { fetchMyProducts, fetchUser, fetchUnseenOrders, fetchDashboard })
 )(Dashboard)
