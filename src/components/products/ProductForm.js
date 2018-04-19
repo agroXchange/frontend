@@ -166,7 +166,7 @@ class ProductForm extends PureComponent {
                 variant="raised"
                 style={classes.button}
               >
-              
+
                 <AddBox /><div className={classes.productstitle}> {t("Product")}</div>
               </Button>
 
@@ -394,6 +394,7 @@ const mapStateToProps = (state, props) => ({
 })
 
 export default combine(
+  translate("product"),
   withMobileDialog(),
   connect(mapStateToProps, { fetchCodes })
 )(ProductForm)
