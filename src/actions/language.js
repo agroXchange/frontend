@@ -5,5 +5,4 @@ export const setLanguage = (language) =>  {
         type: CHANGE_LANGUAGE,
         payload: language
     }
-
 }
