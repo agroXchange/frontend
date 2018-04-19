@@ -250,7 +250,7 @@ class Product extends PureComponent {
               onClose={ this.handleConfirmEditClose }
               aria-labelledby="form-dialog-title"
             >
-              <DialogTitle id="form-dialog-title">Thankyou. Your listing has been updated.</DialogTitle>
+              <DialogTitle id="form-dialog-title">Your listing has been updated.</DialogTitle>
 
             </Dialog>
 
