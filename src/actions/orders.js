@@ -94,12 +94,16 @@ export const fetchOrdersBySeller = () => (dispatch, getState) => {
     .catch(err => alert(err))
 }
 
-export const changeStatus = (data, id) => (dispatch) => (
+export const changeStatus = (data, id) => (dispatch, getState) => {
+  const state = getState()
+  const jwt = state.currentUser.jwt
+
   request
     .patch(`${baseUrl}/orders/${id}`)
+    .set("Authorization", `Bearer ${jwt}`)
     .send(data)
     .then(response => dispatch({
       type: CHANGE_STATUS,
       payload: response.body
     }))
-  )
+  }
