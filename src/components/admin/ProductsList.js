@@ -2,7 +2,7 @@ import React, { PureComponent } from "react"
 import { connect } from "react-redux"
 import * as combine from "lodash/fp/compose"
 import { withStyles } from "material-ui/styles"
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import Card from "material-ui/Card"
 import { CardHeader, CardMedia } from "material-ui/Card"
 import Button from "material-ui/Button"
@@ -28,6 +28,7 @@ import FirstPageIcon from "@material-ui/icons/FirstPage"
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft"
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight"
 import LastPageIcon from "@material-ui/icons/LastPage"
+import {jwtPayload} from '../../jwt'
 
 const actionsStyles = theme => ({
   root: {
@@ -202,6 +203,7 @@ class OrdersPage extends PureComponent {
     const { classes } = this.props
     const products = this.props.products
     if (!products) return null
+      if (this.props.currentUserRole !== "admin") return <Redirect to="/error" />
 
 
     const { rowsPerPage, page } = this.state
@@ -393,8 +395,10 @@ class OrdersPage extends PureComponent {
 }
 
 const mapStateToProps = function(state) {
+  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
-    products: state.products
+    products: state.products,
+    currentUserRole: jwtDecoded.role,
   }
 }
 
