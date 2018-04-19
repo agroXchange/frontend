@@ -158,8 +158,8 @@ class NavBar extends PureComponent {
   }
 
   render() {
-    const { classes, currentUser, currentProfileId, currentProfileRole, t } = this.props
-    const { auth, i18n } = this.state
+    const { classes, currentUser, currentProfileId, currentProfileRole, t, i18n } = this.props
+    const { auth } = this.state
     const changeLanguage = lng => {
       i18n.changeLanguage(lng)
     }
