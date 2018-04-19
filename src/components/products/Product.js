@@ -160,7 +160,7 @@ class Product extends PureComponent {
 
                 { this.daysRemaining(product.harvested, product.expiration) <= 5 ?
 
-                  <div className="bar" style={{ width: this.progress(product.harvested, product.expiration), backgroundColor: 'red' }}></div>
+                  <div className="bar" style={{ width: this.progress(product.harvested, product.expiration), backgroundColor: '#ba1b16' }}></div>
 
                   : <div className="bar" style={{ width: this.progress(product.harvested, product.expiration), backgroundColor: '#588D61'}}></div>
 
