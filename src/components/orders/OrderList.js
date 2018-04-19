@@ -110,7 +110,7 @@ class OrderList extends PureComponent {
                    <TableRow>
                       <TableCell>{this.props.t(this.props.currentProfileId === order.seller.id ? 'Buyer name' : 'Seller name')}</TableCell>
                       <TableCell>
-                      {this.currentProfileId === order.seller.id ?
+                      {this.props.currentProfileId === order.seller.id ?
                         <Link to={`/profiles/${order.buyer.id}`} >
                             {order.buyer.name}
                         </Link> :
@@ -247,7 +247,7 @@ class OrderList extends PureComponent {
                        <TableRow>
                           <TableCell>{this.props.t(this.props.currentProfileId === order.seller.id ? 'Buyer name' : 'Seller name')}</TableCell>
                           <TableCell>
-                          {this.currentProfileId === order.seller.id ?
+                          {this.props.currentProfileId === order.seller.id ?
                             <Link to={`/profiles/${order.buyer.id}`} >
                                 {order.buyer.name}
                             </Link> :
