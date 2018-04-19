@@ -76,7 +76,7 @@ class OrderList extends PureComponent {
               />
            </CardMedia>
                <Table className={this.props.classes.table}>
-               <TableHead className={this.props.classes.header}>Product Info</TableHead>
+               <TableHead className={this.props.classes.header}>{this.props.t('Product Info')}</TableHead>
                 <TableBody>
                    <TableRow>
                       <TableCell>{this.props.t('Product Volume')}</TableCell>
@@ -89,7 +89,7 @@ class OrderList extends PureComponent {
                 </TableBody>
                 </Table>
                 <Table className={this.props.classes.table}>
-                <TableHead className={this.props.classes.header}>Order Info</TableHead>
+                <TableHead className={this.props.classes.header}>{this.props.t('Order Info')}</TableHead>
                 <TableBody>
                    <TableRow>
                       <TableCell>{this.props.t('Order Number')}</TableCell>
@@ -162,7 +162,7 @@ class OrderList extends PureComponent {
             color="primary"
             style={{display:'flex', flex:1}}
           >
-            Go Back
+            {t('goBack')}
           </Button>
           <form>
             <div
@@ -213,7 +213,7 @@ class OrderList extends PureComponent {
                   />
                </CardMedia>
                    <Table className={this.props.classes.table}>
-                    <TableHead className={this.props.classes.header}>Product Info</TableHead>
+                    <TableHead className={this.props.classes.header}>{t('Product Info')}</TableHead>
                     <TableBody>
                        <TableRow>
                           <TableCell>{this.props.t('Product Volume')}</TableCell>
@@ -226,7 +226,7 @@ class OrderList extends PureComponent {
                     </TableBody>
                     </Table>
                    <Table className={this.props.classes.table}>
-                   <TableHead className={this.props.classes.header}>Order Info</TableHead>
+                   <TableHead className={this.props.classes.header}>{t('Order Info')}</TableHead>
                     <TableBody>
                        <TableRow>
                          <TableCell>{this.props.t('Order Number')}</TableCell>

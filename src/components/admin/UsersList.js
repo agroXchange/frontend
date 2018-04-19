@@ -75,10 +75,10 @@ class UsersList extends PureComponent {
 
   pendingUser = user => {
     if (user.approved === true) {
-      return  <Typography style={{color: 'green'}}> Approved </Typography>
+      return  <Typography style={{color: 'green',marginTop:-10 }}> Approved </Typography>
 
     } else {
-      return <Typography style={{color: 'red'}}> Pending Request </Typography>
+      return <Typography style={{color: 'red', marginTop:-20}}> Pending Request </Typography>
     }
   }
 
@@ -141,9 +141,11 @@ class UsersList extends PureComponent {
                 primary={user.profile.name}
                 secondary={user.profile.country}
               />
-            </ListItem>
+              <ListItemText>
+              {this.pendingUser(user)}
+              </ ListItemText>
 
-            {this.pendingUser(user)}
+            </ListItem>
 
             <ListItemSecondaryAction>
               <IconButton onClick={() => this.handleOpen(user.id)}>
