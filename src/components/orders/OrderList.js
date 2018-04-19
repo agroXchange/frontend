@@ -11,6 +11,7 @@ import { InputLabel } from 'material-ui/Input'
 import { FormControl } from "material-ui/Form"
 import { MenuItem } from "material-ui/Menu"
 import Select from "material-ui/Select"
+import Dialog, { DialogTitle, DialogActions } from "material-ui/Dialog"
 import { fetchOrdersByBuyer, fetchOrdersBySeller } from  '../../actions/orders'
 import { jwtPayload } from '../../jwt'
 import { translate } from 'react-i18next'
@@ -39,6 +40,10 @@ const style = theme => ({
   header: {
     fontSize: "15px",
     textAlign: "left"
+  },
+  message: {
+    fontSize: "20px",
+    textAlign: "center"
   }
 })
 
@@ -127,6 +132,22 @@ class OrderList extends PureComponent {
                </Link>
            </Card>
          ))}
+
+         {this.props.orders
+           .filter(order => order.status === this.state.status).length === 0
+           ?
+             <Dialog open={this.props.orders
+               .filter(order => order.status === this.state.status).length === 0} aria-labelledby="form-dialog-title">
+               <DialogTitle id="form-dialog-title">
+                 There are no orders
+               </DialogTitle>
+               <Link style={{textDecoration: 'none'}} to={`/dashboard`}>
+                 <Button size="medium" color="primary">
+                   Go Dashboard
+                 </Button>
+               </Link>
+             </Dialog>
+           : ""}
        </div>
      )}
     }
@@ -179,7 +200,7 @@ class OrderList extends PureComponent {
               </form>
             </div>
           </form>
-          {this.renderFilteredOrder()}
+          { this.state.status !== "All" && this.renderFilteredOrder() }
           { this.state.status === "All" &&
           <div>
             {this.props.orders.map(order => (
