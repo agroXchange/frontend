@@ -1,4 +1,4 @@
-import React, { PureComponent } from "reactr"
+import React, { PureComponent } from "react"
 import { translate } from "react-i18next"
 import List, { ListItem, ListItemText } from "material-ui/List"
 import { CardContent } from "material-ui/Card"
