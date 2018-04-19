@@ -83,10 +83,7 @@ class NavBar extends PureComponent {
   }
 
   toggleProductLanguage = (language) => {
-  //  console.log("state is " + language)
    const newLanguage =  (language !== "en") ? "en" : "es"
-   // console.log("now is " + test)
-
     this.props.setLanguage(newLanguage) 
   }
 

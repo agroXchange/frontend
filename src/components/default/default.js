@@ -53,7 +53,7 @@ button : {
     },
 },
 motto: {
-  fontSize:"60px",
+  fontSize:"3rem",
   color:"white",
   textShadow:" 2px 2px black",
    fontWeight: 900
@@ -139,7 +139,7 @@ class defaultPage extends PureComponent {
          >
            <DialogContent>
              <DialogContentText id="alert-dialog-description">
-              Congratulations. You registered. Wait for approve by admin
+              Thank you for registering. Please wait approval from admin.
              </DialogContentText>
            </DialogContent>
            <DialogActions>

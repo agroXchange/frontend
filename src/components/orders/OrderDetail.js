@@ -134,7 +134,7 @@ class OrderDetail extends PureComponent {
                <Table className={classes.table}>
                 <TableBody>
                 <TableRow>
-                   <TableCell><b>{t('Number')}</b></TableCell>
+                   <TableCell><b>{t('Order Number')}</b></TableCell>
                    <TableCell>{order.id}</TableCell>
                 </TableRow>
                 <TableRow>
@@ -191,9 +191,7 @@ class OrderDetail extends PureComponent {
               {this.props.currentUserRole !== 'admin' &&(
                  this.currentUser(this.props.currentProfileId, order)
                )}
-
-
-                <Link to={`orders/${order.id}/chat`}>
+                <Link to={`${order.id}/chat`}>
                   <br />
                   <Button
                      variant="raised"

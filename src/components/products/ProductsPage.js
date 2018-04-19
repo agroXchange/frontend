@@ -93,12 +93,6 @@ class ProductsPage extends PureComponent {
 
         </Button>
 
-        {/* <FormControlLabel disabled control={<Checkbox value="checkedD" />} label="Disabled" /> */}
-
-        <p>{
-          // !products[0].currency ? "< select product >" : products[0].currency
-        } </p>
-
         <Dialog
           fullScreen={fullScreen}
           open={this.state.open}

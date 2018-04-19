@@ -59,7 +59,7 @@ export const addProduct = (product, picture) => (dispatch, getState) =>{
   const state = getState()
   const jwt = state.currentUser.jwt
 
-  request
+  return request
     .post(`${baseUrl}/products`)
     .set("Authorization", `Bearer ${jwt}`)
     .attach("productPhoto", picture)

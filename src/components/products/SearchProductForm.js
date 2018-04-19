@@ -138,10 +138,11 @@ class SearchProductForm extends React.Component {
         this.props.fetchCodes()
     }
 
-    getName = (code) => {
+    getName = (code, language) => {
         if(!this.state.picked) return
         let product = this.props.codes.filter(i => i.code.match(code))
-        return product[0].titleeng
+        //return product[0].titleeng
+        return  (language === "es") ? product[0].titleesp : product[0].titleeng    
     }
 
 
@@ -265,7 +266,7 @@ class SearchProductForm extends React.Component {
             </div>
             <br/>
 
-                    <div style={classes.dialog}><h4>{!this.state.code ? "" : this.getName(this.state.code)}</h4></div>
+                    <div style={classes.dialog}><h4>{!this.state.code ? "" : this.getName(this.state.code, this.state.language)}</h4></div>
 
             <div>
                         <TextField

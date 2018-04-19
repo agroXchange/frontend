@@ -8,10 +8,13 @@ import Card, { CardActions, CardContent } from "material-ui/Card"
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd"
 import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes"
 import BuildIcon from "@material-ui/icons/Build"
+import Paper from "material-ui/Paper"
 import DescriptionIndIcon from "@material-ui/icons/Description"
+import {fetchDashboard} from '../../actions/dashboard'
 import {jwtPayload} from '../../jwt'
 import { connect } from "react-redux"
 import * as combine from "lodash/fp/compose"
+import Table, { TableBody, TableCell, TableHead, TableRow } from "material-ui/Table"
 
 export const styles = theme => ({
   root: {
@@ -20,7 +23,9 @@ export const styles = theme => ({
   },
   typo: {
     maxWidth: 400,
-    minWidth: 300
+    minWidth: 300,
+
+
   },
 
   card: {
@@ -31,7 +36,8 @@ export const styles = theme => ({
     height: 200
   },
   paper: {
-    height: 200
+    height: 200,
+    marginTop: '20px'
   },
   button : {
      margin: theme.spacing.unit,
@@ -46,6 +52,9 @@ export const styles = theme => ({
   cardContent : {
     display:'inline-block',
     alignItem: 'center'
+  },
+  table: {
+    fontSize: "5px"
   }
 })
 
@@ -54,6 +63,10 @@ class AdminPage extends PureComponent {
     direction: "column",
     justify: "center",
     alignItems: "center"
+  }
+
+  componentWillMount = () => {
+    this.props.fetchDashboard()
   }
 
   render() {
@@ -72,7 +85,7 @@ class AdminPage extends PureComponent {
             direction={direction}
             justify={justify}
           >
-            <Card>
+            <Card >
               <CardContent >
                 <Typography
                   className={classes.typo}
@@ -83,6 +96,9 @@ class AdminPage extends PureComponent {
                 <AssignmentIndIcon />
                 <br />
                   View all pending request
+                </Typography>
+                <Typography style={{fontSize:'14px'}} >
+                 You have {this.props.pendingUser} pending request
                 </Typography>
               </CardContent>
               <CardActions className={classes.cardContent}>
@@ -116,41 +132,12 @@ class AdminPage extends PureComponent {
                 <br />
                   User Administration
                 </Typography>
+                  <Typography style={{fontSize:'14px'}} >
+                   There are {this.props.users} users in the system
+                  </Typography>
               </CardContent>
               <CardActions className={classes.cardContent}>
               <Link style={{textDecoration: 'none'}} to={`/admin/users`}>
-                <Button className={classes.button} size="medium" color="primary">
-                  See more
-                </Button>
-                </Link>
-              </CardActions>
-            </Card>
-          </Grid>
-        </Grid>
-        <Grid item xs={12}>
-          <Grid
-            container
-            spacing={16}
-            className={classes.paper}
-            alignItems={alignItems}
-            direction={direction}
-            justify={justify}
-          >
-            <Card>
-              <CardContent>
-                <Typography
-                  className={classes.typo}
-                  gutterBottom
-                  variant="headline"
-                  component="h2"
-                >
-                  <SpeakerNotesIcon />
-                  <br />
-                  View All Orders
-                </Typography>
-              </CardContent>
-              <CardActions className={classes.cardContent}>
-                <Link style={{textDecoration: 'none'}} to={`/admin/orders`}>
                 <Button className={classes.button} size="medium" color="primary">
                   See more
                 </Button>
@@ -180,6 +167,9 @@ class AdminPage extends PureComponent {
                   <br />
                   View All Products
                 </Typography>
+                <Typography style={{fontSize:'14px'}} >
+                  There are {this.props.products} products in the system
+                </Typography>
               </CardContent>
               <CardActions className={classes.cardContent}>
                 <Link style={{textDecoration: 'none'}} to={`/admin/products`}>
@@ -191,6 +181,41 @@ class AdminPage extends PureComponent {
             </Card>
           </Grid>
           </Grid>
+          <Grid item xs={12}>
+            <Grid
+              container
+              spacing={16}
+              className={classes.paper}
+              alignItems={alignItems}
+              direction={direction}
+              justify={justify}
+            >
+              <Card>
+                <CardContent>
+                  <Typography
+                    className={classes.typo}
+                    gutterBottom
+                    variant="headline"
+                    component="h2"
+                  >
+                    <SpeakerNotesIcon />
+                    <br />
+                    View All Orders
+                  </Typography>
+                  <Typography style={{fontSize:'14px'}} >
+                   There are {this.props.orders} orders in the system
+                   </Typography>
+                </CardContent>
+                <CardActions className={classes.cardContent}>
+                  <Link style={{textDecoration: 'none'}} to={`/admin/orders`}>
+                  <Button className={classes.button} size="medium" color="primary">
+                    See more
+                  </Button>
+                  </Link>
+                </CardActions>
+              </Card>
+            </Grid>
+          </Grid>
       </Grid>
     )
   }
@@ -199,11 +224,20 @@ const mapStateToProps = function(state) {
   const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
     currentUserRole: jwtDecoded.role,
+    pendingUser : state.dashboard.pendingUsers,
+    dashboard : state.dashboard,
+    users: state.dashboard.users,
+    products: state.dashboard.products,
+    orders: state.dashboard.orders,
+    approvedOrders :state.dashboard.approvedOrders,
+    declineOrders :state.dashboard.declineOrders,
+    pendingOrders :state.dashboard.pendingOrders,
+    purchaseOrders :state.dashboard.purchaseOrders,
 
   }
 }
 
 export default combine(
   withStyles(styles),
-  connect(mapStateToProps)
+  connect(mapStateToProps, {fetchDashboard})
 )(AdminPage)

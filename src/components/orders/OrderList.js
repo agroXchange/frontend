@@ -11,6 +11,7 @@ import { InputLabel } from 'material-ui/Input'
 import { FormControl } from "material-ui/Form"
 import { MenuItem } from "material-ui/Menu"
 import Select from "material-ui/Select"
+import Dialog, { DialogTitle, DialogActions } from "material-ui/Dialog"
 import { fetchOrdersByBuyer, fetchOrdersBySeller } from  '../../actions/orders'
 import { jwtPayload } from '../../jwt'
 import { translate } from 'react-i18next'
@@ -39,6 +40,10 @@ const style = theme => ({
   header: {
     fontSize: "15px",
     textAlign: "left"
+  },
+  message: {
+    fontSize: "20px",
+    textAlign: "center"
   }
 })
 
@@ -71,7 +76,7 @@ class OrderList extends PureComponent {
               />
            </CardMedia>
                <Table className={this.props.classes.table}>
-               <TableHead className={this.props.classes.header}>Product Info</TableHead>
+               <TableHead className={this.props.classes.header}>{this.props.t('Product Info')}</TableHead>
                 <TableBody>
                    <TableRow>
                       <TableCell>{this.props.t('Product Volume')}</TableCell>
@@ -84,7 +89,7 @@ class OrderList extends PureComponent {
                 </TableBody>
                 </Table>
                 <Table className={this.props.classes.table}>
-                <TableHead className={this.props.classes.header}>Order Info</TableHead>
+                <TableHead className={this.props.classes.header}>{this.props.t('Order Info')}</TableHead>
                 <TableBody>
                    <TableRow>
                       <TableCell>{this.props.t('Order Number')}</TableCell>
@@ -105,7 +110,7 @@ class OrderList extends PureComponent {
                    <TableRow>
                       <TableCell>{this.props.t(this.props.currentProfileId === order.seller.id ? 'Buyer name' : 'Seller name')}</TableCell>
                       <TableCell>
-                      {this.currentProfileId === order.seller.id ?
+                      {this.props.currentProfileId === order.seller.id ?
                         <Link to={`/profiles/${order.buyer.id}`} >
                             {order.buyer.name}
                         </Link> :
@@ -127,6 +132,22 @@ class OrderList extends PureComponent {
                </Link>
            </Card>
          ))}
+
+         {this.props.orders
+           .filter(order => order.status === this.state.status).length === 0
+           ?
+             <Dialog open={this.props.orders
+               .filter(order => order.status === this.state.status).length === 0} aria-labelledby="form-dialog-title">
+               <DialogTitle id="form-dialog-title">
+                 There are no orders
+               </DialogTitle>
+               <Link style={{textDecoration: 'none'}} to={`/dashboard`}>
+                 <Button size="medium" color="primary">
+                   Go Dashboard
+                 </Button>
+               </Link>
+             </Dialog>
+           : ""}
        </div>
      )}
     }
@@ -141,7 +162,7 @@ class OrderList extends PureComponent {
             color="primary"
             style={{display:'flex', flex:1}}
           >
-            Go Back
+            {t('goBack')}
           </Button>
           <form>
             <div
@@ -179,7 +200,7 @@ class OrderList extends PureComponent {
               </form>
             </div>
           </form>
-          {this.renderFilteredOrder()}
+          { this.state.status !== "All" && this.renderFilteredOrder() }
           { this.state.status === "All" &&
           <div>
             {this.props.orders.map(order => (
@@ -192,7 +213,7 @@ class OrderList extends PureComponent {
                   />
                </CardMedia>
                    <Table className={this.props.classes.table}>
-                    <TableHead className={this.props.classes.header}>Product Info</TableHead>
+                    <TableHead className={this.props.classes.header}>{t('Product Info')}</TableHead>
                     <TableBody>
                        <TableRow>
                           <TableCell>{this.props.t('Product Volume')}</TableCell>
@@ -205,7 +226,7 @@ class OrderList extends PureComponent {
                     </TableBody>
                     </Table>
                    <Table className={this.props.classes.table}>
-                   <TableHead className={this.props.classes.header}>Order Info</TableHead>
+                   <TableHead className={this.props.classes.header}>{t('Order Info')}</TableHead>
                     <TableBody>
                        <TableRow>
                          <TableCell>{this.props.t('Order Number')}</TableCell>
@@ -226,7 +247,7 @@ class OrderList extends PureComponent {
                        <TableRow>
                           <TableCell>{this.props.t(this.props.currentProfileId === order.seller.id ? 'Buyer name' : 'Seller name')}</TableCell>
                           <TableCell>
-                          {this.currentProfileId === order.seller.id ?
+                          {this.props.currentProfileId === order.seller.id ?
                             <Link to={`/profiles/${order.buyer.id}`} >
                                 {order.buyer.name}
                             </Link> :
