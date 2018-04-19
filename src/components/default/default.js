@@ -190,4 +190,4 @@ const mapStateToProps = function(state) {
   }
 }
 
-export default combine(translate("user"), withStyles(styles), connect(mapStateToProps))(defaultPage)
+export default combine(translate("user"), withStyles(styles), connect(mapStateToProps, { closeWindow }))(defaultPage)
