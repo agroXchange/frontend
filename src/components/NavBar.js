@@ -26,6 +26,7 @@ import Button from "material-ui/Button"
 import { withRouter } from "react-router"
 import Select from "material-ui/Select"
 import { MenuItem } from 'material-ui/Menu';
+import { setLanguage} from '../actions/language'
 
 const styles = {
   list: {
@@ -79,6 +80,14 @@ class NavBar extends PureComponent {
     } else {
       return () => this.props.history.push("/")
     }
+  }
+
+  toggleProductLanguage = (language) => {
+  //  console.log("state is " + language)
+   const newLanguage =  (language !== "en") ? "en" : "es"
+   // console.log("now is " + test)
+
+    this.props.setLanguage(newLanguage) 
   }
 
   adminMenu = user => {
@@ -158,10 +167,11 @@ class NavBar extends PureComponent {
   }
 
   render() {
-    const { classes, currentUser, currentProfileId, currentProfileRole, t, i18n } = this.props
+    const { classes, currentUser, currentProfileId, currentProfileRole, t, i18n, language } = this.props
     const { auth } = this.state
     const changeLanguage = lng => {
       i18n.changeLanguage(lng)
+      this.toggleProductLanguage(language)
     }
 
     const sideList = (
@@ -331,13 +341,14 @@ const mapStateToProps = function(state) {
     currentUser: state.currentUser,
     currentUserId: jwtDecoded.id,
     currentProfileId: jwtDecoded.profileId,
-    currentProfileRole: jwtDecoded.role
+    currentProfileRole: jwtDecoded.role,
+    language: state.language,
   }
 }
 
 export default combine(
   withRouter,
   translate("navBar"),
-  connect(mapStateToProps),
+  connect(mapStateToProps, { setLanguage}),
   withStyles(styles)
 )(NavBar)
