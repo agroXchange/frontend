@@ -148,7 +148,7 @@ class NavBar extends PureComponent {
           <ListItem>
             <img
               style={{ height: "80px", width: "150px" }}
-              src="/images/logo.png"
+              src="/images/logo.jpg"
               alt=""
             />
           </ListItem>
@@ -240,7 +240,7 @@ class NavBar extends PureComponent {
               <ListItem>
                 <img
                   style={{ height: "80px", width: "150px" }}
-                  src="/images/logo.png"
+                  src="/images/logo.jpg"
                   alt=""
                   onClick={() => this.props.history.push("/")}
                 />
