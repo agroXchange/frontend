@@ -1,10 +1,10 @@
-import React, { PureComponent } from "react";
-import { withStyles } from "material-ui/styles";
-import TextField from "material-ui/TextField";
-import Button from "material-ui/Button";
+import React, { PureComponent } from "react"
+import { withStyles } from "material-ui/styles"
+import TextField from "material-ui/TextField"
+import Button from "material-ui/Button"
 import Checkbox from 'material-ui/Checkbox'
-import compose from "lodash/fp/compose";
-import { translate } from "react-i18next";
+import * as combine from "lodash/fp/compose"
+import { translate } from "react-i18next"
 import {FormControlLabel} from "material-ui/Form/index"
 
 const styles = theme => ({
@@ -25,27 +25,27 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: 300
   }
-});
+})
 
 class LoginForm extends PureComponent {
-  state = {};
+  state = {}
 
   handleSubmit = e => {
-    e.preventDefault();
-    this.props.onSubmit(this.state);
-  };
+    e.preventDefault()
+    this.props.onSubmit(this.state)
+  }
 
   handleChange = event => {
-    const { name, value } = event.target;
+    const { name, value } = event.target
 
     this.setState({
       [name]: value
-    });
-  };
+    })
+  }
 
   render() {
-    const { t } = this.props;
-    const { classes } = this.props;
+    const { t } = this.props
+    const { classes } = this.props
 
     return (
       <form className={classes.container} onSubmit={this.handleSubmit}>
@@ -81,7 +81,7 @@ class LoginForm extends PureComponent {
           }
           label={t("Stay logged in")}
         />
-        <Button style={{backgroundColor:'green'}}
+        <Button
           variant="raised"
           color="primary"
           className={classes.button}
@@ -90,8 +90,8 @@ class LoginForm extends PureComponent {
           {t("Log in")}
         </Button>
       </form>
-    );
+    )
   }
 }
 
-export default compose(translate("user"), withStyles(styles))(LoginForm);
+export default combine(translate("user"), withStyles(styles))(LoginForm)

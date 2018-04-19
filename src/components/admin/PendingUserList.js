@@ -1,68 +1,48 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import {
-  fetchPendingUsers,
-  approveUser,
-  deleteUser
-} from "../../actions/users";
-import { assignImage, searchingByName } from "./lib/lib";
-import compose from "lodash/fp/compose";
-import { withStyles } from "material-ui/styles";
-import List, {
-  ListItem,
-  ListItemAvatar,
-  ListItemSecondaryAction,
-  ListItemText
-} from "material-ui/List";
-import DeleteIcon from "@material-ui/icons/Delete";
-import InfoIcon from "@material-ui/icons/Info";
-import Button from "material-ui/Button";
-import IconButton from "material-ui/IconButton";
-import Avatar from "material-ui/Avatar";
-import Divider from "material-ui/Divider";
-import Dialog, { DialogTitle, DialogActions } from "material-ui/Dialog";
-import SearchIcon from "@material-ui/icons/Search";
-import TextField from "material-ui/TextField";
-
-const style = theme => ({
-  card: {
-    height: 550,
-    width: 300,
-    margin: 20,
-    textAlign: "center",
-    display: "inline-block"
-  }
-});
+import React, { PureComponent } from "react"
+import { connect } from "react-redux"
+import { Link , Redirect} from "react-router-dom"
+import { fetchPendingUsers, approveUser, deleteUser } from "../../actions/users"
+import { assignImage, searchingByName } from "./lib/lib"
+import * as combine from "lodash/fp/compose"
+import List, { ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText } from "material-ui/List"
+import DeleteIcon from "@material-ui/icons/Delete"
+import Button from "material-ui/Button"
+import IconButton from "material-ui/IconButton"
+import Avatar from "material-ui/Avatar"
+import Divider from "material-ui/Divider"
+import Dialog, { DialogTitle, DialogActions } from "material-ui/Dialog"
+import SearchIcon from "@material-ui/icons/Search"
+import TextField from "material-ui/TextField"
+import {jwtPayload} from '../../jwt'
 
 class UsersList extends PureComponent {
   state = {
     open: false,
     users: this.props.users,
     term: ""
-  };
+  }
 
 
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
+  handleOpen = id => {
+    this.setState({ [`open${id}`]: true })
+  }
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+  handleClose = id => {
+    this.setState({ [`open${id}`]: false })
+  }
 
   componentWillMount(props) {
-    this.props.fetchPendingUsers();
+    this.props.fetchPendingUsers()
   }
 
   deleteUser = id => {
-    this.props.deleteUser(id);
-    this.handleClose();
-  };
+    this.props.deleteUser(id)
+    this.handleClose()
+  }
 
   searchHandler = event => {
-    this.setState({ term: event.target.value });
-  };
+    this.setState({ term: event.target.value })
+  }
 
 
   renderMessage = users => {
@@ -77,25 +57,32 @@ class UsersList extends PureComponent {
           </Button>
         </Link>
       </Dialog>
-    );
-  };
+    )
+  }
 
   renderChamberOfCommerce = chamberOfCommerce => {
     if (chamberOfCommerce) {
-      return chamberOfCommerce;
+      return chamberOfCommerce
     } else {
-      return "No chamber of commerce provided";
+      return "No chamber of commerce provided"
     }
-  };
+  }
 
   render() {
-    const users = this.props.users;
-    const classes = this.props;
-
-    if (!users) return null;
+    const users = this.props.users
+    if (!users) return null
+      if (this.props.currentUserRole !== "admin") return <Redirect to="/error" />
 
     return (
       <div>
+      <Button
+        onClick={() => this.props.history.goBack()}
+        size="medium"
+        color="primary"
+        style={{display:'flex', flex:1}}
+      >
+        Go Back
+      </Button>
       <form>
         <div
           style={{
@@ -120,44 +107,38 @@ class UsersList extends PureComponent {
         {this.renderMessage(users)}
         {users.filter(searchingByName(this.state.term)).map(user => (
           <List>
-            <ListItem>
+            <ListItem onClick={() => this.props.history.push(`/admin/pending/profiles/${user.id}`)}>
               <ListItemAvatar>
-                <Link style={{textDecoration: 'none'}} to={`/admin/pending/profiles/${user.id}`}>
                   <Avatar>
                     <img
-                      className={classes.media}
-                      src={assignImage(user.logo)}
+                      style={{width:'50px'}}
+                      src={assignImage(user.profile.logo)}
                       alt=""
                     />
                   </Avatar>
-                </Link>
               </ListItemAvatar>
 
               <ListItemText
-                primary={"Company name: " + user.name}
+                primary={"Company name: " + user.profile.name}
                 secondary={
                   "Chamber Of Commerce: " +
-                  this.renderChamberOfCommerce(user.chamberOfCommerce)
+                  this.renderChamberOfCommerce(user.profile.chamberOfCommerce)
                 }
               />
-              <Link style={{textDecoration: 'none'}} to={`/admin/profiles/${user.id}`}>
-                <IconButton>
-                  <InfoIcon />
-                </IconButton>
-              </Link>
+              </ListItem>
               <ListItemSecondaryAction>
-                <IconButton onClick={this.handleOpen}>
+                <IconButton onClick={() => this.handleOpen(user.id)}>
                   <DeleteIcon />
                 </IconButton>
                 <Dialog
-                  open={this.state.open}
-                  onRequestClose={this.handleClose}
+                  open={this.state[`open${user.id}`]}
+                  onRequestClose={_ => this.handleClose(user.id)}
                 >
                   <DialogTitle>
-                    {`Are you sure do you want to delete ${user.name}?`}
+                    {`Are you sure do you want to delete ${user.profile.name}?`}
                   </DialogTitle>
                   <DialogActions>
-                    <Button onClick={this.handleClose} primary>
+                    <Button onClick={() => this.handleClose(user.id)} primary>
                       {"Cancel"}
                     </Button>
                     <Button onClick={() => this.deleteUser(user.id)} primary>
@@ -167,22 +148,23 @@ class UsersList extends PureComponent {
                 </Dialog>
               </ListItemSecondaryAction>
               <Divider inset={true} />
-            </ListItem>
+
             <Divider inset={true} />
           </List>
         ))}
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = function(state) {
+  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
-    users: state.users
-  };
-};
+    users: state.users,
+    currentUserRole: jwtDecoded.role,
+  }
+}
 
-export default compose(
-  withStyles(style),
+export default combine(
   connect(mapStateToProps, { fetchPendingUsers, approveUser, deleteUser })
-)(UsersList);
+)(UsersList)

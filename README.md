@@ -679,7 +679,7 @@ Here is an example:
 
 ```js
 import React from 'react';
-import logo from './logo.png'; // Tell Webpack this JS file uses this image
+import logo from './logo.jpg'; // Tell Webpack this JS file uses this image
 
 console.log(logo); // /logo.84287d09.png
 
@@ -697,7 +697,7 @@ This works in CSS too:
 
 ```css
 .Logo {
-  background-image: url(./logo.png);
+  background-image: url(./logo.jpg);
 }
 ```
 
@@ -750,7 +750,7 @@ render() {
   // Note: this is an escape hatch and should be used sparingly!
   // Normally we recommend using `import` for getting asset URLs
   // as described in “Adding Images and Fonts” above this section.
-  return <img src={process.env.PUBLIC_URL + '/img/logo.png'} />;
+  return <img src={process.env.PUBLIC_URL + '/img/logo.jpg'} />;
 }
 ```
 

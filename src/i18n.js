@@ -4,9 +4,16 @@ import LanguageDetector from "i18next-browser-languagedetector";
 i18n.use(LanguageDetector).init({
   resources: {
     en: {
+      navBar: {
+        'Dashboard': 'Dashboard',
+        'My Profile': 'My Profile',
+        'My Products': 'My Products',
+        'My Orders' : 'My Orders',
+        'Marketplace': 'Marketplace',
+        'Logout': 'Logout'
+      },
       product: {
         'Code':  'Code',
-        'Harvested Dated': 'Harvested Dated',
         'Expiration Date': 'Expiration Date',
         'View Seller': 'View Seller',
         'Volume': 'Volume',
@@ -20,7 +27,7 @@ i18n.use(LanguageDetector).init({
         'Description': 'Description',
         'Price per kg': 'Price per kg',
         'Please select your currency': 'Please select your currency',
-        'Harvested Date': 'Harvested Date',
+        'Harvest Date': 'Harvested Date',
         'Expiry Date': 'Expiry Date',
         'Please Upload a Photo': 'Please Upload a Photo',
         'Choose file': 'Choose file',
@@ -35,6 +42,18 @@ i18n.use(LanguageDetector).init({
        'Select product': 'Select product',
        'HS Code': 'HS Code',
        'From country' : ' From country',
+       'Search' : 'Search',
+        'GO BACK': 'GO BACK',
+        'Cancel': 'Cancel',
+        'SOLD OUT': 'SOLD OUT',
+        'EXPIRED': 'EXPIRED',
+        'remaining': 'days remaining',
+        'Edit Your Product': 'Edit Your Product',
+        'My Products': 'My Products',
+        'Add Product': 'Add Product',
+        'No Products': 'This Organization currently has no products for sale.',
+        'You Have No Products': 'You currently have no products listed for sale.',
+        'View Product': 'View Product'
       },
       profile: {
         'Name': 'Name',
@@ -142,12 +161,12 @@ i18n.use(LanguageDetector).init({
     es: {
       product: {
         'Code': 'Código',
-        'Harvested Dated': 'Fecha de cosecha',
+        'Harvest Date': 'Fecha de cosecha',
         'Expiration Date': 'Fecha de vencimiento',
         'View Seller': 'Ver vendedor',
         'Volume': 'Volumen',
         'Price': 'Precio',
-        'Certification': 'certificación',
+        'Certification': 'Certificación',
         'Country': 'Estado',
         'City/Port': 'Ciudad',
         'Edit Product': 'Editar producto',
@@ -156,7 +175,6 @@ i18n.use(LanguageDetector).init({
         'Description': 'Descripción',
         'Price per kg': 'Precio por kg',
         'Please select your currency': 'Seleccione su moneda',
-        'Harvested Date': 'Fecha de cosecha',
         'Expiry Date': 'Fecha de caducidad',
         'Please Upload a Photo': 'Por favor cargue una foto',
         'Choose file': 'Elija el archivo',
@@ -171,6 +189,18 @@ i18n.use(LanguageDetector).init({
         'Select product': 'Seleccionar producto',
         'HS Code': 'Código HS',
         'From country': 'Del pais',
+        'Search': 'Buscar',
+        'GO BACK': 'REGRESA',
+        'Cancel': 'Cancelar',
+        'SOLD OUT': 'AGOTADO',
+        'EXPIRED': 'MUERTO',
+        'remaining': 'días restantes',
+        'Edit Your Product': 'Edita tu producto',
+        'My Products': 'Mis Productos',
+        'Add Product': 'Agregar producto',
+        'No Products': 'Esta organización actualmente no tiene productos en venta.',
+        'You Have No Products': 'Actualmente no tiene productos en venta.',
+        'View Product': 'Ver el producto'
       },
       profile: {
         'new': 'nuevo'
@@ -253,6 +283,14 @@ i18n.use(LanguageDetector).init({
         'Ordered date': 'Fecha ordenada',
         'SEE DETAILS': 'Ver detalles',
         'GO BACK': 'REGRESA'
+      },
+      navBar: {
+        'Dashboard': 'Tablero',
+        'My Profile': 'Perfil',
+        'My Products': 'Mis Productos',
+        'My Orders' : 'Mis Ordenes',
+        'Marketplace': 'Mercado',
+        'Logout': 'Cerrar Sesión'
       },
       detail: {
         'Order': 'Orden',

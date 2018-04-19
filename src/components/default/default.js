@@ -1,13 +1,16 @@
-import React, { PureComponent } from "react";
-import { withStyles } from "material-ui/styles";
-import compose from "lodash/fp/compose";
-import { translate } from "react-i18next";
-import List, { ListItem, ListItemText } from "material-ui/List";
-import Card, { CardActions, CardContent, CardMedia, CardTitle } from "material-ui/Card";
-import Button from "material-ui/Button";
-import Typography from "material-ui/Typography";
-import Paper from "material-ui/Paper";
-import Divider from "material-ui/Divider";
+import React, { PureComponent } from "react"
+import { connect } from 'react-redux'
+import { withStyles } from "material-ui/styles"
+import * as combine from "lodash/fp/compose"
+import { translate } from "react-i18next"
+import List, { ListItem, ListItemText } from "material-ui/List"
+import { CardContent } from "material-ui/Card"
+import Button from "material-ui/Button"
+import Typography from "material-ui/Typography"
+import Paper from "material-ui/Paper"
+import { closeWindow } from '../../actions/users'
+import Divider from "material-ui/Divider"
+import Dialog, { DialogActions, DialogContent, DialogContentText } from 'material-ui/Dialog'
 
 const styles = theme => ({
   list: {
@@ -69,15 +72,32 @@ container: {
   margin:'auto',
   boxSizing:"border-box"
 }
-});
+})
 
 class defaultPage extends PureComponent {
-  state = {};
+  state = {
+      open: false,
+    }
+
+  handleClickOpen = () => {
+       this.setState({ open: true })
+     }
+
+  handleClose = () => {
+    this.props.closeWindow()
+      this.setState({ open: false })
+    }
 
   render() {
-    const { t, classes } = this.props;
+
+    const { t, classes, signup } = this.props
+
+    if (signup.success === true) {
+    this.handleClickOpen()
+    }
 
     return (
+
       <div>
         <div>
           <Paper className={classes.card}>
@@ -88,28 +108,47 @@ class defaultPage extends PureComponent {
             <Typography className={classes.secondaryText}component="p">
               A marketplace for producers
             </Typography>
+            <div className={classes.buttonContainer}>
+            <Button
+              onClick={() => this.props.history.push('/login')}
+               size="large"
+               className={classes.button}
+               >
+            Log In
+           </Button>
+           <Button
+               onClick={() => this.props.history.push('/signup')}
+               variant="raised"
+               size="large"
+               className={classes.button}
+               >
+            Sign Up
+           </Button>
+           </div>
           </CardContent>
 
-
           </Paper>
-          <div className={classes.buttonContainer}>
-          <Button
-            onClick={() => this.props.history.push('/login')}
-             size="large"
-             className={classes.button}
-             >
-          Log In
-         </Button>
-         <Button
-             onClick={() => this.props.history.push('/signup')}
-             variant="raised"
-             size="large"
-             className={classes.button}
-             >
-          Sign Up
-         </Button>
-         </div>
+
          <Divider />
+
+         <Dialog
+           open={this.state.open}
+           onClose={this.handleClose}
+           aria-labelledby="alert-dialog-title"
+           aria-describedby="alert-dialog-description"
+         >
+           <DialogContent>
+             <DialogContentText id="alert-dialog-description">
+              Congratulations. You registered. Wait for approve by admin
+             </DialogContentText>
+           </DialogContent>
+           <DialogActions>
+             <Button onClick={this.handleClose}  color="primary" autoFocus>
+               OK
+             </Button>
+           </DialogActions>
+         </Dialog>
+
         </div>
         <div>
           <div>
@@ -140,8 +179,15 @@ class defaultPage extends PureComponent {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default compose(translate("user"), withStyles(styles))(defaultPage);
+const mapStateToProps = function(state) {
+
+  return {
+    signup: state.signup,
+  }
+}
+
+export default combine(translate("user"), withStyles(styles), connect(mapStateToProps, { closeWindow }))(defaultPage)

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { withStyles } from "material-ui/styles";
 import Button from "material-ui/Button";
-import compose from "lodash/fp/compose";
+import * as combine from "lodash/fp/compose";
 import { translate } from "react-i18next";
 
 
@@ -111,4 +111,7 @@ class EditProfileForm extends PureComponent {
   }
 }
 
-export default compose(translate("user"), withStyles(styles))(EditProfileForm);
+export default combine(
+  translate("user"),
+  withStyles(styles)
+)(EditProfileForm);

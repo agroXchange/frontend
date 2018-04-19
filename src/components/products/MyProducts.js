@@ -5,6 +5,17 @@ import { fetchMyProducts } from '../../actions/products'
 import { fetchUser } from '../../actions/users'
 import {jwtPayload} from "../../jwt"
 import { Link } from 'react-router-dom'
+import { withStyles } from "material-ui/styles"
+import Button from "material-ui/Button"
+import * as combine from "lodash/fp/compose"
+import { translate } from "react-i18next"
+
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+    width: 150
+  }
+})
 
 class MyProducts extends PureComponent {
   state = {}
@@ -16,27 +27,43 @@ class MyProducts extends PureComponent {
 
 
   render() {
-    const { products, currentProfileId, user } = this.props
+    const { t, classes, products, currentProfileId, user } = this.props
     if (!products) return null
     if (!user) return null
 
     return(
       <div>
+        <Button
+         onClick={() => this.props.history.goBack()}
+         size="medium"
+         color="primary"
+         style={{display:'flex', flex:1}}
+        >
+         { t("GO BACK") }
+       </Button>
+
         { currentProfileId === user.id ?
-          <h2>My Products</h2> : <h2>{user.name}</h2> }
+          <h2>{ t("My Products") }</h2> : <h2>{user.name}</h2> }
 
         { products.length === 0 && currentProfileId === user.id ?
           <div>
-            <p>You currently have no products listed for sale.</p>
+            <p>{ t("You Have No Products") }</p>
           </div> : " " }
 
           { products.length === 0 && currentProfileId !== user.id ?
             <div>
-              <p>This Organization currently has no products for sale.</p>
+              <p>{ t("No Products") }</p>
             </div> : " " }
 
         { currentProfileId === user.id ?
-          <Link style={{textDecoration: 'none'}} to="/products/new">Add Product</Link> : " " }
+          <Link style={{textDecoration: 'none'}} to="/products/new">
+            <Button
+              className={ classes.button }
+              variant="raised"
+              color="primary" >
+                {t("Add Product")}
+            </Button>
+          </Link> : " " }
 
         <ProductsList products={ products } />
 
@@ -57,4 +84,7 @@ const mapStateToProps = function(state) {
 }
 
 
-export default connect(mapStateToProps, { fetchMyProducts, fetchUser })(MyProducts)
+export default combine(
+  translate("product", "navBar"),
+  withStyles(styles),
+  connect(mapStateToProps, { fetchMyProducts, fetchUser }))(MyProducts)

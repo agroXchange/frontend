@@ -1,29 +1,32 @@
 import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import compose from 'lodash/fp/compose'
-import MenuItem from 'material-ui/Menu/MenuItem';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
-import Paper from 'material-ui/Paper';
-import { withStyles } from 'material-ui/styles';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import * as combine from "lodash/fp/compose"
+import MenuItem from 'material-ui/Menu/MenuItem'
+import TextField from 'material-ui/TextField'
+import Button from 'material-ui/Button'
+import Paper from 'material-ui/Paper'
+import { withStyles } from 'material-ui/styles'
+import { InputAdornment } from 'material-ui/Input'
+import { translate } from "react-i18next"
 
 const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
   },
+  form: {
+    maxWidth: 270,
+  },
   textField: {
     marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 20,
-    width: 200,
+    marginRight: 'auto',
+    marginBottom: 'auto',
+    width: '90%',
   },
   menu: {
     width: 200,
   },
   paper: {
-    marginBottom: 20,
+    paddingBottom: 20,
     marginLeft: 20,
     marginRight: 20,
   },
@@ -76,13 +79,13 @@ class EditProductForm extends PureComponent {
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, t } = this.props
     const initialValues = this.props.initialValues || " "
     return(
-      <form onSubmit={ this.handleSubmit } className="form-container">
-        <Paper className={ classes.paper }>
+      <form onSubmit={ this.handleSubmit } className={ classes.form }>
+
           <TextField
-            label="Description"
+            label={ t("Description") }
             id="description"
             name="description"
             value={ this.state.description || initialValues.description || " " }
@@ -93,7 +96,7 @@ class EditProductForm extends PureComponent {
           <TextField
             id="certification"
             name="certificate"
-            label="Certification"
+            label={ t("Certification") }
             className={classes.textField}
             value={this.state.certificate || initialValues.certificate || '' }
             onChange={this.handleChange}
@@ -103,7 +106,7 @@ class EditProductForm extends PureComponent {
           <TextField
             id="price"
             name="price"
-            label="Price per Kg"
+            label={ t("Price") }
             value={this.state.price || initialValues.price || '' }
             onChange={this.handleChange}
             type="number"
@@ -118,7 +121,7 @@ class EditProductForm extends PureComponent {
             id="currency"
             name="currency"
             select
-            label="Please select your currency"
+            label={ t("Please select your currency") }
             className={ classes.textField }
             value={ this.state.currency || initialValues.currency || ''  }
             onChange={ this.handleChange }
@@ -132,7 +135,7 @@ class EditProductForm extends PureComponent {
           </TextField>
 
           <TextField
-            label="Volume"
+            label={ t("Volume") }
             id="volume"
             name="volume"
             value={ this.state.volume || initialValues.volume || '' }
@@ -146,7 +149,7 @@ class EditProductForm extends PureComponent {
           <TextField
             id="harvested"
             name="harvested"
-            label="Harvested Date"
+            label={ t("Harvest Date") }
             type="date"
               value={this.state.harvested || initialValues.harvested || '' }
             onChange={ this.handleChange }
@@ -159,7 +162,7 @@ class EditProductForm extends PureComponent {
           <TextField
             id="expired"
               name="expiration"
-            label="Expiry Date"
+            label={ t("Expiry Date") }
             type="date"
               value={this.state.expiration || initialValues.expiration || '' }
             onChange={ this.handleChange }
@@ -180,10 +183,10 @@ class EditProductForm extends PureComponent {
               marginBottom: 20
             }}
           >
-            Save
+            { t("Save") }
           </Button>
 
-        </Paper>
+
       </form>
     )
   }
@@ -192,4 +195,6 @@ class EditProductForm extends PureComponent {
 
 }
 
-export default compose(withStyles(styles))(EditProductForm)
+export default combine(
+  translate("product"),
+  withStyles(styles))(EditProductForm)

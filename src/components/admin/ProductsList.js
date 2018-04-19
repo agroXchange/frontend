@@ -1,11 +1,11 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import compose from "lodash/fp/compose";
-import { withStyles } from "material-ui/styles";
-import { Link } from "react-router-dom";
-import Card from "material-ui/Card";
-import { CardHeader, CardMedia } from "material-ui/Card";
-import Button from "material-ui/Button";
+import React, { PureComponent } from "react"
+import { connect } from "react-redux"
+import * as combine from "lodash/fp/compose"
+import { withStyles } from "material-ui/styles"
+import { Link, Redirect } from "react-router-dom"
+import Card from "material-ui/Card"
+import { CardHeader, CardMedia } from "material-ui/Card"
+import Button from "material-ui/Button"
 import Table, {
   TableBody,
   TableCell,
@@ -13,21 +13,22 @@ import Table, {
   TableRow,
   TableFooter,
   TablePagination
-} from "material-ui/Table";
-import { fetchAllProducts } from "../../actions/products";
-import { productsFilter, changeInputType } from "./lib/lib";
-import Dialog, { DialogTitle } from "material-ui/Dialog";
-import TextField from "material-ui/TextField";
-import SearchIcon from "@material-ui/icons/Search";
-import IconButton from "material-ui/IconButton";
-import Select from "material-ui/Select";
-import { FormControl } from "material-ui/Form";
-import { MenuItem } from "material-ui/Menu";
-import Paper from "material-ui/Paper";
-import FirstPageIcon from "@material-ui/icons/FirstPage";
-import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
-import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
-import LastPageIcon from "@material-ui/icons/LastPage";
+} from "material-ui/Table"
+import { fetchAllProducts } from "../../actions/products"
+import { productsFilter, changeInputType } from "./lib/lib"
+import Dialog, { DialogTitle } from "material-ui/Dialog"
+import TextField from "material-ui/TextField"
+import SearchIcon from "@material-ui/icons/Search"
+import IconButton from "material-ui/IconButton"
+import Select from "material-ui/Select"
+import { FormControl } from "material-ui/Form"
+import { MenuItem } from "material-ui/Menu"
+import Paper from "material-ui/Paper"
+import FirstPageIcon from "@material-ui/icons/FirstPage"
+import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft"
+import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight"
+import LastPageIcon from "@material-ui/icons/LastPage"
+import {jwtPayload} from '../../jwt'
 
 const actionsStyles = theme => ({
   root: {
@@ -35,7 +36,7 @@ const actionsStyles = theme => ({
     color: theme.palette.text.secondary,
     marginLeft: theme.spacing.unit * 2.5
   }
-});
+})
 
 const style = theme => ({
   card: {
@@ -65,40 +66,40 @@ const style = theme => ({
   tableWrapper: {
     overflowX: "auto"
   }
-});
+})
 
 const CustomTableCell = withStyles(theme => ({
   head: {
-    backgroundColor: "#3f51b5",
+    backgroundColor: "#8FBC8F",
     color: theme.palette.common.white
   },
   body: {
     fontSize: 14
   }
-}))(TableCell);
+}))(TableCell)
 
 class TablePaginationActions extends React.Component {
   handleFirstPageButtonClick = event => {
-    this.props.onChangePage(event, 0);
-  };
+    this.props.onChangePage(event, 0)
+  }
 
   handleBackButtonClick = event => {
-    this.props.onChangePage(event, this.props.page - 1);
-  };
+    this.props.onChangePage(event, this.props.page - 1)
+  }
 
   handleNextButtonClick = event => {
-    this.props.onChangePage(event, this.props.page + 1);
-  };
+    this.props.onChangePage(event, this.props.page + 1)
+  }
 
   handleLastPageButtonClick = event => {
     this.props.onChangePage(
       event,
       Math.max(0, Math.ceil(this.props.count / this.props.rowsPerPage) - 1)
-    );
-  };
+    )
+  }
 
   render() {
-    const { classes, count, page, rowsPerPage, theme } = this.props;
+    const { classes, count, page, rowsPerPage, theme } = this.props
 
     return (
       <div className={classes.root}>
@@ -139,15 +140,13 @@ class TablePaginationActions extends React.Component {
           {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
         </IconButton>
       </div>
-    );
+    )
   }
 }
 
 const TablePaginationActionsWrapped = withStyles(actionsStyles, {
   withTheme: true
-})(TablePaginationActions);
-
-
+})(TablePaginationActions)
 
 class OrdersPage extends PureComponent {
   state = {
@@ -157,35 +156,35 @@ class OrdersPage extends PureComponent {
     showOrder: false,
     page: 0,
     rowsPerPage: 5
-  };
+  }
 
   handleChangePage = (event, page) => {
-    this.setState({ page });
-  };
+    this.setState({ page })
+  }
 
   handleChangeRowsPerPage = event => {
-    this.setState({ rowsPerPage: event.target.value });
-  };
+    this.setState({ rowsPerPage: event.target.value })
+  }
 
   handleOrderClose = id => {
-    this.setState({ [`showOrder${id}`]: false });
-  };
+    this.setState({ [`showOrder${id}`]: false })
+  }
 
   handleOrderOpen = id => {
-    this.setState({ [`showOrder${id}`]: true });
-  };
+    this.setState({ [`showOrder${id}`]: true })
+  }
 
   componentWillMount(props) {
-    this.props.fetchAllProducts();
+    this.props.fetchAllProducts()
   }
 
   searchHandler = event => {
-    this.setState({ term: event.target.value });
-  };
+    this.setState({ term: event.target.value })
+  }
 
   handleChange = event => {
-    this.setState({ value: event.target.value });
-  };
+    this.setState({ value: event.target.value })
+  }
 
   renderMessage = products => {
     return (
@@ -197,36 +196,47 @@ class OrdersPage extends PureComponent {
           </Button>
         </Link>
       </Dialog>
-    );
-  };
+    )
+  }
 
   render() {
-    const { classes } = this.props;
-    const products = this.props.products;
+    const { classes } = this.props
+    const products = this.props.products
     if (!products) return null
+      if (this.props.currentUserRole !== "admin") return <Redirect to="/error" />
 
 
-    const { rowsPerPage, page } = this.state;
+    const { rowsPerPage, page } = this.state
     const emptyRows =
       rowsPerPage -
       Math.min(
         rowsPerPage,
         products.map(product => {
-          return product.orders;
+          return product.orders
         }).length -
           page * rowsPerPage
-      );
+      )
 
     return (
       <div>
+      <div>
+      <Button
+        onClick={() => this.props.history.goBack()}
+        size="medium"
+        color="primary"
+        style={{display:'flex', flex:1}}
+      >
+        Go Back
+      </Button>
+      </div>
         <form>
           <div
             style={{
               display:'flex',
-              width: "550px",
+
               margin: 0,
-              marginLeft:20,
-              marginTop: "20px",
+
+              marginTop: "20px"
             }}
           >
             <IconButton>
@@ -347,11 +357,11 @@ class OrdersPage extends PureComponent {
                             className={this.props.classes.row}
                             key={order.id}
                           >
-                            <CustomTableCell><Link to={`/admin/orders/${order.id}`}>{order.id}</Link></CustomTableCell>
+                            <CustomTableCell><Link style={{color:'#8FBC8F'}} to={`/admin/orders/${order.id}`}>{order.id}</Link></CustomTableCell>
                             <CustomTableCell>{order.date}</CustomTableCell>
                             <CustomTableCell>{order.status}</CustomTableCell>
                             <CustomTableCell>{order.comments}</CustomTableCell>
-                            <CustomTableCell><Link to={`/admin/profiles/${order.buyer.id}`}>{order.buyer.name}</Link></CustomTableCell>
+                            <CustomTableCell><Link style={{color:'#8FBC8F'}}  to={`/admin/profiles/${order.buyer.id}`}>{order.buyer.name}</Link></CustomTableCell>
                           </TableRow>
                         ))}
                         {emptyRows > 0 && (
@@ -380,17 +390,19 @@ class OrdersPage extends PureComponent {
             </Card>
           ))}
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = function(state) {
+  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
-    products: state.products
-  };
-};
+    products: state.products,
+    currentUserRole: jwtDecoded.role,
+  }
+}
 
-export default compose(
+export default combine(
   withStyles(style),
   connect(mapStateToProps, { fetchAllProducts })
-)(OrdersPage);
+)(OrdersPage)

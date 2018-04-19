@@ -1,7 +1,21 @@
 .product-photo {
   max-width: 100%;
-  margin-top: -1em;
-  margin-bottom: 2em;
+  margin-top: -1.3em;
+
+}
+
+.sold-out-img {
+  color: red;
+  padding-top: 0.5em;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.expired-img {
+  color: red;
+  padding-top: 0.5em;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .product-container {

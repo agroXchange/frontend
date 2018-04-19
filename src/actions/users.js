@@ -17,6 +17,7 @@ export const USER_LOGOUT = "USER_LOGOUT"
 
 export const UPDATE_LOGO_SUCCESS = 'UPDATE_LOGO_SUCCESS'
 export const UPDATE_LOGO_FAILED = 'UPDATE_LOGO_FAILED'
+export const CLOSE_WINDOW = 'CLOSE_WINDOW'
 
 export const fetchUsers = () => (dispatch, getState) => {
   const state = getState();
@@ -49,6 +50,13 @@ export const fetchPendingUsers = () => (dispatch,getState) => {
     )
     .catch(err => alert(err));
 };
+
+export const closeWindow = () => { console.log("dfasdsa")
+    return {
+      type: CLOSE_WINDOW
+    }
+}
+
 
 
 export const updateUser = (id, updates) => (dispatch,getState) => {

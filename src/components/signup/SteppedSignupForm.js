@@ -9,7 +9,7 @@ import Typography from "material-ui/Typography"
 import Stepper, { Step, StepLabel } from "material-ui/Stepper"
 import Button from "material-ui/Button"
 import TextField from "material-ui/TextField"
-import compose from "lodash/fp/compose"
+import * as combine from "lodash/fp/compose";
 import { translate } from "react-i18next"
 
 const styles = theme => ({
@@ -316,4 +316,4 @@ class SteppedSignupForm extends PureComponent {
   }
 }
 
-export default compose(translate("user"), withStyles(styles))(SteppedSignupForm)
+export default combine(translate("user"), withStyles(styles))(SteppedSignupForm)

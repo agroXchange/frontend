@@ -1,8 +1,7 @@
-import React, { PureComponent } from 'react';
-import { compose } from 'redux'
+import React from 'react';
+import * as combine from "lodash/fp/compose";
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types';
-
+import PropTypes from 'prop-types'
 import Button from 'material-ui/Button';
 import Dialog, { DialogContent, DialogContentText, withMobileDialog,} from 'material-ui/Dialog';
 import ExpansionPanel, { ExpansionPanelSummary, ExpansionPanelDetails,} from 'material-ui/ExpansionPanel';
@@ -11,8 +10,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MenuItem from 'material-ui/Menu/MenuItem';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
-import Icon from 'material-ui/Icon';
 import Search from '@material-ui/icons/Search';
+import { translate } from "react-i18next";
 
 import { fetchCodes } from '../../actions/codes'
 
@@ -70,7 +69,8 @@ const classes = {
 const countries = [
     {
          value: '*',
-        label: 'All',
+        label: 'All/Todas',
+        
     },
     {
         value: 'Colombia',
@@ -146,11 +146,11 @@ class SearchProductForm extends React.Component {
 
 
     render() {
-        const { fullScreen, codes, vegetables, fruits, beans } = this.props
+        const { fullScreen, codes, t, vegetables, fruits, beans } = this.props
 
         if (codes)
         return (
-            
+
             <form onSubmit={this.handleSubmit} className="form-container"
                 style={classes.form}
                 justify="center"
@@ -159,14 +159,14 @@ class SearchProductForm extends React.Component {
             <Paper className="paper">
 
                     <div style={{ textAlign: 'center'}}  >    
-                        <br/>
+                        <h3> {t("Search")} </h3>
                         <Button 
                             onClick={this.handleClickOpen}
-                            variant="raised" 
+                            variant="raised"
                             style={classes.button}
                              color="primary"
                            >
-                            <Search/> Products
+                            <Search />{t("Product")}
                         </Button>
                     </div>
 
@@ -181,7 +181,7 @@ class SearchProductForm extends React.Component {
 
                     <ExpansionPanel>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography className={classes.heading}>Vegetables ({vegetables.length})</Typography>
+                                    <Typography className={classes.heading}>{t("Vegetables")} ({vegetables.length})</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
 
@@ -210,7 +210,7 @@ class SearchProductForm extends React.Component {
 
                     <ExpansionPanel>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography className={classes.heading}>Fruits & Nuts ({fruits.length})</Typography>
+                                    <Typography className={classes.heading}>{t("Fruits & Nuts")} ({fruits.length})</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
 
@@ -237,7 +237,7 @@ class SearchProductForm extends React.Component {
 
                     <ExpansionPanel>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography className={classes.heading}>Beans & Crop ({beans.length})</Typography>
+                                    <Typography className={classes.heading}>{t("Beans & Crop")} ({beans.length})</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
 
@@ -265,13 +265,13 @@ class SearchProductForm extends React.Component {
             </div>
             <br/>
 
-                    <div style={classes.dialog}><h4>{!this.state.code ? "< select product >" : this.getName(this.state.code)}</h4></div>
+                    <div style={classes.dialog}><h4>{!this.state.code ? "" : this.getName(this.state.code)}</h4></div>
 
             <div>
                         <TextField
                             id="code"
                             name="code"
-                            label="HS Code"
+                            label={t("HS Code")}
                             style={classes.textField}
                             value={this.state.code}
                             onChange={this.handleChange}
@@ -285,7 +285,7 @@ class SearchProductForm extends React.Component {
                             id="country"
                             name="country"
                             select
-                            label="From country"
+                            label={t("From country")}
                             style={classes.textField}
                             value={this.state.country}
                             onChange={this.handleChange}
@@ -305,7 +305,7 @@ class SearchProductForm extends React.Component {
                             type="submit"
                             style={classes.thinbutton}
                         >
-                            Save
+                            {t("Save")}
                         </Button>
                     </div>
 
@@ -327,7 +327,8 @@ const mapStateToProps = (state, props) => ({
     beans: state.codes.filter(x => x.code.match(/^09/))
 })
 
-export default compose(
+export default combine(
+    translate("product"),
     withMobileDialog(),
     connect(mapStateToProps, { fetchCodes })
 )(SearchProductForm);

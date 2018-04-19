@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { signup } from "../../actions/users";
 import SteppedSignupForm from "./SteppedSignupForm";
 import { Redirect } from "react-router-dom";
-import compose from "lodash/fp/compose";
+import * as combine from "lodash/fp/compose";
 import { translate } from "react-i18next";
 import Paper from "material-ui/Paper";
 
@@ -41,7 +41,7 @@ const mapStateToProps = function(state) {
   };
 };
 
-export default compose(
+export default combine(
   translate("user"),
   connect(mapStateToProps, { postSignup: signup })
 )(SignupPage);

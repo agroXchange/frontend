@@ -1,32 +1,31 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import AppBar from "material-ui/AppBar";
-import Toolbar from "material-ui/Toolbar";
-import Typography from "material-ui/Typography";
-import IconButton from "material-ui/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import BuildIcon from "@material-ui/icons/Build";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import ShopIcon from "@material-ui/icons/Shop";
-import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes";
-import PermIdentityIcon from "@material-ui/icons/PermIdentity";
-import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
-import DescriptionIndIcon from "@material-ui/icons/Description";
-import Translate from "@material-ui/icons/Translate";
-import { Link } from "react-router-dom";
-import SwipeableDrawer from "material-ui/SwipeableDrawer";
-import StarIcon from "@material-ui/icons/Star";
-import SendIcon from "@material-ui/icons/Send";
-import { ListItem, ListItemIcon } from "material-ui/List";
-import { jwtPayload } from "../jwt";
-import compose from "redux/src/compose";
-import { translate } from "react-i18next";
-import { connect } from "react-redux";
-import { withStyles } from "material-ui";
-import Button from "material-ui/Button";
-import { withRouter } from "react-router";
+import React, { PureComponent } from "react"
+import PropTypes from "prop-types"
+import AppBar from "material-ui/AppBar"
+import Toolbar from "material-ui/Toolbar"
+import Typography from "material-ui/Typography"
+import IconButton from "material-ui/IconButton"
+import MenuIcon from "@material-ui/icons/Menu"
+import BuildIcon from "@material-ui/icons/Build"
+import AccountCircleIcon from "@material-ui/icons/AccountCircle"
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks"
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart"
+import ShopIcon from "@material-ui/icons/Shop"
+import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes"
+import PermIdentityIcon from "@material-ui/icons/PermIdentity"
+import AssignmentIndIcon from "@material-ui/icons/AssignmentInd"
+import DescriptionIndIcon from "@material-ui/icons/Description"
+import SwipeableDrawer from "material-ui/SwipeableDrawer"
+import StarIcon from "@material-ui/icons/Star"
+import { ListItem } from "material-ui/List"
+import { jwtPayload } from "../jwt"
+import * as combine from "lodash/fp/compose"
+import { translate } from "react-i18next"
+import { connect } from "react-redux"
+import { withStyles } from "material-ui"
+import Button from "material-ui/Button"
+import { withRouter } from "react-router"
+import Select from "material-ui/Select"
+import { MenuItem } from 'material-ui/Menu';
 
 const styles = {
   list: {
@@ -48,42 +47,39 @@ const styles = {
   nav: {
     width: "500px"
   }
-};
+}
 
 class NavBar extends PureComponent {
   static propTypes = {
     classes: PropTypes.object.isRequired
-  };
+  }
 
   state = {
     auth: true,
     anchorEl: null,
-    left: false
-  };
+    left: false,
+    currency: '$'
+  }
+  handleChangeValue = (event) => {
+    this.setState({currency: event.target.value})
+
+  }
 
   toggleDrawer = (side, open) => () => {
-    this.setState({ [side]: open });
-  };
+    this.setState({ [side]: open })
+  }
 
   handleChange = (event, checked) => {
-    this.setState({ auth: checked });
-  };
+    this.setState({ auth: checked })
+  }
 
-  handleMenu = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
-
-  handleNewMenu = event => {
-    this.setState({ El: event.currentTarget });
-  };
-
-  handleClose = () => {
-    this.setState({ anchorEl: null });
-  };
-
-  handleNewClose = () => {
-    this.setState({ El: null });
-  };
+  redirectDashboard = (user) => {
+    if(user !== null) {
+      return () => this.props.history.push("/dashboard")
+    } else {
+      return () => this.props.history.push("/")
+    }
+  }
 
   adminMenu = user => {
     if (user === "admin") {
@@ -152,31 +148,21 @@ class NavBar extends PureComponent {
           <ListItem>
             <img
               style={{ height: "80px", width: "150px" }}
-              src="/images/logo.png"
+              src="/images/logo.jpg"
               alt=""
             />
           </ListItem>
         </div>
-      );
+      )
     }
-  };
+  }
 
   render() {
-    const {
-      classes,
-      currentUser,
-      currentProfileId,
-      currentProfileRole
-    } = this.props;
-    const { auth, anchorEl, El } = this.state;
-    const open = Boolean(anchorEl);
-    const openNew = Boolean(El);
-
-    const { i18n } = this.props;
-
+    const { classes, currentUser, currentProfileId, currentProfileRole, t, i18n } = this.props
+    const { auth } = this.state
     const changeLanguage = lng => {
-      i18n.changeLanguage(lng);
-    };
+      i18n.changeLanguage(lng)
+    }
 
     const sideList = (
       <div className={classes.list}>
@@ -192,7 +178,7 @@ class NavBar extends PureComponent {
                   color="inherit"
                   onClick={() => this.props.history.push("/Dashboard")}
                 >
-                  Dashboard
+                  {t('Dashboard')}
                 </Button>
               </ListItem>
               <ListItem button="button">
@@ -203,7 +189,7 @@ class NavBar extends PureComponent {
                     this.props.history.push(`/profiles/${currentProfileId}`)
                   }
                 >
-                  My profile
+                  {t('My Profile')}
                 </Button>
               </ListItem>
 
@@ -217,7 +203,7 @@ class NavBar extends PureComponent {
                     )
                   }
                 >
-                  My products
+                  {t('My Products')}
                 </Button>
               </ListItem>
 
@@ -227,7 +213,7 @@ class NavBar extends PureComponent {
                   color="inherit"
                   onClick={() => this.props.history.push("/orders")}
                 >
-                  My orders
+                  {t('My Orders')}
                 </Button>
               </ListItem>
 
@@ -237,7 +223,7 @@ class NavBar extends PureComponent {
                   color="inherit"
                   onClick={() => this.props.history.push("/products")}
                 >
-                  Marketplace
+                  {t('Marketplace')}
                 </Button>
               </ListItem>
 
@@ -247,14 +233,14 @@ class NavBar extends PureComponent {
                   color="inherit"
                   onClick={() => this.props.history.push("/logout")}
                 >
-                  Logout
+                  {t('Logout')}
                 </Button>
               </ListItem>
               <ListItem />
               <ListItem>
                 <img
                   style={{ height: "80px", width: "150px" }}
-                  src="/images/logo.png"
+                  src="/images/logo.jpg"
                   alt=""
                   onClick={() => this.props.history.push("/")}
                 />
@@ -263,7 +249,7 @@ class NavBar extends PureComponent {
           )}
         </div>
       </div>
-    );
+    )
 
     return (
       <div>
@@ -279,7 +265,6 @@ class NavBar extends PureComponent {
                   <MenuIcon />
                 </IconButton>
               )}
-
               <SwipeableDrawer
                 className={classes.menuButton}
                 open={this.state.left}
@@ -297,62 +282,62 @@ class NavBar extends PureComponent {
                 </div>
               </SwipeableDrawer>
             </div>
-
             <Typography
-              onClick={() => this.props.history.push("/")}
+              onClick={this.redirectDashboard(currentUser)}
               variant="title"
               className={classes.flex}
               style={{ color: `#588D61`, fontSize: "30px" }}
             >
               AgroXchange
             </Typography>
-
             {auth && (
               <div>
-                <IconButton
-                  aria-owns={openNew ? "menu-lang" : null}
-                  aria-haspopup="true"
-                  onClick={this.handleNewMenu}
-                  color="inherit"
-                >
-                  <Translate />
-                </IconButton>
-
-                <IconButton style={{ marginRight: "10px" }}>
                   <Button size="small" onClick={() => changeLanguage("en")}>
-                    <img className="LanguageDetector" src="/images/en.svg" />
+                    <img className="LanguageDetector" src="/images/en.svg" alt="EN" />
                   </Button>
-
                   <Button size="small" onClick={() => changeLanguage("es")}>
-                    <img className="LanguageDetector" src="/images/es.svg" />
+                    <img className="LanguageDetector" src="/images/es.svg" alt="ES" />
                   </Button>
-                </IconButton>
-              </div>
+                  <Select
+                    style={{decoration:'none'}}
+                    value={this.state.currency}
+                    onChange={this.handleChangeValue}
+                    inputProps={{
+                      name: "name",
+                      id: "age-simple"
+                    }}
+                  >
+                    <MenuItem value={"$"} >$</MenuItem>
+                    <MenuItem value={"&euro;"}>&euro;</MenuItem>
+                    <MenuItem value={"₡"}>₡</MenuItem>
+                    <MenuItem value={"COP$"}>COP$</MenuItem>
+                  </Select>
+                </div>
             )}
           </Toolbar>
         </AppBar>
       </div>
-    );
+    )
   }
 }
 
 NavBar.propTypes = {
   classes: PropTypes.object.isRequired
-};
+}
 
 const mapStateToProps = function(state) {
-  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {};
+  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
     currentUser: state.currentUser,
     currentUserId: jwtDecoded.id,
     currentProfileId: jwtDecoded.profileId,
     currentProfileRole: jwtDecoded.role
-  };
-};
+  }
+}
 
-export default compose(
+export default combine(
   withRouter,
-  translate("translations"),
+  translate("navBar"),
   connect(mapStateToProps),
   withStyles(styles)
-)(NavBar);
+)(NavBar)

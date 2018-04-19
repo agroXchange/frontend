@@ -1,35 +1,37 @@
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { fetchUser, updateUser, approveUser } from "../../actions/users";
-import { assignImage } from "./lib/lib";
-import Button from "material-ui/Button";
-import Typography from "material-ui/Typography";
-import EditUserForm from "./EditUserForm";
-import IconButton from "material-ui/IconButton";
-import EditIcon from "@material-ui/icons/Edit";
-import compose from "lodash/fp/compose";
-import { translate } from "react-i18next";
-import Dialog, { DialogTitle } from "material-ui/Dialog";
+import React, { PureComponent } from "react"
+import { connect } from "react-redux"
+import { fetchUser, updateUser, approveUser } from "../../actions/users"
+import { assignImage } from "./lib/lib"
+import Button from "material-ui/Button"
+import Typography from "material-ui/Typography"
+import EditUserForm from "./EditUserForm"
+import IconButton from "material-ui/IconButton"
+import EditIcon from "@material-ui/icons/Edit"
+import * as combine from "lodash/fp/compose"
+import { translate } from "react-i18next"
+import Dialog, { DialogTitle } from "material-ui/Dialog"
+import {jwtPayload} from '../../jwt'
+import { Redirect } from "react-router-dom"
 
 class AdminProfilePage extends PureComponent {
   state = {
     edit: false
-  };
+  }
 
 
   approveUser = id => {
     this.props.approveUser(id);
     this.props.history.goBack()
-   };
+   }
 
 
   handleEditClose = () => {
     this.setState({ edit: false });
-  };
+  }
 
   handleEditOpen = () => {
     this.setState({ edit: true });
-  };
+  }
 
   componentWillMount(props) {
     this.props.fetchUser(this.props.match.params.id);
@@ -43,6 +45,8 @@ class AdminProfilePage extends PureComponent {
   render() {
     const { user, t } = this.props;
     if (!user) return null;
+    if (this.props.currentUserRole !== "admin") return <Redirect to="/error" />
+
 
     return (
       <div key={user.id} className="user-card">
@@ -109,23 +113,6 @@ class AdminProfilePage extends PureComponent {
               />
             )}
           </Dialog>
-
-          <div>
-            <Button
-              onClick={() => this.props.history.push(`/orders/${user.id}`)}
-              size="medium"
-              color="primary"
-            >
-              Orders
-            </Button>
-            <Button
-              onClick={() => this.props.history.push(`/products/${user.id}`)}
-              size="medium"
-              color="primary"
-            >
-              Products
-            </Button>
-          </div>
         </div>
         <Button
           onClick={() => this.approveUser(user.id)}
@@ -135,17 +122,19 @@ class AdminProfilePage extends PureComponent {
           Approve
         </Button>
       </div>
-    );
+    )
   }
 }
 
 const mapStateToProps = function(state) {
+  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
-    user: state.user
-  };
-};
+    user: state.user,
+    currentUserRole: jwtDecoded.role,
+  }
+}
 
-export default compose(
+export default combine(
   translate("user"),
   connect(mapStateToProps, { fetchUser, updateUser, approveUser })
 )(AdminProfilePage);

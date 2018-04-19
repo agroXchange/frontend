@@ -1,9 +1,9 @@
-import React, { PureComponent } from "react";
-import { withStyles } from "material-ui/styles";
-import TextField from "material-ui/TextField";
-import Button from "material-ui/Button";
-import compose from "lodash/fp/compose";
-import { translate } from "react-i18next";
+import React, { PureComponent } from "react"
+import { withStyles } from "material-ui/styles"
+import TextField from "material-ui/TextField"
+import Button from "material-ui/Button"
+import * as combine from "lodash/fp/compose"
+import { translate } from "react-i18next"
 
 const styles = theme => ({
   button: {
@@ -23,27 +23,27 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: 300
   }
-});
+})
 
 class ResetPasswordForm extends PureComponent {
-  state = {};
+  state = {}
 
   handleSubmit = e => {
-    e.preventDefault();
-    this.props.onSubmit(this.state);
-  };
+    e.preventDefault()
+    this.props.onSubmit(this.state)
+  }
 
   handleChange = event => {
-    const { name, value } = event.target;
+    const { name, value } = event.target
 
     this.setState({
       [name]: value
-    });
-  };
+    })
+  }
 
   render() {
-    const { t } = this.props;
-    const { classes } = this.props;
+    const { t } = this.props
+    const { classes } = this.props
 
     return (
       <form className={classes.container} onSubmit={this.handleSubmit}>
@@ -88,8 +88,8 @@ class ResetPasswordForm extends PureComponent {
           {t("resetPassword")}
         </Button>
       </form>
-    );
+    )
   }
 }
 
-export default compose(translate("user"), withStyles(styles))(ResetPasswordForm);
+export default combine(translate("user"), withStyles(styles))(ResetPasswordForm)

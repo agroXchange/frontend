@@ -1,21 +1,23 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Card from "material-ui/Card";
-import { CardHeader, CardMedia } from "material-ui/Card";
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import Card from "material-ui/Card"
 import Button from 'material-ui/Button'
-import Table, { TableBody, TableCell, TableHead, TableRow } from "material-ui/Table";
+import { CardHeader, CardMedia } from "material-ui/Card"
+import {Link} from 'react-router-dom'
+import Table, { TableBody, TableCell, TableHead, TableRow } from "material-ui/Table"
 import {  fetchOrder, changeStatus } from '../../actions/orders'
 import { connect } from 'react-redux'
-import compose from 'lodash/fp/compose'
+import * as combine from "lodash/fp/compose"
 import '../../styles/OrderList.css'
 import { translate } from "react-i18next"
 import { jwtPayload } from '../../jwt'
 
+
 const style = () => ({
   card: {
     height: 700,
-    width: 400,
+    width: 370,
     margin: 20,
     textAlign: "center",
     display: "inline-block"
@@ -28,7 +30,7 @@ const style = () => ({
     fontSize: "10px",
     textAlign: "center",
   }
-});
+})
 
 class OrderDetail extends PureComponent {
   static propTypes = {
@@ -44,7 +46,6 @@ class OrderDetail extends PureComponent {
       status: 'Approved'
     }
     this.props.changeStatus(data, this.props.match.params.id)
-    window.location.reload()
   }
 
   handleDecline = (value) => {
@@ -52,19 +53,17 @@ class OrderDetail extends PureComponent {
       status: 'Declined'
     }
     this.props.changeStatus(data, this.props.match.params.id)
-    window.location.reload()
   }
 
   handleBuy = (value) => {
     const data = {
-      status: 'Bought'
+      status: 'Purchased'
     }
     this.props.changeStatus(data, this.props.match.params.id)
-    window.location.reload()
   }
 
   currentUser = (currentUser, order) => {
-    if (currentUser === order.product.seller.id) {
+    if (currentUser === order.product.seller.id && order.status === "Pending") {
        return (
          <div>
          <Button
@@ -85,7 +84,21 @@ class OrderDetail extends PureComponent {
         </Button>
         </div>
       )
-  } else if (currentUser === order.buyer.id && order.status === "Approved") {
+  } else if (currentUser === order.product.seller.id && order.status === "Approved") {
+      return (
+        <div>
+         <Button
+             variant="raised"
+             color="primary"
+             className={this.props.classes.button}
+             onClick={this.handleDecline}
+             >
+          {this.props.t('DECLINE')}
+       </Button>
+       </div>
+     )
+  }
+   else if (currentUser === order.buyer.id && order.status === "Approved") {
      return (
        <div>
        <Button
@@ -94,7 +107,7 @@ class OrderDetail extends PureComponent {
           className={this.props.classes.button}
           onClick={this.handleBuy}
           >
-       {this.props.t('BUY')}
+       {this.props.t('PURCHASE')}
       </Button>
       </div>
      )
@@ -102,13 +115,21 @@ class OrderDetail extends PureComponent {
 }
 
   render() {
-     const { classes, order  } = this.props;
-     const { t } = this.props;
-     if (!order) return null;
+     const { classes, order  } = this.props
+     const { t } = this.props
+     if (!order) return null
 
 
   return (
       <div>
+        <Button
+          onClick={() => this.props.history.goBack()}
+          size="medium"
+          color="primary"
+          style={{display:'flex', flex:1}}
+        >
+          Go Back
+        </Button>
          <Card className={classes.card} zDepth={3} circle={true} >
                <Table className={classes.table}>
                 <TableBody>
@@ -165,13 +186,25 @@ class OrderDetail extends PureComponent {
                     <TableCell>{order.comments}</TableCell>
                  </TableRow>
                 </TableBody>
+
               </Table>
-               {
+              {this.props.currentUserRole !== 'admin' &&(
                  this.currentUser(this.props.currentProfileId, order)
-                }
-              <Button size="small"  color="primary" onClick={() => this.props.history.goBack()}>
+               )}
+              <Button style={{marginTop:'10px'}} size="small"  color="primary" onClick={() => this.props.history.goBack()}>
                {t('GO BACK')}
               </Button>
+                }
+                <Link to={`orders/${order.id}/chat`}>
+                  <Button
+                     variant="raised"
+                     color="primary"
+                     className={this.props.classes.button}
+                     onClick={this.handleBuy}
+                     >
+                   NEGOTIATION ROOM
+                 </Button>
+               </Link>
         </Card>
       </div>
       )
@@ -183,14 +216,15 @@ const mapStateToProps = function(state) {
   return {
     currentUser: state.currentUser,
     currentUserId: jwtDecoded.id,
+    currentUserRole: jwtDecoded.role,
     currentProfileId: jwtDecoded.profileId,
     order: state.order,
   }
 }
 
 
-export default compose(
+export default combine(
   translate('detail'),
   withStyles(style),
   connect(mapStateToProps, { fetchOrder, changeStatus })
-)(OrderDetail);
+)(OrderDetail)

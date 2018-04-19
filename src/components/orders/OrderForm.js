@@ -1,11 +1,8 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import MenuItem from 'material-ui/Menu/MenuItem';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
-import Paper from 'material-ui/Paper';
-import { withStyles } from 'material-ui/styles';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import React, { PureComponent } from 'react'
+import TextField from 'material-ui/TextField'
+import Button from 'material-ui/Button'
+import Paper from 'material-ui/Paper'
+import { InputAdornment } from 'material-ui/Input'
 import '../../styles/OrderForm.css'
 
 const classes = {
