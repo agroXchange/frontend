@@ -79,7 +79,7 @@ class LoginForm extends PureComponent {
           control={
             <Checkbox style={{marginLeft: 10, color: 'green'}} />
           }
-          label="Stay logged in."
+          label={t("Stay logged in")}
         />
         <Button style={{backgroundColor:'green'}}
           variant="raised"

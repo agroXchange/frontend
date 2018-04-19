@@ -104,7 +104,7 @@ class EditProfileForm extends PureComponent {
           />
         </div>
         <Button variant="raised" color="primary" className={classes.button} type="submit">
-          Edit my profile
+          {t("editMyProfile")}
         </Button>
       </form>
     );
