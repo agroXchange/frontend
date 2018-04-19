@@ -150,7 +150,7 @@ class ProductForm extends PureComponent {
 
 
   render() {
-    const { fullScreen, codes, t,  vegetables, fruits, beans } = this.props
+    const { fullScreen, codes, t,  vegetables, fruits, beans,language } = this.props
 
       return(
         <form onSubmit={ this.handleSubmit } className="form-container">
@@ -193,7 +193,7 @@ class ProductForm extends PureComponent {
                                 type="button"
                                 onClick={_ => this.handleClick(veg.code)}
                               >
-                                {veg.titleeng}
+                                {language === "es" ? veg.titleesp : veg.titleeng} 
                               </Button>
                             </div>
                           }
@@ -221,7 +221,7 @@ class ProductForm extends PureComponent {
                               type="button"
                               onClick={_ => this.handleClick(fruit.code)}
                             >
-                              {fruit.titleeng}
+                              {language === "es" ? fruit.titleesp : fruit.titleeng} 
                             </Button>
                           </div>
                         )}
@@ -248,7 +248,7 @@ class ProductForm extends PureComponent {
                               type="button"
                               onClick={_ => this.handleClick(bean.code)}
                             >
-                              {bean.titleeng}
+                              {language === "es" ? bean.titleesp : bean.titleeng} 
                             </Button>
                           </div>
                         )}
@@ -390,7 +390,8 @@ const mapStateToProps = (state, props) => ({
   codes: state.codes,
   vegetables: state.codes.filter(x => x.code.match(/^07/) ),
   fruits: state.codes.filter(x => x.code.match(/^08/)),
-  beans: state.codes.filter(x => x.code.match(/^09/))
+  beans: state.codes.filter(x => x.code.match(/^09/)),
+  language: state.language
 })
 
 export default combine(
