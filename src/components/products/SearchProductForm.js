@@ -141,7 +141,8 @@ class SearchProductForm extends React.Component {
     getName = (code) => {
         if(!this.state.picked) return
         let product = this.props.codes.filter(i => i.code.match(code))
-        return product[0].titleeng
+        //return product[0].titleeng
+        return  (this.state.language === "es") ? product[0].titleesp : product[0].titleeng    
     }
 
 
