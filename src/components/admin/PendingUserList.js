@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link , Redirect} from "react-router-dom"
 import { fetchPendingUsers, approveUser, deleteUser } from "../../actions/users"
 import { assignImage, searchingByName } from "./lib/lib"
 import * as combine from "lodash/fp/compose"
@@ -13,6 +13,7 @@ import Divider from "material-ui/Divider"
 import Dialog, { DialogTitle, DialogActions } from "material-ui/Dialog"
 import SearchIcon from "@material-ui/icons/Search"
 import TextField from "material-ui/TextField"
+import {jwtPayload} from '../../jwt'
 
 class UsersList extends PureComponent {
   state = {
@@ -70,6 +71,7 @@ class UsersList extends PureComponent {
   render() {
     const users = this.props.users
     if (!users) return null
+      if (this.props.currentUserRole !== "admin") return <Redirect to="/error" />
 
     return (
       <div>
@@ -156,8 +158,10 @@ class UsersList extends PureComponent {
 }
 
 const mapStateToProps = function(state) {
+  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
-    users: state.users
+    users: state.users,
+    currentUserRole: jwtDecoded.role,
   }
 }
 

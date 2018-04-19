@@ -2,7 +2,7 @@ import React, { PureComponent } from "react"
 import { connect } from "react-redux"
 import * as combine from "lodash/fp/compose"
 import { withStyles } from "material-ui/styles"
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import Card from "material-ui/Card"
 import { CardHeader,CardMedia } from "material-ui/Card"
 import Button from "material-ui/Button"
@@ -13,6 +13,7 @@ import Dialog, { DialogTitle } from "material-ui/Dialog"
 import TextField from "material-ui/TextField"
 import SearchIcon from "@material-ui/icons/Search"
 import IconButton from "material-ui/IconButton"
+import {jwtPayload} from '../../jwt'
 
 const style = () => ({
   card: {
@@ -70,6 +71,7 @@ class OrdersPage extends PureComponent {
   render() {
     const { classes } = this.props
     const orders = this.props.orders
+    if (this.props.currentUserRole !== "admin") return <Redirect to="/error" />
 
     return (
       <div>
@@ -167,8 +169,10 @@ class OrdersPage extends PureComponent {
 }
 
 const mapStateToProps = function(state) {
+  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
-    orders: state.orders
+    orders: state.orders,
+    currentUserRole: jwtDecoded.role,
   }
 }
 

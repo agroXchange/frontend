@@ -26,6 +26,7 @@ import { createMuiTheme } from 'material-ui/styles';
 import './styles/App.css';
 import MessageForm from "./components/chat/MessageForm"
 import ChatPage from "./components/chat/ChatPage"
+import NotFoundPage from './components/admin/NotFoundPage'
 
 const  theme = createMuiTheme({
   palette: {
@@ -54,6 +55,7 @@ class App extends Component {
             <Route exact path="/admin/orders" component={OrdersListPage} />
             <Route exact path="/admin/orders/:id([0-9]+)" component={OrderDetail} />
             <Route exact path="/admin/users" component={UsersList} />
+            <Route exact path="/error" component={NotFoundPage} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/signup" component={SignupPage} />
             <Route exact path="/logout" component={LogoutPage} />
