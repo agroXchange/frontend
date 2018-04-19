@@ -220,7 +220,7 @@ const mapStateToProps = function(state) {
     unseenOrders: state.unseenOrders,
     products: state.products,
     user: state.user,
-    dashboard: state.dashboard
+    dashboard: state.dashboard,
     unreadMessages: state.unreadMessages
   }
 }
