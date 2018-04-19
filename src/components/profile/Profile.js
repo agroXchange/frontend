@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { fetchUser, uploadLogo, updateProfile } from "../../actions/users"
 import Paper from "material-ui/Paper"
 import Typography from "material-ui/Typography"
-import * as combine from "lodash/fp/compose";
+import * as combine from "lodash/fp/compose"
 import { translate } from "react-i18next"
 import { jwtPayload } from "../../jwt"
 import Button from "material-ui/Button"
@@ -58,14 +58,6 @@ class Profile extends PureComponent {
 
     return (
       <div>
-        <Button
-          onClick={() => this.props.history.goBack()}
-          size="medium"
-          color="primary"
-          style={{ display: "flex", flex: 1, margin: 15 }}
-        >
-          {t("goBack")}
-        </Button>
       <Paper
         style={{
           textAlign: "center",
