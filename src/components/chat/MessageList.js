@@ -1,6 +1,8 @@
 import React, { PureComponent } from "react";
 import List from 'material-ui/List'
 import Message from "./Message"
+import {connect} from 'react-redux'
+import {markMessage} from "../../actions/chat"
 
 class MessageList extends PureComponent {
 
@@ -10,6 +12,9 @@ class MessageList extends PureComponent {
 
   componentDidUpdate() {
     this.scrollToBottom();
+    const {messages, markMessage} = this.props
+    const msgId = messages[messages.length - 1].id
+    markMessage(msgId)
   }
 
   scrollToBottom() {
@@ -41,4 +46,4 @@ class MessageList extends PureComponent {
   }
 }
 
-export default MessageList;
+export default connect(null, { markMessage })(MessageList)
