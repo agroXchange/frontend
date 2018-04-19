@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react"
 import { connect } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import { fetchUsers, deleteUser } from "../../actions/users"
 import { assignImage, searchingByName } from "./lib/lib"
 import * as combine from "lodash/fp/compose"
@@ -19,6 +19,7 @@ import Avatar from "material-ui/Avatar"
 import Divider from "material-ui/Divider"
 import Dialog, { DialogTitle, DialogActions } from "material-ui/Dialog"
 import TextField from "material-ui/TextField"
+import {jwtPayload} from '../../jwt'
 
 const style = theme => ({
   card: {
@@ -37,12 +38,12 @@ class UsersList extends PureComponent {
     term: ""
   }
 
-  handleOpen = () => {
-    this.setState({ open: true })
+  handleOpen = id => {
+    this.setState({ [`open${id}`]: true })
   }
 
-  handleClose = () => {
-    this.setState({ open: false })
+  handleClose = id => {
+    this.setState({ [`open${id}`]: false })
   }
 
   componentWillMount(props) {
@@ -74,6 +75,7 @@ class UsersList extends PureComponent {
   render() {
     const users = this.props.users
     const classes = this.props
+    if (this.props.currentUserRole !== "admin") return <Redirect to="/error" />
 
     if (!users) return null
 
@@ -131,15 +133,15 @@ class UsersList extends PureComponent {
               />
             </ListItem>
             <ListItemSecondaryAction>
-              <IconButton onClick={this.handleOpen}>
+              <IconButton onClick={() => this.handleOpen(user.id)}>
                 <DeleteIcon />
               </IconButton>
-              <Dialog open={this.state.open} onRequestClose={this.handleClose}>
+              <Dialog open={this.state[`open${user.id}`]} onRequestClose={_ => this.handleClose(user.id)}>
                 <DialogTitle>
                   {`Are you sure do you want to delete ${user.profile.name}?`}
                 </DialogTitle>
                 <DialogActions>
-                  <Button onClick={this.handleClose} primary>
+                  <Button onClick={() => this.handleClose(user.id)} primary>
                     {"Cancel"}
                   </Button>
                   <Button onClick={() => this.deleteUser(user.id)} primary>
@@ -158,8 +160,10 @@ class UsersList extends PureComponent {
 }
 
 const mapStateToProps = function(state) {
+  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
-    users: state.users
+    users: state.users,
+    currentUserRole: jwtDecoded.role,
   }
 }
 

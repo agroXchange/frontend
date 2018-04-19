@@ -10,6 +10,8 @@ import EditIcon from "@material-ui/icons/Edit"
 import * as combine from "lodash/fp/compose"
 import { translate } from "react-i18next"
 import Dialog, { DialogTitle } from "material-ui/Dialog"
+import {jwtPayload} from '../../jwt'
+import { Redirect} from "react-router-dom"
 
 class AdminProfilePage extends PureComponent {
   state = {
@@ -36,6 +38,7 @@ class AdminProfilePage extends PureComponent {
   render() {
     const { user, t } = this.props;
     if (!user) return null;
+    if (this.props.currentUserRole !== "admin") return <Redirect to="/error" />
 
     return (
       <div key={user.id} className="user-card">
@@ -119,8 +122,10 @@ class AdminProfilePage extends PureComponent {
 }
 
 const mapStateToProps = function(state) {
+  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
   return {
-    user: state.user
+    user: state.user,
+    currentUserRole: jwtDecoded.role,
   }
 }
 

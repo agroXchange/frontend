@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react"
 import { withStyles } from "material-ui/styles"
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import Button from "material-ui/Button"
 import Grid from "material-ui/Grid"
 import Typography from "material-ui/Typography"
@@ -9,6 +9,9 @@ import AssignmentIndIcon from "@material-ui/icons/AssignmentInd"
 import SpeakerNotesIcon from "@material-ui/icons/SpeakerNotes"
 import BuildIcon from "@material-ui/icons/Build"
 import DescriptionIndIcon from "@material-ui/icons/Description"
+import {jwtPayload} from '../../jwt'
+import { connect } from "react-redux"
+import * as combine from "lodash/fp/compose"
 
 export const styles = theme => ({
   root: {
@@ -56,6 +59,8 @@ class AdminPage extends PureComponent {
   render() {
     const { classes } = this.props
     const { alignItems, direction, justify } = this.align
+    if (this.props.currentUserRole !== "admin") return <Redirect to="/error" />
+
     return (
       <Grid container className={classes.root}>
         <Grid item xs={12}>
@@ -190,5 +195,15 @@ class AdminPage extends PureComponent {
     )
   }
 }
+const mapStateToProps = function(state) {
+  const jwtDecoded = state.currentUser ? jwtPayload(state.currentUser.jwt) : {}
+  return {
+    currentUserRole: jwtDecoded.role,
 
-export default withStyles(styles)(AdminPage)
+  }
+}
+
+export default combine(
+  withStyles(styles),
+  connect(mapStateToProps)
+)(AdminPage)
