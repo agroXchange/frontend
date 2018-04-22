@@ -76,7 +76,7 @@ class Dashboard extends PureComponent {
           marginTop: "40px"
         }}
       >
-        <h1>{t("Welcome")} {user.name}</h1>
+        <div><h1>{t("Welcome")} {user.name}</h1></div>
           <Button className={classes.button} size="medium" color="primary" variant="raised" component={Link} to={`/products`}>
             {t("goToMarketplace")}
           </Button>
